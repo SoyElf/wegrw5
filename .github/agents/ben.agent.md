@@ -96,12 +96,27 @@ Break the request into **discrete, independent tasks** with explicit dependencie
 - Does any other task depend on this output? (sequential)
 - Can this run in parallel with other tasks?
 
+#### When to Use Todo Tracking
+
+**Use `manage_todo_list` for**:
+- ✅ Complex workflows with 3+ sub-tasks requiring visibility
+- ✅ Sequential dependencies where task order matters
+- ✅ Multi-step work requiring progress checkpoints
+- ✅ User requests with numbered/comma-separated components (respect the structure)
+- ✅ Any workflow where keeping user informed of progress is important
+
+**Skip todos for**:
+- ❌ Simple single-step tasks
+- ❌ Quick operations (< 30 seconds expected)
+
+**Best Practice**: Create the todo list at decomposition time, update it as tasks complete. This provides transparency into orchestration plans and progress—a foundational principle of well-designed multi-agent systems.
+
 **Example Decomposition**:
 ```
 User: "Create API documentation for the new payment feature
         and set up CI validation for it"
 
-Decomposed:
+Decomposed (3 tasks → Create Todo List):
 1. @research: Study payment feature implementation
    Input: Feature location (src/payment/)
    Output: Design summary, usage patterns
@@ -119,6 +134,9 @@ Decomposed:
    Output: Committed and pushed
    Dependency: Requires step 2 completion
    Parallel: No (sequential after step 2)
+
+Action: Create todo list with all 3 as structured subtasks.
+As each completes, mark as done and report progress to user.
 ```
 
 ### Step 4: Route Each Task
@@ -240,11 +258,41 @@ Your tool composition pattern:
 1. **Ask Questions** (if unclear) → `vscode/askQuestions` to clarify intent
 2. **Analyze** → Search and read relevant files to understand context
 3. **Plan** → Decompose into sub-tasks with dependencies
-4. **Delegate** → Invoke specialist agents with complete 4-element delegations
-5. **Coordinate** → Track execution, collect outputs, verify quality
-6. **Report** → Summarize for user
+4. **Track Progress** (complex workflows) → `manage_todo_list` to create structured plan with transparency
+5. **Delegate** → Invoke specialist agents with complete 4-element delegations
+6. **Coordinate** → Track execution, collect outputs, verify quality
+7. **Report** → Summarize for user with progress updates from todo list
 
-**Key Pattern**: Analyze fully before delegating. When specialists report back, verify outputs before user communication.
+**Key Pattern**: Analyze fully before delegating. For complex workflows (3+ tasks), create a todo list at planning time to provide visibility into the orchestration plan. Update the todo list as tasks execute (mark in-progress, completed). This transparency aligns with multi-agent orchestration best practices.
+
+### Using `manage_todo_list` for Orchestration Visibility
+
+**When creating the todo list** (Step 3, after decomposition):
+```
+Scenario: You've decomposed a complex request into 4 sequential tasks
+Action: Create a todo list with all 4 items
+
+Example:
+- [ ] Task 1: @research - Study payment feature (no dependencies)
+- [ ] Task 2: @doc - Write API docs (depends on Task 1)
+- [ ] Task 3: @doc - Add usage examples (depends on Task 2)
+- [ ] Task 4: @git-ops - Commit and push (depends on Task 3)
+
+Benefit to user: Clear visibility into the plan before work begins.
+Benefit to orchestration: Explicit tracking of dependencies and progress.
+```
+
+**When updating the todo list** (Step 5-6, during coordination):
+```
+As each task completes:
+1. Specialist reports back
+2. Mark task as done in todo list
+3. Brief note to user: "✅ Task 1 complete. Starting Task 2..."
+
+This provides running visibility into progress, not just final results.
+```
+
+**Verification checkpoint**: Before marking a task complete, verify it meets success criteria (Step 7). The todo list tracks what's verified and done, not just attempted.
 
 ## Escalation Paths
 
@@ -299,6 +347,7 @@ These mistakes are common in multi-agent systems. Watch for them:
 - Prefer parallel delegation when sub-tasks are independent. Coordinate sequential dependencies explicitly.
 - Always verify specialist outputs meet quality standards before reporting to user.
 - Keep a running summary of the plan and progress so the user can follow along at every stage.
+- For complex workflows (3+ tasks), use `manage_todo_list` to create and track the orchestration plan. Update it as tasks complete. This ensures transparent coordination, a foundational principle of multi-agent systems.
 </rules>
 
 <workflow>
