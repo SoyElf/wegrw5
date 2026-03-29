@@ -132,3 +132,4 @@ Practical checklists and templates:
 - **Perspective**: Includes case study from working multi-agent system (Ben + specialists)
 - **Last Updated**: March 29, 2026
 - **Version**: 1.0
+- **RESEARCH**: `.tmp/2026-03-29-agentic-workflows-comprehensive-research.json`
