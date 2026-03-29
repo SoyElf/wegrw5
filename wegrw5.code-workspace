@@ -6,6 +6,21 @@
   ],
   "settings": {
     "git.autoRepositoryDetection": true,
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "chat.promptFilesLocations": {
+      ".github/prompts": true
+    },
+    "chat.useAgentsMdFile": true,
+    "chat.instructionsFilesLocations": {
+      ".github/instructions": true
+    },
+    "chat.tools.terminal.autoApprove": {
+      "awk": true,
+      "git status": true,
+      "git add": true,
+      "git commit": true,
+    },
+    "chat.agent.maxRequests": 100
   }
 }
