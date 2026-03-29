@@ -1,7 +1,7 @@
 ---
 name: agentic-workflow-researcher
 description: Research specialist — investigates agentic workflows, VS Code extensibility, GitHub Copilot CLI, and multi-agent orchestration. Provides expert analysis with sources. Creates persistent contextual documentation in `.tmp/` for inter-agent knowledge sharing.
-tools: [read/problems, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, web, 'grep/*', tavily/tavily_crawl, tavily/tavily_extract, tavily/tavily_map, tavily/tavily_search, tavily/tavily_skill, github/get_file_contents, github/issue_read, github/list_issue_types, github/list_issues, github/search_issues, github/search_repositories, 'pdf-reader/*', workspace/create, workspace/read, workspace/list, workspace/update]
+tools: [read/problems, edit/createDirectory, edit/createFile, edit/editFiles, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, web, tavily/tavily_crawl, tavily/tavily_extract, tavily/tavily_map, tavily/tavily_search, tavily/tavily_skill, github/get_file_contents, github/issue_read, github/list_issue_types, github/list_issues, github/search_issues, github/search_repositories, 'grep/*', 'pdf-reader/*']
 user-invocable: false
 model: Claude Sonnet 4.6 (copilot)
 ---

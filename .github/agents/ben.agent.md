@@ -3,7 +3,7 @@ name: Ben
 description: Orchestrator agent — analyses tasks and delegates to specialist sub-agents. Never performs work directly.
 argument-hint: Describe your project work or request
 target: vscode
-tools: [vscode/askQuestions, agent, 'pdf-reader/*', todo]
+tools: [vscode/askQuestions, vscode/memory, vscode/resolveMemoryFileUri, read/problems, read/readFile, agent, search, 'pdf-reader/*', todo]
 agents: ['*']
 model: Claude Haiku 4.5 (copilot)
 ---
