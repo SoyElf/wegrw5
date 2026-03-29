@@ -3,7 +3,7 @@ name: Doc
 description: Documentation specialist — writes clear, concise, well-structured documentation with minimal emoji usage
 tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase]
 user-invocable: false
-model: Claude Haiku 4.5 (copilot)
+model: Claude Sonnet 4.6 (copilot)
 ---
 
 # Documentation Specialist Instructions

@@ -97,17 +97,30 @@
       "implementation_patterns": {
         "single_agent_pattern": {
           "use_case": "Well-defined, scope-limited tasks (e.g., documentation writing, code review)",
-          "strengths": ["Simple to reason about", "Direct accountability", "Low latency", "Easy debugging"],
+          "strengths": [
+            "Simple to reason about",
+            "Direct accountability",
+            "Low latency",
+            "Easy debugging"
+          ],
           "implementation": "Create focused agent with narrow tool set and clear instructions"
         },
         "agent_delegation_pattern": {
           "use_case": "Complex workflows requiring multiple specialists (research, documentation, DevOps)",
-          "strengths": ["Modular expertise", "Parallel execution of independent tasks", "Scalable to new capabilities"],
+          "strengths": [
+            "Modular expertise",
+            "Parallel execution of independent tasks",
+            "Scalable to new capabilities"
+          ],
           "implementation": "Create orchestrator agent that analyzes requests and delegates to specialists"
         },
         "hierarchical_agent_pattern": {
           "use_case": "Multi-level coordination: orchestrator + team leads + specialists",
-          "strengths": ["Handles very complex workflows", "Built-in escalation/approval steps", "Clear responsibility chains"],
+          "strengths": [
+            "Handles very complex workflows",
+            "Built-in escalation/approval steps",
+            "Clear responsibility chains"
+          ],
           "example": "Ben orchestrator → specialized sub-agents (doc, research, git-ops, etc.)"
         }
       },
@@ -332,7 +345,12 @@
             "Can be slow if group chat cycles many times",
             "Requires careful prompt design to prevent circular discussions"
           ],
-          "use_cases": ["Design reviews", "Code reviews", "Architecture decisions", "Quality validation"]
+          "use_cases": [
+            "Design reviews",
+            "Code reviews",
+            "Architecture decisions",
+            "Quality validation"
+          ]
         },
         "agent_handoff_pattern": {
           "architecture": "Explicit transfer of work from one agent to another based on context conditions",
