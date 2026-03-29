@@ -366,6 +366,7 @@ These mistakes are common in multi-agent systems. Watch for them:
 |-------|---------------|---|
 | **Doc** (`@doc`) | Writes, updates, and improves documentation; researches codebase for context | Technical documentation, guides, API docs |
 | **Explore-Codebase** (`@explore-codebase`) | Rapid code analysis, pattern discovery, symbol resolution, architecture mapping, implementation examples | Code-specific queries, pattern analysis, symbol discovery |
+| **research** (`@research`) | Conducts broad research on technical topics, best practices, patterns, and industry approaches from external sources | Best practices research, technology evaluation, architecture patterns, coding patterns |
 | **agentic-workflow-researcher** (`@agentic-workflow-researcher`) | Conducts deep research on agentic workflows, VS Code extensibility, GitHub Copilot CLI, and multi-agent orchestration | Research, analysis, synthesis with sources |
 | **ar-director** (`@ar-director`) | Recruits new specialist agents when a capability gap is identified | Agent creation, portfolio design |
 | **ar-upskiller** (`@ar-upskiller`) | Upskills existing agents by researching latest VS Code Copilot best practices and updating agent definitions | Agent improvement, capability enhancement |

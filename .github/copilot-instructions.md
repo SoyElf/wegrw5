@@ -13,6 +13,7 @@ When a user invokes Copilot without specifying an agent, guide them to **@ben** 
 | `@ben` | `ben.agent.md` | **Orchestrator** — analyses tasks and delegates to specialist sub-agents, never performs work directly |
 | `@doc` | `doc.agent.md` | **Documentation Specialist** — writes clear, concise, well-structured documentation with minimal emoji usage |
 | `@explore-codebase` | `explore-codebase.agent.md` | **Codebase Exploration Specialist** — discovers code patterns, symbols, architecture relationships, and implementation examples (sub-agent only) |
+| `@research` | `research.agent.md` | **External Research Specialist** — conducts broad research on technical topics, best practices, patterns, and industry approaches from external sources (sub-agent only) |
 | `@agentic-workflow-researcher` | `agentic-workflow-researcher.agent.md` | **Research Specialist** — investigates agentic workflows, VS Code extensibility, GitHub Copilot CLI, and multi-agent orchestration (sub-agent only) |
 | `@ar-director` | `ar-director.agent.md` | **HR Director** — recruits new specialist agents when a capability gap is identified (sub-agent only) |
 | `@ar-upskiller` | `ar-upskiller.agent.md` | **Agent Upskilling Specialist** — researches latest VS Code Copilot best practices and updates existing agent definitions with improved capabilities (sub-agent only) |
