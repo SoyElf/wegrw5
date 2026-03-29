@@ -1,7 +1,7 @@
 ---
 name: ar-upskiller
 description: Upskills existing agents by researching latest VS Code Copilot best practices and updating agent definitions with improved capabilities.
-tools: [read/problems, agent, edit/editFiles, search, todo]
+tools: [read/problems, agent, edit/editFiles, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/semantic]
 agents: ['agentic-workflow-researcher']
 user-invocable: false
 model: Claude Haiku 4.5 (copilot)
@@ -43,13 +43,13 @@ When delegating to `agentic-workflow-researcher`, provide:
 ### Documentation Resources
 
 The workspace includes comprehensive agentic workflows documentation at `docs/research/agentic-workflows/`. This repository contains:
-- **Agent fundamentals** ([agent-definition-and-fundamentals.md](../../docs/research/agentic-workflows/agent-definition-and-fundamentals.md>))
-- **Specialization patterns** ([agent-specialization-patterns.md](<../../docs/research/agentic-workflows/agent-specialization-patterns.md>))
-- **Instruction engineering** ([instruction-engineering-best-practices.md](<../../docs/research/agentic-workflows/instruction-engineering-best-practices.md>))
-- **Tool composition** ([tool-composition-patterns.md](<../../docs/research/agentic-workflows/tool-composition-patterns.md>))
-- **VS Code agent architecture** ([vscode-agent-architecture.md](<../../docs/research/agentic-workflows/vscode-agent-architecture.md>))
-- **Common failure modes** ([common-failure-modes.md](<../../docs/research/agentic-workflows/common-failure-modes.md>))
-- **Orchestration principles** ([multi-agent-orchestration-principles.md](<../../docs/research/agentic-workflows/multi-agent-orchestration-principles.md>))
+- **Agent fundamentals** ([agent-definition-and-fundamentals.md](docs/research/agentic-workflows/agent-definition-and-fundamentals.md))
+- **Specialization patterns** ([agent-specialization-patterns.md](docs/research/agentic-workflows/agent-specialization-patterns.md))
+- **Instruction engineering** ([instruction-engineering-best-practices.md](docs/research/agentic-workflows/instruction-engineering-best-practices.md))
+- **Tool composition** ([tool-composition-patterns.md](docs/research/agentic-workflows/tool-composition-patterns.md))
+- **VS Code agent architecture** ([vscode-agent-architecture.md](docs/research/agentic-workflows/vscode-agent-architecture.md))
+- **Common failure modes** ([common-failure-modes.md](docs/research/agentic-workflows/common-failure-modes.md))
+- **Orchestration principles** ([multi-agent-orchestration-principles.md](docs/research/agentic-workflows/multi-agent-orchestration-principles.md))
 
 When upskilling agents, use semantic search and file search tools to:
 1. Query patterns relevant to the agent capability being improved

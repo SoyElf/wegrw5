@@ -3,7 +3,7 @@ name: ar-director
 description: HR Director — recruits (creates) new specialist agents when a capability gap is identified. Only invocable by Ben.
 argument-hint: Describe the new agent role and required capabilities
 target: vscode
-tools: [agent, read/problems, read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, edit/rename, search, web, tavily/tavily_crawl, tavily/tavily_extract, tavily/tavily_search, github/get_file_contents, github/search_code, semantic_search, file_search]
+tools: [read/problems, read/readFile, agent, edit/createDirectory, edit/createFile, edit/editFiles, edit/rename, search, web, github/get_file_contents, github/search_code, tavily/tavily_crawl, tavily/tavily_extract, tavily/tavily_search]
 user-invocable: false
 model: Claude Sonnet 4.6 (copilot)
 ---
