@@ -1,0 +1,811 @@
+{
+  "research_topic": "Comprehensive Agentic Workflows Best Practices: VS Code Agents, GitHub Copilot CLI, and Multi-Agent Orchestration",
+  "findings": {
+    "section_1_vs_code_custom_agents": {
+      "foundational_concepts": {
+        "definition": "VS Code custom agents are specialized versions of GitHub Copilot configured via `.agent.md` files that handle unique workflows, coding conventions, and specialist use cases within the VS Code editor environment.",
+        "agent_system_architecture": [
+          "Agents are defined as `.agent.md` files with YAML frontmatter and Markdown instructions",
+          "Powered by GitHub Copilot (Claude Haiku 4.5 or Claude Sonnet 4.6 depending on complexity)",
+          "Can be user-invocable or sub-agents (invoked only by orchestrator)",
+          "Support multiple tool capabilities through MCP servers and custom tool definitions",
+          "Agent modes enable specialized behavior: coding mode, analysis mode, research mode, documentation mode"
+        ],
+        "agent_md_file_specification": {
+          "structure": "YAML frontmatter with metadata + Markdown body with instructions",
+          "required_fields": [
+            "name - descriptive agent name",
+            "description - clear purpose and capabilities",
+            "tools - array of tool configurations agent can use",
+            "instructions - detailed Markdown instructions for agent behavior"
+          ],
+          "optional_fields": [
+            "version - semantic version for tracking updates",
+            "tags - array of keywords for discovery",
+            "scope - user-level (global) or workspace-level",
+            "custom_instructions - agent-specific behavioral modifications"
+          ],
+          "example_structure": "name: Documentation Specialist\ndescription: Writes, Updates, and improves documentation\ntools:\n  - name: file_search\n    description: Search files in workspace\n  - name: semantic_search\n    description: Semantic search across codebase\ninstructions: |\n  You are a documentation specialist..."
+        }
+      },
+      "agent_tool_capabilities": {
+        "built_in_tools": [
+          "file_search - find files by glob pattern",
+          "semantic_search - search codebase semantically",
+          "grep_search - text/regex search in files",
+          "file_list - list directory contents",
+          "create_file - create new files with content",
+          "replace_string_in_file - edit existing files",
+          "multi_replace - batch file edits efficiently",
+          "get_errors - retrieve lint/compile errors",
+          "get_changed_files - git diff integration"
+        ],
+        "tool_restrictions": {
+          "principle": "Agent access to tools should be scoped by agent role and task context",
+          "best_practice": "Define explicit tool allowlists in agent configuration rather than default-allow-all",
+          "safety_considerations": [
+            "File modification tools should require clear purpose/context",
+            "Terminal/shell execution requires explicit approval or safe command whitelist",
+            "External API calls need authentication validation",
+            "Always include rollback/verification mechanisms for destructive operations"
+          ]
+        },
+        "tool_composition": {
+          "concept": "Strategic combination of multiple tools to accomplish complex tasks",
+          "pattern": "Agent uses search tools → analyzes results → applies modifications → verifies changes",
+          "key_insight": "Well-composed tool chains are more reliable than single complex tools; compose atomic operations",
+          "failure_prevention": "Include verification steps after tool use; handle partial failures gracefully"
+        }
+      },
+      "agent_modes_and_customization": {
+        "agent_modes": [
+          "Code generation/modification mode - specialized for coding tasks",
+          "Research/Analysis mode - optimized for investigation and synthesis",
+          "Documentation mode - focused on clear written communication",
+          "Development/DevOps mode - specialized infrastructure and deployment tasks",
+          "Multi-agent orchestration mode - routing and delegation focus"
+        ],
+        "customization_approaches": {
+          "instruction_engineering": "Detailed Markdown instructions guide agent behavior, decision-making, and quality standards",
+          "prompt_structuring": "Structure instructions with clear sections: role, responsibilities, constraints, guidelines, examples",
+          "behavioral_tuning": "Use specific language patterns: 'must', 'should', 'avoid' to set expectations at different priority levels",
+          "context_preparation": "Pre-populate agent context with workspace structure, conventions, and project-specific knowledge"
+        },
+        "best_practices_for_customization": [
+          "Keep instructions concise but comprehensive - balance detail with readability",
+          "Use bullets/sections for scanability - agents process structured text more reliably",
+          "Include concrete examples of desired behavior within instructions",
+          "Specify quality criteria and error-handling expectations explicitly",
+          "Document agent-specific secrets/credentials via environment variables, not instructions",
+          "Version agent instructions in git for tracking evolution and rollback capability"
+        ]
+      },
+      "mcp_server_integration": {
+        "concept": "Model Context Protocol (MCP) servers extend agent capabilities with external tools and services",
+        "integration_pattern": [
+          "MCP servers are configured in VS Code settings or .copilot configuration",
+          "Agents automatically gain access to MCP tools without modification",
+          "Common MCP servers: GitHub API, web search, file systems, database queries",
+          "Custom MCP servers enable domain-specific integrations (e.g., Slack, Jira, monitoring systems)"
+        ],
+        "configuration": {
+          "location_vscode": "Settings > Copilot > MCP Servers or in settings.json",
+          "location_cli": "~/.copilot/mcp.json or .copilot/mcp.json (project-scoped)",
+          "protocol": "MCP servers communicate via stdio, SSE, or other transports"
+        }
+      },
+      "implementation_patterns": {
+        "single_agent_pattern": {
+          "use_case": "Well-defined, scope-limited tasks (e.g., documentation writing, code review)",
+          "strengths": ["Simple to reason about", "Direct accountability", "Low latency", "Easy debugging"],
+          "implementation": "Create focused agent with narrow tool set and clear instructions"
+        },
+        "agent_delegation_pattern": {
+          "use_case": "Complex workflows requiring multiple specialists (research, documentation, DevOps)",
+          "strengths": ["Modular expertise", "Parallel execution of independent tasks", "Scalable to new capabilities"],
+          "implementation": "Create orchestrator agent that analyzes requests and delegates to specialists"
+        },
+        "hierarchical_agent_pattern": {
+          "use_case": "Multi-level coordination: orchestrator + team leads + specialists",
+          "strengths": ["Handles very complex workflows", "Built-in escalation/approval steps", "Clear responsibility chains"],
+          "example": "Ben orchestrator → specialized sub-agents (doc, research, git-ops, etc.)"
+        }
+      },
+      "common_pitfalls_and_solutions": {
+        "pitfall_1_overly_broad_agent_scope": {
+          "problem": "Single agent tries to handle documentation, coding, research, and DevOps",
+          "consequence": "Reduced quality, higher hallucination, difficulty in debugging failures",
+          "solution": "Decompose into specialized agents with clear domain boundaries"
+        },
+        "pitfall_2_insufficient_context": {
+          "problem": "Agent lacks workspace structure, conventions, or project-specific knowledge",
+          "consequence": "Generates code/docs inconsistent with project standards",
+          "solution": "Include project context in agent instructions; reference styleguides and patterns"
+        },
+        "pitfall_3_unclear_success_criteria": {
+          "problem": "Agent doesn't know when task is complete or what quality threshold to meet",
+          "consequence": "Over/under-delivery; inconsistent output quality",
+          "solution": "Define explicit success criteria, quality standards, and verification steps"
+        },
+        "pitfall_4_poor_error_handling": {
+          "problem": "Agent proceeds despite tool failures or incomplete data retrieval",
+          "consequence": "Hallucinated content, incorrect modifications, cascading failures",
+          "solution": "Include explicit error handling in instructions; verify outcomes before proceeding"
+        },
+        "pitfall_5_tool_misuse": {
+          "problem": "Agent uses wrong tool or calls tools in wrong order (e.g., modify before searching)",
+          "consequence": "Failed operations, wasted tokens, task incomplete",
+          "solution": "Include tool usage examples in instructions; structure workflow as sequential steps"
+        }
+      }
+    },
+    "section_2_github_copilot_cli_extensibility": {
+      "foundational_concepts": {
+        "definition": "GitHub Copilot CLI brings Copilot capabilities to the terminal, enabling agentic workflows for development tasks with extensibility through skills, custom agents, hooks, and MCP servers.",
+        "cli_core_capabilities": [
+          "Interactive coding sessions in terminal",
+          "Programmatic/scripted invocation for automation",
+          "Tool use with approval controls (interactive approval, approval flags, auto-allow)",
+          "Session management and context persistence across commands",
+          "Slash command system for steering agent behavior",
+          "Integration with existing development workflows"
+        ],
+        "copilot_cli_vs_vs_code_agents": {
+          "vscode_agents": "Specialized using `.agent.md` files; tightly integrated with editor UI; visual context and file trees",
+          "cli_agents": "Terminal-based; more scripted and automation-focused; better for CI/CD and programmatic use; similar core capabilities but different interaction model"
+        }
+      },
+      "cli_extensibility_mechanisms": {
+        "skills": {
+          "description": "Markdown files containing instructions that Copilot can use to perform tasks in specific contexts",
+          "structure": [
+            "SKILL.md file with instructions (required)",
+            "Supporting scripts, examples, or templates in skill directory (optional)",
+            "Organized in .github/skills/, .claude/skills/, .agents/skills/, or ~/.copilot/skills/"
+          ],
+          "usage_pattern": "When appropriate to task context, Copilot injects SKILL.md into agent context",
+          "scope_options": [
+            "Project skills - repository-specific, in .github/skills/ or .claude/skills/",
+            "Personal skills - shared across projects, in ~/.copilot/skills/"
+          ],
+          "best_practices": [
+            "Write clear instructions on WHEN and HOW to use the skill",
+            "Include concrete examples and reference examples",
+            "Keep skill scope focused (one primary task per skill)",
+            "Version skills in git for tracking and rollback",
+            "Document dependencies and prerequisites"
+          ]
+        },
+        "custom_agents": {
+          "description": "Specialized versions of Copilot CLI for unique workflows, coding conventions, and specialist use cases",
+          "invocation": "CLI can automatically infer agent or user can explicitly select via /agent command",
+          "configuration": "Similar `.agent.md` format as VS Code but with CLI-specific tool set",
+          "auto_infer_pattern": "Configure agent with infer: true to enable automatic selection when appropriate"
+        },
+        "mcp_servers": {
+          "description": "Model Context Protocol servers providing tools and external service integrations",
+          "configuration_file": "~/.copilot/mcp.json or .copilot/mcp.json (project-scoped)",
+          "common_servers": [
+            "GitHub MCP server - GitHub API access",
+            "Web search/research servers",
+            "Database query servers",
+            "Custom domain-specific servers"
+          ],
+          "integration_pattern": "MCP servers automatically available to agents; provide tools expandingagent capabilities"
+        },
+        "hooks": {
+          "description": "Operations performed at specific moments in CLI sessions (e.g., session start, tool execution, session end)",
+          "use_cases": [
+            "Block specific tools from running",
+            "Log activity for audit trails",
+            "Auto-approve certain operations",
+            "Setup/teardown for session context"
+          ],
+          "configuration": "Defined in custom agent or CLI configuration"
+        },
+        "instructions": {
+          "description": "Large, task-specific instructions that guide Copilot behavior",
+          "when_to_use": "When instructions are too specific/large for main prompt but smaller than full skill",
+          "placement": "Can be CLI-level, agent-level, or task-level"
+        }
+      },
+      "slash_command_system": {
+        "overview": "Terminal commands prefixed with '/' that steer agent behavior during CLI sessions",
+        "key_commands": [
+          "/help - List available slash commands",
+          "/agent <name> - Select or switch to specific agent",
+          "/cwd or /cd <path> - Change working directory",
+          "/feedback - Provide feedback about CLI session",
+          "/allow <tool> - Approve specific tool for current session",
+          "/allow-all - Approve all tools for current session",
+          "/yolo - Auto-approve all tools (no prompts)",
+          "/exit - End current session"
+        ],
+        "tool_approval_controls": {
+          "interactive_approval": "Copilot prompts for approval before using tools",
+          "approval_flags": "Use CLI flags to pre-approve tools: --allow-all-tools, --allow-tool <name>",
+          "auto_approval": "Full auto-approval via /allow-all or --allow-all-tools"
+        }
+      },
+      "cli_best_practices": {
+        "1_customize_environment": "Configure skills, agents, and MCP servers for your workflow",
+        "2_plan_before_code": "Use Copilot to help plan complex tasks before jumping into implementation",
+        "3_leverage_infinite_sessions": "Keep CLI session open for multi-step workflows to maintain context",
+        "4_delegate_work_effectively": "Break complex tasks into Copilot-delegated steps; manage context explicitly",
+        "5_use_role_specific_agents": "Create agents for specific roles (e.g., @architect, @reviewer, @tester)",
+        "6_structured_coordination": "Define clear workflows combining role-specific agents with runtime agents"
+      },
+      "agent_workflow_patterns_for_cli": {
+        "pattern_1_role_specific_agents": {
+          "description": "Design agents to play specific roles in your development process (architect, developer, reviewer, QA)",
+          "workflow_example": "User request → Role-specific agent analyzes → Documentation/code output",
+          "benefits": "Clear accountability, specialized expertise, easier to reason about",
+          "implementation": "Create focused agent definitions for each role with explicit responsibilities and constraints"
+        },
+        "pattern_2_runtime_agents": {
+          "description": "Agents that execute the workflow defined by role-specific agents",
+          "workflow_example": "Feature request → Architecture agent designs → Developer agent implements → Reviewer agent validates",
+          "benefits": "Separation of planning and execution; better error recovery",
+          "implementation": "Runtime agents follow structured plans; can escalate or ask for guidance"
+        },
+        "pattern_3_hybrid_workflows": {
+          "description": "Combine role-specific (design layer) agents with runtime (execution layer) agents",
+          "workflow_example": "Complex feature → docs agent + research agent (parallel) → architecture agent → implementation agent → testing agent",
+          "validation_pattern": "Include verification agents that validate outputs against specifications",
+          "key_insight": "Document clearly what ran, which agents were involved, what ran in parallel, and validation results"
+        }
+      },
+      "integration_with_vs_code": {
+        "github_copilot_agent_mode": "VS Code has dedicated Agent mode leveraging same capabilities as CLI agents",
+        "shared_capabilities": "Same tool models, MCP servers, and skill systems work across VS Code and CLI",
+        "workflow_pattern": "Agents can be invoked from either VS Code UI or CLI depending on context",
+        "context_sharing": "Limited direct context sharing between VS Code and CLI, but can share skills/agents via git"
+      },
+      "common_pitfalls_and_solutions": {
+        "pitfall_1_tool_approval_confusion": {
+          "problem": "Users uncertain about tool approval controls; either no approvals or over-approving",
+          "consequence": "Security risks or blocked workflows",
+          "solution": "Document approval model clearly; use --allow-all-tools carefully in CI/CD contexts"
+        },
+        "pitfall_2_skill_discoverability": {
+          "problem": "Agents don't know about available skills or when to use them",
+          "consequence": "Skills not leveraged; duplicated effort in prompt",
+          "solution": "Skills must be explicitly documented in instructions; include usage examples"
+        },
+        "pitfall_3_mcp_configuration_confusion": {
+          "problem": "MCP servers configured in wrong location or incorrect format",
+          "consequence": "Agents don't have expected tool access",
+          "solution": "Clear documentation on configuration paths (~/.copilot/mcp.json vs .copilot/mcp.json)"
+        },
+        "pitfall_4_session_context_loss": {
+          "problem": "Long CLI sessions lose context or variables",
+          "consequence": "Tasks fail or require re-context",
+          "solution": "Use /cwd to persist state; leverage session context variables explicitly"
+        }
+      }
+    },
+    "section_3_multi_agent_orchestration": {
+      "foundational_concepts": {
+        "definition": "Multi-agent orchestration is the coordination model that determines how multiple specialized AI agents communicate, delegate work, and collaborate to solve complex tasks",
+        "key_principles": [
+          "Single agent per focused domain - agents are specialists not generalists",
+          "Clear role definition - each agent has explicit responsibilities and constraints",
+          "Explicit delegation - work routing is intentional, not automatic",
+          "Dependency management - explicit ordering of sequential vs parallel tasks",
+          "Verification at boundaries - validate outputs at agent handoff points",
+          "Transparent coordination - humans/systems can observe orchestration decisions"
+        ],
+        "orchestration_vs_coordination": {
+          "orchestration": "Central authority (orchestrator) explicitly controls workflow and agent interactions",
+          "coordination": "Agents negotiate directly with each other on work allocation and sequencing"
+        }
+      },
+      "orchestration_patterns": {
+        "orchestrator_worker_pattern": {
+          "architecture": "Central orchestrator agent fans out work to specialized worker agents",
+          "control_flow": "Orchestrator receives request → analyzes → determines which agents → delegates → coordinates results",
+          "strengths": [
+            "Clear Single Point Of Control (SPoC)",
+            "Easy to reason about and debug",
+            "Natural for hierarchical task decomposition",
+            "Excellent for error recovery and escalation"
+          ],
+          "weaknesses": [
+            "Single orchestrator can become bottleneck",
+            "Orchestrator understands all domains",
+            "Less suitable for highly parallel, peer-to-peer work"
+          ],
+          "implementation_example": "Ben orchestrator → delegates to @doc, @research, @git-ops agents",
+          "best_for": "Most multi-agent systems; particularly good for development workflows"
+        },
+        "group_chat_collaboration_pattern": {
+          "architecture": "Multiple agents participate in shared conversation thread for collaborative problem-solving",
+          "control_flow": "Initial agent proposes approach → other agents provide feedback → group converges on solution → one agent executes",
+          "strengths": [
+            "Natural consensus-building",
+            "Agents can challenge each other's assumptions",
+            "Good for validation and review workflows",
+            "Leverages diverse perspectives"
+          ],
+          "weaknesses": [
+            "Harder to debug conversation dynamics",
+            "Can be slow if group chat cycles many times",
+            "Requires careful prompt design to prevent circular discussions"
+          ],
+          "use_cases": ["Design reviews", "Code reviews", "Architecture decisions", "Quality validation"]
+        },
+        "agent_handoff_pattern": {
+          "architecture": "Explicit transfer of work from one agent to another based on context conditions",
+          "control_mechanisms": [
+            "Conditional routing - supervisor outputs specific strings triggering conditional edges",
+            "Command objects - agents issue structured handoff commands updating state + routing",
+            "Context conditions - handoff triggered when specific variables or conditions met"
+          ],
+          "strengths": [
+            "Clear ownership transitions",
+            "Agents only activated when appropriate",
+            "Scales better than group chat",
+            "Natural for escalation paths (user → tier1 support → specialist → engineering)"
+          ],
+          "implementation_patterns": {
+            "simple_conditional": "Agent outputs 'route_to_agent_x' → conditional function routes",
+            "advanced_command": "Agent issues Command object with destination + state updates",
+            "context_based": "OnContextCondition checks state variables to decide next agent"
+          ]
+        },
+        "plan_and_execute_pattern": {
+          "architecture": "Planner agent creates detailed execution plan → executor agents follow the plan",
+          "phases": [
+            "Planning phase - planner analyzes request and creates structured task list with dependencies",
+            "Execution phase - execution agents work through plan, reporting progress and blockers",
+            "Verification phase - verifier validates execution against plan"
+          ],
+          "strengths": [
+            "Clear expected outcomes",
+            "Easy to validate progress",
+            "Agents can operate independently following plan",
+            "Good for deterministic workflows"
+          ],
+          "weaknesses": [
+            "Plans become stale if execution reveals issues",
+            "Re-planning mid-execution requires orchestrator intervention",
+            "Less suitable for exploratory/research tasks with uncertain paths"
+          ]
+        },
+        "hierarchical_agent_pattern": {
+          "architecture": "Tree-structured delegation: orchestrator → team leads → specialists",
+          "levels": [
+            "Level 1 - Primary orchestrator handles request routing",
+            "Level 2 - Domain team leads manage specialists within domain",
+            "Level 3 - Specialists execute focused tasks"
+          ],
+          "strengths": [
+            "Scales to large agent teams",
+            "Clear escalation and approval paths",
+            "Domains can evolve independently",
+            "Natural organizational structure"
+          ],
+          "use_case_example": "Enterprise deployment with docs domain, DevOps domain, research domain"
+        },
+        "swarm_pattern": {
+          "architecture": "Decentralized emergent coordination; agents operate semi-autonomously with minimal central control",
+          "characteristics": [
+            "Agents have local goals and local communication",
+            "No central orchestrator",
+            "Emergent behavior from agent interactions",
+            "Self-organizing around task requirements"
+          ],
+          "use_cases": "Rarely suitable for LLM agents in typical business workflows due to unpredictability",
+          "caution": "Swarm patterns work better for deterministic systems; LLM agents need explicit coordination"
+        }
+      },
+      "request_routing_and_delegation": {
+        "orchestrator_analysis_process": [
+          "1. Understand request - parse user intent and extract key context",
+          "2. Identify work type - classify request as documentation, coding, research, DevOps, etc.",
+          "3. Decompose workflow - break complex requests into discrete tasks with explicit dependencies",
+          "4. Identify parallel opportunities - find independent sub-tasks that can execute concurrently",
+          "5. Route to specialists - delegate each task to appropriate specialist agent with full context",
+          "6. Coordinate execution - orchestrate sequential and parallel execution",
+          "7. Synthesize results - collect outputs and summarize for user"
+        ],
+        "delegation_best_practices": [
+          "Provide full context - don't assume specialist knows project conventions or user intent",
+          "Set clear success criteria - specify what good outcome looks like",
+          "Include relevant workspace state - path to related files, project structure, style guides",
+          "Enable error recovery - specify fallback options if task encounters blockers",
+          "Track dependencies - explicitly specify which tasks must complete before others start"
+        ],
+        "context_passing": {
+          "approach_1_explicit_context": "Orchestrator passes full context to each agent (can be verbose but clear)",
+          "approach_2_shared_memory": "Agents read shared workspace memory (`.tmp/`, workspace root) for context",
+          "approach_3_file_based": "Results written to files agents can discover and read as needed"
+        }
+      },
+      "agent_specialization_and_role_definition": {
+        "specialization_principle": "Agents should have narrow, well-defined expertise areas rather than broad general capability",
+        "benefits": [
+          "Higher quality outputs within domain",
+          "Easier to test and validate specialist outputs",
+          "Clearer responsibility and accountability",
+          "Simpler to debug and improve agents",
+          "Better token efficiency (shorter, more focused instructions)"
+        ],
+        "role_definition_framework": {
+          "element_1_domain": "What specific area does this agent specialize in? (e.g., documentation, research, DevOps)",
+          "element_2_responsibilities": "What is this agent accountable for delivering?",
+          "element_3_constraints": "What is this agent NOT allowed to do?",
+          "element_4_tools": "What specific tools does this agent have access to?",
+          "element_5_success_criteria": "How do we know this agent succeeded?",
+          "element_6_escalation": "When/how does this agent escalate to orchestrator?"
+        },
+        "workspace_example": {
+          "@ben": {
+            "domain": "Orchestration and delegation",
+            "responsibilities": "Analyze requests, route to appropriate agents, coordinate workflows",
+            "constraints": "Never performs implementation work directly; always delegates to specialists",
+            "tools": "Orchestration: invoke agents, read shared memory, coordinate execution"
+          },
+          "@doc": {
+            "domain": "Documentation and technical writing",
+            "responsibilities": "Write, update, improve READMEs, guides, API docs, comments",
+            "constraints": "Only modifies documentation; doesn't write application code",
+            "tools": "File search, semantic search, create/edit files, code analysis"
+          },
+          "@research": {
+            "domain": "Investigation and synthesis of complex topics",
+            "responsibilities": "Research agentic patterns, VS Code APIs, best practices; create structured findings",
+            "constraints": "Research only - doesn't implement solutions; always cites sources",
+            "tools": "Web search, content extraction, codebase grep, synthesis"
+          }
+        }
+      },
+      "inter_agent_communication_patterns": {
+        "direct_communication": {
+          "mechanism": "One agent directly invokes another",
+          "when_suitable": "Sequential work where downstream agent depends on upstream output",
+          "limitation": "Violates clean separation; couples agents; makes orchestration opaque"
+        },
+        "orchestrator_mediated": {
+          "mechanism": "All inter-agent communication flows through orchestrator",
+          "when_suitable": "Most workflows; preserves clear accountability and visibility",
+          "implementation": "Agent reports to orchestrator → orchestrator delegates to next agent with context"
+        },
+        "shared_memory_based": {
+          "mechanism": "Agents write results to shared workspace (files, database, shared temp directory)",
+          "when_suitable": "Asynchronous, loosely-coupled workflows",
+          "implementation": "Agent A writes output to file → Orchestrator delegates to Agent B → Agent B reads file"
+        },
+        "event_based": {
+          "mechanism": "Agents subscribe to events and react; event bus coordinates communication",
+          "when_suitable": "Complex, reactive systems (less common in dev workflows)",
+          "limitation": "Difficult to debug; non-deterministic ordering"
+        },
+        "best_practice": "Use orchestrator-mediated for most workflows; shared memory for parallel tasks; avoid direct communication"
+      },
+      "dependency_management": {
+        "task_dependency_types": [
+          "Sequential - Task B cannot start until Task A completes",
+          "Conditional - Task B only runs if Task A succeeded (or failed with specific error)",
+          "Parallel - Task A and Task B execute simultaneously with no dependencies",
+          "Partial ordering - Some tasks have dependencies, others are independent"
+        ],
+        "explicit_dependency_declaration": {
+          "pattern": "Orchestrator explicitly states which tasks are dependent, independent, sequential, parallel",
+          "implementation": "Include dependency graph in orchestration context",
+          "benefit": "Enables efficient parallel execution; clear what can be optimized"
+        },
+        "handling_failures": {
+          "approach_1_fail_fast": "If Task A fails, subsequent dependent tasks do not run",
+          "approach_2_fault_tolerance": "Some tasks can be retried or have fallback agents",
+          "approach_3_escalation": "If critical task fails, orchestrator escalates to human"
+        },
+        "workspace_example": "Git operations only run after all code/doc changes complete (sequential dependency)"
+      },
+      "parallel_vs_sequential_execution": {
+        "parallel_execution_opportunities": [
+          "Multiple independent sub-tasks from single complex request",
+          "Research + documentation writing (different specializations, no dependency)",
+          "Code implementation + testing framework design (can proceed in parallel with handoff)",
+          "Analysis of different system components (no dependencies between them)"
+        ],
+        "implementation": {
+          "approach": "Orchestrator identifies independent tasks → delegates all to respective agents → waits for all to complete → synthesizes results",
+          "context_requirements": "Each agent must have sufficient context to work independently",
+          "coordination": "Minimal real-time coordination needed; batch up results at end"
+        },
+        "benefits": [
+          "Wall-clock time reduction (significant for complex workflows)",
+          "Better resource utilization",
+          "Simpler agent implementations (no need to coordinate with each other)"
+        ],
+        "pitfalls": [
+          "Too much parallelization without dependency analysis → wasted work if assumptions wrong",
+          "Parallel tasks with hidden dependencies → race conditions or inconsistencies",
+          "Context explosion - too many agents operating independently lose sight of unified goal"
+        ]
+      },
+      "failure_modes_and_mitigation": {
+        "failure_mode_1_specification_failures": {
+          "description": "Orchestrator misspecifies what specialists should do; agents receive unclear/contradictory requirements",
+          "consequence": "Agents execute wrong work or produce poor quality outputs",
+          "mitigation": [
+            "Explicit success criteria in every delegation",
+            "Examples of expected outputs in instructions",
+            "Clear constraints and boundaries",
+            "Verification step after agent completes work"
+          ],
+          "research_finding": "41-86% of multi-agent systems fail in production; 79% of failures from bad specs and broken coordination"
+        },
+        "failure_mode_2_inter_agent_misalignment": {
+          "description": "Agents disagree on interpretation of task, expected format, quality standards",
+          "consequence": "Outputs incompatible; require rework; cascade failures",
+          "mitigation": [
+            "Shared context defining project conventions and standards",
+            "Explicit format specifications for agent outputs",
+            "Verification agents that validate compatibility",
+            "Pre-coordination between agents before execution"
+          ]
+        },
+        "failure_mode_3_tool_failures": {
+          "description": "Agents struggle when tools fail, return incomplete data, or behave unexpectedly",
+          "consequence": "Hallucinations, incorrect work, cascading failures",
+          "mitigation": [
+            "Explicit error handling in agent instructions",
+            "Verification of tool outputs before proceeding",
+            "Fallback strategies (retry, alternative tool, escalate)",
+            "Clear error messages to help agents recover"
+          ]
+        },
+        "failure_mode_4_context_loss": {
+          "description": "Agents work with stale or incomplete context",
+          "consequence": "Outputs inconsistent with project state; re-work required",
+          "mitigation": [
+            "Fresh context retrieval at task start",
+            "Shared memory for critical project state",
+            "Refresh context for long-running agent sessions"
+          ]
+        },
+        "failure_mode_5_poor_termination": {
+          "description": "Agents don't know when task is complete; over/under-deliver",
+          "consequence": "Incomplete work or wasted effort on unnecessary tasks",
+          "mitigation": [
+            "Explicit success criteria and completion signals",
+            "Verification step confirming task done",
+            "Clear stopping conditions in instructions"
+          ]
+        },
+        "failure_mode_6_hallucinated_reasoning": {
+          "description": "Agents confidently make up information when uncertain",
+          "consequence": "Incorrect outputs, cascading downstream failures",
+          "mitigation": [
+            "Require agents to indicate uncertainty explicitly",
+            "Verification and fact-checking steps",
+            "Grounding in actual project artifacts, not training data"
+          ]
+        }
+      },
+      "real_world_case_study_workspace_architecture": {
+        "system_overview": "This workspace is a production multi-agent orchestration hub with clear role specialization and hierarchical coordination",
+        "architecture": {
+          "primary_entry": "@ben - Orchestrator agent (user-invocable)",
+          "specialist_agents": [
+            "@doc - Documentation specialist",
+            "@agentic-workflow-researcher - Research specialist",
+            "@ar-director - HR Director (recruits new agents)",
+            "@ar-upskiller - Upskilling specialist",
+            "@git-ops - Git operations specialist"
+          ],
+          "coordination_model": "Hierarchical with Ben as orchestrator"
+        },
+        "orchestrator_ben_workflow": [
+          "1. Analyse - Determine work type (documentation, research, development, DevOps, etc.)",
+          "2. Decompose - Break complex requests into discrete sub-tasks with explicit dependencies",
+          "3. Delegate - Route to appropriate specialist agents with full context",
+          "4. Coordinate - Run independent tasks in parallel; sequence dependent ones in order",
+          "5. Report - Summarize what was delegated, to whom, and the outcome"
+        ],
+        "specialization_implementation": {
+          "@ben": "Pure orchestration - never implements directly, always delegates to specialists",
+          "@doc": "Documentation-only specialist - writes READMEs, guides, API docs, comments only",
+          "@research": "Research-only specialist - investigates and synthesizes complex topics; cites sources",
+          "@git-ops": "DevOps specialist - manages git operations with Conventional Commits validation",
+          "@ar-director": "HR specialist - recruits new agents when capability gaps identified",
+          "@ar-upskiller": "Training specialist - updates agent definitions with latest best practices"
+        },
+        "dependency_management_example": "Git operations only execute after code/doc changes complete; enforced via orchestration sequence",
+        "inter_agent_communication": "Orchestrator-mediated - all coordination flows through @ben; agents report completion to @ben",
+        "error_recovery": "Ben evaluates specialist outputs; can request rework or escalate issues",
+        "scalability_approach": "New specialist agents recruited on-demand when capability gaps identified (via @ar-director)",
+        "lessons_learned": [
+          "Clear specialist roles enable high-quality outputs within domains",
+          "Orchestrator pattern scales well as new specialists are added",
+          "Explicit context passing (instructions, file references) crucial for agent alignment",
+          "Separation of orchestration (Ben) from execution (specialists) maintains clean architecture",
+          "File-based state sharing (.tmp/) enables inter-agent discovery and async coordination"
+        ]
+      }
+    },
+    "patterns_and_best_practices_summary": {
+      "tool_ecosystem": {
+        "vs_code_integration": [
+          "Native agent support via .agent.md files",
+          "Copilot Chat in agent mode",
+          "MCP server configuration built-in",
+          "File system and semantic search integration"
+        ],
+        "github_copilot_cli": [
+          "Terminal-based agentic workflows",
+          "Skills and custom agent support",
+          "MCP server integration",
+          "Scripting and automation capabilities"
+        ],
+        "orchestration_frameworks": [
+          "Semantic Kernel (Microsoft) - agent framework with sequential/concurrent/group chat/handoff orchestration",
+          "LangGraph (LangChain) - structured agent graphs with conditional routing",
+          "AG2 (formerly AutoGen) - multi-agent conversations with handoff protocols",
+          "Akka - supervised agent orchestration with workflow coordination"
+        ],
+        "supporting_tools": [
+          "MCP servers (GitHub, web search, custom domains)",
+          "Git integration (conventional commits, semantic-release)",
+          "File systems and shared memory for async coordination",
+          "Observability and logging for production systems"
+        ]
+      },
+      "integration_best_practices": {
+        "practice_1_clear_separation": "Separate orchestration (Ben) from execution (specialists); maintain clean architecture",
+        "practice_2_explicit_context": "Pass comprehensive context to agents; don't assume they know project conventions",
+        "practice_3_verification_at_boundaries": "Validate outputs at agent handoff points; catch errors early",
+        "practice_4_parallel_where_possible": "Identify independent tasks and run them concurrently for efficiency",
+        "practice_5_documented_workflows": "Clearly document orchestrator logic, agent responsibilities, and communication patterns",
+        "practice_6_scalable_specialist_recruitment": "Design system to accommodate new specialist agents as capability gaps emerge",
+        "practice_7_observable_coordination": "Log orchestration decisions and agent interactions for debugging and monitoring"
+      }
+    }
+  },
+  "sources": [
+    {
+      "title": "VS Code Custom Agents Documentation",
+      "url": "https://code.visualstudio.com/docs/copilot/customization/custom-agents",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "GitHub Copilot CLI Documentation",
+      "url": "https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Creating Agent Skills for GitHub Copilot CLI",
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/create-skills",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Comparing GitHub Copilot CLI Customization Features",
+      "url": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/comparing-cli-features",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "From Prompts to Pipelines: Role-Specific and Runtime Agents",
+      "url": "https://spknowledge.com/2026/03/16/from-prompts-to-pipelines-hybrid-agents-copilot-cli-2/",
+      "type": "technical-blog",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Multi-Agent Orchestration: Patterns and Best Practices for 2024",
+      "url": "https://collabnix.com/multi-agent-orchestration-patterns-and-best-practices-for-2024/",
+      "type": "research",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "AI Agent Orchestration Patterns - Azure Architecture Center",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Why Do Multi-Agent LLM Systems Fail? - arXiv",
+      "url": "https://arxiv.org/html/2503.13657v1",
+      "type": "research",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Why do multi agent LLM systems fail (and how to fix) - 2026 Guide",
+      "url": "https://futureagi.substack.com/p/why-do-multi-agent-llm-systems-fail",
+      "type": "technical-blog",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Agent Orchestration Patterns: Multiple Architectures Explained",
+      "url": "https://gurusup.com/blog/agent-orchestration-patterns",
+      "type": "technical-blog",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "AI Agent Orchestration Patterns for Reliable Products",
+      "url": "https://productschool.com/blog/artificial-intelligence/ai-agent-orchestration-patterns",
+      "type": "technical-blog",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "How Agent Handoffs Work in Multi-Agent Systems",
+      "url": "https://towardsdatascience.com/how-agent-handoffs-work-in-multi-agent-systems/",
+      "type": "technical-blog",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "AI Orchestration Patterns - Akka Documentation",
+      "url": "https://doc.akka.io/concepts/ms-agent-patterns.html",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Handoffs in AG2 (AutoGen)",
+      "url": "https://docs.ag2.ai/latest/docs/user-guide/advanced-concepts/orchestration/group-chat/handoffs/",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "A Practical Guide to LLM Failure Modes",
+      "url": "https://medium.com/@adnanmasood/a-field-guide-to-llm-failure-modes-5ffaeeb08e80",
+      "type": "technical-blog",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Multi-Agent Systems: AI Agent Teams for Marketing - Digital Applied",
+      "url": "https://www.digitalapplied.com/blog/multi-agent-systems-guide-2025",
+      "type": "technical-blog",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "GitHub Copilot CLI Best Practices",
+      "url": "https://docs.github.com/copilot/how-tos/copilot-cli/cli-best-practices",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Invoking Custom Agents in Copilot CLI",
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli-agents/invoke-custom-agents",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    },
+    {
+      "title": "Extending GitHub Copilot Chat with MCP Servers",
+      "url": "https://docs.github.com/copilot/customizing-copilot/using-model-context-protocol/extending-copilot-chat-with-mcp",
+      "type": "official",
+      "accessed_date": "2026-03-29"
+    }
+  ],
+  "timestamp": "2026-03-29T14:30:00Z",
+  "requestor_agent": "agentic-workflow-researcher",
+  "tags": [
+    "agentic-workflows",
+    "vs-code",
+    "github-copilot-cli",
+    "agent-orchestration",
+    "multi-agent-systems",
+    "mcp-servers",
+    "agent-patterns",
+    "delegation",
+    "tool-composition",
+    "best-practices",
+    "failure-modes"
+  ],
+  "summary": "Comprehensive research on agentic workflows spanning VS Code custom agent development, GitHub Copilot CLI extensibility, and multi-agent orchestration. Covers foundational concepts, implementation patterns, real-world case studies (including this workspace's Ben/specialist pattern), common pitfalls, and tool ecosystems. Key finding: most successful multi-agent systems use orchestrator-worker pattern with clear specialist role definition, explicit context passing, and dependency management. Failure modes concentrated in specification/coordination gaps (79% of failures).",
+  "applicable_to_agents": [
+    "@ben",
+    "@ar-director",
+    "@ar-upskiller",
+    "@doc"
+  ],
+  "follow_up_questions": [
+    "How should inter-agent memory/context be shared in long-running coordination sessions?",
+    "What observability/monitoring is needed to debug complex multi-agent orchestration failures?",
+    "How can agent role definitions evolve as system complexity grows?"
+  ],
+  "version": "1.0"
+}
