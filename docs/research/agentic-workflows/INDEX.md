@@ -1,0 +1,134 @@
+# Agentic Workflows: Complete Framework for VS Code & GitHub Copilot CLI
+
+## Overview
+
+This zettelkasten documents comprehensive best practices for designing, implementing, and orchestrating agentic workflows in VS Code and the GitHub Copilot CLI. Topics span foundational concepts, implementation patterns, real-world orchestration, and failure prevention.
+
+**Key Finding**: Most successful multi-agent systems use an orchestrator-worker pattern with clear specialist role definition, explicit context passing, and dependency management. Failure modes (79% of cases) stem from specification/coordination gaps, not capability limitations.
+
+---
+
+## Core Concepts & Foundations
+
+Start here for understanding the fundamentals:
+
+- **[Agent Definition and Fundamentals](<./agent-definition-and-fundamentals.md>)** — What agents are, core concepts, architecture, agent lifecycle, composability, and design patterns
+- **[VS Code Custom Agents Overview](<./vscode-custom-agents-overview.md>)** — How to build and invoke custom agents in VS Code, agent modes, behavioral specialization
+- **[VS Code Agent File Specification](<./vscode-agent-file-specification.md>)** — Complete `.agent.md` format reference, YAML frontmatter, tools configuration, instruction engineering best practices
+
+---
+
+## Tool Integration & Capabilities
+
+Understanding tool composition and integration:
+
+- **[Tool Composition and Design](<./tool-composition-patterns.md>)** — Strategic combining of multiple tools, atomic operations, failure prevention, verification patterns
+- **[Tool Restrictions and Safety](<./tool-restrictions-and-safety.md>)** — Scope principles, allowlist patterns, external API authentication, rollback mechanisms
+
+---
+
+## Extension Platforms & Architectures
+
+Platform-specific guidance:
+
+- **[VS Code Agent Architecture](<./vscode-agent-architecture.md>)** — VS Code integration points, activation events, contribution points, lifecycle management
+- **[GitHub Copilot CLI Capabilities](<./github-copilot-cli-capabilities.md>)** — CLI extensibility, GitHub Integration, OAuth flows, scripting patterns, terminal integration
+
+---
+
+## Multi-Agent Orchestration
+
+Designing, implementing, and managing multi-agent systems:
+
+- **[Multi-Agent Orchestration Principles](<./multi-agent-orchestration-principles.md>)** — Orchestrator pattern, delegation strategies, context passing, coordination mechanisms
+- **[Agent Specialization Patterns](<./agent-specialization-patterns.md>)** — Role definition, capability boundaries, interdependencies, composable responsibilities
+- **[Inter-Agent Communication](<./inter-agent-communication.md>)** — Context sharing, memory systems, async coordination, session management
+
+---
+
+## Real-World Case Studies
+
+Practical examples and tested patterns:
+
+- **[Orchestrator-Worker Case Study: Ben and Specialist Agents](<./orchestrator-worker-case-study.md>)** — The Ben/specialist agent model from this workspace, lessons learned, failure modes encountered
+- **[Effective Delegation Strategies](<./effective-delegation-strategies.md>)** — When to delegate, how to structure tasks, context requirements, competency matching
+
+---
+
+## Common Pitfalls & Failure Prevention
+
+Learn from failures to build robust systems:
+
+- **[Common Failure Modes](<./common-failure-modes.md>)** — Specification gaps, coordination failures, context loss, tool composition errors, recovery strategies
+- **[Debugging Multi-Agent Systems](<./debugging-multi-agent-systems.md>)** — Observability patterns, logging strategies, coordination breakpoint identification, failure reconstruction
+
+---
+
+## Quick Reference Guides
+
+Practical checklists and templates:
+
+- **[Agent Creation Checklist](<./agent-creation-checklist.md>)** — Step-by-step guide for creating new agents, validation points, testing considerations
+- **[Instruction Engineering Best Practices](<./instruction-engineering-best-practices.md>)** — Prompt structure templates, behavioral tuning patterns, example inclusion guidelines
+- **[MCP Server Integration Guide](<./mcp-server-integration-guide.md>)** — Configuring MCP servers, common integrations, custom server development
+
+---
+
+## Conceptual Relationships
+
+### Hierarchy
+- **Foundational** → Core Concepts & Foundations section
+- **Operational** → Tool Integration section
+- **Architectural** → Extension Platforms & Multi-Agent Orchestration sections
+- **Practical** → Case Studies & Quick References
+
+### Cross-Cutting Themes
+- **Safety & Constraints**: Tool Restrictions, Agent Specialization, Failure Prevention
+- **Coordination**: Multi-Agent Orchestration, Inter-Agent Communication, Debugging
+- **Implementation**: Agent File Specification, Instruction Engineering, MCP Integration
+- **Real-World Application**: Case Studies, Effective Delegation, Common Pitfalls
+
+---
+
+## Navigation Guide
+
+**If you're new to agents:**
+1. Start with [Agent Definition and Fundamentals](<./agent-definition-and-fundamentals.md>)
+2. Read [VS Code Custom Agents Overview](<./vscode-custom-agents-overview.md>)
+3. See [Agent Creation Checklist](<./agent-creation-checklist.md>) for hands-on guidance
+
+**If you're building multi-agent systems:**
+1. Understand [Multi-Agent Orchestration Principles](<./multi-agent-orchestration-principles.md>)
+2. Study [Orchestrator-Worker Case Study: Ben and Specialist Agents](<./orchestrator-worker-case-study.md>)
+3. Learn [Common Failure Modes](<./common-failure-modes.md>) to avoid pitfalls
+4. Reference [Effective Delegation Strategies](<./effective-delegation-strategies.md>)
+
+**If you're integrating external tools:**
+1. Review [Tool Composition and Design](<./tool-composition-patterns.md>)
+2. Check [MCP Server Integration Guide](<./mcp-server-integration-guide.md>)
+3. Apply [Tool Restrictions and Safety](<./tool-restrictions-and-safety.md>) patterns
+
+**If you're extending GitHub Copilot:**
+1. Explore [GitHub Copilot CLI Capabilities](<./github-copilot-cli-capabilities.md>)
+2. Reference [VS Code Agent Architecture](<./vscode-agent-architecture.md>)
+3. Use [Instruction Engineering Best Practices](<./instruction-engineering-best-practices.md>)
+
+---
+
+## Key Insights
+
+1. **Specification Matters**: 79% of multi-agent failures stem from poor specification or coordination gaps, not capability limitations
+2. **Orchestrator Pattern Works**: Agent systems with clear orchestrator-worker relationships and explicit delegation are most reliable
+3. **Context is Critical**: Explicit, scoped context passing is essential; implicit shared state leads to failures
+4. **Atomic Tool Composition**: Combining atomic tools reliably is more effective than complex single-tool operations
+5. **Role Clarity**: Clear specialist role definition reduces coordination overhead and improves reliability
+
+---
+
+## Research Metadata
+
+- **Comprehensive**: Covers foundational concepts, implementation patterns, real-world orchestration, failure prevention
+- **Multi-Platform**: VS Code agents, GitHub Copilot CLI, command-line integration
+- **Perspective**: Includes case study from working multi-agent system (Ben + specialists)
+- **Last Updated**: March 29, 2026
+- **Version**: 1.0
