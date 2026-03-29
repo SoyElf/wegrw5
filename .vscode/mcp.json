@@ -1,0 +1,21 @@
+{
+  "servers": {
+    "tavily": {
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=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"
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "grep": {
+      "url": "https://mcp.grep.app"
+    },
+    "pdf-reader": {
+      "command": "npx",
+      "args": [
+        "@sylphx/pdf-reader-mcp"
+      ]
+    }
+  }
+}

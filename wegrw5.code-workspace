@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "path": "/home/i1admin/wegrw5"
+    }
+  ],
+  "settings": {
+    "git.autoRepositoryDetection": true,
+    "git.openRepositoryInParentFolders": "always"
+  }
+}
