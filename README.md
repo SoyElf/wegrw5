@@ -1,69 +1,195 @@
 # Agentic Orchestration Hub
 
-A VS Code workspace designed to coordinate work through specialized custom agents, creating a structured system for task delegation and execution.
+An intelligent workspace powered by GitHub Copilot custom agents. This hub coordinates specialized AI agents to handle documentation, research, development, and DevOps tasks through intelligent delegation and orchestration.
 
-## Purpose
+## Project Overview
 
-This workspace is an **agentic orchestration hub** — a centralized system where work is coordinated through specialized agents rather than handled directly. Each agent is a VS Code custom agent with specific expertise designed to handle particular types of tasks. By routing requests through specialized agents, the workspace ensures that work is handled by the right expert with the right tooling at the right time.
+This workspace is an **agentic orchestration hub** — a system where work is routed through a primary orchestrator agent (`@ben`) who analyzes user requests and delegates to specialized sub-agents with specific skills. The architecture enables:
 
-## How It Works
+- **Intelligent task routing** — Requests are analyzed and delegated to the most appropriate specialist agent
+- **Autonomous execution** — Specialist agents work independently with full context to complete their tasks
+- **Parallel workflows** — Independent tasks execute simultaneously for faster completion
+- **Scalable capability** — New specialist agents can be recruited on-demand when capability gaps are identified
 
-The workspace uses a delegation model:
+## Agent System Architecture
 
-1. **User submits a request** — Pass your task to the workspace without specifying an agent
-2. **Ben (Orchestrator) analyzes** — Ben receives the request and determines what type of work is needed
-3. **Ben delegates** — The orchestrator forwards the work to the appropriate specialist agent(s)
-4. **Specialist agents execute** — Each agent completes their portion of the work using their designated tools and expertise
-5. **Results are coordinated** — When multiple agents are involved, Ben coordinates their outputs and delivers final results
+All agents are defined as `.agent.md` files in [.github/agents/](.github/agents/) and are powered by GitHub Copilot (Claude Haiku 4.5 or Claude Sonnet 4.6, depending on complexity).
 
-This structure separates concerns, allows agents to specialize, and makes the system scalable — new agents can be added without changing the core workflow.
+### Routing Flow
 
-## Available Agents
+1. User invokes Copilot and describes their request
+2. Default routing directs to **@ben** (the orchestrator)
+3. **@ben** analyzes the request and determines what type of work is needed
+4. **@ben** delegates to the appropriate specialist agent with full context
+5. Specialist agent executes autonomously and reports completion
+6. **@ben** coordinates outputs and summarizes results to the user
 
-| Agent | Role | When to Use |
-|-------|------|------------|
-| **Ben** (`@ben`) | Orchestrator | Always the first contact — analyzes your request and delegates to specialists |
-| **Doc** (`@doc`) | Documentation Specialist | Creating, updating, or improving documentation (READMEs, API docs, guides, etc.) |
-| **ar-director** (`@ar-director`) | HR Director | Identifying capability gaps and recruiting new specialist agents |
+### Agent Roles
 
-## Getting Started
+Agents fall into two categories:
 
-**For any task:** Simply describe what you need to accomplish. The workspace will automatically route your request to Ben, who will analyze it and delegate to the appropriate specialist.
+- **User-invocable agents** — Can be directly invoked via `@agent-name`
+  - `@ben` — The orchestrator (primary entry point)
+  
+- **Sub-agents** — Invoked only by `@ben` when needed
+  - `@doc` — Documentation specialist
+  - `@agentic-workflow-researcher` — Research specialist
+  - `@ar-director` — HR Director (recruits new agents)
+  - `@ar-upskiller` — Upskilling specialist
+  - `@git-ops` — Git operations specialist
 
-Example requests:
-- "Write a README for the authentication module"
-- "Document the database schema and API endpoints"
-- "Create a new agent for database migrations"
+## Agent Directory
 
-You don't need to specify an agent — Ben handles the routing.
+| Agent | File | Role | Invocable |
+|-------|------|------|-----------|
+| **Ben** | [.github/agents/ben.agent.md](<.github/agents/ben.agent.md>) | **Orchestrator** — Analyzes tasks and delegates to specialist sub-agents. Never performs work directly. | ✓ User |
+| **Doc** | [.github/agents/doc.agent.md](<.github/agents/doc.agent.md>) | **Documentation Specialist** — Writes, updates, and improves documentation (READMEs, guides, API docs, comments). | Sub-agent |
+| **agentic-workflow-researcher** | [.github/agents/agentic-workflow-researcher.agent.md](<.github/agents/agentic-workflow-researcher.agent.md>) | **Research Specialist** — Investigates agentic workflows, VS Code extensibility, GitHub Copilot CLI, and multi-agent orchestration patterns. Provides expert analysis with sources. | Sub-agent |
+| **ar-director** | [.github/agents/ar-director.agent.md](<.github/agents/ar-director.agent.md>) | **HR Director** — Recruits new specialist agents when a capability gap is identified. | Sub-agent only |
+| **ar-upskiller** | [.github/agents/ar-upskiller.agent.md](<.github/agents/ar-upskiller.agent.md>) | **Upskilling Specialist** — Researches latest VS Code Copilot best practices and updates existing agent definitions with improved capabilities. | Sub-agent only |
+| **git-ops** | [.github/agents/git-ops.agent.md](<.github/agents/git-ops.agent.md>) | **Git Operations Specialist** — Manages local and remote git operations with Conventional Commits enforcement, validation, and workflow automation. | Sub-agent only |
 
-## Adding New Agents
+## Workflow Documentation
 
-As the workspace grows and new capability gaps are identified, follow this process:
+### Standard Workflow: Requesting Work
 
-1. **Gap Identification** — Ben recognizes that a requested task doesn't fit existing agent capabilities
-2. **Recruitment** — Ben invokes ar-director (HR Director) to recruit a new specialist agent
-3. **Agent Creation** — Create a new `.agent.md` file in `.github/agents/` with:
-   - YAML frontmatter specifying agent metadata (`name`, `description`, `tools`, `agents`, `model`)
-   - Markdown instructions defining the agent's responsibilities and workflow
-4. **Registration** — Update `.github/copilot-instructions.md` to register the new agent in the Agent Directory table
+1. **Describe your request to @ben**
+   ```
+   @ben I need to add comprehensive API documentation for the payment service
+   ```
 
-For detailed specifications, see the [VS Code custom agents documentation](https://code.visualstudio.com/docs/copilot/customization/custom-agents).
+2. **@ben analyzes and routes**
+   - Determines the request requires documentation writing
+   - Delegates to `@doc` with full context
 
-## Workspace Structure
+3. **Specialist executes and reports**
+   - `@doc` researches the codebase, writes documentation, and reports changes
+   - Reports list of modified files and key changes
 
-Key directories and files:
+4. **Changes are committed** (if needed)
+   - `@ben` may invoke `@git-ops` to handle commit and push with Conventional Commits
 
-- `.github/copilot-instructions.md` — Central routing logic; defines all available agents and integration rules
-- `.github/agents/` — Directory containing all agent definitions
-  - `ben.agent.md` — Orchestrator agent (task analysis and delegation)
-  - `doc.agent.md` — Documentation specialist agent
-  - `ar-director.agent.md` — Recruiter agent
-- `README.md` — This file
+### Ben's Orchestration Logic
 
-## Design Principles
+**@ben** follows a structured approach:
 
-- **Separation of concerns** — Each agent handles a specific domain
-- **Scalability** — New agents can be added without restructuring existing workflows
-- **Clear delegation** — Users interact with one interface (Ben); work is automatically routed to specialists
-- **Tool-scoped expertise** — Each agent has access only to the tools needed for their domain
+1. **Analyse** — Determine what kind of work is needed (coding, documentation, research, DevOps, etc.)
+2. **Decompose** — Break complex requests into discrete sub-tasks and identify dependencies
+3. **Delegate** — Invoke appropriate specialist agents with full context
+4. **Coordinate** — Run independent tasks in parallel; sequence dependent ones in order
+5. **Report** — Summarize what was delegated, to whom, and the outcome
+
+### When to Invoke Specific Agents
+
+- **@doc** — Documentation, READMEs, API docs, comments, guides
+- **@agentic-workflow-researcher** — Research on agentic patterns, VS Code extensibility, GitHub Copilot CLI
+- **@ar-director** — When a new specialist capability is needed (Ben invokes this)
+- **@ar-upskiller** — Improving existing agents based on latest best practices (Ben invokes this)
+- **@git-ops** — Committing and pushing changes with Conventional Commits validation
+
+### Adding New Agents
+
+When the workspace needs a new specialist capability:
+
+1. Request the capability from **@ben**
+2. **@ben** invokes **@ar-director** with the capability description
+3. **@ar-director** creates a new `.agent.md` file in [.github/agents/](.github/agents/)
+4. **@ar-director** updates [.github/copilot-instructions.md](<.github/copilot-instructions.md>) and [.github/agents/ben.agent.md](<.github/agents/ben.agent.md>)
+5. New agent becomes available for delegation
+
+Agent files follow the VS Code custom agent format with YAML frontmatter and Markdown instructions. See [VS Code custom agents documentation](https://code.visualstudio.com/docs/copilot/customization/custom-agents) for the full specification.
+
+## Git & Commits
+
+All changes in this workspace follow **Conventional Commits** standards to maintain clean history, enable automated versioning, and ensure clear commit messages.
+
+### Conventional Commits Standard
+
+Every commit must follow this structure:
+
+```
+<type>[optional scope]: <short summary>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Commit Types
+
+| Type | Purpose | Version Impact |
+|------|---------|-----------------|
+| `feat` | A new feature | Minor version bump |
+| `fix` | A bug fix | Patch version bump |
+| `docs` | Documentation-only changes | No version change |
+| `style` | Code formatting (no logic changes) | No version change |
+| `refactor` | Code refactoring (no feature/fix) | No version change |
+| `test` | Adding or updating tests | No version change |
+| `chore` | Build, dependencies, tooling, config | No version change |
+| `perf` | Performance improvements | No version change |
+| `ci` | CI/CD configuration changes | No version change |
+
+### Examples
+
+```
+feat: add payment service webhook support
+
+The service now accepts and processes payment webhook events
+from the Stripe API, enabling real-time transaction updates.
+
+Closes #234
+```
+
+```
+fix: resolve race condition in user session manager
+
+Use atomic operations instead of read-modify-write pattern
+to prevent concurrent session corruption.
+```
+
+```
+docs: update API authentication guide
+```
+
+### Git Operations Workflow
+
+**@git-ops** manages all git operations when changes need to be committed:
+
+1. Changes are completed by specialist agents
+2. Agents report the list of modified files to **@ben**
+3. **@ben** invokes **@git-ops** with the file list and context
+4. **@git-ops** validates all changes, creates Conventional Commits, and pushes
+5. **@git-ops** reports the commit hashes and branch status
+
+All commits are validated for:
+- Proper Conventional Commits format
+- Meaningful commit messages
+- Correct type classification
+- Proper scope usage (when applicable)
+
+### Integration Tools
+
+The workspace uses these tools for git automation and validation:
+
+- **commitlint** — Validates commit message format
+- **husky** — Enforces git hooks for pre-commit validation
+- **semantic-release** — Automates versioning based on Conventional Commits
+
+## Quick Start
+
+1. **For general tasks** — Mention @ben and describe what you need
+2. **For documentation** — @ben will delegate to @doc
+3. **For research** — @ben will delegate to @agentic-workflow-researcher
+4. **For git operations** — Changes are automatically committed using Conventional Commits
+5. **For new capabilities** — @ben handles recruitment of new specialist agents
+
+## Workspace Configuration
+
+- **Workspace file** — [wegrw5.code-workspace](<../assets/wegrw5.code-workspace>)
+- **Copilot instructions** — [.github/copilot-instructions.md](<.github/copilot-instructions.md>)
+- **Agent definitions** — [.github/agents/](.github/agents/) directory
+- **Documentation** — This README and agent-specific docs in each `.agent.md` file
+
+## Support
+
+Each agent file includes detailed instructions and workflow documentation. For specific agent capabilities, refer to the relevant `.agent.md` file in [.github/agents/](.github/agents/).
