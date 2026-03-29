@@ -3,9 +3,8 @@ name: Explore-Codebase
 description: Specialized codebase exploration agent for rapid code pattern discovery, architecture analysis, symbol resolution, and implementation examples. Read-only, parallel-optimized. Use for code-specific queries; use generic Explore for general repo questions.
 argument-hint: Describe code pattern, symbol, or architecture question and desired thoroughness (quick/medium/thorough)
 model: ['Claude Haiku 4.5 (copilot)', 'Gemini 3 Flash (Preview) (copilot)', 'Auto (copilot)']
-target: vscode
 user-invocable: false
-tools: ['search', 'read', 'vscode/listCodeUsages', 'vscode/codeQuery', 'execute/getTerminalOutput', 'execute/testFailure']
+tools: [execute/getTerminalOutput, execute/testFailure, execute/runInTerminal, read, search]
 agents: []
 ---
 
