@@ -1,8 +1,24 @@
 {
-  "folders": [
-    {
-      "path": "/home/i1admin/wegrw5"
-    }
+	"folders": [
+		{
+			"path": "."
+		}
   ],
-  "settings": {}
+  "settings": {
+    "chat.tools.terminal.autoApprove": {
+      "git add": true,
+      "git commit": true,
+      "git push": true
+    },
+    "git.autoRepositoryDetection": true,
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "chat.promptFilesLocations": {
+      ".github/prompts": true
+    },
+    "chat.useAgentsMdFile": true,
+    "chat.instructionsFilesLocations": {
+      ".github/instructions": true
+    },
+    "chat.agent.maxRequests": 100
+  }
 }
