@@ -230,13 +230,13 @@ This case study documents a real, working multi-agent system: the **Ben orchestr
 
 5. @research completes research
    - Investigates 10+ topics
-   - Creates .tmp/research-findings.json with structured findings
+   - Creates .github/context/research-findings.json with structured findings
    - Reports to @ben when complete
 
 6. @ben → @doc:
    "Create atomic zettelkasten documentation using research findings
     Structure: Flat file hierarchy, semantic naming, single MOC index
-    Reference: .tmp/research-findings.json"
+    Reference: .github/context/research-findings.json"
 
 7. @doc creates documentation
    - Reads research findings
