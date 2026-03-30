@@ -30,12 +30,15 @@ Hindsight transforms our agentic orchestration hub from **self-contained, sessio
 
 **Goal**: Create automated, reflection-driven documentation that stays synchronized with discoveries.
 
+**Architectural Approach**: Distributed knowledge curation enhanced within existing @doc agent (not a dedicated librarian agent). Rationale: Distributed memory curation scales better across 20+ agents, living documentation synthesis is the primary value driver, @doc already owns documentation updates, and implementation complexity of a separate agent outweighs centralization benefits. See [Hindsight Librarian Evaluation](<./hindsight-librarian-evaluation.md>) for detailed analysis.
+
 **Actions**:
 - **@doc responsibilities expand**:
   - Periodic cycles (weekly/biweekly): `recall()` recent research and codebase discoveries
   - Synthesize via `reflect()`: "What new understanding emerges across research, exploration, and current docs?"
   - Update relevant markdown files with synthesized patterns
   - Log updates as memories for audit trail and continuous improvement
+  - **Quality gates (critical)**: Only synthesize patterns appearing in 2+ discoveries; must be actionable and improve clarity
 - **Documentation ecosystem**:
   - INDEX.md becomes "memory-informed" — reflects current best practices, discovered patterns
   - Architecture guides updated with agent specialization patterns discovered across sessions
@@ -136,6 +139,31 @@ Hindsight transforms our agentic orchestration hub from **self-contained, sessio
 
 ---
 
+## Core Meta-Pattern: The `retain()`-`recall()`-`reflect()` Loop
+
+All agent integration with hindsight follows a unified workflow loop:
+
+1. **`retain(content, metadata, tags)`** — Store discoveries with semantic context
+   - Captures research findings, code patterns, architectural insights with evidence
+   - Includes domain tags, confidence levels, source citations, temporal markers
+   - Creates indexed memory for future retrieval and synthesis
+
+2. **`recall(query, tags, filters)`** — Query prior discoveries to contextualize current work
+   - Checks for existing research on topic (avoid duplication)
+   - Finds similar code patterns (accelerate pattern matching)
+   - Retrieves related documentation (inform updates)
+   - Eliminates redundant work through knowledge reuse
+
+3. **`reflect(question, tags)`** — Synthesize patterns across retained memories
+   - Identifies meta-patterns connecting diverse discoveries
+   - Surfaces emerging conventions from scattered implementations
+   - Guides documentation and architectural evolution
+   - Discovers workspace-wide best practices from collective experience
+
+**Why this pattern matters**: This loop transforms hindsight from a passive memory store into an **active learning system** where agents build on prior work, discover cross-domain patterns, and continuously improve workspace practices. Each agent applies this loop in its domain, creating cumulative intelligence.
+
+---
+
 ## Implementation Guidelines by Agent
 
 ### @research Guidelines
@@ -153,6 +181,11 @@ Hindsight transforms our agentic orchestration hub from **self-contained, sessio
 ### @doc Guidelines
 - **Living doc cycles**: Weekly or biweekly, execute recall → reflect → update → retain workflow
 - **Synthesis trigger**: When research or exploration completes, assess if documentation needs refresh
+- **Quality gates** (critical for Phase 2 success):
+  - Only include synthesized patterns appearing in **2+ independent discoveries** (validated, not one-off)
+  - Patterns must be **actionable** and improve **clarity** (not bulk for bulk's sake)
+  - Synthesized insights must align with **actual codebase behavior** (implementation is source of truth)
+  - Cross-references must be **verified working** (links, examples, citations)
 - **Index maintenance**: Keep docs/research/agentic-workflows/INDEX.md synchronized with hindsight patterns
 - **Update audit trail**: Log all documentation changes with patterns that motivated them
 
