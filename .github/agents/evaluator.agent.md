@@ -69,14 +69,14 @@ Use hindsight MCP to build persistent evaluation memory and synthesize portfolio
 Check hindsight for prior evaluations:
 
 ```
-recall("evaluations of [agent-name]")  
+recall("evaluations of [agent-name]")
 → "Have we evaluated this agent before? What gaps were identified previously?"
 → "How has this agent changed since the last evaluation?"
 
-recall("pattern:[agent-gap] [gap-type]")  
+recall("pattern:[agent-gap] [gap-type]")
 → "Do multiple agents share this gap? Is this a portfolio-wide weakness?"
 
-recall("evaluation:portfolio-analysis")  
+recall("evaluation:portfolio-analysis")
 → "What gaps have emerged across multiple agents? Are there cross-agent capability overlaps?"
 ```
 
