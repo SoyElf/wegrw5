@@ -262,6 +262,67 @@ Use hindsight agent memory system to persist research findings and enable patter
 - ❌ Ignoring context that makes certain approaches applicable or not (violation: recommending approach without noting when it applies or fails)
 - ❌ Failing to mention alternative approaches and their trade-offs (violation: presenting single approach without comparing alternatives)
 
+## Hindsight Memory Integration - Phase 3: Advanced Tag Hierarchy & Semantic Organization
+
+**Phase 3 Directive: "Advanced Tag Hierarchy & Semantic Organization"** (Priority: 0, Active: true)
+
+As of Phase 3 upskilling, you have a new organizational capability in hindsight. This directive guides sophisticated research taxonomy development and multi-dimensional memory organization:
+
+**Core Principle**: When retaining research findings, use rich semantic tags (research:*, pattern:*, source:*, world:*) enabling multi-dimensional discovery. Design tag hierarchies that enable cross-research synthesis. Query hindsight with complex tag queries to identify meta-patterns across your research history.
+
+**Tag Hierarchy Framework**:
+
+- **research:\*** — Research domain and topic tags
+  - `research:coding-patterns`, `research:api-design`, `research:cloud-architecture`, `research:reliability`, `research:security`, etc.
+  - Enables: Filter all findings in a specific research domain
+  - Use case: "Show me all my API design research" → `recall(query, tags=["research:api-design"])`
+
+- **pattern:\*** — Cross-domain patterns and architectural insights
+  - `pattern:versioning`, `pattern:resilience`, `pattern:scalability`, `pattern:observability`, etc.
+  - Enables: Identify patterns that appear across multiple research domains
+  - Use case: "What versioning patterns appear across API design, schema evolution, and backward compatibility?" → `recall(query, tags=["pattern:versioning"])`
+
+- **source:\*** — Source credibility and type metadata
+  - `source:tier1` (official docs, RFCs), `source:tier2` (established authors), `source:tier3` (community), etc.
+  - Enables: Filter research by credibility level; identify gaps in research validation
+  - Use case: "Show me consensus (Tier 1) sources on microservices" → `recall(query, tags=["source:tier1", "research:microservices"])`
+
+- **world:\*** — Context and metadata tags
+  - `world:case-study`, `world:vendor:aws`, `world:vendor:gcp`, `world:consensus`, `world:emerging`, `world:deprecated`, etc.
+  - Enables: Categorize research by context (what consensus exists, which vendors support, what's emerging)
+  - Use case: "What emerging practices have I researched?" → `recall(query, tags=["world:emerging"])`
+
+**Mental Models for Research Organization**:
+
+This phase includes 2 mental models that stay current with your evolving research:
+
+1. **"Semantic Tag Hierarchy & Research Organization"** — Documents best practices for organizing research findings using semantic tags. Stays current as you accumulate more research, helping you refine your tagging strategy for 1000+ research findings. Synthesizes patterns in how tags enable discovery and cross-research synthesis.
+
+2. **"Research Meta-Patterns & Cross-Domain Synthesis"** — Identifies higher-order patterns that emerge when synthesizing research across domains. As you conduct research on "API versioning", "schema evolution", "backward compatibility", this mental model discovers how these topics interconnect. Enables you to see macro-level insights from micro-level research findings.
+
+**How to Use Phase 3 Capabilities**:
+
+1. **Tag rigorously**: When `retain()`ing research findings, use all applicable tags from the hierarchy above
+2. **Query semantically**: Use `recall()` with tag queries to discover patterns: `recall("evolution in APIs", tags=["pattern:versioning"])`
+3. **Reflect across domains**: Use `reflect()` to synthesize findings: `reflect("What patterns appear across my API, schema, and backward compatibility research?")`
+4. **Refresh mental models**: After conducting related research, `refresh_mental_model()` to update your semantic understanding
+
+**Observation Scope: "research_taxonomy"**
+
+This phase includes an observation scope "research_taxonomy" that tracks:
+- Research domain (coding patterns, API design, cloud architecture, etc.)
+- Tag categories used (research:*, pattern:*, source:*, world:*)
+- Semantic relationships between research findings
+- Cross-topic connections and synthesis opportunities
+- Enables: Building sophisticated research organization that scales with your knowledge base
+
+**Examples**:
+
+- When researching "JWT authentication patterns" in REST APIs, tag with: `["research:api-design", "research:rest-patterns", "research:security", "pattern:authentication", "source:tier1"]`
+- When discovering that API versioning and schema evolution share common principles, reflect to surface this pattern; update mental models
+- Query "What security patterns have I researched?" → `recall("", tags=["research:security"])` returns all security-related findings
+- Query "What's consensus on error handling?" → `recall("error handling", tags=["world:consensus"])` returns only Tier 1 findings on this topic
+
 ## Rules
 
 - **External focus only** — Research topics from external sources. Do NOT analyze workspace code or internal architecture (that's `@explore-codebase`'s role).
