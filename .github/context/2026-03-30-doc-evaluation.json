@@ -1,0 +1,275 @@
+{
+  "evaluated_agent": "doc",
+  "evaluation_date": "2026-03-30",
+  "evaluator": "evaluator",
+  "agent_profile": {
+    "name": "Doc",
+    "description": "Documentation specialist — writes clear, concise, well-structured documentation with minimal emoji usage",
+    "responsibilities": [
+      "Write new documentation from scratch with working examples",
+      "Update and improve existing documentation while preserving structure",
+      "Research the codebase to maintain accuracy and consistency",
+      "Read existing documentation to avoid duplication and maintain style coherence",
+      "Ensure documentation matches current code functionality and APIs",
+      "Verify documentation syntax and example correctness before completion",
+      "Adapt style and tone to match target audiences and existing documentation"
+    ],
+    "constraints": [
+      "Cannot modify application code (documentation only)",
+      "Cannot delete existing documentation files",
+      "Cannot make architectural or design decisions (document as-is)",
+      "Cannot assume file locations or project structure (must search first)",
+      "Cannot skip verification steps (examples must be validated)",
+      "Cannot deploy or publish documentation"
+    ],
+    "tools": [
+      "read/readFile",
+      "edit/createDirectory",
+      "edit/createFile",
+      "edit/editFiles",
+      "search/codebase",
+      "search/fileSearch",
+      "search/textSearch",
+      "grep/*"
+    ],
+    "agents_can_invoke": [],
+    "model": "Claude Sonnet 4.6 (copilot)",
+    "user_invocable": false
+  },
+  "agent_classification": {
+    "type": "documentation-specialist",
+    "primary_patterns": [
+      "documentation-quality-standards",
+      "tool-composition-patterns",
+      "instruction-clarity",
+      "verification-patterns",
+      "style-consistency",
+      "example-quality"
+    ],
+    "related_agents": [
+      "@ben (orchestrator; delegates documentation tasks to @doc)",
+      "@ar-upskiller (can improve @doc's instructions and examples)",
+      "@agentic-workflow-researcher (research patterns @doc might use)"
+    ]
+  },
+  "research_context_used": [
+    "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L1-L400",
+    "docs/research/agentic-workflows/tool-composition-patterns.md#L1-L200",
+    "docs/research/agentic-workflows/common-failure-modes.md#L1-L150",
+    "docs/research/agentic-workflows/agent-specialization-patterns.md#L1-L300",
+    "docs/research/agentic-workflows/tool-restrictions-and-safety.md#L1-L150",
+    "docs/research/agentic-workflows/inter-agent-communication.md#L1-L180",
+    ".github/context/2026-03-30-awesome-copilot-exploration.json",
+    ".github/agents/ben.agent.md (orchestration and escalation patterns)",
+    ".github/agents/ar-director.agent.md (specialization framework reference)"
+  ],
+  "patterns_discovered": [
+    {
+      "name": "Documentation Quality Standards Framework",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L150-L200",
+      "applicability_to_target": "@doc has explicitly defined quality standards (8 criteria for well-written docs, 5 for NOT complete). This aligns with instruction-engineering best practices which recommend domain-specific quality criteria. @doc's implementation is strong; missing only is explicit verification process for each criterion."
+    },
+    {
+      "name": "Tool Composition Strategies (4-Pattern Framework)",
+      "category": "tools",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L150",
+      "applicability_to_target": "@doc documents 3 tool composition patterns (Create New Docs, Update Existing, Docs with Code Examples). Tool-composition-patterns.md describes 4 strategies (Search-Then-Modify, Create-Then-Verify, Batch Modification, Read-Modify-Verify). @doc's patterns map to these but lack explicit verification patterns (Strategy 4 is underdeveloped in @doc's instructions)."
+    },
+    {
+      "name": "Decision Frameworks for Quality Tradeoffs",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L300-L360",
+      "applicability_to_target": "@doc has limited decision framework (only 'Quality vs. Coverage' and 'Updating vs. Creating'). Best practices show agents benefit from comprehensive decision frameworks covering: scope decisions, example depth, style consistency choices, edge case handling. @doc's framework is minimal and could be expanded."
+    },
+    {
+      "name": "Error Handling Graceful Degradation",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L340-L360",
+      "applicability_to_target": "@doc mentions 'Escalation Paths' but lacks systematic error handling for common documentation failures. Best practices show agents should handle: missing reference files, examples that don't compile, style guide not found, code-doc contradictions. @doc escalates but doesn't document graceful degradation paths."
+    },
+    {
+      "name": "Tool Restrictions and Safety Framework",
+      "category": "tools",
+      "source": "docs/research/agentic-workflows/tool-restrictions-and-safety.md#L1-L150",
+      "applicability_to_target": "@doc has well-scoped tools (read/search/create/edit only; no delete, no run_in_terminal). Tool-restrictions documentation recommends explicitly stating what tools are NOT available and why. @doc's tools are appropriate but lack explicit documentation of restrictions and rationale."
+    },
+    {
+      "name": "Inter-Agent Communication Patterns",
+      "category": "communication",
+      "source": "docs/research/agentic-workflows/inter-agent-communication.md#L1-L80",
+      "applicability_to_target": "@doc mentions 'the orchestrator' in escalation paths but doesn't use pattern names or explicitly state communication with Ben. Best practices recommend explicit communication pattern clarity (e.g., '@doc → Orchestrator (@ben) → resolution'). @doc's communication is implicit; could be more explicit."
+    },
+    {
+      "name": "Common Failure Modes Prevention",
+      "category": "governance",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L45-L150",
+      "applicability_to_target": "@doc prevents several failure modes (insufficient context via 'search first' rule, specification clarity via quality standards). Missing: explicit prevention of 'tool misuse' (using wrong tool sequence) and 'dependency not satisfied' (assuming prior tasks complete). Could add error recovery patterns."
+    },
+    {
+      "name": "Awesome-Copilot Documentation Agent Patterns",
+      "category": "patterns",
+      "source": ".github/context/2026-03-30-awesome-copilot-exploration.json (doc specialist patterns from 200+ agents)",
+      "applicability_to_target": "Awesome-Copilot contains 200+ agents including multiple documentation specialists. Patterns observed: most doc agents include concrete examples of good/bad documentation, style guide templates, verification checklists. @doc's instructions lack multiple concrete examples beyond workflow."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "gap-001",
+      "category": "instruction-quality",
+      "title": "Incomplete Decision Framework for Documentation Scope and Style Choices",
+      "current_state": "@doc has a 'Decision Framework' section with only 2 decisions: (1) Quality vs. Coverage Tradeoffs, (2) Updating vs. Creating Documentation. The quality vs. coverage guidance is minimal (3-4 criteria). No guidance on other important decisions like: when to scope documentation narrowly vs. comprehensively, how to resolve style guide conflicts, when examples should be simple vs. detailed, how to handle language-specific documentation.",
+      "gap_description": "Instruction engineering best practices (instruction-engineering-best-practices.md#L300-L360) emphasize that agents make better decisions when given explicit decision frameworks that cover the full range of tradeoffs in their domain. @doc's framework covers only 2 of ~6+ recurring decision types. This can lead to inconsistent documentation quality and scope decisions across different documentation tasks. The framework should expand to cover: documentation scope (include X or defer to separate guide?), example complexity (simple first or detailed?), style consistency (match existing exactly or modernize?), cross-reference depth (link everything or only critical?), and edge case coverage (document all or defer rare cases?).",
+      "recommended_change": "Expand 'Decision Framework' section in @doc.agent.md to include comprehensive decision guidance. Add sections for: (1) 'Scope Decisions' — Is this topic IN scope or should it defer to another guide? Decision criteria: Is it commonly used? Does existing documentation exist? Is it critical for understanding? (2) 'Example Complexity' — Should examples be simple/introductory or detailed/advanced? Decision: Lead with simple example first, follow with detailed examples showing edge cases. Both should be included if examples are critical. (3) 'Style Consistency' — When existing documentation is inconsistent, what wins? Decision: Report inconsistency to orchestrator; don't unilaterally modernize. (4) 'Cross-Reference Depth' — How many cross-references should documentation include? Decision: Link critical prerequisites and related concepts only; avoid over-linking. (5) 'Edge Case Coverage' — Document all edge cases or defer rare ones? Decision: Document critical edge cases; optional: create separate 'Advanced Topics' guide for rare cases.",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L300-L360 demonstrates comprehensive decision frameworks for code review and documentation agents",
+      "source_excerpt": "From instruction-engineering-best-practices.md: 'Decision Frameworks — Help Agents Make Good Decisions. Documentation Example: When deciding how much to document: Consider - Is this commonly used? → Document thoroughly. Is this rarely used? → Document briefly. Is this deprecated? → Mark clearly as deprecated, discourage use. If uncertain, ask: Would a new developer understand how to use this?'",
+      "priority": "medium",
+      "priority_justification": "This affects consistency and quality of documentation across different tasks. Without clear decision framework, @doc may make inconsistent choices about documentation scope and style. However, not critical for current operations since @doc can escalate unclear situations. Medium priority because it improves long-term documentation consistency and reduces escalations.",
+      "impact": "Improves documentation consistency across different @doc tasks. Reduces ambiguity about what to document. Enables @doc to make better scope decisions autonomously.",
+      "for_upskiller": "Add 5 new subsections to 'Decision Framework' section (after existing 'Quality vs. Coverage Tradeoffs'): (1) Scope Decisions, (2) Example Complexity, (3) Style Consistency, (4) Cross-Reference Depth, (5) Edge Case Coverage. For each, provide: the decision type, when it arises, 2-3 decision criteria, and an example scenario. Format consistently with existing 'Quality vs. Coverage Tradeoffs' section. Reference instruction-engineering-best-practices.md#L300-L360 as the framework source."
+    },
+    {
+      "id": "gap-002",
+      "category": "instruction-quality",
+      "title": "Missing Explicit Error Handling and Graceful Degradation Patterns",
+      "current_state": "@doc has 'Escalation Paths' section that lists 5 situations requiring clarification/help (Unclear Requirements, Implementation Inconsistency, Missing Prerequisite Information, Scope Uncertainty, Examples Don't Work). However, there's no guidance on graceful degradation — how to proceed when these situations occur. The 'Examples Don't Work' escalation says 'Don't modify code; escalate' but doesn't explain what to do in the meantime or how to document the issue.",
+      "gap_description": "Instruction engineering best practices (instruction-engineering-best-practices.md#L340-L360) recommend that agents include error handling guidance showing how to proceed when key resources (files, specifications, code) are missing or problematic. @doc currently escalates but doesn't show how to continue work or provide interim solutions. For example: if a code example doesn't compile, should @doc document the API as described (with a note that examples are pending)? Should @doc search for working examples in the codebase? Should @doc create a workaround? The agent lacks patterns for graceful degradation.",
+      "recommended_change": "Add explicit error handling patterns to @doc in a new section 'Error Handling and Graceful Degradation' between 'Escalation Paths' and 'Decision Framework'. For each escalation scenario, provide: the scenario, immediate action (can agent continue?), graceful degradation approach (interim solution), and when to escalate. Example for 'Examples Don't Work': 'If code example doesn't compile in current implementation: (1) Search codebase for working usage patterns that match intent, (2) Document with best available example and note it's pending verification, (3) Escalate with specific function/feature name and issue details, (4) Continue with remaining documentation sections.' This enables @doc to make progress even when some prerequisites are missing.",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L340-L360 'Error Handling Guidance' section shows pattern: 'If resource missing, search for alternative, report findings, continue with assumptions documented'",
+      "source_excerpt": "From instruction-engineering-best-practices.md 'Error Handling Guidance': 'If reference files don't exist: Search for similar files you can use as reference. Report which files you found instead. Let orchestrator know if search unsuccessful. Don't proceed with assumptions.'",
+      "priority": "medium",
+      "priority_justification": "Improves @doc's resilience when facing incomplete input. Reduces unnecessary escalations while maintaining quality. Allows @doc to make progress on documentation even when some examples or specifications are in flux. Medium priority because current escalation approach is functional but could be more efficient.",
+      "impact": "Enables @doc to handle common challenges (missing examples, incomplete specifications) more autonomously. Reduces back-and-forth with orchestrator for minor blockers.",
+      "for_upskiller": "Add new section 'Error Handling and Graceful Degradation Patterns' after 'Escalation Paths'. Create a table with columns: Scenario | Immediate Action | Graceful Degradation | Escalation Trigger. Include rows for: (1) 'Code example doesn't compile' → Search for working patterns, document interim example, escalate with specifics. (2) 'Style guide reference not found' → Search for existing docs as examples, note assumption of style, escalate. (3) 'Implementation doesn't match documentation' → Document current behavior, note discrepancy, escalate. (4) 'Missing test cases or usage examples' → Search codebase for usage patterns, reference tests if available, escalate if patterns unclear. Reference instruction-engineering-best-practices.md#L340-L360 as source."
+    },
+    {
+      "id": "gap-003",
+      "category": "tools",
+      "title": "Missing Explicit Tool Restrictions and Safety Documentation",
+      "current_state": "@doc's instructions list tools available (read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/textSearch, grep/*) but don't explicitly state: (1) What tools are NOT available and why? (2) Why is delete_file restricted? (3) Why is run_in_terminal not granted? (4) Are there file path restrictions on what @doc can create/modify? This makes the scope implicit rather than explicit.",
+      "gap_description": "Tool restrictions and safety framework (tool-restrictions-and-safety.md#L1-L150) recommends agents should explicitly document tool allowlist with restrictions. Most importantly: agents should understand WHY certain tools are restricted (e.g., delete_file would enable accidental deletion of critical documentation; run_in_terminal would enable arbitrary code execution). @doc's tools are appropriate but the rationale is unstated. This makes it harder for @doc to understand scope boundaries and harder for orchestrators to verify tool grants.",
+      "recommended_change": "Add explicit section 'Tool Restrictions and Scope Boundaries' after 'Tool Composition Patterns'. Include: (1) Allowed tools (list of 8 tools) with brief purpose statement; (2) Explicitly NOT available tools with rationale: 'delete_file — prevents accidental deletion of critical documentation; run_in_terminal — prevents arbitrary command execution; rename/move file — documentation structure changes require orchestrator approval'; (3) File path considerations: 'All tools scoped to documentation files (docs/*, *.md, README.md, etc.); no creation/modification in src/, code, or config directories.' This makes scope explicit and helps @doc avoid attempting restricted operations.",
+      "source": "docs/research/agentic-workflows/tool-restrictions-and-safety.md#L1-L150 recommends explicit tool allowlists with rationale. Section 'Example Agent Configuration with Tool Restrictions' (L60-L110) shows pattern.",
+      "source_excerpt": "From tool-restrictions-and-safety.md 'Example Agent Configuration': 'create_file — Create new documentation files, restrictions: paths [docs/**, *.md], operations [create_only]. Explicitly NOT available: run_in_terminal, delete_file, mcp_github_create_or_update_file'",
+      "priority": "low",
+      "priority_justification": "This is documentation/clarity improvement rather than functional gap. @doc's tool set is already appropriate and correctly scoped. Adding explicit restrictions is defensive (clarifies intent, prevents confusion) but not immediately impacting agent effectiveness. Low priority because current implicit scoping works correctly.",
+      "impact": "Clarifies tool scope boundaries. Helps orchestrators verify that tool grants are appropriate. Helps @doc understand and respect scope limits.",
+      "for_upskiller": "Add new section 'Tool Restrictions and Scope Boundaries' after 'Tool Composition Patterns' section. Create two subsections: (1) 'Allowed Tools' — List each of the 8 tools with 1-line purpose. (2) 'Restricted Tools and Rationale' — Create table with columns: Tool | Restricted | Reason. Include rows for: delete_file (accidental doc deletion), run_in_terminal (arbitrary execution), rename/move (requires orchestrator approval), mcp_github_create_or_update_file (GitHub API calls require control). Reference tool-restrictions-and-safety.md#L60-L110 as pattern source."
+    },
+    {
+      "id": "gap-004",
+      "category": "instruction-quality",
+      "title": "Verification Patterns Incomplete — Missing Explicit Verification Tool Sequences",
+      "current_state": "@doc's Quality Standards define 'Documentation is NOT complete if: examples don't compile/run'. However, under 'Workflow' section, the verification step (Step 5) says 'Check markdown syntax, verify examples compile/run, test cross-references, use search/textSearch to verify outdated code, confirm style matches.' This is vague about HOW to verify each criterion. Which tools verify markdown syntax? How does @doc check if a code example actually compiles?",
+      "gap_description": "Tool composition patterns (tool-composition-patterns.md#L150-L200) emphasize explicit, step-by-step tool sequences for complex operations. Under 'Strategy 4: Read-Modify-Verify Pattern', the document shows: '1. read_file (full context), 2. Analyze what could break, 3. replace_string_in_file, 4. get_errors, 5. semantic_search for related code.' This pattern is applicable to documentation verification but not detailed in @doc's instructions. @doc needs explicit sequences for verifying each quality criterion (e.g., 'To verify examples compile: 1. read_file on example, 2. search_codebase for test files using same API, 3. compare example against tests, 4. if mismatch found, escalate').",
+      "recommended_change": "Expand 'Verify & Validate' step in Workflow section. Change from general list ('Check markdown syntax, verify examples compile...') to explicit tool sequences for each verification type. Create subsection 'Verification Tool Sequences': (1) 'Verify markdown syntax' — Is there a linting tool? If not, document: 'Use grep_search to check for common markdown errors (unclosed backticks, unmatched brackets).' (2) 'Verify code examples compile' — Sequence: search_codebase for test files using same API, read_file on tests, compare example pattern against test, if pattern matches: examples verified; if pattern differs, escalate. (3) 'Verify cross-references' — Use search_fileSearch to confirm linked files exist, use grep_search to confirm link targets are valid. (4) 'Verify style consistency' — Compare style elements (headers, code blocks, emphasis) against reference docs using grep_search patterns.",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L150-L200 'Strategy 4: Read-Modify-Verify Pattern' and tool-composition-patterns.md#L40-L100 'Atomic Tool Operations'",
+      "source_excerpt": "From tool-composition-patterns.md 'Atomic Tool Operations': 'Verification Tools — get_errors: Retrieve linting, type-checking, compilation errors. Critical Practice: Always verify changes after modifications. Check for syntax errors, type issues, unexpected side effects.' And 'Strategy 4: Read-Modify-Verify Pattern: 1. read_file (full context) 2. Analyze what could break 3. replace_string_in_file 4. get_errors 5. semantic_search for related code'",
+      "priority": "medium",
+      "priority_justification": "Improves verification reliability and clarity. Without explicit tool sequences, @doc may use inefficient or incomplete verification approaches. However, current approach is functional (agent can search and validate). Medium priority because it streamlines verification and provides clear success criteria.",
+      "impact": "Ensures verification steps are explicit and repeatable. Makes quality standards testable. Reduces ambiguity about 'how to verify examples compile'.",
+      "for_upskiller": "Replace general 'Verify & Validate' checklist in Workflow section with detailed subsection 'Verification Tool Sequences'. For each quality criterion, provide explicit tool sequence. Example format: 'Verify code examples compile: Step 1 - read_file on example code. Step 2 - search_codebase for test files using same API. Step 3 - grep_search for matching usage patterns in tests. Step 4 - If pattern matches and tests pass: VERIFIED. If pattern differs or unclear: escalate with specifics.' Include sequences for: markdown syntax, code compilation, cross-references, style consistency. Reference tool-composition-patterns.md#L40-L100 for tool options."
+    },
+    {
+      "id": "gap-005",
+      "category": "instruction-quality",
+      "title": "Example Quality — Missing Concrete Good/Bad Documentation Examples",
+      "current_state": "@doc's instructions reference 'quality standards' (8 criteria for well-written docs) but provide minimal concrete examples. The workflow shows 3 tool composition patterns with brief descriptions (Pattern 1: Create New, Pattern 2: Update Existing, Pattern 3: Examples with Code). However, there are no examples of actual 'good documentation' vs 'bad documentation' to anchor understanding.",
+      "gap_description": "Instruction engineering best practices (instruction-engineering-best-practices.md#L200-L250) emphasize that agent instructions are more effective with 2-3 concrete examples per major concept. Specifically, examples showing 'good' vs 'bad' outcomes help agents understand standards in context. For documentation agents, examples should show: (1) Well-written documentation (matching all 8 criteria), (2) Poorly-written documentation with specific issues, (3) Good vs bad examples of handling style conflicts. @doc's quality standards are abstract; concrete examples would anchor the standards.",
+      "recommended_change": "Add new section 'Quality Examples: Good vs. Bad Documentation' after 'Quality Standards'. Create 3 examples: (1) Example 1: 'Good Documentation' — Show a well-written 200-word documentation snippet with working code example, active voice, clear structure, showing all 8 quality criteria. (2) Example 2: 'Poor Documentation' — Same feature documented poorly (no examples, passive voice, unclear structure) with annotations pointing to specific criteria violated. (3) Example 3: 'Style Consistency Example' — Show how to match existing documentation style by comparing two versions (one correct, one inconsistent). Each example should reference specific quality criteria it demonstrates or violates.",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L200-L250 'Responsibility Statements' and 'Role Definition' sections show pattern: 'Good Examples: [show clear, specific roles]. Poor Examples: [show vague roles with annotation of issues]'",
+      "source_excerpt": "From instruction-engineering-best-practices.md 'Writing Effective Role Statements': 'Good Examples: ✓ \"You are a documentation specialist. Your primary job is writing clear, technical documentation.\" Poor Examples: ✗ \"You are a helpful assistant\" (Too generic)' — Pattern shows good/bad with annotations.",
+      "priority": "medium",
+      "priority_justification": "Improves clarity and helps @doc understand quality standards in context. Agents learn better from examples than from abstract criteria. However, current quality standards are clear enough for functional operation. Medium priority because concrete examples significantly improve instruction quality but aren't essential for current functionality.",
+      "impact": "Makes quality standards concrete and memorable. Helps @doc apply criteria consistently across different documentation types.",
+      "for_upskiller": "Add section 'Quality Examples: Good vs. Bad Documentation' after 'Quality Standards'. Include 3 examples: (1) Good documentation snippet (200-300 words, API endpoint documentation with request/response, example, error handling) with checkmarks showing 8 quality criteria met. (2) Poor version of same documentation (no example, passive voice, unclear structure) with annotations showing which criteria violated. (3) Style consistency example showing matched vs mismatched formatting. Format examples in callout boxes or code blocks for clarity. Reference instruction-engineering-best-practices.md#L200-L250 as source pattern."
+    },
+    {
+      "id": "gap-006",
+      "category": "instruction-quality",
+      "title": "Missing Systematic Style Guide Extraction Pattern for 'Read Existing Documentation'",
+      "current_state": "@doc's Workflow Step 2 includes 'Read existing docs to identify style conventions and formatting patterns' and Constraint says '@doc should match existing documentation exactly'. However, there's no explicit pattern for HOW to systematically extract and document style conventions. @doc just says 'refer to existing docs for style' without a process.",
+      "gap_description": "Tool composition patterns (tool-composition-patterns.md) emphasize that multi-step tasks need explicit, numbered sequences. @doc should have an explicit sequence for 'Extract and Apply Style Conventions': (1) Use search/fileSearch to find similar docs, (2) read_file on 2-3 reference documents, (3) Use grep_search to identify patterns (header format, code block markers, emphasis style), (4) Document found conventions before writing. Currently, this is implicit ('read existing docs'). Making it explicit helps @doc avoid manual style hunting and ensures comprehensive pattern extraction.",
+      "recommended_change": "Add explicit subsection in 'Tool Composition Patterns' section: 'Pattern 0: Extract Style Conventions (BASELINE PATTERN — always do this first)'. Sequence: '1. Use search/fileSearch to find 2-3 existing docs most similar to documentation being written. 2. read_file on each reference doc (note header formats, code block styles, emphasis patterns). 3. Use grep_search with regex to identify: (a) Header level patterns (# for chapters, ## for sections?), (b) Code block language markers (```javascript? ```python?), (c) Emphasis styles (bold for **important**? for *emphasis*?), (d) Link formats ([text](path) or [text]: path format?). 4. Document extracted conventions in notes before writing new docs. 5. Compare your draft against these conventions; adjust before reporting complete.'",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L100 'The Fundamental Pattern: Search/Analyze → Decide → Modify → Verify'",
+      "source_excerpt": "From tool-composition-patterns.md: 'The fundamental pattern for reliable tool composition: 1. Search/Analyze (gather information) ↓ 2. Decide (determine what's needed) ↓ 3. Modify (apply changes) ↓ 4. Verify (validate outcomes) ↓ 5. Report' — @doc's 'read existing docs to match style' should follow this pattern systematically.",
+      "priority": "medium",
+      "priority_justification": "Improves efficiency and consistency of style matching. Without explicit extraction pattern, @doc may miss style conventions or apply them inconsistently. However, current 'read and match' approach is functional. Medium priority because it streamlines the style-matching process and ensures comprehensive extraction.",
+      "impact": "Ensures @doc systematically extracts style conventions before writing. Reduces inconsistent style application. Makes style-matching process teachable and verifiable.",
+      "for_upskiller": "Add new subsection in 'Tool Composition Patterns' before Pattern 1. Title: 'Pattern 0: Extract Style Conventions (BASELINE PATTERN — always execute first)'. Include 5 steps: (1) search/fileSearch to find 2-3 similar docs, (2) read_file on each reference, (3) grep_search with regex to identify header levels, code block markers, emphasis styles, link formats, (4) Document extracted conventions in notes, (5) Compare draft against conventions before reporting. Include regex examples for identifying patterns (e.g., '^#+\\s' to identify header levels). Reference tool-composition-patterns.md#L40-L100 'fundamental pattern' as source."
+    },
+    {
+      "id": "gap-007",
+      "category": "communication",
+      "title": "Inter-Agent Communication Implicit — Missing Explicit Ben Reference in Escalation Paths",
+      "current_state": "@doc's 'Escalation Paths' section says 'Ask for clarification' and 'Escalate for clarification' and 'Ask orchestrator' but doesn't explicitly state that the orchestrator is @ben. The communication pattern is implicit (agent knows orchestrator exists) but not explicit. This makes it unclear for new users reading @doc's instructions who the orchestrator is or how to communicate.",
+      "gap_description": "Inter-agent communication patterns (inter-agent-communication.md#L1-L80) emphasize clarity about communication targets. The recommended 'Orchestrator-Mediated Communication' pattern shows: 'Agent A → Orchestrator → Agent B' with explicit reference to agent names. @doc should explicitly state: 'Escalate to @ben (orchestrator)' rather than generic 'ask orchestrator'. This clarifies the communication path and makes it clear to any reader who @doc communicates with.",
+      "recommended_change": "In 'Escalation Paths' section, replace generic 'Ask orchestrator' and 'escalate' with explicit '@ben (orchestrator)'. Example changes: Change 'Ask orchestrator for clarification' to 'Ask @ben (orchestrator) for clarification'. Change 'Escalate for clarification' to 'Escalate to @ben with specific details'. This makes communication explicit and aligns with inter-agent communication best practices (orchestrator-mediated pattern).",
+      "source": "docs/research/agentic-workflows/inter-agent-communication.md#L20-L80 'Pattern 1: Orchestrator-Mediated Communication' shows pattern: 'Agent A → Orchestrator → Agent B' with explicit naming",
+      "source_excerpt": "From inter-agent-communication.md 'Orchestrator-Mediated Communication': '@ben (orchestrator) analyzes request, determines specialists needed, delegates to @research... @research reports findings to @ben... @ben delegates to @doc with @research output as input. Strengths: Clear, observable communication flow. Orchestrator has full visibility into state.'",
+      "priority": "low",
+      "priority_justification": "This is clarity/documentation improvement, not functional gap. Communication works because @doc implicitly escalates to whoever orchestrates (Ben). Making it explicit improves clarity but doesn't change behavior. Low priority because implicit communication currently works correctly.",
+      "impact": "Clarifies communication targets. Makes orchestrator relationship explicit. Aligns @doc with inter-agent communication best practices.",
+      "for_upskiller": "In 'Escalation Paths' section, update all references to generic 'orchestrator' with explicit '@ben (orchestrator)'. Search for phrases: 'Ask if unclear', 'Ask orchestrator', 'escalate', 'escalate for clarification' and update to '@ben'. Format as: 'Escalate to @ben with [specific details]'. Also add brief note explaining communication pattern: 'All escalations go to @ben (the orchestrator), who coordinates next steps.' Reference inter-agent-communication.md#L20-L80 as pattern source."
+    },
+    {
+      "id": "gap-008",
+      "category": "instruction-quality",
+      "title": "Edge Case Handling Guidance Incomplete — Missing Specific Patterns for Common Challenges",
+      "current_state": "@doc's constraints and workflow cover normal cases (writing docs, verifying examples, matching style) but lack specific guidance for common edge cases: (1) What if documentation examples are in a language not supported by the codebase? (2) What if implementation has broken or deprecated code that needs documenting? (3) What if user provides conflicting style requirements (modernize BUT match)? (4) What if feature documentation contradicts code comments? These real-world scenarios lack explicit handling patterns.",
+      "gap_description": "Common failure modes (common-failure-modes.md#L45-L150) show that 79% of agent failures are preventable through specification clarity. The document lists 'Insufficient Context' as a major failure mode (agents create output that doesn't match expectations). For @doc, edge cases like contradictions or language mismatches require explicit handling to prevent failure. Current instruction say 'Don't guess' but don't provide scenario-specific guidance for handling these edge cases.",
+      "recommended_change": "Add section 'Common Edge Cases and Handling Patterns' after 'Decision Framework'. For each edge case, provide: scenario, decision point, and handling approach. Include: (1) Language Mismatch: 'If examples are in language not in codebase (e.g., pseudocode, Ruby in Python codebase), document as-is and escalate with note: \"Example language differs from codebase; confirm documentation approach.\"' (2) Deprecated/Broken Code: 'If code being documented is deprecated or known broken, document current behavior explicitly; mark DEPRECATED clearly; escalate for decision on whether guide should recommend alternatives.' (3) Conflicting Requirements: 'User says modernize style AND match existing — clarify with @ben which takes priority (preserve consistency vs modernize).' (4) Code-Documentation Contradiction: 'If documentation contradicts code behavior, document actual behavior and escalate with: \"Implementation differs from documentation comment at [file:line]. Using actual behavior as source of truth.\"'",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L70-L100 'Failure 2: Insufficient Context' shows prevention: 'Always include style guides/references. Provide specific file examples. Set explicit conventions.' Applies to @doc edge case handling.",
+      "source_excerpt": "From common-failure-modes.md 'Insufficient Context': 'Symptom: Agent creates output that doesn't match project conventions. Prevention: Always include style guides. Provide specific file examples. Set explicit conventions. Recovery: Ask agent to revisit output with correct context.'",
+      "priority": "low",
+      "priority_justification": "These edge cases are handled via escalation (which works), but explicit guidance prevents escalations and improves autonomy. Currently @doc escalates when uncertain, which is correct but not optimally efficient. Low priority because escalation pathway is functional; explicit guidance is optimization.",
+      "impact": "Enables @doc to handle edge cases more autonomously. Reduces escalations for foreseeable scenarios. Makes edge case handling consistent and documented.",
+      "for_upskiller": "Add new section 'Common Edge Cases and Handling Patterns' after 'Decision Framework'. Create table with columns: Edge Case Scenario | Decision Point | Recommended Approach. Include 4 rows: (1) Language Mismatch (examples in different language), (2) Deprecated/Broken Code (feature is deprecated), (3) Conflicting Requirements (modernize vs match), (4) Code-Doc Contradiction (documentation doesn't match code). For each, provide scenario description (1 sentence), decision point ('What should be documented?'), and approach (2-3 sentence handling pattern). Reference common-failure-modes.md#L70-L100 as source."
+    }
+  ],
+  "summary": {
+    "overall_assessment": "@doc is a well-designed, focused documentation specialist with strong quality standards, clear responsibilities, appropriate constraints, and comprehensive workflows. The agent excels at: explicit quality criteria (8-point quality standard is excellent), tool selection (appropriate read/search/create tools), and workflow guidance (6-step process covers normal scenarios). Primary improvement areas are in completeness of instruction sections: (1) decision frameworks are narrow (2 of ~6 decision types covered), (2) error handling patterns are implicit rather than explicit, (3) verification sequences are described but not step-by-step, (4) edge case guidance is missing. These are all 'medium' or 'low' priority improvements that enhance instruction completeness and agent autonomy without fixing critical gaps.",
+    "strengths": [
+      "Excellent explicit quality standards (8 criteria for well-written documentation with clear success indicators)",
+      "Clear, specific responsibilities (7 measurable deliverables with clear accountability)",
+      "Appropriate, focused tool set (read/search/create tools appropriate for documentation; dangerous tools restricted)",
+      "Comprehensive workflow guidance (6-step process covering requirements → search → read → write → verify → report)",
+      "Good tool composition patterns (3 documented patterns for different documentation scenarios)",
+      "Clear constraints preventing scope creep (6 explicit boundaries including no code modification, no deletion)",
+      "Escalation paths defined for 5 common blocking scenarios",
+      "Emphasis on verification ('Must verify before completion' is strong requirement)",
+      "Search-first mentality ('Must search before assuming structure' prevents errors)"
+    ],
+    "improvement_areas": [
+      "Decision framework is narrower than best practices recommend (covers 2 decision types; could cover ~6)",
+      "Error handling patterns are implicit (escalate when unclear) rather than explicit (graceful degradation approaches)",
+      "Verification patterns described but not as explicit tool sequences (need step-by-step for each quality criterion)",
+      "Tool restrictions not explicitly documented (what tools NOT available? why?)",
+      "Missing concrete examples of good/bad documentation to anchor quality standards",
+      "Style guide extraction process not formalized (missing Pattern 0 for systematic convention extraction)",
+      "Inter-agent communication targets implicit (says 'orchestrator' rather than '@ben')",
+      "Edge case guidance incomplete (common scenarios like language mismatches, deprecated code not addressed)"
+    ],
+    "critical_gaps": 0,
+    "recommendations_by_priority": {
+      "high": "0 high-priority gaps identified. No safety, governance, or core responsibility gaps detected. @doc's core functionality and specialization are sound.",
+      "medium": 4,
+      "medium_summary": "4 medium-priority gaps focusing on instruction completeness: (1) Incomplete decision framework (gap-001), (2) Missing error handling patterns (gap-002), (3) Incomplete verification sequences (gap-004), (4) Missing style extraction pattern (gap-006)",
+      "low": 4,
+      "low_summary": "4 low-priority gaps focusing on clarity and documentation: (1) Implicit tool restrictions (gap-003), (2) Missing example documentation (gap-005), (3) Implicit orchestrator reference (gap-007), (4) Incomplete edge case handling (gap-008)"
+    }
+  },
+  "next_steps": {
+    "for_ben": "@doc evaluation complete. No critical gaps or blocking issues detected. Agent is functional and well-designed for documentation specialization. Recommendation: (1) Delegate @doc evaluation results to @ar-upskiller — implement medium-priority gaps (decision framework, error handling, verification patterns) to enhance instruction completeness. (2) Low-priority gaps can be addressed as convenient improvements. (3) @doc is ready for full use by Ben; no blocking issues prevent orchestrator from delegating documentation tasks. Total estimated implementation time for upskiller: 3-4 hours for all gaps (high effort on decision framework expansion; medium on error handling and verification; low on documentation improvements).",
+    "for_upskiller": "Priority sequence for implementation: (1) **Immediate (1-2 hours)**: Implement gap-001 (decision framework expansion — add 5 decision types to existing Decision Framework section) and gap-002 (error handling patterns — add graceful degradation section). These are directimprovements to instruction clarity. (2) **Secondary (1-2 hours)**: Implement gap-004 (verification sequences — expand verification checklist to explicit tool sequences) and gap-006 (style guide extraction pattern — add Pattern 0 to tool composition section). These streamline @doc's processes. (3) **Enhancement (0.5-1 hour)**: Lower-priority gaps (gap-003: tool restrictions documentation, gap-005: example documentation, gap-007: @ben reference, gap-008: edge case handling) can be bundled with a documentation polish pass. All gaps are specific and actionable; see individual gap entries for detailed implementation guidance.",
+    "timeline": "Gap-001 + gap-002 (core instruction enhancements): 1-2 hours. Gap-004 + gap-006 (verification and patterns): 1-2 hours. Gaps 003, 005, 007, 008 (documentation polish): 0.5-1 hour. Total: 3-4 hours estimated for comprehensive implementation. Optional: Implement gaps-001 and gap-002 immediately (highest value); defer others to next improvement cycle."
+  },
+  "evaluation_metadata": {
+    "framework_used": "8-step evaluation framework",
+    "research_delegations": "No external research delegations; comprehensive research documentation exists in workspace",
+    "confidence_level": "high",
+    "confidence_justification": "Evaluation based on: (1) Complete review of @doc.agent.md definition, (2) Systematic analysis against 7 research documents covering instruction engineering, tool composition, safety, specialization, failure modes, and communication patterns, (3) 200+ agent pattern examples from awesome-copilot exploration, (4) Comparison with other agents (@ben, @ar-director) using same frameworks. All gaps have specific sources and example patterns. No vague recommendations made.",
+    "evaluation_complete": true,
+    "notes": "@doc is a mature, well-designed agent with strong core functionality. The 8 identified gaps are all in instruction completeness (decision frameworks, error handling, verification patterns) and clarity (explicit restrictions, examples, edge cases) — not in core agent design or functionality. Medium-priority gaps represent genuine improvements to instruction quality and efficiency; low-priority gaps are polish items. No critical safety, governance, or specialization issues detected."
+  }
+}
