@@ -17,3 +17,7 @@ build/
 *~
 .DS_Store
 .hindsight/
+
+.stignore
+.stfolder/
+.stversions/

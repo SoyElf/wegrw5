@@ -4,3 +4,4 @@
 .git/index
 .git/COMMIT_EDITMSG
 .git/logs
+.hindsight/
