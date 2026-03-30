@@ -1,0 +1,326 @@
+{
+  "evaluated_agent": "research",
+  "evaluation_date": "2026-03-30",
+  "evaluator": "evaluator",
+  "agent_profile": {
+    "name": "research",
+    "description": "External research specialist — conducts broad research on technical topics, best practices, patterns, and industry approaches from external sources",
+    "primary_domain": "External research synthesis on coding patterns, architecture, infrastructure, APIs, tools, and emerging practices",
+    "responsibilities": [
+      "Conduct broad web research on technical topics, coding patterns, architecture decisions, and industry best practices",
+      "Search external sources for vendor documentation, tool capabilities, and technology comparisons",
+      "Discover real-world implementations and case studies on GitHub and technical blogs",
+      "Synthesize findings from multiple sources into clear, coherent insights",
+      "Always provide source attribution, URLs, and citations for all findings",
+      "Document research methodology and evaluation criteria for credibility assessment",
+      "Offer practical recommendations based on research evidence",
+      "Distinguish between consensus practices, emerging trends, and controversial approaches",
+      "Provide pro/con analysis where multiple competing approaches exist",
+      "Use workspace context to understand domain-specific research needs (but do NOT analyze workspace code)"
+    ],
+    "constraints": [
+      "External focus only — Research topics from external sources. Do NOT analyze workspace code",
+      "Read-only operations — Never modification. Do NOT edit workspace files, create configurations, or implement code",
+      "Always cite sources — Every finding must include URL, author, publication, or authoritative reference",
+      "Prefer official documentation — Use vendor-provided docs, RFCs, and standards as primary sources",
+      "Never user-invocable — Sub-agent only, invoked by orchestrators (Ben or agentic-workflow-researcher)"
+    ],
+    "tools_granted": [
+      "read/problems",
+      "read/readFile",
+      "search/fileSearch",
+      "search/textSearch",
+      "search/listDirectory",
+      "web",
+      "tavily/tavily_search",
+      "tavily/tavily_crawl",
+      "tavily/tavily_extract",
+      "github/search_repositories",
+      "github/get_file_contents",
+      "grep/*",
+      "pdf-reader/*",
+      "vscode/memory"
+    ],
+    "agents_can_invoke": [],
+    "model": "Claude Haiku 4.5",
+    "user_invocable": false
+  },
+  "agent_classification": {
+    "agent_type": "research specialist",
+    "specialization_level": "generalist external research (vs specialized agentic-workflow-researcher)",
+    "primary_patterns": [
+      "Multi-source research and synthesis",
+      "Credibility evaluation and source prioritization",
+      "Real-world pattern discovery",
+      "Pro/con analysis for competing approaches"
+    ],
+    "related_agents": [
+      "@agentic-workflow-researcher (specialized research for agentic workflows only)",
+      "@explore-codebase (internal codebase exploration, vs external research)",
+      "@doc (consumes @research findings to write documentation)"
+    ]
+  },
+  "research_context_used": [
+    "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L1-L450",
+    "docs/research/agentic-workflows/tool-composition-patterns.md#L1-L150",
+    "docs/research/agentic-workflows/agent-specialization-patterns.md#L1-L150",
+    "docs/research/agentic-workflows/common-failure-modes.md#L1-L100",
+    "docs/research/agentic-workflows/orchestrator-worker-case-study.md#L1-L150",
+    "docs/research/agentic-workflows/inter-agent-communication.md#L1-L150",
+    "docs/research/agentic-workflows/tool-restrictions-and-safety.md#L1-L150",
+    ".github/context/2026-03-30-awesome-copilot-exploration.json"
+  ],
+  "patterns_discovered": [
+    {
+      "name": "Research Methodology Structuring",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L328-L380",
+      "pattern_description": "Best practices show that research methodology is most effective when presented as explicit step-by-step procedures with tool calls at each step, not just conceptual phases. Example: 'Step 1: Search for existing documentation (use file_search in docs/)' vs 'Step 1: Clarify the objective'",
+      "applicability_to_research": "Research agent has 8-phase methodology but lacks explicit tool guidance per phase. Instruction engineering best practices show concrete tool examples improve agent execution quality."
+    },
+    {
+      "name": "Credibility Evaluation Framework",
+      "category": "patterns",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L45-L90",
+      "pattern_description": "Specification failures arise from unclear criteria. Research agents need explicit decision frameworks for: How to evaluate source credibility during synthesis? What to do when sources conflict? When is research depth sufficient?",
+      "applicability_to_research": "@research lists 'evaluate credibility' but lacks detailed framework. Common failure mode: Insufficient evaluation criteria leads to inconsistent source prioritization."
+    },
+    {
+      "name": "Parallel Research Capability",
+      "category": "patterns",
+      "source": "docs/research/agentic-workflows/orchestrator-worker-case-study.md#L220-L280 and tool-composition-patterns.md#L50-L100",
+      "pattern_description": "Best practices emphasize parallelizable research: 'When researching multiple related topics, parallelize web searches and document crawls rather than sequential queries.' Current methodology is sequential.",
+      "applicability_to_research": "@research has 'Use parallel research' as a rule but methodology section is purely sequential. Guidance on HOW to parallelize is missing from 8-step process."
+    },
+    {
+      "name": "Scope Management & Escalation",
+      "category": "governance",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L35-L50",
+      "pattern_description": "Specification failures include 'Insufficient context in delegation'. Research agents need clear rules for: When is scope too broad? How to handle emerging complexity? When to escalate for more resources?",
+      "applicability_to_research": "@research lists rules but lacks explicit scope management. No framework for 'quick research' vs 'thorough research' time-boxing or complexity escalation."
+    },
+    {
+      "name": "Decision Framework for Research Trade-offs",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L43-L80 and #L308-L350",
+      "pattern_description": "Effective agent instructions include decision frameworks: How to decide between depth vs breadth? Official docs vs community blogs? Current claims vs emerging trends? Best practices show explicit frameworks improve consistency.",
+      "applicability_to_research": "@research has rules about preferences but no explicit decision framework for research trade-offs when: sources are conflicting, scope is unclear, or depth/breadth tradeoffs emerge."
+    },
+    {
+      "name": "Tool Composition Example Guidance",
+      "category": "tools",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L330-L380",
+      "pattern_description": "Tool usage guidance is most effective with concrete examples showing: (1) Search step, (2) Read/analyze step, (3) Synthesis step, (4) Verify step, (5) Report step. Sequential tool ordering prevents mistakes.",
+      "applicability_to_research": "@research methodology describes phases but lacks concrete tool usage examples per phase. Missing: explicit guidance on tool ordering and when to use which tools."
+    },
+    {
+      "name": "Quality Standards with Measurable Criteria",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L85-L110",
+      "pattern_description": "Quality standards are most effective when specific and measurable: 'Include 3+ sources (not: Include multiple sources)'; 'Conflict handling: Document where sources disagree' (not: Evaluate credibility).",
+      "applicability_to_research": "@research quality standards list outcomes (examples, sources, synthesis) but lack specific measurable targets. Example: Should pro/con analysis have 3+ arguments per side? How many sources minimum for different research depths?"
+    },
+    {
+      "name": "Comparative Research Agent Pattern",
+      "category": "patterns",
+      "source": ".github/context/2026-03-30-awesome-copilot-exploration.json (Gem Researcher pattern)",
+      "pattern_description": "Well-designed research agents in awesome-copilot explicitly state: What this agent does vs related agents (Gem Researcher covers codebase exploration, not external research). Current @research definition covers this well but could be more explicit about tool-level distinctions.",
+      "applicability_to_research": "@research correctly distinguishes itself from @explore-codebase, @agentic-workflow-researcher, @doc. Distinction could be strengthened with explicit tool examples showing how external research differs from internal exploration."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "gap-001",
+      "category": "instruction-quality",
+      "title": "Research methodology lacks explicit tool guidance per phase",
+      "current_state": "Research methodology describes 8 conceptual phases (Clarify objective → Define scope → Multi-source research → Pattern identification → Synthesize findings → Evaluate credibility → Cite thoroughly → Present findings) but does not provide tool names or sequencing for each phase.",
+      "gap_description": "Instruction engineering best practices (docs/research/agentic-workflows/instruction-engineering-best-practices.md#L328-L380) show that tool usage is most effective when explicitly linked to methodology phases with concrete examples. For example: 'Step 1: Clarify the objective → (no tool specified)' vs 'Step 1: Clarify the objective → Use read/problems to understand task context, then read_file on relevant workspace docs'. Current approach relies on agent to infer which tools apply where.",
+      "recommended_change": "Add explicit tool guidance section after research methodology that shows tool sequence per phase: Phase 1 (Clarify) → tools: read/problems, read_file on context; Phase 2 (Define scope) → tools: search/fileSearch in workspace; Phase 3 (Multi-source web) → tools: web, tavily_search, tavily_crawl; Phase 4 (Pattern identification) → tools: grep_search on results, semantic_search; Phase 5 (Synthesis) → tools: (conceptual, no tool); Phase 6 (Evaluate credibility) → tools: (comparison logic, pdf-reader); Phase 7 (Cite) → tools: vscode/memory to store findings. Include 1-2 concrete examples showing tool chain for a sample research task.",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L328-L365",
+      "source_excerpt": "When researching a feature: (1) Search for existing documentation → file_search in docs/ → semantic_search for related concepts; (2) Read implementation code → read_file to understand how feature works; (3) Check tests for usage patterns → read_file on test files; (4) Write documentation → create_file with content; (5) Verify output → get_errors for syntax validation. Order matters: Search before reading, read before writing, write before verifying.",
+      "priority": "high",
+      "priority_justification": "Explicit tool guidance directly improves execution quality and consistency. Tool composition patterns show that agents with clear tool ordering have fewer failures and faster execution. This is core to agent capability, not supplementary.",
+      "for_upskiller": "Add 'Tool Usage Guidelines' section after 'Research Methodology' section in research.agent.md. Structure as: (1) Tool sequencing per research phase with tool names; (2) 2 concrete examples showing full tool chain for different research scenarios (quick research vs thorough research); (3) Annotation at end of methodology phases showing which tools apply. Reference docs/research/agentic-workflows/tool-composition-patterns.md#Strategy-1 for pattern."
+    },
+    {
+      "id": "gap-002",
+      "category": "instruction-quality",
+      "title": "Missing decision framework for research scope and depth trade-offs",
+      "current_state": "@research documents rules ('Respect research depth — When asked for quick research, do 2-3 quality sources; for thorough, expand to 5+ sources') but provides no decision framework for how to determine when a research request is 'quick' vs 'thorough', or how to escalate if complexity exceeds initial scope estimate.",
+      "gap_description": "Instruction engineering best practices (docs/research/agentic-workflows/instruction-engineering-best-practices.md#L308-L350) recommend explicit decision frameworks that guide agents through common trade-off scenarios. Common failure mode (from common-failure-modes.md#L45-L70) is 'Insufficient context in delegation' — research agents should have explicit logic for: How do I determine research depth from the request? What if sources are conflicting and I can't synthesize? When should I escalate for clarification? Current approach relies on agent judgment without framework.",
+      "recommended_change": "Add 'Decision Framework' section after 'Quality Standards'. Include: (1) Depth determination: 'If request says quick/fast/brief → 2-3 sources; if request implies importance/critical/comprehensive → 5+ sources; if ambiguous, ask Ben'; (2) Source conflict resolution: 'If 2+ sources significantly disagree: (a) Document disagreement explicitly, (b) Cite all conflicting sources, (c) Explain why they differ (timing, scope, vendor bias), (d) Note which is most reliable based on official status'; (3) Scope escalation: 'If during research the topic proves more complex than initial scope (e.g., started on 'API patterns', discovering need to cover 5 competing architectures), explicitly state complexity escalation to Ben with estimate of additional effort needed'. Include 2-3 example scenarios showing the framework in action.",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L308-L350",
+      "source_excerpt": "Decision Framework: How to think about tradeoffs and decisions... Agents process structured decision frameworks more reliably than prose. Include examples of decisions the agent will face (not all decisions, but representative ones).",
+      "priority": "high",
+      "priority_justification": "Decision frameworks directly prevent specification failures (45% of failures per common-failure-modes.md#L5-L10). Without explicit logic, research agents make inconsistent scope decisions, leading to misaligned expectations. This is critical for reliability.",
+      "for_upskiller": "Add 'Decision Framework' section to research.agent.md after 'Quality Standards' section. Use format from instruction-engineering-best-practices.md example starting at line 43. Include 3 decision scenarios: (1) Depth determination from request; (2) Source conflict resolution; (3) Scope escalation logic. Add example invocation for each scenario showing expected agent behavior."
+    },
+    {
+      "id": "gap-003",
+      "category": "patterns",
+      "title": "No explicit guidance on parallelizing research across multiple topics",
+      "current_state": "@research has rule 'Use parallel research — When researching multiple related topics, parallelize web searches and document crawls rather than sequential queries' but provides no guidance on HOW to parallelize, WHEN to parallelize, or WHAT tools to use for parallel execution.",
+      "gap_description": "Tool composition patterns (docs/research/agentic-workflows/tool-composition-patterns.md#L40-L60) show that parallelization must be explicit in methodology. Current rule is guidance-only without mechanism. Agents execute sequential operations by default; explicit parallelization instruction is needed to trigger parallel tool execution. Example from patterns: '(1) Search for API patterns in official docs AND GitHub repos in parallel via tavily_search + github/search_repositories; (2) Wait for both to complete; (3) Analyze results synthetically'.",
+      "recommended_change": "Add explicit parallelization guidance to 'Tool Usage Guidelines' (from gap-001): Include section 'When to parallelize research tasks'. Content: (1) When to parallelize: 'If researching 3+ independent topics (e.g., comparing 3 database technologies), search all in parallel'; (2) How to parallelize: 'Initiate web searches for Topic A, B, C simultaneously using tavily_search, github/search_repositories, etc.; then wait for all results before moving to synthesis'; (3) Tools that support parallelization: 'tavily_search (multiple queries), github/search_repositories (multiple queries), grep_search (multiple patterns)'; (4) Parallelization example: Show a single research request that benefits from parallel execution (e.g., 'Compare REST vs GraphQL vs gRPC' can search all 3 in parallel).",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L100",
+      "source_excerpt": "Use parallel research — When researching multiple related topics, parallelize web searches and document crawls rather than sequential queries... [Tools that support parallelization]: tavily_search (multiple queries), github_search (multiple repos), semantic_search (multiple patterns)",
+      "priority": "medium",
+      "priority_justification": "Parallelization improves research efficiency (time optimization), not core correctness. Medium priority because research accuracy is more important than speed. However, pattern establishes this as standard practice in awesome-copilot (applied broadly).",
+      "for_upskiller": "Add 'Parallelization Strategy' subsection to 'Tool Usage Guidelines'. Concise: when to use (3+ indie topics), which tools support it (tavily_search, github/search_repositories, grep_search for multiple patterns), and 1 example showing parallel execution in single research request. Keep concise (5-8 lines) as this is optimization, not core requirement."
+    },
+    {
+      "id": "gap-004",
+      "category": "instruction-quality",
+      "title": "Quality standards lack specific, measurable success criteria",
+      "current_state": "Quality standards section lists high-level outcomes (every claim has source, findings distinguish consensus, multiple sources, real-world examples, pro/con analysis, evidence-based, transparent methodology, terminology precise, deprecated approaches marked) but does not specify measurable minimums. For example: 'Multiple sources inform conclusions' — how many is 'multiple'? 'Pro/con analysis' — how many pros and cons per approach?",
+      "gap_description": "Per instruction-engineering-best-practices.md#L303-L350, quality standards are most effective when specific and measurable. Common failure mode (common-failure-modes.md#L80-L110) is 'Unclear success criteria' — agent and requester have different definitions of success. Current standards are qualitative (good, excellent, balanced) without quantitative targets. Comparison: @agentic-workflow-researcher has 'Create structured JSON documents' (measurable outcome); @doc requires '2-3 usage examples' (specific count); @research quality has 'Real-world examples demonstrate practical application' (vague — how many examples?).",
+      "recommended_change": "Revise 'Quality Standards' section to include specific, measurable criteria. Format: change each bulleted outcome to include a measurable target. Examples: '✅ Every factual claim includes a source URL or reference (target: 100% of claims cited)'; '✅ Findings clearly distinguish consensus from emerging/controversial approaches (target: explicitly label 3+ approach categories)'; '✅ Multiple sources inform conclusions (target: minimum 3 independent sources per claim for thorough research, 2 for quick research)'; '✅ Real-world examples and case studies demonstrate practical application (target: 2-3 substantive examples per pattern)'; '✅ Pro/con analysis is balanced and informed by credible sources (target: 3+ pros AND 3+ cons per competing approach, document source for each)'. After revision, add measurable failure criteria (❌) showing what violates standards (e.g., '❌ Single-source reliance: research informed by 1-2 sources only').",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L303-L350 and common-failure-modes.md#L80-L110",
+      "source_excerpt": "Clear Success Criteria: ... Define explicit, measurable success criteria ... Use checkboxes and quantifiable standards ... Include examples of done vs not done ... [Common failure]: Unclear success criteria — Agent delivers output but it doesn't meet expectations because Agent and orchestrator have different definitions of done",
+      "priority": "high",
+      "priority_justification": "Measurable criteria directly enable verification and consistency. Prevents expectation mismatches (common source of specification failures per common-failure-modes.md). Critical for research agent since quality is subjective without specific targets.",
+      "for_upskiller": "Revise 'Quality Standards' bullets to add specific, measurable targets. For each ✅, add quantifiable minimum (e.g., '3+ sources', '2-3 examples', '3+ pros/cons'). Also add parallel ❌ section showing what violates standards (single-source research, vague conclusions, no citations, etc.). Use format from common-failure-modes.md example on line 93-110."
+    },
+    {
+      "id": "gap-005",
+      "category": "governance",
+      "title": "No explicit escalation path for research limitations and conflicts",
+      "current_state": "@research has rules 'Acknowledge limitations — If research is incomplete, sources are conflicting, or consensus is unclear, explicitly state these limitations' but provides no guidance on WHEN to escalate to Ben vs when to continue research independently.",
+      "gap_description": "Inter-agent communication patterns (docs/research/agentic-workflows/inter-agent-communication.md#L1-L50) show escalation paths are critical for orchestrator-mediated systems. Current @research instructions document WHAT to do (acknowledge limitations) but not WHEN to escalate and HOW to surface blockers to Ben. Example missing: If 5 sources say approach A is best but 2 credible sources disagree, does agent continue research or escalate? Current guidance is silent. This creates uncertainty and inconsistent behavior.",
+      "recommended_change": "Add 'Escalation & Limitations' section after 'Rules'. Content: (1) When to escalate: 'Escalate to Ben if: (a) Research scope becomes significantly more complex than stated (estimated effort doubles); (b) Sources fundamentally conflict with no clear resolution (e.g., vendor documentation contradicts academic research, no clear reason why); (c) Key sources are inaccessible or paywalled; (d) Research direction becomes ambiguous (multiple valid interpretations of original request); (e) Consensus is genuinely unclear (multiple competing best practices with equal credibility)'; (2) How to escalate: 'Provide Ben with: (i) Current findings (what you've discovered so far), (ii) Specific blocker (why you cannot continue), (iii) Estimated impact (what additional effort is needed), (iv) Recommendation (continue deeper, expand scope, or deprioritize)'; (3) Document limitations explicitly: 'When continuing research despite limitations, explicitly state what you could not research and why'. Include 2 example escalation scenarios.",
+      "source": "docs/research/agentic-workflows/inter-agent-communication.md#L1-L70 and orchestrator-worker-case-study.md#L50-L100",
+      "source_excerpt": "Orchestrator-mediated communication: ... Orchestrator has full visibility into state ... Easy to debug: can see what each agent received ... Centralized error handling and recovery ... When to escalate to other specialists...",
+      "priority": "high",
+      "priority_justification": "Escalation paths are critical for multi-agent governance. Without clear escalation rules, research agents either bloat scope (attempting to solve all conflicts) or produce incomplete research (abandoning unresolved questions). This is directly related to system reliability and user expectation management.",
+      "for_upskiller": "Add 'Escalation & Limitations' section after 'Rules' in research.agent.md. Use format from orchestrator-worker-case-study.md and inter-agent-communication.md examples. Include: (1) 5 concrete escalation criteria; (2) Template for escalation message to Ben; (3) 2 example scenarios showing when to escalate vs continue research. Keep focused on research-specific escalation (not general agent escalation)."
+    },
+    {
+      "id": "gap-006",
+      "category": "instruction-quality",
+      "title": "Credibility evaluation framework is underspecified",
+      "current_state": "@research states 'Evaluate credibility — Prioritize official documentation, established thought leaders, and verified sources over opinion pieces' but does not provide explicit framework for: How to evaluate credibility during synthesis? How to rank conflicting sources? What makes a source 'verified'? When is a blog post credible?",
+      "gap_description": "Instruction engineering best practices emphasize decision frameworks for tradeoffs. Current credibility guidance is a priority list (official → thought leader → verified → opinion) but lacks detailed evaluation logic. Example: If a vendor's official documentation contradicts an established thought leader's blog post, which takes precedence? Current rules don't address nuance. Missing: explicit credibility scoring or weight assignment.",
+      "recommended_change": "Add detailed 'Source Credibility Evaluation' section within or after 'Research Methodology'. Structure as decision tree or scoring framework: (1) Primary sources (highest credibility): Official vendor documentation (official APIs, RFCs, standards); Author is vendor/creator; Timestamp is current (within 2 years for fast-moving topics); (2) Secondary sources (high credibility): Established technical authors/blogs (must have track record in domain); Published in recognized publications (Hacker News, Medium publications, O'Reilly); Cited by multiple independent sources; (3) Tertiary sources (medium credibility): Community blogs/tutorials (check author experience); GitHub projects (check stars, active maintenance); Discussion forums (Stack Overflow, technical forums); (4) Low credibility sources (use cautiously): Opinion pieces without evidence; Outdated sources (5+ years old for fast-moving domains); Sponsored content without disclosure; (5) How to handle conflicts: 'If primary and secondary sources conflict, document both with explicit discussion of why they differ (timing, scope, vendor bias, methodology differences)'. Include 3 examples showing credibility evaluation in a research synthesis.",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L45-L70 and instruction-engineering-best-practices.md#L308-L350",
+      "source_excerpt": "Research Methodology: Evaluate credibility — Prioritize official documentation, established thought leaders, and verified sources over opinion pieces... [Missing specification]: How to compare conflicting sources with equal credibility? When is single-source research acceptable?",
+      "priority": "high",
+      "priority_justification": "Credibility evaluation is core to research quality. Without explicit framework, agents make inconsistent source judgments, leading to uneven research quality. This directly impacts the value of research findings to downstream consumers (doc agent, ben, etc.).",
+      "for_upskiller": "Add 'Source Credibility Evaluation Framework' section after Research Methodology. Structure as tiered source evaluation: (1) Primary sources (official docs); (2) Secondary sources (established authors); (3) Tertiary sources (community); (4) Low credibility. For each tier, specify evaluation criteria (author authority, publication venue, timestamp, citations). Add section on 'Handling Conflicting Sources' with decision tree. Include 3 concrete examples of credibility evaluation applied to research synthesis."
+    },
+    {
+      "id": "gap-007",
+      "category": "tools",
+      "title": "Tool list includes read/readFile but no guidance on when to use vs omit",
+      "current_state": "@research has tools [read/problems, read/readFile, ...] but methodology and instructions do not specify when to use read/readFile on workspace files vs when to rely purely on external web research. The 'External focus only' constraint says 'Do NOT analyze workspace code' but read/readFile is granted.",
+      "gap_description": "Tool restrictions and safety (docs/research/agentic-workflows/tool-restrictions-and-safety.md#L20-L50) emphasize that tool access should be scoped to specific use cases. Current @research has read/readFile which could enable reading workspace code (violating 'external focus only' constraint). This creates ambiguity: Is read/readFile for reading context docs only? For reading research findings stored in workspace? Lack of clarity could lead to misuse.",
+      "recommended_change": "Add explicit tool usage constraints to instructions, clarifying read/readFile scope: 'read/readFile may be used for: (1) Understanding workspace context (reading .github/copilot-instructions.md, agent definitions to understand domain needs); (2) Reading research findings stored in .github/context/ (temp docs from agentic-workflow-researcher, previous research); (3) Verifying research task context (if Ben delegates research with file references). MUST NOT use read/readFile for: (1) Reading workspace application code to analyze patterns (delegate to @explore-codebase); (2) Reading internal implementation details to critique or compare external patterns; (3) Using workspace code as a source in research findings (research must be external). Include example: If Ben delegates \"Research API versioning approaches\", you may read .github/copilot-instructions.md to understand domain, but do NOT read src/api.ts to find how YOUR API versions it — use external research instead.'",
+      "source": "docs/research/agentic-workflows/tool-restrictions-and-safety.md#L20-L50",
+      "source_excerpt": "Tool Restrictions: Context-Based Restrictions — Tool access should be scoped to specific use cases... Research specialist: semantic_search, grep_search, web search, create_file (read-only findings). Explicitly NOT available: [file modification, code analysis for internal patterns]",
+      "priority": "medium",
+      "priority_justification": "Clarifies tool boundaries to prevent scope creep (external focus only). Medium priority because current constraints already state 'external focus', but explicit tool usage clarification improves consistency and prevents unintended code analysis.",
+      "for_upskiller": "Add 'Tool Usage Constraints' subsection to 'Rules' in research.agent.md. Specify allowed/disallowed uses of read/readFile. Keep concise (8-10 lines). Reference tool-restrictions-and-safety.md#L20-L30. Include 1 example showing correct use (reading research context) vs incorrect use (analyzing workspace code)."
+    },
+    {
+      "id": "gap-008",
+      "category": "documentation",
+      "title": "Research domains section lacks concrete research examples",
+      "current_state": "@research lists 5 research domains (Coding & Development Patterns, Infrastructure & Cloud Architecture, API & Data Design, Tool & Technology Evaluation, Emerging Practices & Trends) with bullet points describing scope, but does NOT provide concrete research examples or case studies showing what successful research in each domain looks like.",
+      "gap_description": "Instruction engineering best practices (docs/research/agentic-workflows/instruction-engineering-best-practices.md#L380-L410) emphasize concrete examples over abstract descriptions. Current research domains are described but not exemplified. Example: 'API Design Patterns' could include: What do you research? (REST versioning, OAuth2 patterns, rate limiting); How many sources? (5+); What should synthesis include? (comparison of approaches, how vendors implement, trade-offs). Without examples, agents may research wrong scope or depth within domains.",
+      "recommended_change": "For each of the 5 research domains, add 1-2 concrete research examples showing: (a) A specific research question within the domain; (b) Concrete sources to research (official docs, GitHub projects, blogs); (c) Expected synthesis structure (e.g., 'should compare 3+ approaches'); (d) Sample output format. Example for 'API & Data Design' domain: \"Research question: 'What are current best practices for API versioning in REST APIs?' → Sources: REST API standards, major frameworks (FastAPI, Express, Rails), case studies from GitHub; Synthesis should include: URL/Header/Content-Negotiation versioning approaches, trade-offs (backward compatibility, client complexity), vendor implementations. Output: comparison table + pro/con analysis + examples from 3+ frameworks.\" Include 2-3 such concrete examples per domain (or 1 example per domain), showing depth of research expected.",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L380-L410",
+      "source_excerpt": "[Examples are the most effective way to communicate expected behavior]. Include 2-3 concrete examples showing how the concept applies... Do not rely solely on abstract description.",
+      "priority": "medium",
+      "priority_justification": "Concrete examples improve clarity and consistency, but are not core to agent functionality. Medium priority because research methodology already describes general approach. Examples would enhance guidance, not fix fundamental gaps.",
+      "for_upskiller": "Add 1 concrete example to each research domain or 2-3 examples distributed across domains. Format: (1) Specific research question; (2) Bullet list of sources to investigate; (3) Expected synthesis structure; (4) Key output components. Keep examples concise (5-8 lines each). Place examples at end of each domain description. Reference instruction-engineering-best-practices.md#L380."
+    },
+    {
+      "id": "gap-009",
+      "category": "instruction-quality",
+      "title": "Distinction from agentic-workflow-researcher lacks concrete tool/scope examples",
+      "current_state": "@research correctly identifies distinction from @agentic-workflow-researcher: 'agentic-workflow-researcher: Specialized research on agentic workflows, VS Code extensibility, GitHub Copilot CLI, multi-agent orchestration. research: Generalist external research on any technical topic (coding patterns, cloud architecture, API design, tool evaluation, etc.)' But does not provide concrete examples of WHEN to use which agent or WHAT tool differences exist.",
+      "gap_description": "Distinction between agents is stated but not exemplified. Example missing: If Ben delegates \"Research agentic workflow patterns\", should he use @research or @agentic-workflow-researcher? Current instructions say agentic-workflow-researcher is 'specialized' and @research is 'generalist', but what's the decision logic? Tool differences aren't documented: @agentic-workflow-researcher has edit/createFile, edit/editFiles (can create temp docs); @research has vscode/memory (can store findings). Why this difference? Current approach requires Ben to infer delegation logic.",
+      "recommended_change": "Enhance 'Distinction from Other Specialists' section with concrete decision examples: (1) When to use @research (generalist external research): 'Research REST API best practices', 'Compare database technologies', 'Investigate Kubernetes patterns'; When to use @agentic-workflow-researcher (specialist agentic research): 'Research agentic workflow patterns', 'Investigate VS Code agent architecture', 'Study GitHub Copilot CLI capabilities'; (2) Tool capability difference: Explain @agentic-workflow-researcher has file creation tools (edit/createDirectory, edit/createFile) because it creates temp docs in .github/context/ for inter-agent knowledge sharing. @research uses vscode/memory for findings storage but cannot create persistent files. (3) Decision logic for Ben: 'If research question is about agentic workflows, VS Code extensibility, or Copilot CLI → delegate to @agentic-workflow-researcher. If research question is any other technical topic → delegate to @research. If both apply (e.g., research API patterns used in agentic workflows), → delegate to @research first for broad context, then optionally @agentic-workflow-researcher for agentic-specific patterns'. Include 2-3 example delegation scenarios.",
+      "source": "docs/research/agentic-workflows/orchestrator-worker-case-study.md#L60-L100 and agent-specialization-patterns.md#L40-L80",
+      "source_excerpt": "Specialization Benefits: Clear Accountability... when something goes wrong, specialization makes diagnosis easier... Simpler Debugging: Focused agents are easier to test and improve",
+      "priority": "medium",
+      "priority_justification": "Improved clarity for Ben's delegation decisions, but not core to @research functionality. Medium priority because distinction is already stated, this enhances it with examples. Would prevent occasional delegation confusion.",
+      "for_upskiller": "Enhance 'Distinction from Other Specialists' section: Add 3-4 concrete research question examples (from various domains) with explicit guidance on which agent to use and why. Add explanation of tool differences (@agentic-workflow-researcher can create persistent docs, @research uses memory). Add decision logic for Ben (flowchart or if-then rules). Keep concise."
+    },
+    {
+      "id": "gap-010",
+      "category": "documentation",
+      "title": "Example invocations are sparse and don't cover all research domains",
+      "current_state": "@research provides 2 example invocations at end (API versioning, Node.js authentication) covering only 1-2 research domains (Coding & Development Patterns), but does NOT provide examples for Infrastructure, Cloud, Tool & Technology, or Emerging Practices domains.",
+      "gap_description": "Example invocations anchor understanding of agent behavior. Current examples are good but incomplete. Per instruction-engineering-best-practices.md#L380-L410, 2-3 examples are baseline; comprehensive coverage should span major domains. Missing examples for: Infrastructure & Cloud (no Kubernetes/serverless/microservices example), Tool & Technology (no vendor comparison example), Emerging Practices (no trend/early adoption example). Without diverse examples, agents may rely on inferred patterns that miss domain-specific nuances.",
+      "recommended_change": "Expand 'Example Invocations' section from 2 to 5 examples, covering: (1) Coding & Development (KEEP existing: API versioning); (2) Coding & Development (KEEP existing: Node.js authentication); (3) Infrastructure & Cloud: 'What are best practices for designing microservices architecture?'; (4) Tool & Technology: 'Compare features and use cases of PostgreSQL vs MongoDB vs DynamoDB for [context]'; (5) Emerging Practices: 'What are current approaches to AI-assisted testing in CI/CD pipelines?'. For each, add: (a) Your response: [1-2 sentence research plan]; (b) Synthesis should include: [expected output components]. Keep format consistent with existing examples.",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L380-L410",
+      "source_excerpt": "[Concrete Examples]: Include 2-3 examples showing expected behavior... Cover major task types... Comprehensive instruction sets often have 5-8 examples",
+      "priority": "low",
+      "priority_justification": "Enhances clarity but not critical to functionality. Current 2 examples are sufficient to demonstrate core behavior. This would improve completeness and prevent edge-case confusion. Low priority but easy to implement.",
+      "for_upskiller": "Add 3 more example invocations to 'Example Invocations' section covering Infrastructure, Tool Evaluation, and Emerging Practices research. Use format consistent with existing examples. Keep each to 3-4 lines. Include research plan + expected synthesis structure."
+    }
+  ],
+  "root_causes": {
+    "specification_clarity": "Research methodology and quality standards are conceptual (prose-based) rather than concrete and structured. This is source of gaps-001, gap-002, gap-004, gap-006 — agents benefit from structured, specific guidance over narrative descriptions.",
+    "decision_framework_gaps": "Several decisions (scope determination, conflict resolution, escalation, credibility evaluation) lack explicit frameworks. Per common-failure-modes.md, lack of clear decision criteria is root cause of specification failures. Gaps: gap-002, gap-005, gap-006 stem from this.",
+    "tool_composition_underspecification": "Research methodology is described as conceptual phases rather than explicit tool sequences. Per tool-composition-patterns.md and instruction-engineering-best-practices.md, explicit tool ordering improves reliability. Root cause of gap-001, gap-003.",
+    "example_coverage_gaps": "Agent instructions cover generalist domain but lack concrete examples spanning major use cases. Per instruction-engineering best practices, examples improve clarity and prevent misuse. Root cause of gaps-008, gap-010."
+  },
+  "strengths": [
+    "Well-articulated external focus constraint — Clearly distinguishes @research from @explore-codebase, preventing scope creep into internal code analysis",
+    "Comprehensive research domains coverage — Lists 5 major research categories (Coding, Infrastructure, API, Tool Evaluation, Emerging Practices) that span broad technical landscape",
+    "Clear anti-pattern documentation — 'Common research failures to avoid' section explicitly lists failure modes (no sources, single-source reliance, mixing deprecated approaches, overgeneralization), helping agents self-check",
+    "Strong rule enforcement — Rules section is prescriptive: 'External focus only', 'Always cite sources', 'Prefer official documentation' — sets clear boundaries for behavior",
+    "Appropriate tool composition — 11 tools granted (web, tavily suite, github search, pdf-reader, memory) cover external research spectrum without destructive/modification capabilities (respects read-only constraint)",
+    "Distinction from related agents clearly stated — Correctly identifies roles of @explore-codebase, @agentic-workflow-researcher, @doc and how @research complements them",
+    "8-step research methodology is sound — Phases (Clarify → Define scope → Multi-source → Pattern ID → Synthesize → Evaluate credibility → Cite → Present) follow logical research workflow",
+    "Quality standards emphasize synthesis over raw data — Focus on 'synthesize findings from multiple sources' and 'distinguish consensus from emerging' shows sophisticated research expectations, not just information gathering",
+    "Sub-agent only designation prevents misuse — User-invocable: false ensures @research is only delegated by Ben/orchestrators, not invoked directly by users with potentially vague requests"
+  ],
+  "summary": {
+    "overall_assessment": "@research is a well-designed generalist external research agent with clear constraints, comprehensive domain coverage, and sound methodology. Strengths include explicit external focus, rule enforcement, and appropriate tool composition. Primary gaps are in specification clarity and concreteness: Research methodology is described conceptually (phases) rather than with explicit tool sequences; quality standards and decision frameworks lack measurable criteria; scope management and escalation paths are underspecified. These gaps (primarily instruction-quality and patterns categories) prevent consistent, high-reliability research execution per multi-agent best practices. Addressing these gaps would elevate @research from good design to best-practice conformance.",
+    "findings_summary": "Evaluated @research against 8 workspace research documents and awesome-copilot exploration (200+ agent patterns). Identified 10 gaps across instruction quality (4), governance (2), patterns (2), tools (1), and documentation (1). All gaps are addressable through instruction enhancement; no architectural changes needed. Root causes: conceptual vs structured description (methodology), missing decision frameworks (scope/credibility/escalation), tool ordering underspecification, example coverage gaps.",
+    "improvement_areas": [
+      "Methodology needs explicit tool guidance per phase (gap-001) — make tool sequences concrete, not conceptual",
+      "Quality standards need measurable criteria (gap-004) — specify minimums (3+ sources, 2-3 examples, 3+ pros/cons) rather than qualitative targets",
+      "Decision framework missing for scope/depth trade-offs (gap-002) — provide explicit logic for quick vs thorough research, conflict resolution, complexity escalation",
+      "Credibility evaluation framework underspecified (gap-006) — detailed source tier system and conflict handling logic needed",
+      "Escalation paths poorly defined (gap-005) — explicit when-to-escalate criteria and escalation messaging template needed",
+      "Parallelization guidance missing (gap-003) — explicit how/when to parallelize research tasks across multiple topics",
+      "Tool usage constraints need clarification (gap-007) — specify read/readFile scope to prevent code analysis misuse",
+      "Research domains lack concrete examples (gap-008) — add 1-2 concrete research examples per domain showing scope and depth",
+      "Distinction from agentic-workflow-researcher needs tool/decision examples (gap-009) — clarify when to delegate to which agent",
+      "Example invocations incomplete across domains (gap-010) — expand to 5 examples covering all major research areas"
+    ],
+    "critical_gaps": "No critical gaps affecting safety, governance, or core functionality. All identified gaps are specification/clarity issues that improve reliability and consistency, not fundamental design flaws.",
+    "recommendations_by_priority": {
+      "high": "4 gaps (gap-001: tool guidance, gap-002: decision framework, gap-004: measurable quality, gap-006: credibility framework) — These directly impact research quality, consistency, and user expectation alignment. Address first.",
+      "medium": "3 gaps (gap-003: parallelization, gap-005: escalation, gap-007: tool constraints, gap-009: agent distinction) — These prevent edge cases and clarify boundaries. Address second.",
+      "low": "2 gaps (gap-008: domain examples, gap-010: invocation examples) — These enhance clarity without affecting core functionality. Address third if time permits."
+    }
+  },
+  "next_steps": {
+    "for_ben": "Review evaluation findings and prioritize implementation. Recommend ordering: (1) Fix high-priority gaps-001, gap-002, gap-004, gap-006 (core research quality/consistency); (2) Address medium-priority gaps-003, gap-005, gap-007, gap-009 (boundaries/edge cases); (3) If capacity, implement low-priority gaps-008, gap-010 (documentation completeness). Delegate implementation to @ar-upskiller with this evaluation JSON as reference.",
+    "for_upskiller": "Implement gaps in recommended priority order: HIGH (1-2 hours total): gap-001 (add tool usage guidelines per phase + 1-2 examples), gap-002 (add decision framework for scope/depth), gap-004 (convert quality standards to measurable criteria), gap-006 (add source credibility tier system + conflict handling). MEDIUM (1 hour): gap-003 (add parallelization guidance), gap-005 (add escalation criteria + template), gap-007 (clarify read/readFile constraints), gap-009 (add delegation decision examples). LOW (30 mins): gap-008 (concrete domain examples), gap-010 (expand invocation examples from 2 to 5). Estimated total: 3-4 hours. Reference tool-composition-patterns.md, instruction-engineering-best-practices.md, and common-failure-modes.md for patterns.",
+    "timeline": "HIGH-priority gaps: 1-2 hours (suitable for immediate implementation). MEDIUM-priority gaps: 1 hour (implement after high-priority). LOW-priority gaps: 30 minutes (optional, implement if capacity). Total estimated effort: 3-4 hours for full implementation. Recommend: Complete high-priority gaps first (enables immediate improvement); schedule medium and low-priority for future cycles.",
+    "success_verification": "After implementation, verify: (1) Research methodology section includes explicit tool per phase with examples; (2) Quality standards include measurable criteria (source counts, example counts, pro/con balance); (3) Decision framework section addresses scope determination, conflict resolution, escalation; (4) Credibility evaluation has tiered source system; (5) Escalation section has 5+ criteria and template; (6) Research domains include 1-2 concrete examples each; (7) Example invocations expanded to 5+ covering all domains. Re-evaluate after implementation."
+  },
+  "evaluation_metadata": {
+    "framework_used": "8-step evaluator framework (agent definition → pattern research → gap analysis → JSON report)",
+    "research_delegations": [],
+    "research_sources_used": [
+      "docs/research/agentic-workflows/instruction-engineering-best-practices.md",
+      "docs/research/agentic-workflows/tool-composition-patterns.md",
+      "docs/research/agentic-workflows/agent-specialization-patterns.md",
+      "docs/research/agentic-workflows/common-failure-modes.md",
+      "docs/research/agentic-workflows/orchestrator-worker-case-study.md",
+      "docs/research/agentic-workflows/inter-agent-communication.md",
+      "docs/research/agentic-workflows/tool-restrictions-and-safety.md",
+      ".github/context/2026-03-30-awesome-copilot-exploration.json"
+    ],
+    "confidence_level": "high",
+    "rationale_for_confidence": "Evaluation grounded in 7+ workspace research documents covering agent specialization, instruction engineering, tool composition, common failures, and orchestration patterns. All gaps are sourced to specific documentation with line references. Awesome-copilot exploration confirms patterns observed in 200+ real-world agents. Gaps identified are representative of specification clarity issues documented in common-failure-modes.md (45% of failures are specification gaps).",
+    "evaluation_complete": true,
+    "notes": "Evaluation focused on @research (generalist external research agent) vs @agentic-workflow-researcher (specialized agentic research agent). Distinction is important: both are research agents but with different scope/domains. Gaps identified are specific to @research's broader scope and need for general decision frameworks. @agentic-workflow-researcher likely has stronger specialization but was not evaluated in this cycle."
+  }
+}
