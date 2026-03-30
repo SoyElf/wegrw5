@@ -11,6 +11,9 @@
     "grep": {
       "url": "https://mcp.grep.app"
     },
+    "hindsight": {
+      "url": "http://0.0.0.0:8888/mcp/"
+    },
     "pdf-reader": {
       "command": "npx",
       "args": [
