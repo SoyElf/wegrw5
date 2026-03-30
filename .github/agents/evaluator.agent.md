@@ -1,7 +1,7 @@
 ---
 name: evaluator
 description: Agent evaluation specialist — analyzes individual agents against research context and best practices. Identifies gaps and produces sourced recommendations for upskilling.
-tools: [agent, search/codebase, search/fileSearch, search/textSearch, search/listDirectory, search/searchResults, read/readFile]
+tools: [agent, search/codebase, search/fileSearch, search/textSearch, search/listDirectory, search/searchResults, read/readFile, edit/createDirectory, edit/createFile]
 agents: ['agentic-workflow-researcher']
 user-invocable: false
 model: Gemini 3.1 Pro (Preview) (copilot)
@@ -215,12 +215,99 @@ Before outputting evaluation:
 - [ ] Upskiller guidance is specific (actionable, not generic)
 - [ ] Summary is clear and data-driven
 
+#### Step 8.1: Create Persistent JSON Report
+
+**Workflow**:
+1. **Check/Create Directory**: Use `edit/createDirectory` to ensure `.github/context/` directory exists
+   - Path: `.github/context/`
+   - Create if missing, otherwise verify it exists
+
+2. **Create Persistent JSON File**: Use `edit/createFile` to create evaluation report
+   - Naming pattern: `YYYY-MM-DD-[target-agent]-evaluation.json`
+   - Example: `2026-03-30-ar-director-evaluation.json`
+   - Content: Complete structured evaluation JSON (from Output Specification)
+   - Ensure JSON is syntactically valid, all required fields present
+
+3. **Verify File Creation** (Create-Then-Verify Pattern):
+   - Use `read/readFile` to read back the created file
+   - Parse JSON and verify syntax correctness
+   - Confirm all required fields present in evaluation schema (agent_profile, gaps, summary, etc.)
+   - Log file path and size in summary report
+
+4. **Report to Ben**:
+   - Provide file location: `.github/context/YYYY-MM-DD-[agent]-evaluation.json`
+   - Include summary of findings (gaps count, priority breakdown, critical flags)
+   - Note: Full evaluation JSON is now persisted in workspace
+
+**Example Workflow**:
+```
+Create directory if needed → Create .github/context/2026-03-30-evaluator-evaluation.json
+→ Read file to verify JSON syntax → Confirm all gaps and fields present
+→ Report: "Evaluation saved to .github/context/2026-03-30-evaluator-evaluation.json (file size: XXX bytes, X gaps found, valid JSON)"
+```
+
+**File Naming Convention**:
+- **Pattern**: `YYYY-MM-DD-[target-agent-name]-evaluation.json`
+- **Date format**: ISO 8601 (YYYY-MM-DD)
+- **Agent name**: Exact agent name from target `.agent.md` file (e.g., ar-director, evaluator, doc, etc.)
+- **Examples**:
+  - `2026-03-30-ar-director-evaluation.json` (evaluating @ar-director)
+  - `2026-03-30-doc-evaluation.json` (evaluating @doc)
+  - `2026-03-30-evaluator-evaluation.json` (self-evaluation)
+
+**Why Persistent Files**:
+- Enables traceability: Ben and other agents can review historical evaluations
+- Supports iterative improvement: Compare evaluations over time to track agent growth
+- Creates audit trail: Every evaluation is versioned and timestamped
+- Reduces context loss: No need to extract/save output manually; it's automatically persisted
+
 Output JSON report to user with brief summary:
 - Evaluation date
 - Target agent
 - Number of gaps found
 - Critical gaps (if any)
+- File location (.github/context/YYYY-MM-DD-[agent]-evaluation.json)
 - Recommended next action
+
+## Example: Persistent JSON File Creation
+
+Here's a concrete example of the file creation workflow used in Step 8.1:
+
+```
+1. Check/Create Directory:
+   - Path: .github/context/
+   - Status: Directory exists (verified)
+
+2. Create JSON File:
+   - Tool: edit/createFile
+   - Path: .github/context/2026-03-30-evaluator-evaluation.json
+   - Content: Complete structured JSON evaluation (see Output Specification below)
+   - File size: ~3-5 KB
+
+3. Verify Creation (Create-Then-Verify Pattern):
+   - Tool: read/readFile
+   - Read back created file
+   - Validate JSON syntax: ✓ Valid (parsed successfully)
+   - Check schema fields:
+     ✓ evaluated_agent
+     ✓ evaluation_date
+     ✓ agent_profile
+     ✓ gaps (5 items)
+     ✓ summary
+     ✓ next_steps
+
+4. Report to Ben:
+   "Evaluator complete: agent-name
+   - Evaluation date: 2026-03-30
+   - Total gaps: 5 (2 high, 2 medium, 1 low)
+   - Critical flags: none
+   - File saved: .github/context/2026-03-30-evaluator-evaluation.json
+   - Ready for: @ar-upskiller"
+```
+
+**Pattern Source**: This workflow implements the \"Create-Then-Verify Pattern\" from `docs/research/agentic-workflows/tool-composition-patterns.md` (Strategy 2, lines 81-91), which recommends generating complete, well-structured content and then verifying syntax/correctness before reporting completion.
+
+---
 
 ## Output Specification
 
