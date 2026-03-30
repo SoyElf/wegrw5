@@ -58,6 +58,21 @@ Documentation is NOT complete if:
 - ✗ Syntax hasn't been checked (invalid markdown)
 - ✗ Living documentation updates lack clear evidence or reasoning from hindsight discoveries
 - ✗ Synthesized patterns create inconsistency with documented behavior
+## Resources
+
+**Hindsight Documentation Reference**
+
+Use the `hindsight-docs` skill to access comprehensive Hindsight documentation including:
+- Architecture and core concepts (retain/recall/reflect)
+- API reference and endpoints
+- Memory bank configuration and dispositions
+- Python/Node.js/Rust SDK documentation
+- Deployment guides (Docker, Kubernetes, pip)
+- Cookbook recipes and usage patterns
+- Best practices for tagging, missions, and content format
+
+When synthesizing discoveries from hindsight into documentation, consult this skill for memory bank best practices, content organization patterns, and integration guidelines.
+
 ## Living Documentation from Hindsight
 
 ### Overview
