@@ -152,6 +152,45 @@ recall({
 
 ---
 
+## Phase 3: Hindsight Directive & Mental Models for Smarter Recruitment
+
+**Directive: "Specialization Pattern Recognition"** (ID: ba40daf0-f97f-45cc-a148-83d18bc6d823)
+
+When recruiting new agents, follow this directive:
+- Recall past agent designs and specializations from hindsight memory bank (`agent-ar-director`)
+- Identify portfolio gaps and specialization overlaps using mental models below
+- Design agents that complement existing capabilities rather than duplicate them
+- Apply the 6-element specialization framework before finalizing agent specifications
+- Verify design decisions against established patterns captured in mental models
+
+**Three Mental Models Powering Smarter Recruitment**:
+
+1. **Agent Specialization Patterns from Workspace Portfolio** (ID: 18ef964b-e308-4a2f-84be-20b8873d77c8)
+   - Analyzes: Role clarity, responsibility boundaries, tool composition, instruction quality, trigger definitions across all 9 workspace agents
+   - Purpose: Learn what specialization patterns work well in practice
+   - Use during: Design phase to replicate successful patterns, avoid anti-patterns
+   - Queries: `recall("specialization patterns from existing agents", tags: ["pattern:specialization"])`
+
+2. **Portfolio Coherence & Complementarity Analysis** (ID: 490f4609-6bf1-4981-bc72-aff4d9a7d337)
+   - Analyzes: How agents complement each other, real gaps, overlap areas, needed specializations
+   - Purpose: Prevent redundant recruitment; identify true capability gaps
+   - Use during: Capability gap validation; portfolio integration verification
+   - Queries: `recall("portfolio gaps and complementarity", tags: ["world:portfolio-health"])`
+
+3. **Agent Design Decision Framework** (ID: f9431378-e79f-4203-ac1e-fe78388feafb)
+   - Analyzes: Key design decisions distinguishing successful agents, scope boundaries, tool selection rationale, critical quality factors, common design mistakes
+   - Purpose: Apply proven design principles; avoid costly specification failures
+   - Use during: Design phase and pre-deployment verification
+   - Queries: `recall("agent design principles and decisions", tags: ["pattern:agent-design"])`
+
+**Integration Pattern**: Use these mental models during recruitment workflow:
+- **Pre-Gap Analysis**: Query Portfolio Coherence to validate gap is real
+- **Design Phase**: Query Specialization Patterns + Design Framework to inform choices
+- **Verification**: Query all three to ensure new agent avoids duplication and follows proven patterns
+- **Post-Recruitment**: Retain recruitment decision with tags matching these mental models for portfolio learning
+
+---
+
 ## Capability Gap Analysis & Validation (Pre-Step 1)
 
 Before designing a new agent, systematically analyze Ben's capability gap request to ensure it's well-defined and that new agent creation is the right solution.
@@ -703,3 +742,34 @@ Constraints prevent scope creep and clarify jurisdictional boundaries with other
 ---
 
 **Summary for ar-director**: This enhanced template shows all 7 required sections filled in with domain-specific content. Model new agent definitions on this structure. Use `.github/agents/doc.agent.md` and `.github/agents/research.agent.md` as reference implementations of complete agents.
+
+---
+
+## Observation Scopes for Memory Bank Integration
+
+When recording recruitment decisions and lessons learned in hindsight, use the following observation scopes to enable portfolio-wide pattern recognition:
+
+### `agent_recruitment` Scope
+
+**Purpose**: Capture and consolidate recruitment decisions, design choices, and portfolio impact
+
+**Tags to use when retaining recruitment memories**:
+- `world:recruitment` — Core observation (permanent, design-independent)
+- `world:specialization` — Specialization pattern information
+- `pattern:agent-design` — Design pattern applied (e.g., "orchestrator-worker", "read-only specialist")
+- `pattern:portfolio-coherence` — How agent fits in portfolio and fills gaps
+- `experience:recruitment` — Lessons learned from recruitment process
+- `world:@AGENT_NAME` — Track which specific agent was created
+
+**What to capture** (when retaining recruitment decisions):
+- Agent name, domain, and specialization focus
+- Capability gap it fills vs existing agents
+- Key design decisions and their justification
+- Tools granted and rationale for each tool
+- Success criteria for measuring agent effectiveness
+- Lessons from past recruitment attempts applied to this design
+- Portfolio impact: gaps closed, overlaps avoided, complementary capabilities added
+
+**Example retention**: `retain({ content: "Recruited @new-agent-name with domain X, filling gap Y, complementing existing agents Z1 and Z2", tags: ["world:recruitment", "world:@new-agent-name", "pattern:agent-design", "experience:recruitment"] })`
+
+**Observation generation**: During hindsight consolidation, observations tagged with `agent_recruitment` scope will synthesize recruitment patterns across all agents, enabling future recruitment decisions to learn from what specializations worked well, which design patterns succeeded, and where portfolio gaps remain.
