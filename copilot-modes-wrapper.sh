@@ -208,11 +208,13 @@ c-ask() {
   # Execute copilot in ask mode
   if [[ -n "$input_text" ]]; then
     echo "$input_text" | COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       --deny-tool 'shell' \
       --deny-tool 'write' \
       2>/dev/null
   else
     COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       --deny-tool 'shell' \
       --deny-tool 'write' \
       2>/dev/null
@@ -284,11 +286,13 @@ c-plan() {
   # Execute copilot in plan mode
   if [[ -n "$input_text" ]]; then
     echo "$input_text" | COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       --deny-tool 'shell' \
       --deny-tool 'write' \
       2>/dev/null
   else
     COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       --deny-tool 'shell' \
       --deny-tool 'write' \
       2>/dev/null
@@ -377,11 +381,13 @@ c-edit() {
   # Execute copilot in edit mode with scope
   if [[ -n "$input_text" ]]; then
     echo "$input_text" | COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       --deny-tool 'shell' \
       --scope "$scope" \
       2>/dev/null
   else
     COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       --deny-tool 'shell' \
       --scope "$scope" \
       2>/dev/null
@@ -471,10 +477,12 @@ c-agent() {
   # Execute copilot in agent mode with deny-list
   if [[ -n "$input_text" ]]; then
     echo "$input_text" | COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       $deny_flags \
       2>/dev/null
   else
     COPILOT_MODEL="$model" copilot \
+      -p "$prompt" \
       $deny_flags \
       2>/dev/null
   fi
