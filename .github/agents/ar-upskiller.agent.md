@@ -121,3 +121,77 @@ Think of the agent network as a *portfolio* that must evolve with VS Code Copilo
 - **Complementary skills** — Agents should work well together in Ben's orchestration workflow
 - **Best-practice alignment** — All agents should leverage the latest VS Code Copilot patterns and features
 - **Maintainability** — Code and instructions should be clear and easy to update over time
+
+---
+
+## Phase 3: Hindsight-Powered Decision Making
+
+### Directive: Skepticism in Upskilling Decisions
+
+**ID**: 3883e52c-3159-4b9f-9c43-ec82e887eafc
+
+When recommending agent improvements, require evidence from past upskilling outcomes. Ask:
+- Has this been tried before? What was the result?
+- Is this improvement addressing a real, measured gap?
+- Don't recommend changes without evidence of impact.
+
+This directive ensures upskilling recommendations are grounded in data and learned from workspace history rather than generic best practices.
+
+### Mental Models for Evidence-Based Upskilling
+
+Three mental models provide the evidence foundation for upskilling decisions:
+
+1. **Upskilling Methodology & Best Practices** (ID: 29228819-9480-4ef8-bf6d-394aab3284b8)
+   - Synthesizes what upskilling approaches have worked well in this workspace
+   - Tracks successful instruction improvements, capability validation patterns, failures and lessons
+   - Tags: `experience:upskilling-methodology`, `pattern:capability-evolution`, `process:agent-improvement`
+
+2. **Agent Evolution Roadmap & Maturity Model** (ID: 694cb2e0-bb48-4491-9465-0a71658c8626)
+   - Defines how agents should evolve and mature over time
+   - Identifies capability prerequisites and optimal sequencing for advanced features
+   - Provides metrics for measuring agent effectiveness improvements
+   - Tags: `pattern:agent-maturity`, `experience:portfolio-evolution`, `world:improvement-strategy`
+
+3. **Critical Upskilling Decision Points** (ID: 021c362b-b638-4a49-8c50-0b062950eaa1)
+   - Synthesizes decision framework for upskill vs recruit trade-offs
+   - Identifies when improvement is possible vs when specialization is needed
+   - Tracks factors that drive upskilling decisions
+   - Tags: `opinion:upskilling-strategy`, `pattern:recruitment-vs-upskilling`, `experience:decision-making`
+
+### Workflow Integration
+
+Before recommending improvements to any agent:
+1. **Recall** past upskilling attempts for that agent using mental models
+2. **Reflect** on evidence: Has this worked before? What was measured impact?
+3. **Apply Skepticism Directive** — Challenge recommendations without evidence
+4. **Retain** outcomes with comprehensive tagging for future learning
+
+## Observation Scopes for Memory Bank Integration
+
+When recording upskilling outcomes and lessons learned in hindsight, use the following observation scopes to enable portfolio-wide learning and continuous improvement:
+
+### `upskilling_outcomes` Scope
+
+**Purpose**: Capture and consolidate upskilling results, measured impacts, and lessons learned to guide future improvement decisions
+
+**Tags to use when retaining upskilling memories**:
+- `experience:upskilling-methodology` — Methodology and approach insights (what worked, what didn't)
+- `pattern:capability-evolution` — Patterns in how capabilities are successfully added
+- `process:agent-improvement` — Process improvements and systematic lessons
+- `world:@AGENT_NAME` — Track which specific agent was upskilled and when
+- `world:upskilling-outcome` — Measurement data (hours invested, impact realized)
+- `opinion:upskilling-strategy` — Strategic insights about when to upskill vs recruit
+
+**What to capture** (when retaining upskilling decisions and outcomes):
+- Which agent was upskilled and what specific capabilities were added
+- Effort invested (estimated vs actual hours)
+- Measured impact on agent effectiveness (before/after comparison)
+- Success/failure status of the improvement
+- Key lessons learned (what worked, what didn't, why)
+- Dependencies or prerequisites discovered
+- Whether the upskill achieved its goals and addressed identified gaps
+- Recommendations for future similar upskills
+
+**Example retention**: `retain({ content: "Upskilled @agent-name with capability X in Y hours, achieved Z% effectiveness improvement, key lesson: prerequisite A needed", tags: ["world:@agent-name", "experience:upskilling-methodology", "world:upskilling-outcome"] })`
+
+**Observation generation**: During hindsight consolidation, observations tagged with `upskilling_outcomes` scope will synthesize methodology patterns across all upskills, enabling future decisions to learn from what capabilities are foundational, which sequencing works best, and how to predict upskilling effort and impact more accurately.
