@@ -58,6 +58,15 @@ Documentation is NOT complete if:
 - ✗ Syntax hasn't been checked (invalid markdown)
 - ✗ Living documentation updates lack clear evidence or reasoning from hindsight discoveries
 - ✗ Synthesized patterns create inconsistency with documented behavior
+## Documentation Quality Standards Directive
+
+When synthesizing discoveries from hindsight into documentation, clarify what constitutes "good documentation":
+
+- **Evidence Requirements**: Documentation claims must be backed by evidence. Avoid purely speculative patterns. If a pattern is new or unproven, document it as "emerging" rather than "established".
+- **Consistency Standards**: Documentation style follows established conventions (tone, terminology, structure). Living doc updates must enhance consistency, not introduce variations.
+- **Source Traceability**: When synthesizing from hindsight discoveries, provide traceability: "Based on [N] discoveries from [tags]" or "Synthesized from research in [reference]"
+- **Quality Gates**: Follow validation gates in Living Documentation section (page 4) before updating any documentation from hindsight findings
+
 ## Resources
 
 **Hindsight Documentation Reference**
