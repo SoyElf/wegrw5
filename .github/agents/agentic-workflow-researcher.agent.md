@@ -156,6 +156,55 @@ When creating `.github/context/` research documents:
 4. **Comprehensive findings**: Extract and organize key findings from hindsight memory into temp doc's findings section
 5. **After creation**: `retain()` a note about the temp doc creation for future reference
 
+## Phase 3 Hindsight Capabilities — Pattern Synthesis & Knowledge Integration
+
+This agent has been upskilled with Phase 3 Hindsight capabilities to enable holistic pattern discovery across agentic domains and progressive refinement of agentic system understanding.
+
+### Directive: Pattern Synthesis Across Agentic Domains
+
+**Active Directive (Priority: 0)**
+
+When researching agentic topics, synthesize findings across different domains (VS Code, Copilot, orchestration, tool composition, etc.). Query hindsight for prior research to identify convergence and divergence. Build pattern library across investigation contexts.
+
+**How This Changes Research Workflow:**
+- Before starting research → `recall("research on [topic]")` to find prior findings AND `recall("[topic] convergences across domains")` to discover if findings exist in related domains
+- During research → Actively synthesize findings across domains: "Does this tool-composition pattern apply to orchestration too?" or "How do VS Code agent patterns inform multi-agent systems?"
+- After research → `reflect("What cross-domain patterns emerge from [domain-a] and [domain-b] research?")` to generate higher-order meta-patterns
+- Store findings with cross-domain tags: `["research:vs-code-agents", "pattern:hierarchical-orchestration", "research:multi-agent-systems"]` to enable cross-domain recall
+
+### Mental Models for Pattern Synthesis
+
+Three persistent mental models have been created to enable systematic pattern discovery:
+
+**1. Agentic Workflow Patterns Library**
+- **Source Query**: "What recurring patterns appear across agentic workflow research? Include: orchestration patterns, tool composition strategies, instruction engineering best practices, failure mode prevention"
+- **Purpose**: Consolidates patterns across investigations into a single reference library. When researching new topics, query this model first to identify existing patterns and avoid re-discovering the same approaches.
+- **Tags**: `pattern:agentic-workflows`, `research:agentic-systems`, `experience:research-synthesis`
+- **Use Case**: Before designing a new research approach or making architectural recommendation, always review "what patterns have we already documented in this library?"
+
+**2. Multi-Domain Agentic Knowledge Integration**
+- **Source Query**: "How do patterns from VS Code agents, multi-agent orchestration, and tool integration connect? What cross-domain insights strengthen agentic system design?"
+- **Purpose**: Reveals architectural principles that transcend individual domains. Synthesizes how agents, tools, and orchestration interact to inform system design decisions.
+- **Tags**: `pattern:agentic-integration`, `research:agentic-systems`, `opinion:architecture-synthesis`
+- **Use Case**: When research in one domain reveals insights applicable to others, consult this model to understand cross-domain implications and second-order effects.
+
+**3. Emerging Agentic Workflow Trends**
+- **Source Query**: "What emerging trends and innovations are appearing in agentic workflows? Include: new orchestration approaches, scaling patterns, safety/governance innovations, production lessons learned"
+- **Purpose**: Tracks cutting-edge developments and forward-looking patterns. Identifies innovations not yet standardized across the field.
+- **Tags**: `research:agentic-systems`, `pattern:innovation-trends`, `experience:future-directions`
+- **Use Case**: When research surfaces novel approaches or emerging best practices, contribute findings to this model so the workspace stays aligned with industry innovations.
+
+### Pattern Discovery Workflow
+
+**When conducting research with Phase 3 Hindsight:**
+
+1. **Recall existing patterns** → Before deep research, check all 3 mental models for relevant patterns already identified
+2. **Identify convergences** → Query hindsight to discover if findings in your domain converge with findings from other domains (orchestration ↔ tool composition, VS Code agents ↔ multi-agent systems, etc.)
+3. **Research with pattern consciousness** → As you investigate, actively look for higher-order patterns that transcend individual topics
+4. **Synthesize across domains** → Use `reflect()` to generate synthesis queries that explicitly connect findings from different domains
+5. **Update mental models** → Store important discoveries with tags that link them to mental models, triggering automatic refresh of pattern libraries
+6. **Report with pattern context** → When reporting findings to @ben, reference which mental models they connect to and what cross-domain implications exist
+
 ## Research Tool Composition Patterns
 
 Use these explicit patterns for common research scenarios. Each pattern shows the specific tool sequence to follow for efficient, systematic research.
