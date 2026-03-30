@@ -1,0 +1,334 @@
+{
+  "evaluated_agent": "agentic-workflow-researcher",
+  "evaluation_date": "2026-03-30",
+  "evaluator": "evaluator",
+  "agent_profile": {
+    "name": "Agentic Workflow Researcher",
+    "description": "Research specialist — investigates agentic workflows, VS Code extensibility, GitHub Copilot CLI, and multi-agent orchestration. Provides expert analysis with sources. Creates persistent contextual documentation in `.github/context/` for inter-agent knowledge sharing.",
+    "responsibilities": [
+      "Conduct in-depth web research on agentic workflow patterns and best practices",
+      "Investigate VS Code agent architecture, APIs, and extensibility capabilities",
+      "Research GitHub Copilot CLI features, commands, and integration patterns",
+      "Explore multi-agent orchestration approaches, frameworks, and coordination patterns",
+      "Analyze current trends and emerging technologies in AI-assisted development",
+      "Provide comprehensive findings with proper source attribution and citations",
+      "Offer practical recommendations based on research discoveries and findings",
+      "Search workspace codebase for relevant patterns, implementations, and precedents",
+      "Create and update temporary contextual documentation in `.github/context/` directory for inter-agent knowledge sharing and discovery",
+      "Document research findings in structured JSON format with metadata for agent discoverability and reuse"
+    ],
+    "constraints": [
+      "Focus exclusively on research and analysis — do not write code, modify workspace files, or perform implementation work (except creating `.github/context/` research docs)",
+      "Conduct research objectively without favoring any particular tool, framework, or approach",
+      "Work autonomously once delegated a research task; only clarify ambiguous requests if essential to proceeding",
+      "Use web search responsibly and efficiently — consolidate findings to minimize redundant or duplicate queries",
+      "Create temp docs only for research with lasting value and applicability — avoid trivial, one-off, or transient findings",
+      "Use consistent JSON schema and naming conventions for all temp docs to enable reliable agent discoverability",
+      "Preserve and reference existing temp docs when related research is discovered during new investigations"
+    ],
+    "tools": [
+      "read/problems",
+      "edit/createDirectory",
+      "edit/createFile",
+      "edit/editFiles",
+      "search/changes",
+      "search/codebase",
+      "search/fileSearch",
+      "search/listDirectory",
+      "search/searchResults",
+      "search/textSearch",
+      "web",
+      "github/get_file_contents",
+      "github/issue_read",
+      "github/list_issue_types",
+      "github/list_issues",
+      "github/search_issues",
+      "github/search_repositories",
+      "grep/*",
+      "pdf-reader/*",
+      "tavily/tavily_crawl",
+      "tavily/tavily_extract",
+      "tavily/tavily_map",
+      "tavily/tavily_search",
+      "tavily/tavily_skill"
+    ],
+    "agents_can_invoke": [],
+    "model": "Claude Sonnet 4.6 (copilot)",
+    "user_invocable": false
+  },
+  "agent_classification": {
+    "type": "research-specialist",
+    "primary_patterns": [
+      "research-methodology",
+      "source-attribution",
+      "temporary-contextual-documentation",
+      "tool-composition-for-research",
+      "inter-agent-communication",
+      "synthesis-and-analysis",
+      "multi-source-research",
+      "structured-findings-documentation"
+    ],
+    "related_agents": [
+      "@ben (orchestrator; delegates research tasks)",
+      "@doc (consumes research findings for documentation)",
+      "@ar-upskiller (benefits from research on latest best practices)",
+      "@ar-director (benefits from research on agent patterns)",
+      "@explore-codebase (complementary codebase analysis)"
+    ]
+  },
+  "research_context_used": [
+    "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L1-L400",
+    "docs/research/agentic-workflows/agent-specialization-patterns.md#L1-L300",
+    "docs/research/agentic-workflows/tool-composition-patterns.md#L1-L200",
+    "docs/research/agentic-workflows/inter-agent-communication.md#L1-L180",
+    "docs/research/agentic-workflows/orchestrator-worker-case-study.md#L68-L220",
+    "docs/research/agentic-workflows/common-failure-modes.md#L1-L150",
+    "docs/research/agentic-workflows/effective-delegation-strategies.md#L1-L250",
+    "docs/research/agentic-workflows/mcp-server-integration-guide.md#L1-L420",
+    ".github/context/2026-03-30-awesome-copilot-exploration.json (200+ agent patterns, research examples)",
+    ".github/context/2026-03-29-agentic-workflows-comprehensive-research.json (example research output)",
+    ".github/agents/ben.agent.md (orchestrator delegation patterns)",
+    ".github/agents/doc.agent.md (specialist agent pattern reference)"
+  ],
+  "patterns_discovered": [
+    {
+      "name": "Research Specialist Specialization Framework (6-Element)",
+      "category": "specialization",
+      "source": "docs/research/agentic-workflows/agent-specialization-patterns.md#L246-L260 and orchestrator-worker-case-study.md#L68-L100",
+      "applicability_to_target": "@agentic-workflow-researcher is well-defined against the 6-element framework: (1) Domain ✓ (clear: agentic workflows, VS Code, Copilot CLI), (2) Responsibilities ✓ (10 specific, measurable responsibilities), (3) Constraints ✓ (7 explicit constraints preventing scope creep), (4) Tools ✓ (28 tools appropriate for research), (5) Success Criteria (PARTIAL: defined in Rules but not as explicit measurable standards), (6) Escalation Paths (NOT DOCUMENTED: missing explicit escalation guidance). Overall strong specialization but missing explicit success criteria and escalation patterns."
+    },
+    {
+      "name": "Tool Composition Strategies for Research (4-Pattern Framework)",
+      "category": "tools",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L150 and mcp-server-integration-guide.md#L217-L240",
+      "applicability_to_target": "Tool-composition-patterns.md defines 4 strategies (Search-Then-Modify, Create-Then-Verify, Batch Modification, Read-Modify-Verify). MCP-server-integration-guide.md shows research agents use: web_search → analyze results → synthesize findings. @agentic-workflow-researcher lists tools and describes 'Research Methodology' (7 steps) but lacks explicit tool composition sequences for specific research workflows (e.g., 'Investigating a new framework' or 'Exploring GitHub awesome-copilot'). Research methodology is described in prose; lacks step-by-step tool sequences."
+    },
+    {
+      "name": "Temporary Contextual Documentation JSON Schema (Structured Pattern)",
+      "category": "documentation",
+      "source": ".agent.md file #L128-L230 shows complete schema with required/optional fields, example 1 and 2",
+      "applicability_to_target": "@agentic-workflow-researcher defines temp docs comprehensively with: (1) Schema with required fields ✓, (2) Naming convention ✓, (3) Two complete examples ✓, (4) When to create/update ✓, (5) How others consume temp docs ✓. This is EXCELLENT and fully aligned with structured patterns. Temp docs section is a model for research documentation patterns."
+    },
+    {
+      "name": "Research Quality Standards Framework",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/agent-specialization-patterns.md#L155-L185 and instruction-engineering-best-practices.md#L188-L200 (Research Agent success criteria examples)",
+      "applicability_to_target": "Agent-specialization-patterns.md shows research agent success criteria: ✓ Findings cite sources and evidence, ✓ Complexity matches domain understanding, ✓ Synthesis is clear and structured, ✗ Success if just 'did research'. Instruction-engineering-best-practices.md shows: ✓ Include sources/citations, ✓ Depth matches complexity, ✓ Synthesis clear, ✗ Make claims without sources. @agentic-workflow-researcher mentions 'Always cite sources' in Rules but lacks explicit, measurable quality standards (like @doc's 8-point quality framework). Success criteria are implicit rather than explicit."
+    },
+    {
+      "name": "Research Methodology Workflow (Multi-Step Process)",
+      "category": "workflows",
+      "source": "@agentic-workflow-researcher.agent.md #L64-L75 defines 7-step 'Research Methodology'",
+      "applicability_to_target": "@agentic-workflow-researcher defines methodology: (1) Clarify objective ✓, (2) Multi-source research ✓, (3) Pattern matching ✓, (4) Synthesize findings ✓, (5) Cite sources ✓, (6) Evaluate credibility ✓, (7) Report findings ✓. This is clear and well-structured. However, it's not as detailed as tool-composition-patterns.md recommends for complex research tasks. Missing: explicit verification steps (how to verify findings accuracy?), and research task decomposition patterns (how to scope large research projects)."
+    },
+    {
+      "name": "Inter-Agent Communication Patterns (Orchestrator-Mediated)",
+      "category": "communication",
+      "source": "docs/research/agentic-workflows/inter-agent-communication.md#L20-L80 and orchestrator-worker-case-study.md#L230-L250",
+      "applicability_to_target": "@agentic-workflow-researcher doesn't explicitly document inter-agent communication. Orchestrator-worker case study shows: @research → @ben (reports findings) → @ben → @doc (passes findings as input). @agentic-workflow-researcher instructions say 'Report back' and 'Deliver findings' but don't explicitly state 'communicate with @ben (orchestrator)' or show communication pattern. Communication is implicit rather than explicit."
+    },
+    {
+      "name": "Awesome-Copilot Research Agent Patterns (200+ Examples)",
+      "category": "patterns",
+      "source": ".github/context/2026-03-30-awesome-copilot-exploration.json contains 10+ research agent examples and patterns",
+      "applicability_to_target": "Awesome-Copilot contains research examples showing: (1) Gem-Researcher agent (codebase exploration with clear triggers), (2) Explicit research output formats (structured JSON with metadata), (3) Verification patterns (comparing findings, cross-checking sources), (4) Decision frameworks (when to search deeper vs. when to synthesize). @agentic-workflow-researcher has core patterns but lacks some advanced patterns observed in awesome-copilot (explicit verification, comparison strategies, decision frameworks for research scope)."
+    },
+    {
+      "name": "Common Research Failure Modes Prevention",
+      "category": "governance",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L45-L150 (Specification failures, coordination failures)",
+      "applicability_to_target": "Common-failure-modes.md shows research agent failure patterns: (1) Over-broad scope (researching too many topics), (2) Insufficient source verification (making claims without sources), (3) Poor synthesis (findings aren't actionable), (4) Missing follow-up questions (doesn't identify gaps). @agentic-workflow-researcher prevents some (Rules mandate citations) but lacks explicit guidance for: handling conflicting sources, scope boundaries for research tasks, synthesis quality checks, follow-up question identification patterns."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "gap-001",
+      "category": "instruction-quality",
+      "title": "Missing Explicit, Measurable Quality Standards for Research Output",
+      "current_state": "@agentic-workflow-researcher's quality expectations are implicit in Rules section: 'Always cite sources', 'Evaluate credibility', 'Present findings objectively'. These are general guidelines but lack explicit, measurable success criteria comparable to @doc's 8-point quality standard framework. There's no checklist like 'Research is complete when: ✓ All claims have source URLs, ✓ Multiple sources per major finding, ✓ Synthesis addresses all stated research questions, ✓ Follow-up questions identified'.",
+      "gap_description": "Instruction engineering best practices (instruction-engineering-best-practices.md#L155-L185) emphasize explicit, measurable quality standards for agents. Research agents need specific criteria like: (1) Source count per finding (minimum 2-3 sources per major claim), (2) Source credibility hierarchy (official > blog > research), (3) Synthesis completeness (addresses all research questions), (4) Actionability (findings enable downstream agents to act), (5) Follow-up identification (gaps documented for future research). @agentic-workflow-researcher's Rules section lists principles but agent lacks a 'Quality Standards' checklist. This makes it harder to verify when research is 'done' or 'complete'.",
+      "recommended_change": "Add explicit 'Quality Standards' section after 'Rules' section in @agentic-workflow-researcher.agent.md. Create checklist format matching @doc's pattern: 'Research is complete when: ✓ Every major claim has source attribution (minimum 2 sources per claim for important findings). ✓ Sources include mix of official documentation, technical blogs, and where available, peer-reviewed research. ✓ Credibility assessed for each source (official > vendor > technical blog > generic). ✓ Findings directly address all stated research questions. ✓ Synthesis is structured with clear key insights grouped logically. ✓ Recommendations are actionable and specific (not vague). ✓ Knowledge gaps and follow-up questions identified. ✓ Temp docs include metadata (timestamp, requestor, tags) for agent discoverability. ✗ Research is NOT complete if findings lack sources, synthesis is vague, or follow-up questions are missing.'",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L155-L185 and instruction-engineering-best-practices.md#L188-L200 (Quality Standards section with Research Agent example)",
+      "source_excerpt": "From instruction-engineering-best-practices.md 'Quality Standards': 'Research Agent: ✓ Findings cite sources and evidence. ✓ Complexity matches domain understanding. ✓ Synthesis is clear and structured. ✗ Make claims without sources.' This pattern should be expanded into specific, measurable criteria for @agentic-workflow-researcher.",
+      "priority": "high",
+      "priority_justification": "Quality standards are critical for research agents because downstream agents (Ben, Doc, others) rely on research quality to make decisions. Vague quality standards lead to inconsistent research output, wasted effort on incomplete research, and poor decision-making based on insufficient evidence. High priority because it affects downstream agent effectiveness and workspace knowledge quality.",
+      "impact": "Ensures research output meets consistent, verifiable standards. Enables other agents to confidently use research findings. Reduces need for re-research when quality is discovered to be insufficient.",
+      "for_upskiller": "Add new section 'Quality Standards' immediately after 'Rules' section. Format as checkboxes like @doc's quality standards. Include 8 criteria: (1) Source attribution (minimum 2 sources per major claim), (2) Source credibility hierarchy, (3) Covers all research questions, (4) Structured synthesis, (5) Actionable recommendations, (6) Gap identification, (7) Temp doc metadata completeness, (8) Negative indicator (claims without sources = incomplete). Format matching instruction-engineering-best-practices.md example. Reference orchestrator-worker-case-study.md#L85-L95 (Research success indicators) as pattern source."
+    },
+    {
+      "id": "gap-002",
+      "category": "instruction-quality",
+      "title": "Missing Decision Framework for Research Scope and Depth Management",
+      "current_state": "@agentic-workflow-researcher lists 5 research domains but lacks guidance on scope decisions within those domains. Example: When researching 'agentic workflow patterns', should agent research: (1) All workflow patterns (broad)? (2) Only orchestration patterns (narrow)? (3) VS Code-specific patterns only? (4) Patterns for all frameworks? The agent lacks explicit decision framework for scoping research. Current instruction says 'Understand the query' but doesn't show HOW to analyze scope or make scope decisions.",
+      "gap_description": "Instruction engineering best practices (instruction-engineering-best-practices.md#L300-L360) show decision frameworks help agents make consistent choices. Research agents need framework for: (1) When to broaden research (find more sources/topics) vs. when to narrow and synthesize, (2) How deep to investigate each subtopic, (3) When to declare research 'sufficient' vs. 'needs more depth', (4) How to handle conflicting sources or opinions, (5) When to escalate scope decisions to orchestrator. @agentic-workflow-researcher lacks these, leading to potentially unbounded research projects.",
+      "recommended_change": "Add 'Decision Framework' section after 'Research Methodology'. Include: (1) 'Scope Decisions' — Is topic IN scope? Decision criteria: Is it core to research question? Is it covered in existing research? Should it be separate task? (2) 'Research Depth' — How deep to investigate? Decision: Common topic/many sources → summarize, synthesize. Rare/few sources → investigate deeply. Novel topic → research broadly first. (3) 'Source Analysis' — Handling conflicting sources. Decision: Check source credibility; if conflict remains, document both views, escalate for interpretation guidance. (4) 'Sufficiency Decision' — When is research done? Decision: All research questions addressed? Multiple sources per claim? Synthesis complete? Follow-up questions documented? YES to all → DONE. (5) 'Escalation Triggers' — When to ask @ben. Decision: If research would exceed estimated scope? If sources conflict badly? If research question isn't clear enough?",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L300-L360 'Decision Frameworks' section",
+      "source_excerpt": "From instruction-engineering-best-practices.md 'Decision Framework' pattern for doc agents: 'When deciding how much to document: Consider - Is this commonly used? → Document thoroughly. Is this rarely used? → Document briefly. Is this deprecated? → Mark clearly.' This same pattern applies to research agents deciding research depth.",
+      "priority": "high",
+      "priority_justification": "Scope management is critical for research agents. Without decision framework, agents may over-research (wasting Ben's tokens and time) or under-research (creating incomplete findings). This directly impacts downstream agent effectiveness. High priority because it prevents wasted research effort and ensures research fits requested scope.",
+      "impact": "Enables research agent to scope research appropriately. Prevents over/under-research. Reduces escalations for scope clarification.",
+      "for_upskiller": "Add new 'Decision Framework' section after 'Research Methodology'. Create subsections for 5 decision types: (1) Scope Decisions, (2) Research Depth, (3) Source Analysis, (4) Sufficiency Decision, (5) Escalation Triggers. For each, provide: the question the agent faces, decision criteria (3-4 options), and guidance on which to choose. Format matching instruction-engineering-best-practices.md examples. Include scenarios: researching 'multi-agent orchestration' (how broad?), conflicting sources (what to do?), researching 'emerging frameworks' (depth?). Reference effective-delegation-strategies.md#L120-L150 for research task scoping patterns."
+    },
+    {
+      "id": "gap-003",
+      "category": "instruction-quality",
+      "title": "Missing Explicit Tool Composition Sequences for Different Research Task Types",
+      "current_state": "@agentic-workflow-researcher lists 'Research Methodology' (7 steps: understand → multi-source → pattern-match → synthesize → cite → evaluate → report) and lists 28 tools available. However, there are no explicit tool composition sequences like @doc has (e.g., 'Pattern 1: Create New Docs → search, read, create, verify'). For example, if researching 'GitHub Copilot CLI capabilities', what's the specific tool sequence? web_search → github/search_repositories → tavily_extract → synthesize? Or different? Current instruction is methodology in prose; lacks explicit tool sequences.",
+      "gap_description": "Tool composition patterns (tool-composition-patterns.md#L40-L150) emphasize explicit, step-by-step tool sequences. MCP-server-integration-guide.md# L217-L240 shows research agents should follow: web_search → analyze → search deeper → synthesize. @agentic-workflow-researcher's 'Research Methodology' is clear but operates at abstract level (understand, research, synthesize). Missing: specific tool sequences for common research scenarios like: (1) Broad web research (which tavily tools? search order?), (2) GitHub pattern discovery (which github tools?), (3) Codebase pattern extraction (grep + semantic_search strategy?), (4) PDF/documentation exploration (pdf-reader → extract → analyze?). Without explicit sequences, agent might use tools inefficiently or in non-optimal orders.",
+      "recommended_change": "Add new section 'Research Tool Composition Patterns' after 'Research Domains'. Create 4-5 explicit patterns for common research scenarios. Pattern format (following tool-composition-patterns.md format): Pattern Name, When to Use, Step-by-step Tool Sequence (numbered), Why this works. Examples: (1) 'Pattern 1: Broad Web Research Topic' — Scenario: Research new framework/pattern. Sequence: (1) tavily_search with broad query, (2) Analyze top 5 results, (3) tavily_search with narrower follow-up queries, (4) tavily_extract for detailed content from top sources, (5) Synthesize findings. (2) 'Pattern 2: GitHub Pattern Discovery' — Scenario: Research patterns in open-source agents. Sequence: (1) github/search_repositories for agent repos, (2) github/get_file_contents on .agent.md files, (3) grep to identify patterns, (4) Synthesize comparative analysis. (3) 'Pattern 3: Workspace Codebase Extraction' — Scenario: Identify patterns in workspace codebase. Sequence: (1) search/fileSearch to locate relevant files, (2) grep to find pattern examples, (3) semantic_search for related concepts, (4) Report findings with workspace references.",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L150 (4 Composition Strategies with step-by-step sequences) and mcp-server-integration-guide.md#L217-L240 (Research Agent tool patterns showing web_search → analyze → synthesize cycle)",
+      "source_excerpt": "From tool-composition-patterns.md 'Composition Strategies': 'Strategy 1: Search-Then-Modify Pattern. When to use: Making targeted changes. How: (1) semantic_search for relevant files, (2) read_file for context, (3) replace_string_in_file, (4) get_errors to verify.' From mcp-server-integration-guide.md 'Research Agent using Web Search': '1. web_search(query), 2. Analyze search results, 3. web_search (deeper topics), 4. Synthesize all findings'",
+      "priority": "medium",
+      "priority_justification": "Improves efficiency and consistency of research workflows. Without explicit sequences, research may be less systematic or miss important sources. However, current 7-step methodology is sufficient for execution. Medium priority because explicit tool sequences improve efficiency and teachability without blocking current research effectiveness.",
+      "impact": "Makes research workflow more systematic and repeatable. Enables agent to optimize tool usage. Provides templates for complex research projects.",
+      "for_upskiller": "Add section 'Research Tool Composition Patterns' after 'Research Domains'. Create 3-4 pattern templates matching tool-composition-patterns.md format. For each pattern: title, 'When to Use' (scenario), 'Sequence' (numbered tool steps), 'Why This Works' (1-2 sentences). Include patterns: (1) Broad web research, (2) GitHub pattern discovery, (3) Workspace codebase extraction, (4) Optional: PDF/documentation deep-dive. Reference tool-composition-patterns.md#L40-L150 and mcp-server-integration-guide.md#L217-L240 as sources."
+    },
+    {
+      "id": "gap-004",
+      "category": "instruction-quality",
+      "title": "Missing Explicit Escalation Paths and Error Handling for Research Challenges",
+      "current_state": "@agentic-workflow-researcher lists 6 general rules including 'Work autonomously once delegated' but lacks explicit escalation paths like other agents have. When should agent escalate to @ben? If sources conflict? If research question is unclear? If findings contradict workspace patterns? Current instruction says 'only clarify ambiguous requests if essential' but doesn't define what constitutes 'essential' or provide scenarios.",
+      "gap_description": "Instruction engineering best practices (instruction-engineering-best-practices.md#L340-L360) and common failure modes (common-failure-modes.md#L115-L150) emphasize explicit escalation guidance. Research agents need clear escalation paths for: (1) Ambiguous research questions (what to do while waiting for clarification?), (2) Conflicting sources (escalate or resolve?), (3) Findings that contradict workspace patterns/existing research (escalate for interpretation), (4) Research scope questions (broader/narrower?), (5) Sources that are unavailable/paywalled (escalate or find alternatives?). Without explicit paths, agent may either over-escalate (every minor issue) or under-escalate (major issues go unnoticed).",
+      "recommended_change": "Add new section 'Escalation Paths and Error Handling' before 'Constraints'. Create table format: Scenario | Decision Point | Escalation Trigger | Immediate Action | When to Escalate. Include scenarios: (1) 'Research question unclear' — Does question specify: what topics? which frameworks? — NO → Immediately ask Ben for clarification; DON'T proceed with assumptions. (2) 'Sources conflict' — Can you reconcile via credibility evaluation? → YES: document both views and credibility analysis; NO: escalate with conflicting sources documented. (3) 'Cost/availability' — Source is paywalled or requires authentication — Try alternative sources; if critical source unavailable, escalate with impact analysis. (4) 'Scope creep' — Research expanding beyond original question — Escalate with: 'Research could expand to [topics]; should I investigate or defer?' (5) 'Findings contradict workspace knowledge' — Mark discrepancy, document both sources, escalate with: 'Research finding contradicts [existing pattern]; which takes priority?'",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L340-L360 'Error Handling Guidance' and common-failure-modes.md#L115-L150 'Insufficient Context'",
+      "source_excerpt": "From instruction-engineering-best-practices.md 'Error Handling Guidance': 'If reference files don't exist: Search for similar files. Report findings. Let orchestrator know if unsuccessful. Don't proceed with assumptions.' From common-failure-modes.md 'Failure: Insufficient Context': 'Agent creates output not matching expectations. Prevention: Provide clear context. Recovery: Ask agent to revisit with correct context.'",
+      "priority": "medium",
+      "priority_justification": "Improves research reliability and autonomy. Clear escalation paths prevent both over-escalation (agent asks Ben about every minor issue) and under-escalation (agent proceeds with wrong assumptions). Medium priority because current autonomy works but explicit paths reduce ambiguity and improve decision-making.",
+      "impact": "Enables agent to handle research challenges more independently. Clarifies when to escalate vs. proceed. Reduces unnecessary escalations and ensures critical issues are flagged.",
+      "for_upskiller": "Add 'Escalation Paths and Error Handling' section. Create table with 5-6 rows: (1) Unclear Research Questions, (2) Conflicting Sources, (3) Unavailable Sources, (4) Scope Expansion, (5) Contradictory Findings, (6) Tool Failures. For each row: situation description, decision point (how to analyze), escalation trigger (when to ask Ben), immediate action (continue researching or wait?). Format as structured table for clarity. Reference instruction-engineering-best-practices.md#L340-L360 and common-failure-modes.md#L115-L150."
+    },
+    {
+      "id": "gap-005",
+      "category": "instruction-quality",
+      "title": "Missing Explicit Inter-Agent Communication Pattern Reference",
+      "current_state": "@agentic-workflow-researcher's 'Workflow' step 8 says 'Report back → Deliver comprehensive research findings with citations...'. But it doesn't explicitly state: 'Report to @ben (orchestrator)' or document the communication pattern. It's implicit that findings go to whoever delegated the task. This makes communication pattern unstated compared to best practices which recommend explicit agent naming.",
+      "gap_description": "Inter-agent communication patterns (inter-agent-communication.md#L20-L80) show orchestrator-mediated communication pattern: 'Agent A → Orchestrator → Agent B' with explicit agent names. @agentic-workflow-researcher should explicitly state: 'Report findings to @ben (the orchestrator) using [communication method]'. Currently says 'Report back' generically. This is minor clarity issue but aligns with best practices of explicit communication targets.",
+      "recommended_change": "In 'Workflow' section step 8, change 'Report back' to 'Report to @ben (orchestrator)'. Example: Change 'Deliver comprehensive research findings with citations...' to 'Report findings to @ben (orchestrator) with: comprehensive research findings document, citations and sources, recommendations for next steps, identified follow-up research questions.' Also add brief statement in Workflow introduction: 'All research findings are reported to @ben (the orchestrator), who coordinates how findings are passed to other agents (@doc for documentation, @ar-upskiller for capability analysis, etc.)'",
+      "source": "docs/research/agentic-workflows/inter-agent-communication.md#L20-L80 'Orchestrator-Mediated Communication' pattern showing explicit agent naming",
+      "source_excerpt": "From inter-agent-communication.md 'Orchestrator-Mediated Communication': '@ben (orchestrator) → @research: Research topic, create findings. @research → @ben: Reports findings. @ben → @doc: Here are findings; document them. Strengths: Clear communication flow.'",
+      "priority": "low",
+      "priority_justification": "This is clarity/documentation improvement, not functional gap. Communication effectively goes to whoever delegated task (implicitly Ben). Making it explicit improves clarity but doesn't change behavior. Low priority because implicit communication works correctly.",
+      "impact": "Clarifies communication target. Makes orchestrator relationship explicit. Aligns @agentic-workflow-researcher with inter-agent communication best practices.",
+      "for_upskiller": "In 'Workflow' section Step 8, add explicit orchestrator reference. Change: 'Report back' to 'Report to @ben (orchestrator)'. Add introductory sentence to Workflow section: 'All research is reported to @ben, who coordinates downstream use of findings.' Reference inter-agent-communication.md#L20-L80 as pattern source."
+    },
+    {
+      "id": "gap-006",
+      "category": "instruction-quality",
+      "title": "Missing Verification Patterns for Research Accuracy and Completeness",
+      "current_state": "@agentic-workflow-researcher's 'Research Methodology' step 5 says 'Cite sources' and step 6 says 'Evaluate credibility' but lacks explicit verification process. How does agent verify: (1) All research questions answered? (2) Synthesis is coherent? (3) Sources are still relevant? (4) No circular references in citations? (5) Coverage is complete or identified gaps documented? Missing explicit verification checklist like @doc has for documentation verification.",
+      "gap_description": "Tool composition patterns (tool-composition-patterns.md#L150-L200) emphasize 'Strategy 4: Read-Modify-Verify' showing verification is explicit, step-by-step process. Research agents need systematic verification that: (1) Every major finding has source(s), (2) Sources are credible (official > blog > generic), (3) All research questions explicitly addressed, (4) Findings are internally consistent (no contradictions), (5) Synthesis connects findings to answer original question, (6) Follow-up questions identified (what gaps remain?), (7) Temp doc metadata complete (timestamp, tags, version). Current instruction describes methodology but not verification.",
+      "recommended_change": "Add 'Verification Patterns' subsection within 'Workflow' section or as separate 'Verification Checklist'. Before finalizing research output, agent should verify: (1) ✓ Every major claim has ≥1 source (preferably 2+ for important findings). (2) ✓ Sources evaluated for credibility (hierarchy documented). (3) ✓ All stated research questions are directly answered in findings. (4) ✓ Findings are internally consistent (check for contradictions). (5) ✓ Synthesis/recommendations flow logically from findings. (6) ✓ Follow-up research questions identified. (7) ✓ If creating temp doc: metadata complete (research_topic, findings, sources array, timestamp, tags, applicable_to_agents, follow_up_questions, version). ✗ Research incomplete if: claims lack sources, synthesis vague, follow-up questions missing, temp doc missing metadata.",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L150-L200 'Strategy 4: Read-Modify-Verify Pattern' showing step-by-step verification",
+      "source_excerpt": "From tool-composition-patterns.md 'Strategy 4': '1. read_file (full context), 2. Analyze what could break, 3. replace_string_in_file, 4. get_errors, 5. semantic_search for related code.' Pattern shows verification is explicit step after modification. For research: verify sources, verify coverage, verify synthesis coherence.",
+      "priority": "medium",
+      "priority_justification": "Improves research quality and reliability. Without explicit verification, research might pass to downstream agents incomplete or with unstated gaps. However, individual steps (cite sources, evaluate credibility) are documented. Medium priority because explicit verification checklist improves quality assurance without blocking current effectiveness.",
+      "impact": "Ensures research completeness before reporting. Catches missing sources or incomplete coverage. Improves quality of findings passed to downstream agents.",
+      "for_upskiller": "Add 'Verification Checklist' subsection in 'Workflow' after step 7 'Synthesize findings'. Create checklist format (like @doc's quality standards): 'Before reporting research complete, verify: ✓ [7 positive criteria], ✗ [3 negative criteria showing incompleteness].' For each criterion, be specific (not 'verify sources' but 'every major claim has ≥1 source, preferably 2+ for important findings'). Include temp doc verification (if creating .github/context/ document, metadata complete?). Reference tool-composition-patterns.md#L150-L200."
+    },
+    {
+      "id": "gap-007",
+      "category": "instruction-quality",
+      "title": "Missing Concrete Examples of Good vs. Poor Research Output",
+      "current_state": "@agentic-workflow-researcher's instructions describe methodology and show 2 detailed examples of temp doc JSON structures (Example 1 and Example 2 in 'Temporary Contextual Documentation' section). These are excellent. However, there are no examples of: (1) Good research findings (structured, well-sourced, answering research questions clearly), (2) Poor research findings (vague synthesis, insufficient sources, incomplete coverage), (3) Good vs. bad source evaluation. The temp doc examples show format but not research quality examples.",
+      "gap_description": "Instruction engineering best practices (instruction-engineering-best-practices.md#L200-L250) emphasize agents learn better from 2-3 concrete examples per major concept. @doc has 'Quality Examples: Good vs. Bad Documentation' section. @agentic-workflow-researcher has format examples (JSON temp docs) but lacks research quality examples. Agent would benefit from concrete examples showing: (1) Well-researched topic (has multiple sources, clear synthesis, actionable recommendations), (2) Poorly-researched version (vague findings, insufficient sources, unclear synthesis). These didn't take space in instructions but would improve clarity.",
+      "recommended_change": "Add section 'Research Quality Examples: Good vs. Poor Output' after 'Temporary Contextual Documentation' examples. Include 2-3 examples: (1) Example 1: 'Good Research Output' — Show a well-researched 300-word excerpt (e.g., 'VS Code Agent Patterns Found') with: multiple sources cited, credibility evaluated, findings organized logically, recommendations clear, follow-up questions identified. Annotate to show all 7 quality criteria met. (2) Example 2: 'Poor Research Output' — Same topic researched poorly (vague synthesis, 1 source, unclear findings) with annotations pointing to quality criteria violated. (3) Example 3: 'Source Evaluation' — Show how different sources evaluated for credibility (official doc ranked higher than blog).",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L200-L250 'Role Definition Framework' and `.github/agents/doc.agent.md` demonstrating 'Quality Examples: Good vs. Bad Documentation' pattern",
+      "source_excerpt": "From instruction-engineering-best-practices.md: 'Good Examples: [show clear examples with annotations]. Poor Examples: [show vague examples with annotations of what's missing]' — This pattern is demonstrated in doc.agent.md quality examples section.",
+      "priority": "low",
+      "priority_justification": "Nice-to-have improvement for instruction clarity. Agent can function without examples (7-step methodology is clear). However, concrete examples significantly improve understanding. Low priority because research methodology is already well-explained; examples would be pure enhancement.",
+      "impact": "Makes quality standards concrete and memorable. Helps agent internalize what 'good research' looks like. Provides reference points for self-evaluation.",
+      "for_upskiller": "Add section 'Research Quality Examples: Good vs. Poor Output' after 'Temporary Contextual Documentation' examples. Include 2 complete research output examples: (1) 'Good Research' — 300-word research excerpt (e.g., researched VS Code Agent patterns) showing: multiple sources (≥3), sources evaluated for credibility, findings organized with clear key insights, recommendations specific and actionable, follow-up questions identified. Annotate with checkmarks showing quality criteria met. (2) 'Poor Research' — Same topic researched poorly (1-2 vague sources, unclear synthesis, no follow-up questions) with annotations showing quality criteria violated. Format in callout boxes or blockquotes. Reference instruction-engineering-best-practices.md#L200-L250."
+    },
+    {
+      "id": "gap-008",
+      "category": "instruction-quality",
+      "title": "Missing Common Research Failure Modes and Prevention Patterns",
+      "current_state": "@agentic-workflow-researcher lists 6 Rules to guide behavior (always cite sources, prefer official documentation, be comprehensive, focus on applicability, report accurately, use workspace context, provide structure, link resources) but doesn't document common failure modes for research agents. What are typical research failures? Over-scoping? Insufficient sources? Poor synthesis? Circular citations? Focusing on unrelated topics? These aren't explicitly addressed.",
+      "gap_description": "Common failure modes (common-failure-modes.md#L45-L150) shows 79% of agent failures are preventable through design. Research agent failure modes include: (1) Over-broad research scope (agent researches too many topics without focus), (2) Insufficient source verification (accepting questionable sources), (3) Poor synthesis (findings don't address original question), (4) Circular references (citing other research that was based on first source), (5) Missing application context (research isn't applicable to workspace), (6) Assuming facts without sources. @agentic-workflow-researcher's Rules prevent some but don't address these failures explicitly.",
+      "recommended_change": "Add section 'Common Research Failure Modes and Prevention' after 'Decision Framework' (once added). Document 5-6 failure patterns: (1) 'Over-Broad Research Scope' — Symptom: research expands beyond original question. Prevention: Use decision framework to scope each research subtopic; escalate if scope expanding. (2) 'Insufficient Source Verification' — Symptom: findings based on weak/non-credible sources. Prevention: Evaluate credibility for every source; prefer official documentation; document source quality. (3) 'Poor Synthesis' — Symptom: findings don't clearly answer research question. Prevention: For each finding, explicitly map to original research question; verify all questions answered. (4) 'Circular References' — Symptom: source A cites source B which originally cited source A. Prevention: Track source lineage; validate sources independently when possible. (5) 'Inapplicable Research' — Symptom: findings don't apply to workspace context. Prevention: Before finalizing, evaluate: 'Are findings applicable to agentic workflows, VS Code agents, or Copilot CLI?' If not, escalate or refocus.",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L45-L150 showing 5-6 failure patterns with prevention strategies",
+      "source_excerpt": "From common-failure-modes.md 'Specification Failures': 'Overly Broad Agent Scope — Single agent produces mediocre output across multiple domains. Prevention: Create focused agents per domain. Recovery: Identify where quality dropped.' Pattern applies to research: over-broad scope → mediocre synthesis → incomplete findings.",
+      "priority": "low",
+      "priority_justification": "Useful documentation of failure patterns but not critical for agent function. Prevention mechanisms are largely addressed in Rules and (once added) Decision Framework. Low priority because instruction already guides against major failure modes; explicit failure mode documentation is supplementary.",
+      "impact": "Helps agent recognize and avoid common pitfalls. Provides decision frameworks for edge cases. Improves research robustness.",
+      "for_upskiller": "Add section 'Common Research Failure Modes and Prevention' after 'Decision Framework'. For each of 5-6 failure modes: provide symptom (what goes wrong), root cause (why it happens), and prevention strategy (how to avoid). Format as short subsections (3-4 sentences each). Include: Over-Broad Scope, Insufficient Source Verification, Poor Synthesis, Circular References, Inapplicable Findings. Reference common-failure-modes.md#L45-L150."
+    },
+    {
+      "id": "gap-009",
+      "category": "documentation",
+      "title": "Temp Doc Schema Includes Optional Fields Not Documented in Creation Guidance",
+      "current_state": "@agentic-workflow-researcher defines temp doc JSON schema with fields: research_topic ✓, findings ✓, sources ✓, timestamp ✓, requestor_agent ✓, tags ✓, summary ✓, applicable_to_agents ✓, follow_up_questions ✓, version ✓. The schema is complete and well-designed. However, Example 1 and 2 show these fields with values, but 'When to Create/Update Temp Docs' section (5 scenarios) doesn't provide detailed guidance on WHICH fields to populate for different research types. For example, is 'applicable_to_agents' required for all docs or only some?",
+      "gap_description": "The temp doc schema is excellent and well-documented with 2 complete examples. However, 'When to Create/Update Temp Docs' section lists 5 scenarios (at end of research tasks, significant discoveries, background research, pattern documentation, technology updates) without explaining field population strategy for each scenario. Should all fields be populated for all research types? Are there abbreviated vs. comprehensive docs? How does agent decide which agents should be listed in 'applicable_to_agents'? These aren't addressed.",
+      "recommended_change": "Expand 'When to Create/Update Temp Docs' section with field population guidance for different research types. For each of 5 scenarios, add: which fields are required (all vs. subset), any special considerations for that research type. Example: 'Significant Discoveries' — Populate all fields completely; include comprehensive 'findings' section and multiple sources; identify 'applicable_to_agents' based on which agents benefit from discovery. 'Technology Updates' — Populate all fields; prioritize 'summary' and 'follow_up_questions' because updates often raise new research directions. 'Background Research' — Populate all fields; may have fewer 'sources' but should include 'follow_up_questions' showing what wasn't discovered.",
+      "source": "@agentic-workflow-researcher.agent.md 'Temporary Contextual Documentation' section shows schema and examples but 'When to Create/Update' section lacks field-specific guidance",
+      "source_excerpt": "From @agentic-workflow-researcher.agent.md: 'When to Create/Update Temp Docs: (1) At end of research tasks...' lists scenarios but doesn't explain field population for each scenario type.",
+      "priority": "low",
+      "priority_justification": "The schema is complete and examples are clear, so agent can infer field usage. This is refinement/clarity improvement rather than functional gap. Low priority because examples show all fields populated; agent can follow patterns shown.",
+      "impact": "Clarifies field population strategy for different research types. Reduces ambiguity about whether certain fields are optional/required.",
+      "for_upskiller": "Expand 'When to Create/Update Temp Docs' section with field guidance per scenario type. For each of 5 scenarios, add 1-2 sentences about field population: (1) 'At end of research tasks' — Populate all fields; ensure 'summary' clearly states key findings. (2) 'Significant discoveries' — All fields; 'findings' must be comprehensive; identify all 'applicable_to_agents'. (3) 'Background research' — All fields; can have fewer sources but must identify gaps in 'follow_up_questions'. (4) 'Pattern documentation' — All fields; 'patterns' array should be comprehensive; examples required. (5) 'Technology updates' — All fields; prioritize 'summary' and 'follow_up_questions' because implications often unclear."
+    },
+    {
+      "id": "gap-010",
+      "category": "tools",
+      "title": "Tool Composition Lacks Explicit Guidance on Tool Avoiding Common Mistakes",
+      "current_state": "@agentic-workflow-researcher is granted 28 tools (read, edit, search, web, github, grep, pdf-reader, tavily tools). The agent has rich capabilities but lacks explicit guidance on 'what tools to use when' or 'common mistakes to avoid with tools'. For example: tavily_crawl vs. tavily_extract — which to use when? When to use github/search_repositories vs. web search? When is semantic_search better than grep? These isn't specified.",
+      "gap_description": "Tool composition patterns (tool-composition-patterns.md#L40-L100) emphasize agents need guidance on 'tool selection strategy' not just tool availability. Agents perform better with example sequences like '@doc has patterns for create-new vs. update-existing scenarios. @agentic-workflow-researcher lacks tool-specific guidance: (1) When to use tavily_search vs. web tool? (2) When to use github/search_repositories vs. tavily? (3) How to use pdf-reader effectively? (4) When to combine grep + semantic_search vs. one at a time? These aren't addressed, leading to potentially suboptimal tool usage.",
+      "recommended_change": "Add brief 'Tool Selection Guidance' subsection in 'Research Methodology' or as separate 'Tool Usage Tips' section. Provide guidance on high-impact tool choices: (1) 'tavily tools vs. web tool' — Tavily offers specialized crawling/extraction (better for deep-dive). Web tool is simpler but broader. Use tavily for research requiring content extraction from complex pages. (2) 'github tools vs. web search' — github/search_repositories searches code/projects. Use when researching patterns in open-source agents. Use web search for documentation/blogs. (3) 'semantic_search vs. grep' — semantic_search finds conceptually related code (better for understanding). grep finds exact text (better for pattern validation). Use semantic first in codebase exploration. (4) 'pdf-reader usage' — Use for academic papers, documentation PDFs. Extract key findings and cite source document. (5) 'create_file for temp docs' — Use ONLY for temp docs in .github/context/; follow JSON schema strictly.",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L100 emphasizing tool selection strategy",
+      "source_excerpt": "From tool-composition-patterns.md 'Atomic Tool Operations': 'Different tools for different purposes. Choose tool based on task. Search before modifying. Verify after operations.' — Pattern shows tool choice matters.",
+      "priority": "low",
+      "priority_justification": "Agent can function with 28 tools available using intuition. Tool selection guidance would optimize efficiency but isn't critical. Low priority because agent has broad tool access and can experiment.",
+      "impact": "Improves tool selection efficiency. Reduces suboptimal tool usage. Makes research workflows more streamlined.",
+      "for_upskiller": "Add brief 'Tool Selection Guidance' subsection to 'Research Methodology' section or create separate 'Tool Usage Tips' section. Provide 5 brief tool selection guidelines: (1) tavily vs. web, (2) github vs. web search, (3) semantic_search vs. grep, (4) pdf-reader usage, (5) create_file for temp docs only. Format as concise bullet points (2-3 sentences each). Reference tool-composition-patterns.md#L40-L100."
+    }
+  ],
+  "summary": {
+    "overall_assessment": "@agentic-workflow-researcher is a well-designed, thoughtfully constructed research specialist with excellent foundational structure. Core strengths: clear 5 research domains, explicit 7-step research methodology, comprehensive 28-tool set, exemplary temp doc schema with detailed JSON specification and 2 complete examples, explicit rules emphasizing source attribution. Primary improvement areas focus on instruction completeness and decision-making frameworks: (1) explicitly measurable quality standards (vs. implicit rules), (2) decision framework for research scope management, (3) explicit tool composition sequences, (4) escalation paths and error handling, (5) verification checklists. These are all 'medium' or 'low' priority enhancements; no critical gaps affect core research specialization.",
+    "strengths": [
+      "Excellent temp doc specification with complete JSON schema showing required/optional fields, naming convention, two detailed working examples, clear population guidance, and inter-agent consumption patterns",
+      "Clear, explicit 7-step research methodology (understand → multi-source → pattern-match → synthesize → cite → evaluate → report) with actionable guidance for each step",
+      "Well-defined 5 research domains (agentic workflows, VS Code, Copilot CLI, multi-agent orchestration, development tools) with clear specialization boundaries",
+      "Comprehensive, appropriate 28-tool set including web research (tavily suite), GitHub integration, codebase search, PDF handling, and grep/semantic search capabilities",
+      "Strong emphasis on source attribution and credibility evaluation in Rules section",
+      "Clear responsibilities (10 specific, measurable deliverables)",
+      "Explicit constraints (7 boundaries preventing scope creep and implementation work)",
+      "Exemplary temp doc examples showing real research output format and metadata",
+      "Clear escalation principle: 'Work autonomously once delegated; only clarify if essential'",
+      "Good guidance on temp doc consumption by other agents with discovery patterns (tags, timestamps, version fields)"
+    ],
+    "improvement_areas": [
+      "Quality standards are implicit (Rules list principles) rather than explicit (measurable checklist like @doc's 8-point standard)",
+      "Missing decision framework for research scope, depth, and sufficiency (when is research 'done'?)",
+      "Research methodology described in prose; could benefit from explicit tool composition sequences for common scenarios",
+      "Escalation paths not documented (what constitutes 'essential' clarification? when to escalate conflicting sources?)",
+      "No explicit verification checklist before reporting research (all questions answered? sources verified? synthesis coherent?)",
+      "Missing concrete examples of good vs. poor research quality (temp doc examples show format, not quality examples)",
+      "Inter-agent communication implicit ('report back') rather than explicit ('report to @ben, orchestrator')",
+      "No documented common research failure modes (over-scoping, poor synthesis, insufficient sources)",
+      "Tool selection guidance missing (when to use tavily vs. web? semantic_search vs. grep?)",
+      "Temp doc schema is excellent but field population guidance for different research types could be more explicit"
+    ],
+    "critical_gaps": 0,
+    "recommendations_by_priority": {
+      "high": 2,
+      "high_summary": "2 high-priority gaps: (1) Missing explicit quality standards (gap-001) — critical for consistent research output quality, impacts downstream agents. (2) Missing decision framework (gap-002) — critical for scoping research appropriately, prevents wasted effort and token usage.",
+      "medium": 5,
+      "medium_summary": "5 medium-priority gaps: (3) Explicit tool composition sequences (gap-003), (4) Escalation paths/error handling (gap-004), (6) Verification patterns (gap-006), (8) Common failure modes (gap-008), (10) Tool selection guidance (gap-010). These improve efficiency and robustness.",
+      "low": 3,
+      "low_summary": "3 low-priority gaps: (5) Inter-agent communication clarity (gap-005), (7) Research quality examples (gap-007), (9) Temp doc field population guidance (gap-009). These are clarity/polish improvements."
+    }
+  },
+  "next_steps": {
+    "for_ben": "@agentic-workflow-researcher evaluation complete. No critical gaps or blocking issues detected. Agent is well-designed for research specialization with excellent foundational structure (temp docs, methodology, tools). Recommendation: (1) Delegate @agentic-workflow-researcher evaluation results to @ar-upskiller — implement high-priority gaps (quality standards gap-001, decision framework gap-002) immediately; these affect research output quality. (2) Schedule medium-priority gaps (tool composition, escalation, verification, failure modes) for next improvement cycle. (3) Low-priority gaps (clarity improvements) can be bundled with documentation polish. (4) @agentic-workflow-researcher is ready for full use by Ben; no blocking issues prevent delegating research tasks. Total estimated implementation time: 4-5 hours for comprehensive improvements (2-3 hours high-priority, 1-2 hours medium-priority, 0.5-1 hour low-priority).",
+    "for_upskiller": "Priority sequence for @agentic-workflow-researcher improvement: (1) **IMMEDIATE (2-3 hours)**: Implement gap-001 (Quality Standards — add explicit measurable criteria matching @doc pattern) and gap-002 (Decision Framework — add scope, depth, sufficiency decisions). These directly impact research quality. High-priority gaps take precedence. (2) **SECONDARY (1-2 hours)**: Implement gap-003 (Tool Composition Sequences), gap-004 (Escalation Paths), gap-006 (Verification Checklist). These improve robustness and efficiency. (3) **ENHANCEMENT (0.5-1 hour)**: Implement gap-005, gap-007, gap-008, gap-009, gap-010 (inter-agent communication clarity, examples, failure modes, field guidance, tool selection). These are polish/clarity improvements. All gaps are actionable with specific implementation guidance provided in gap entries. Consider implementing high-priority gaps immediately, deferring others to next cycle.",
+    "timeline": "High-priority gaps (001, 002): 2-3 hours. Medium-priority gaps (003, 004, 006): 1-2 hours. Low-priority gaps (005, 007, 008, 009, 010): 0.5-1 hour. Total estimated: 4-5 hours for comprehensive implementation. Recommend: Implement high-priority immediately (quality standards and decision framework are foundational); defer medium/low to next improvement cycle if time-constrained."
+  },
+  "evaluation_metadata": {
+    "framework_used": "8-step evaluation framework from evaluator.agent.md",
+    "research_delegations": "No external research delegations needed; comprehensive research agent patterns exist in workspace (orchestrator-worker case study, agent-specialization-patterns, instruction-engineering-best-practices, common-failure-modes, tool-composition-patterns)",
+    "confidence_level": "high",
+    "confidence_justification": "Evaluation based on: (1) Complete review of @agentic-workflow-researcher.agent.md (400+ lines), (2) Systematic analysis against 11 research documents covering research methodology, instruction engineering, specialization, tool composition, failure modes, delegation patterns, and communication patterns, (3) 200+ agent pattern examples from .github/context/2026-03-30-awesome-copilot-exploration.json with research agent references, (4) Detailed comparison with @doc (fellow specialist agent using same evaluation framework), (5) Concrete pattern sources from orchestrator-worker case study and effective-delegation-strategies.md. All gaps have specific sources and actionable implementation guidance.",
+    "evaluation_complete": true,
+    "notes": "@agentic-workflow-researcher is a mature, well-designed research specialist with exceptional temp doc specification (should serve as reference pattern for other agents). Core research specialization is sound; foundational structure (domains, methodology, tools) is excellent. Identified gaps are primarily in instruction completeness (explicit quality standards, decision frameworks, verification patterns, escalation paths) and optional enhancements (examples, failure mode documentation). No safety, governance, or specialization concerns detected. High-priority gaps are recommended for immediate implementation as they directly impact research output quality. Agent is ready for full deployment to Ben; gaps represent optimization opportunities."
+  }
+}
