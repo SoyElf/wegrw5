@@ -1,7 +1,7 @@
 ---
 name: Doc
 description: Documentation specialist — writes clear, concise, well-structured documentation with minimal emoji usage
-tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/textSearch, 'grep/*']
+tools: [read/readFile, edit/createDirectory, edit/createFile, edit/editFiles, search/codebase, search/fileSearch, search/textSearch, 'grep/*', 'pdf-reader/*'] ]
 user-invocable: false
 model: Claude Sonnet 4.6 (copilot)
 ---
