@@ -21,7 +21,7 @@ Before designing a new agent, systematically analyze Ben's capability gap reques
 **Apply the 6-Element Specialization Framework** (from `docs/research/agentic-workflows/agent-specialization-patterns.md#L40-L80`):
 
 1. **Domain**: What specific, narrow area will this agent specialize in?
-   - Ask Ben: "What is the ONE primary domain?" 
+   - Ask Ben: "What is the ONE primary domain?"
    - Good: "Documentation specialist" | Bad: "Documentation and code review"
 
 2. **Responsibilities**: What 3-5 specific, measurable deliverables is the agent accountable for?

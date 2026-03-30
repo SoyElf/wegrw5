@@ -1,0 +1,391 @@
+{
+  "evaluated_agent": "ar-director",
+  "evaluation_date": "2026-03-30",
+  "evaluator": "evaluator",
+  "agent_profile": {
+    "name": "ar-director",
+    "description": "HR Director — recruits (creates) new specialist agents when a capability gap is identified. Only invocable by Ben.",
+    "responsibilities": [
+      "Understand new agent role requirements from Ben's brief",
+      "Design new specialist agents with appropriate scope, tools, and instructions",
+      "Optionally validate agent design via agentic-workflow-researcher",
+      "Create .agent.md files in .github/agents/ directory",
+      "Update Ben's agent registry with new agent",
+      "Update workspace instructions (.github/copilot-instructions.md)",
+      "Report new agent creation to Ben with capabilities summary"
+    ],
+    "constraints": [
+      "Cannot perform work directly; only creates agent definitions",
+      "Cannot design generalist agents (only specialists)",
+      "Cannot bypass workspace conventions or structure",
+      "Remains accountable for final agent quality"
+    ],
+    "tools": [
+      "read/problems",
+      "read/readFile",
+      "agent (invoke agentic-workflow-researcher)",
+      "edit/createDirectory",
+      "edit/createFile",
+      "edit/editFiles",
+      "edit/rename",
+      "search",
+      "web",
+      "github/get_file_contents",
+      "github/search_code",
+      "tavily/tavily_crawl",
+      "tavily/tavily_extract",
+      "tavily/tavily_search"
+    ],
+    "agents_can_invoke": [
+      "agentic-workflow-researcher"
+    ],
+    "model": "Claude Sonnet 4.6 (copilot)",
+    "user_invocable": false
+  },
+  "agent_classification": {
+    "type": "recruitment-specialist",
+    "primary_patterns": [
+      "agent-specialization-patterns",
+      "instruction-engineering-best-practices",
+      "capability-gap-assessment",
+      "tool-composition-patterns",
+      "agent-creation-checklist",
+      "multi-agent-portfolio-management"
+    ],
+    "related_agents": [
+      "@ben (orchestrator; receives ar-director output and delegates to new agents)",
+      "@ar-upskiller (improves agents after creation)",
+      "@agentic-workflow-researcher (validates agent designs)",
+      "@evaluator (analyzes agents for quality)"
+    ]
+  },
+  "research_context_used": [
+    "docs/research/agentic-workflows/agent-creation-checklist.md#L1-L250",
+    "docs/research/agentic-workflows/agent-definition-and-fundamentals.md#L1-L120",
+    "docs/research/agentic-workflows/agent-specialization-patterns.md#L1-L300",
+    "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L1-L300",
+    "docs/research/agentic-workflows/tool-composition-patterns.md#L1-L200",
+    "docs/research/agentic-workflows/common-failure-modes.md#L1-L150",
+    "docs/research/agentic-workflows/orchestrator-worker-case-study.md#L150-L175",
+    "docs/research/agentic-workflows/multi-agent-orchestration-principles.md#L100-L120",
+    "docs/research/agentic-workflows/effective-delegation-strategies.md#L1-L200",
+    ".github/context/2026-03-30-awesome-copilot-exploration.json (200+ agent examples, patterns, governance)",
+    ".github/agents/ben.agent.md (escalation patterns, capability gap assessment)",
+    ".github/agents/doc.agent.md (specialization example, instruction patterns)",
+    ".github/agents/ar-upskiller.agent.md (interdependency with ar-director)"
+  ],
+  "patterns_discovered": [
+    {
+      "name": "Agent Specialization Framework (6-Element)",
+      "category": "specialization",
+      "source": "docs/research/agentic-workflows/agent-specialization-patterns.md#L40-L200",
+      "applicability_to_target": "ar-director should systematically apply this framework when designing new agents: (1) Domain clarity, (2) Specific responsibilities, (3) Explicit constraints, (4) Tool set justification, (5) Success criteria, (6) Escalation paths. Currently ar-director mentions these loosely but doesn't enforce systematic application."
+    },
+    {
+      "name": "Instruction Engineering Best Practices (7-Section Structure)",
+      "category": "instruction-quality",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L20-L150",
+      "applicability_to_target": "Every new agent requires: Role, Responsibilities, Constraints, Quality Standards, Tool Usage Guidance, Escalation Paths, Decision Framework. ar-director should verify all sections present in new agents but currently doesn't have explicit checklist."
+    },
+    {
+      "name": "Agent Creation Checklist (5-Phase Framework)",
+      "category": "governance",
+      "source": "docs/research/agentic-workflows/agent-creation-checklist.md#L1-L400",
+      "applicability_to_target": "Complete framework: Phase 1 (Planning), Phase 2 (Implementation), Phase 3 (Testing), Phase 4 (Documentation), Phase 5 (Deployment). ar-director's 7-step process covers 1,2,5 but omits systematic testing and comprehensive documentation planning. Should reference and apply this checklist."
+    },
+    {
+      "name": "Tool Composition Strategies (4-Pattern Framework)",
+      "category": "tools",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L150",
+      "applicability_to_target": "Four strategies for composing tools: (1) Search-Then-Modify, (2) Create-Then-Verify, (3) Batch Modification, (4) Read-Modify-Verify. ar-director should guide new agents on tool composition strategy but currently only says 'keep tool list minimal' without systematic approach."
+    },
+    {
+      "name": "Common Failure Modes Prevention",
+      "category": "governance",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L1-L150",
+      "applicability_to_target": "79% of agent failures are preventable through specification clarity (45%) and coordination (34%). ar-director should use this framework to prevent specification failures (overly broad scope, insufficient context, unclear success criteria, tool misuse). Should proactively check for these failure modes in new agent designs."
+    },
+    {
+      "name": "Ben's Escalation Decision Framework",
+      "category": "governance",
+      "source": ".github/agents/ben.agent.md#L200-L230",
+      "applicability_to_target": "Ben escalates to ar-director when: (1) existing specialist unsuitable for task, (2) tool gap exists, (3) domain mismatch. ar-director should understand these escalation triggers and design agents that address them clearly. Ben emphasizes 'clear capability gap description' — ar-director should require this from Ben as input."
+    },
+    {
+      "name": "Awesome-Copilot Patterns (200+ Agents Reference)",
+      "category": "patterns",
+      "source": ".github/context/2026-03-30-awesome-copilot-exploration.json (patterns section)",
+      "applicability_to_target": "200+ production agents demonstrate: (1) Hierarchical orchestration (Gem series), (2) Specialization patterns, (3) Instruction engineering techniques, (4) Tool composition strategies, (5) Safety/governance integration. ar-director could reference these as design templates and patterns for validating new agents."
+    },
+    {
+      "name": "Research-Backed Design Validation",
+      "category": "governance",
+      "source": "docs/research/agentic-workflows/ (all files)",
+      "applicability_to_target": "Comprehensive research documentation exists for all aspects of agent design. ar-director should systematically apply these patterns when designing new agents, not just reference them casually. Should have explicit workflow for consulting research during design phases."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "gap-001",
+      "category": "recruitment-framework",
+      "title": "Missing Systematic Capability Gap Assessment Framework",
+      "current_state": "ar-director receives Ben's brief stating 'what capability is needed' but lacks explicit framework for analyzing and validating the capability gap. Step 1 says 'From Ben's brief, determine what the new agent needs to do' — this is vague and subjective.",
+      "gap_description": "Ben's orchestrator instructions emphasize 'clear capability gap description' as a requirement for escalation, but ar-director has no systematic method to analyze, validate, or challenge capability gap claims. This creates risk of designing agents for vaguely-stated needs. The agent-specialization-patterns.md framework provides a 6-element structure (Domain, Responsibilities, Constraints, Tools, Success Criteria, Escalation) that ar-director should systematically apply to validate every new agent gap.",
+      "recommended_change": "Add explicit 'Capability Gap Analysis' step to ar-director's recruitment process (before Step 1). Create structured analysis template: (1) What existing agents were considered and rejected? (2) Why are they unsuitable? (3) What specific domain will the new agent cover? (4) What responsibilities must it have? (5) What constraints must it have? (6) What success criteria define 'agent complete'? This ensures ar-director doesn't design agents for poorly-defined needs.",
+      "source": "docs/research/agentic-workflows/agent-specialization-patterns.md#L40-L80 defines the 6-element framework; .github/agents/ben.agent.md#L226-L230 emphasizes 'clear gap description'; docs/research/agentic-workflows/common-failure-modes.md#L70-L100 shows specification failures (45% of failures) are preventable.",
+      "source_excerpt": "From agent-specialization-patterns.md: 'Define each agent using this framework: Domain (What specific area), Responsibilities (What is accountable for), Constraints (What NOT allowed to do), Tools (Specific tools), Success Criteria (How know succeeded), Escalation Paths (When escalate).' From ben.agent.md: 'Escalating to ar-director without clear capability gap description [is bad orchestration]'",
+      "priority": "high",
+      "priority_justification": "Capability gap analysis is foundational to ar-director's core responsibility (recruitment). Without systematic analysis, ar-director risks designing agents for poorly-understood needs, leading to specification failures (45% of agent failures per common-failure-modes.md). This directly impacts agent quality and Ben's ability to use new agents effectively.",
+      "impact": "Ensures new agents address real capability gaps with clear requirements. Prevents 'solution looking for a problem' agent creations. Enables Ben to verify gap analysis before agent design begins.",
+      "for_upskiller": "Add new section 'Capability Gap Analysis & Validation' after 'When You Are Invoked' section. Include: (1) Explicit template/checklist for analyzing capability gaps using the 6-element specialization framework, (2) Questions ar-director should ask Ben ('What existing agents were considered? Why unsuitable?'), (3) Example of good vs poor gap analysis, (4) Explicit instruction: 'If gap is unclear after analysis, ask Ben for clarification before proceeding to design.' Reference docs/research/agentic-workflows/agent-specialization-patterns.md#L40-L80 as the framework to apply."
+    },
+    {
+      "id": "gap-002",
+      "category": "specification-quality",
+      "title": "No Explicit Agent Specification Quality Checklist Tied to agent-creation-checklist.md",
+      "current_state": "ar-director has a 7-step process and mentions 'agent design guidelines' but doesn't enforce a systematic checklist for verifying new agent specifications before deployment. No reference to or application of the comprehensive agent-creation-checklist.md.",
+      "gap_description": "The workspace has a detailed 5-phase agent creation checklist (Planning, Implementation, Testing, Documentation, Deployment) with 40+ specific checkpoints. ar-director's current process touches on these informally but doesn't systematically verify them. This creates risk of incomplete agent definitions being deployed (missing success criteria, unclear constraints, no testing, insufficient documentation).",
+      "recommended_change": "Add explicit step in ar-director's process to verify new agent specifications against the 5-phase checklist from agent-creation-checklist.md. Before Step 4 ('Create the file'), ar-director should verify: Phase 1 (Planning): Domain defined clearly? Constraints explicit? Tools justified? Phase 2 (Implementation): YAML complete? All required Markdown sections present? Phase 3 (Testing considerations): Are there clear success criteria to test against? Document which tests would validate the agent. Phase 4 (Documentation): Has agent's purpose, constraints, and workflow been documented in instructions? Phase 5 (Deployment): Will agent be discoverable? Are all tools available? Create explicit verification checklist that ar-director uses before finalizing file creation.",
+      "source": "docs/research/agentic-workflows/agent-creation-checklist.md#L1-L400 provides the complete 5-phase framework with 40+ checkpoints. Currently ar-director doesn't reference or apply this systematically.",
+      "source_excerpt": "From agent-creation-checklist.md: 'Phase 1: Planning — (Define Agent Role, Define Responsibilities, Define Tool Set). Phase 2: Implementation — (Create Agent Definition File, Write Clear Instructions). Phase 3: Testing — (Unit Testing, Integration Testing, Quality Testing). Phase 4: Documentation — (Agent-Level Docs, Team Documentation). Phase 5: Deployment — (Pre-Deployment Checklist, Monitoring).'",
+      "priority": "high",
+      "priority_justification": "Ensures new agents are production-ready before deployment. Prevents incomplete specifications from being used by Ben. The checklist addresses all critical agent design dimensions (role, responsibilities, constraints, tools, instructions, testing, documentation, deployment). Without systematic verification, newly-created agents risk being incomplete or non-functional.",
+      "impact": "New agents are deployed with complete, verified specifications. Reduces post-deployment issues (missing tools, unclear instructions, discovery problems). Enables ar-upskiller to improve agents later from a solid baseline.",
+      "for_upskiller": "Add new section 'Agent Specification Verification Checklist' in ar-director instructions, inserted before Step 4 ('Create the file'). Include: (1) Direct reference to agent-creation-checklist.md Phases 1-5, (2) Simplified checklist for ar-director's workflow (what items MUST be verified before creating file), (3) Example of 'complete specification' vs 'incomplete specification', (4) Explicit instruction: 'Do not proceed to Step 4 until all critical checklist items verified. If items missing, go back to design phase.' Create a 1-page summary checklist that ar-director uses before finalizing agent file."
+    },
+    {
+      "id": "gap-003",
+      "category": "governance",
+      "title": "Unclear Criteria for Mandatory vs Optional Research Validation",
+      "current_state": "Step 3 states 'Optional best-practice review — If the role is complex, broad, or high-impact, delegate to agentic-workflow-researcher...' The terms 'complex,' 'broad,' and 'high-impact' are subjective and ar-director has no explicit framework for deciding when validation is mandatory vs optional.",
+      "gap_description": "Research validation with agentic-workflow-researcher is critical for preventing specification failures (common-failure-modes.md shows 45% of failures are preventable with better upfront specification). However, ar-director treats it as 'optional,' which risks skipping validation for agents that need it. Common failure modes include: overly broad scope, insufficient context, unclear success criteria. These are all preventable with research-backed design validation.",
+      "recommended_change": "Replace 'Optional best-practice review' with explicit decision criteria for WHEN research validation is MANDATORY. Create a decision matrix: (1) IF agent complexity is HIGH (multiple responsibilities, complex tool composition) THEN mandatory research validation. (2) IF agent scope overlaps with existing agents OR could potentially duplicate capabilities THEN mandatory research validation to validate specialization. (3) IF agent tool set is large (5+ tools) THEN mandatory research validation for tool composition patterns. (4) IF agent has complex constraints (safety/governance concerns) THEN mandatory research validation. (5) LOW complexity (single clear responsibility, simple tools, no overlap) THEN optional. Create explicit guidance for ar-director: 'Use research validation when uncertain about design choices; always validate before deploying agents with potential safety/governance implications.'",
+      "source": "docs/research/agentic-workflows/common-failure-modes.md#L45-L100 shows specification failures (45% of total failures) preventable with better upfront specification; docs/research/agentic-workflows/instruction-engineering-best-practices.md emphasizes clear specifications prevent failures; .github/agents/agentic-workflow-researcher.agent.md shows research validation is available resource for design validation.",
+      "source_excerpt": "From common-failure-modes.md: 'Specification Failures (45% of Total): Overly Broad Agent Scope, Insufficient Context in Delegation, Unclear Success Criteria. Prevention: [Create focused agents, provide style guides, set explicit criteria]' This shows prevention of these failures requires deliberate specification work—validating with research helps catch these.",
+      "priority": "high",
+      "priority_justification": "Research validation prevents 45% of agent failures (specification-related). Making validation 'optional' creates risk of deploying poorly-specified agents. Given that recruitment creates high-impact agents that other agents depend on, validation should be systematic, not discretionary.",
+      "impact": "New agents are designed with research-backed patterns. Specification failures are caught before deployment. ar-director makes consistent, evidence-based design decisions.",
+      "for_upskiller": "Replace Step 3 ('Optional best-practice review') with explicit decision framework. (1) Rename section to 'Research Validation Decision' with clear matrix: Complexity/Scope/Overlap/Tool Count/Governance → Mandatory/Optional. (2) Add examples: 'If creating a documentation agent with single responsibility and 4 tools: optional. If creating code review agent with 6 responsibilities and potential overlap with existing specialists: mandatory.' (3) Include guidance: 'When in doubt, validate. Research validation is cheap; specification failures are expensive (lead to non-functional agents).' (4) Reference common-failure-modes.md#L45-L100 as the pattern being prevented."
+    },
+    {
+      "id": "gap-004",
+      "category": "instruction-quality",
+      "title": "Incomplete Application of Instruction Engineering Best Practices to New Agents",
+      "current_state": "ar-director has 'Agent Design Guidelines' section with basic template but doesn't systematically ensure all required instruction sections are present in new agents. Template shows only role, responsibilities, rules; omits critical sections like Quality Standards, Decision Framework, and Escalation Paths.",
+      "gap_description": "The instruction-engineering-best-practices.md document provides a complete recommended structure: Role, Responsibilities, Constraints, Quality Standards, Tool Usage Guidance, Escalation Paths, Decision Framework. ar-director's example template only covers Role, Responsibilities, and Rules—missing 4 of 7 critical sections. This creates risk that new agents lack important guidance sections (like Quality Standards, which define what success looks like for the agent).",
+      "recommended_change": "Update ar-director's 'Example Agent Template' to include all 7 critical sections from instruction-engineering-best-practices.md: (1) Role statement, (2) Responsibilities (specific, measurable), (3) Constraints (explicit scope boundaries), (4) Quality Standards (success criteria for this agent's outputs), (5) Tool Usage Guidance (composition patterns, order, restrictions), (6) Escalation Paths (when/how to ask for help), (7) Decision Framework (how agent makes tradeoffs). Provide complete template example showing all sections filled in. Add req to ar-director: 'When designing agents, ensure new agent instructions include all 7 sections. If a section is N/A, explicitly state why in design rationale.'",
+      "source": "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L20-L150 provides complete recommended structure with examples; .github/agents/doc.agent.md demonstrates this structure in practice (Role, Responsibilities, Constraints, Quality Standards, Tool Composition Patterns, Rules). ar-director's template example (end of ar-director.agent.md) shows incomplete template.",
+      "source_excerpt": "From instruction-engineering-best-practices.md: 'Recommended Instruction Structure: Role, Responsibilities, Constraints, Quality Standards, Tool Usage Guidance, Escalation Paths, Decision Framework. Why Structure Matters: Agents process structured text more reliably than prose. Clear sections enable quick navigation and understanding.' From doc.agent.md: Complete example with all sections properly filled in.",
+      "priority": "high",
+      "priority_justification": "Instruction completeness directly impacts agent effectiveness and reliability. Missing sections (like Quality Standards or Escalation Paths) lead to agent confusion about success criteria and when to ask for help. This is a direct application gap—the pattern exists in documentation and examples, but ar-director doesn't enforce it.",
+      "impact": "New agents have complete, structured instructions matching best practices. Agents understand success criteria, constraints, and escalation paths clearly. Reduces post-deployment instruction clarifications.",
+      "for_upskiller": "Replace the 'Example Agent Template' at end of ar-director.agent.md with complete template including all 7 sections from instruction-engineering-best-practices.md. Model it after the @doc agent definition. Include brief explanation of why each section matters. Add explicit requirement to ar-director: 'Before finalizing agent definition, verify all applicable sections are present in instructions: Role, Responsibilities, Constraints, Quality Standards, Tool Usage, Escalation Paths, Decision Framework.' Create a checklist that ar-director uses when reviewing new agent instructions."
+    },
+    {
+      "id": "gap-005",
+      "category": "tools",
+      "title": "Missing Systematic Tool Composition Framework for New Agents",
+      "current_state": "ar-director says 'keep tool list minimal' and 'determine what tools it requires' but provides no systematic framework for selecting tools or composing them. Doesn't reference tool-composition-patterns.md strategies.",
+      "gap_description": "Tool-composition-patterns.md provides 4 explicit strategies for composing tools reliably: (1) Search-Then-Modify Pattern, (2) Create-Then-Verify Pattern, (3) Batch Modification Pattern, (4) Read-Modify-Verify Pattern. ar-director doesn't guide new agents to use these strategies. Additionally, ar-director doesn't provide a framework for deciding what tools are necessary vs optional vs forbidden 'for this specific agent role.'",
+      "recommended_change": "Add explicit 'Tool Selection & Composition Framework' section to ar-director instructions. Include: (1) Framework for deciding which tools agent needs: Does agent need to search code? (→ search/semantic_search). Does agent modify files? (→ edit/editFiles). Does agent need to verify changes? (→ get_errors). (2) Reference the 4 tool composition strategies from tool-composition-patterns.md and guide ar-director to choose strategy matching agent's workflow. (3) Explicit guidance on tool RESTRICTIONS: 'For documentation agents: can read files but not modify arbitrary files outside docs/. For code review agents: read-only, no command execution.' (4) Add tool composition examples to new agent instructions: 'When you search for files, follow with: (1) semantic_search to find relevant content, (2) read_file to get context, (3) modify with targeted edits, (4) verify with get_errors.'",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L40-L150 provides 4 strategies with detailed examples; .github/agents/doc.agent.md demonstrates tool composition guidance embedded in 'Tool Composition Patterns' section with concrete examples for different tasks.",
+      "source_excerpt": "From tool-composition-patterns.md: 'Tool Composition Pattern: (1) Search/Analyze, (2) Decide, (3) Modify, (4) Verify, (5) Report. Strategy 1: Search-Then-Modify — Always search before modifying. Strategy 2: Create-Then-Verify — Generate complete files rather than creating empty. Strategy 3: Batch Modification — Use multi_replace for related changes. Strategy 4: Read-Modify-Verify — Complex edits with sufficient context.' From doc.agent.md: 'Tool Composition Patterns: Pattern 1: Create New Documentation (1. search/codebase, 2. read_file, 3. create_file, 4. search/textSearch, 5. Report).'",
+      "priority": "medium-high",
+      "priority_justification": "Tool composition is critical for agent reliability. Poorly-composed tool use leads to failures (wrong tool order, missing verification steps). The patterns exist, but ar-director doesn't apply them when designing new agents. This affects every new agent's ability to use tools effectively.",
+      "impact": "New agents use tools in reliable, verified patterns. Reduces tool-related failures (wrong order, missing verification). Agents follow documented best practices for their domain.",
+      "for_upskiller": "Add 'Tool Selection & Composition Framework' section to ar-director instructions (insert in 'Agent Design Guidelines' section). Include: (1) Decision matrix: Agent responsibility → needed tools. (2) Reference to 4 strategies from tool-composition-patterns.md with brief descriptions. (3) Requirement: 'In new agent instructions, include a 'Tool Composition Patterns' section showing concrete examples of tool use for primary agent workflows' (model on @doc.agent.md). (4) Example: 'If agent modifies files, show: (1) search, 2) read_file, 3) modify with sufficient context, 4) verify with get_errors.' Make tool composition guidance a standard section that ar-director includes in all new agents."
+    },
+    {
+      "id": "gap-006",
+      "category": "governance",
+      "title": "Missing Explicit Agent Specialization Framework Application",
+      "current_state": "ar-director mentions 'choose an appropriate name, description, tool set, write clear Markdown instructions' but doesn't systematically apply the 6-element specialization framework from agent-specialization-patterns.md. Doesn't explicitly ensure every new agent has: clear Domain, defined Responsibilities, explicit Constraints, justified Tools, success Criteria, and Escalation Paths.",
+      "gap_description": "agent-specialization-patterns.md provides a complete 6-element role definition framework. ar-director should verify that every new agent is designed and documented using this framework. Currently, ar-director doesn't explicitly check that (1) domain is narrow and well-defined, (2) responsibilities are specific and measurable (not vague), (3) constraints prevent scope creep, (4) tools are justified (not just granted arbitrarily), (5) success criteria are explicit (how do we know agent succeeded?), (6) escalation paths are defined. Without systematic application, new agents risk being broad, unclear, or without clear success criteria.",
+      "recommended_change": "Create 'Agent Specialization Framework Checklist' that ar-director applies to every new agent design. Checklist items: (1) Domain: Is agent's specialty narrow and well-defined? (✓ 'Documentation specialist' ✗ 'Documentation and code review'). (2) Responsibilities: Are there 3-5 specific, measurable responsibilities? (✓ 'Write API documentation with request/response schemas and examples' ✗ 'Document things'). (3) Constraints: Are there explicit 'Cannot do...' statements to prevent scope creep? (✓ 'Cannot modify application code' ✗ No constraints stated). (4) Tools: Is each tool justified and needed for responsibilities? (✓ Justify 'read/readFile: needed to understand code context' ✗ Just list tools). (5) Success Criteria: Are there explicit, measurable success criteria? (✓ 'Documentation passes linting, includes 3 examples, style matches reference docs' ✗ 'Documentation is good'). (6) Escalation: Are escalation paths defined? (✓ 'Escalate if implementation unclear' ✗ No escalation guidance). Insert verification step in ar-director's process before Step 4.",
+      "source": "docs/research/agentic-workflows/agent-specialization-patterns.md#L40-L200 provides 6-element framework with detailed explanation of each element, examples of good/bad definitions, and rationale. .github/agents/doc.agent.md demonstrates applied framework (Domain: documentation, Responsibilities: clear list, Constraints: explicit, Tools: justified, Quality Standards: measurable). .github/agents/ben.agent.md also shows good application of framework.",
+      "source_excerpt": "From agent-specialization-patterns.md: 'Define each agent using this framework: Element 1: Domain (What specific area). Element 2: Responsibilities (What accountable for). Element 3: Constraints (Cannot do statements). Element 4: Tools. Element 5: Success Criteria. Element 6: Escalation Paths.' Example: ✓ 'Code Review Agent: Reviews code for bugs, performance, style. Cannot: modify code, approve alone, deploy.' ✗ 'Generic code agent that also does documentation and testing.'",
+      "priority": "high",
+      "priority_justification": "The 6-element framework is foundational to agent quality. Without systematic application, new agents risk scope creep (Failure Mode 1), unclear constraints (leads to agents overstepping), and unmeasurable success criteria (Failure Mode 3). This is core to ar-director's recruitment responsibility.",
+      "impact": "Every new agent is designed with clear domain, responsibilities, constraints, and success criteria. Prevents specification failures (Failure Modes 1, 3). Enables Ben to understand agent capabilities and constraints clearly.",
+      "for_upskiller": "Create explicit 'Agent Specialization Framework' checklist that ar-director applies to every new agent. Insert as verification step before Step 4 ('Create the file'). Include: (1) 6-element checklist (Domain, Responsibilities, Constraints, Tools, Success Criteria, Escalation), (2) Examples of good vs poor definitions for each element, (3) Requirement: 'Do not proceed to agent creation unless all 6 elements are clearly defined for the new agent.' (4) Template questions ar-director should answer for each element: 'Domain: What is the ONE specific area this agent specializes in? Would another agent be more appropriate?' (5) Reference agent-specialization-patterns.md#L40-L200 throughout checklist."
+    },
+    {
+      "id": "gap-007",
+      "category": "portfolio-management",
+      "title": "Missing Explicit Portfolio Integration Verification",
+      "current_state": "ar-director updates Ben's agent registry and workspace instructions but doesn't explicitly verify that new agent: (1) doesn't duplicate existing agent capabilities, (2) integrates cleanly with Ben's orchestration model, (3) follows workspace naming conventions, (4) is discoverable by Ben, (5) follows established instruction patterns across portfolio.",
+      "gap_description": "As the HR Director for a growing agent portfolio, ar-director should think about portfolio health: Do agents overlap? Do they follow consistent patterns? Are they all discoverable by orchestrator? Currently, ar-director focuses on creating individual agents without systematic verification of portfolio integration. This could lead to: (1) Duplicate agents (two agents doing similar work), (2) Inconsistent naming (some named @doc, some @documentation, some @docs-writer), (3) Inconsistent instruction patterns (making Ben's orchestration less predictable), (4) Discovery problems (Ben doesn't know about the agent because it's not properly registered).",
+      "recommended_change": "Add 'Portfolio Integration Verification' step before Step 5 (Update Ben). Verify: (1) Uniqueness: Does this agent's domain overlap with existing agents? If yes, justify why both are needed. (2) Ben Compatibility: Will Ben understand this agent's role and when to delegate to it? Verify by asking: 'If Ben has task [specific example], would this agent be the right choice?' (3) Naming Consistency: Does agent name follow workspace patterns (descriptive name matching role, e.g., @documentation-specialist vs generic @doc)? (4) Instruction Consistency: Do agent instructions follow the established pattern from @doc, @research, @git-ops (Role section format, Responsibilities structure, etc.)? (5) Discoverability: After updating Ben and copilot-instructions.md, is agent listed in Agent Directory table with clear description? Verify Ben can find and route to agent. Add checklist questions: 'Does this agent fill a clear gap or extend existing capability? Is the role distinct from all other agents in portfolio? Will Ben immediately understand what the agent does?' If any check fails, go back to design phase.",
+      "source": "Orchestrator-worker-case-study.md#L150-L175 documents existing agent portfolio and how agents integrate; .github/copilot-instructions.md provides agent directory table showing workspace conventions; .github/agents/ directory shows established patterns (consistent YAML frontmatter, instruction structure, naming); Ben's orchestration model in .github/agents/ben.agent.md shows Ben needs clear agent purposes to make routing decisions.",
+      "source_excerpt": "From orchestrator-worker-case-study.md: 'Responsibilities: Identify capability gaps not covered by existing specialists. Domain: Agent recruitment and team expansion. Constraints: Only creates agents (doesn't implement them). Must ensure new agents fit with orchestrator pattern. Considers overlap and duplication.' From ben.agent.md: Table of existing specialists shows naming pattern (@doc, @research, @git-ops, etc.). Ben's classification table shows Ben needs clear domain/type for each agent to make routing decisions.",
+      "priority": "medium",
+      "priority_justification": "Portfolio health impacts orchestration effectiveness. Duplicate agents confuse Ben (which should I use?). Inconsistent patterns make orchestration less predictable. As the portfolio grows, integration verification becomes increasingly important. This is a medium priority because individual agents can function without it, but portfolio-level clarity improves over time.",
+      "impact": "Agent portfolio remains coherent and non-overlapping. Ben's orchestration is simpler (no duplicate agents). New agents follow established patterns for consistency. Portfolio growth is managed systematically.",
+      "for_upskiller": "Add 'Portfolio Integration Verification' section before Step 5 ('Update Ben'). Include: (1) Checklist: Uniqueness, Ben Compatibility, Naming Consistency, Instruction Consistency, Discoverability, (2) Examples: 'Naming consistency: ✓ @documentation-specialist (clear), ✗ @docs (ambiguous). ✓ @code-review-specialist, ✗ @reviewer (vague).' (3) Reference to orchestrator-worker-case-study.md showing agent portfolio structure. (4) Guidance: 'If agent overlaps with existing agent, clarify in capability gap analysis why both are needed. If instruction patterns differ, align with established workspace patterns.' (5) Explicit requirement: 'Do not update Ben's agent registry unless portfolio integration verification passes.'"
+    },
+    {
+      "id": "gap-008",
+      "category": "documentation",
+      "title": "Missing Structured Capability Gap Analysis Documentation",
+      "current_state": "ar-director creates new agents and reports back to Ben, but doesn't create a persistent record of WHY each agent was created (what gap was identified, why existing agents insufficient, what problem the new agent solves).",
+      "gap_description": "As the portfolio grows and agents are created over time, future maintainers (ar-upskiller, evaluator, potential new agents) won't understand the rationale behind each agent's creation. Ben's decision framework shows the importance of 'clear capability gap description,' but this information isn't persisted for future reference. This creates risk that future recruitment decisions miss context about why agents were organized the way they are.",
+      "recommended_change": "Add 'Capability Gap Analysis Documentation' step in ar-director's process (after Step 7, Report back). Create a brief document for each new agent that records: (1) What capability gap was identified? (Describe the problem users/Ben faced), (2) Why existing agents insufficient? (List agents considered and their limitations), (3) What problem does new agent solve? (Concise statement). (4) How does new agent integrate with existing portfolio? (Which agents does it complement?), (5) Key design decisions: (Why these responsibilities? Why these constraints? Why these tools?). Store documents in `.github/context/` with naming pattern: `YYYY-MM-DD-recruitment-[agent-name].md` (e.g., `2026-03-30-recruitment-python-refactoring-specialist.md`). This creates persistent record that future agents can reference when understanding portfolio structure.",
+      "source": "agentic-workflow-researcher.agent.md describes 'Temporary Contextual Documentation' pattern for creating structured knowledge artifacts in `.github/context/` for inter-agent discovery. Same pattern could be applied to recruitment rationale. Ben's orchestrator instructions emphasize 'clear capability gap description' as requirement for escalation—ar-director should document this rationale for future reference.",
+      "source_excerpt": "From agentic-workflow-researcher.agent.md: 'Temp docs enable: Agent-readable research artifacts, Coordinated knowledge sharing, Research deduplication, Historical record, Cross-agent discovery.' Same value applies to recruitment rationale documentation. Pattern already exists in workspace for documenting contextual knowledge.",
+      "priority": "low-medium",
+      "priority_justification": "This is an enhancement for long-term portfolio management, not immediately critical. However, as the agent portfolio grows and future decisions are made about improvements/additions, this context becomes increasingly valuable. It's documentation/discoverability rather than a functional gap.",
+      "impact": "Future ar-upskiller and ar-director have context for understanding agent portfolio structure. Portfolio evolution is documented and traceable. New agents can learn from past recruitment decisions.",
+      "for_upskiller": "Add final step to ar-director's recruitment process: 'Step 8: Document Capability Gap & Recruitment Rationale.' Create brief document template (template provided in instructions) that ar-director fills out: Capability Gap, Why Existing Agents Insufficient, Problem Solved, Portfolio Integration, Design Decisions. Save to `.github/context/YYYY-MM-DD-recruitment-[agent-name].md`. Include guidance: 'This documentation helps future agents understand portfolio structure and rationale. Keep it concise (1-2 pages max).' Reference agentic-workflow-researcher.agent.md's temp doc pattern as model."
+    },
+    {
+      "id": "gap-009",
+      "category": "governance",
+      "title": "Missing Explicit Testing & Deployment Verification Before Agent Creation",
+      "current_state": "ar-director creates .agent.md file and updates documentation but doesn't verify that new agent will actually be deployable and functional. No testing or pre-deployment checks documented.",
+      "gap_description": "agent-creation-checklist.md Phase 3 (Testing) and Phase 5 (Deployment) include pre-deployment verification: Can the agent be invoked? Are all tools available? Is file format valid? ar-director doesn't perform these checks. This creates risk that deployed agents are non-functional or have syntax errors in YAML/Markdown.",
+      "recommended_change": "Add 'Pre-Deployment Verification' step before Step 5 (Update Ben). Verify: (1) YAML Syntax: Is frontmatter valid YAML (can be parsed)? Use workspace tooling or manual check. (2) Markdown Syntax: Are Markdown sections properly formatted (valid Markdown)? (3) File Creation Test: Create the .agent.md file and verify it can be read/parsed. (4) Tool Availability: For each tool listed, verify it's a valid tool name in VS Code Copilot. (5) Agent Invocation: Verify agent would be discoverable and invocable by name (check against naming conventions, no conflicts). (6) Ben Compatibility: Verify Ben's orchestration patterns would work with this agent (e.g., agent is properly registered as sub-agent if user-invocable: false).",
+      "source": "agent-creation-checklist.md#L180-L250 (Phase 3: Testing) and #L260-L300 (Phase 5: Deployment) provide pre-deployment checklist items. Currently ar-director skips these steps.",
+      "source_excerpt": "From agent-creation-checklist.md Phase 5: 'Pre-Deployment Checklist: Agent file in correct location, File format is valid (YAML frontmatter valid, no syntax errors), Agent is discoverable (can invoke with @name, shows up in agent selection), All tests passing.'",
+      "priority": "medium",
+      "priority_justification": "Prevents deployment of broken agents. While individual agent creators could catch these errors themselves, ar-director should do final verification before deployment to ensure quality. This is medium priority because errors would be caught eventually (when Ben tries to invoke agent), but catching them early prevents failed delegations.",
+      "impact": "Deployed agents are functional and discoverable. Reduces failed delegations due to agent syntax errors or missing tools. Ensures file format compliance before deployment.",
+      "for_upskiller": "Add 'Pre-Deployment Verification' section to ar-director instructions, inserted before Step 5 ('Update Ben'). Include: (1) Checklist: YAML syntax valid, Markdown syntax valid, File creation test, Tools exist, Agent discoverable, Ben compatibility check. (2) Specific checks ar-director should perform: 'Verify all tools in agent definition are valid tool names in VS Code Copilot.' 'Verify agent name is unique (no conflicts with existing agents).' 'Verify YAML frontmatter can be parsed as valid YAML.' (3) Reference agent-creation-checklist.md Phase 5 (Deployment) as the framework. (4) Guidance: 'If any verification fails, go back to design/implementation phase and fix before proceeding to Step 5.'"
+    },
+    {
+      "id": "gap-010",
+      "category": "pattern-integration",
+      "title": "Limited Leverage of Awesome-Copilot Patterns (200+ Agents Reference)",
+      "current_state": "ar-director instructions reference workspace documentation (agentic-workflows/) but don't mention or leverage the awesome-copilot exploration findings showing 200+ production agents with established patterns, 100+ instruction sets, and governance frameworks.",
+      "gap_description": "The .github/context/2026-03-30-awesome-copilot-exploration.json documents 200+ working agents with demonstrated patterns: Gem series (hierarchical orchestration), Beast Mode agents (advanced instruction techniques), governance examples, MCP server patterns, skill bundling. These are production-validated patterns that ar-director could reference when designing new agents. Currently, ar-director only references workspace documentation, missing access to these external pattern references.",
+      "recommended_change": "Update ar-director instructions to reference awesome-copilot patterns as design templates and validation sources. Add section 'Reference Patterns from Awesome-Copilot' in Agent Design Guidelines: (1) For orchestration specialist agents, reference Gem Orchestrator pattern, (2) For advanced instruction requirements, reference Beast Mode patterns, (3) For governance/safety requirements, reference agent-governance-reviewer pattern, (4) For agents with complex tool needs, reference MCP server integration examples, (5) When uncertain about instruction structure, reference 200+ agent examples. Add guidance: 'When designing new agents, search workspace context files (.github/context/2026-03-30-awesome-copilot-exploration.json) for relevant reference patterns from awesome-copilot. Use these as templates and validation benchmarks.'",
+      "source": ".github/context/2026-03-30-awesome-copilot-exploration.json documents 200+ agents with patterns; specifically: Gem series (orchestration), Beast Mode (advanced instruction), governance patterns, MCP server integration, skill bundling",
+      "source_excerpt": "From awesome-copilot-exploration.json: 'Gem Series Agent Hierarchy Pattern: Complete multi-agent orchestration case study showing hierarchical delegation pattern (Orchestrator → Planner → Researcher → Implementer → Reviewer).' 'Custom Agent Examples — 200+ Specialized Agents: Comprehensive directory of agent types: architectural experts, domain specialists, language experts, tool experts, workflow agents.' These provide reference implementations ar-director could use for validation.",
+      "priority": "low-medium",
+      "priority_justification": "This is a pattern enrichment gap rather than a functional gap. New agents can be created effectively without referencing awesome-copilot patterns. However, having access to 200+ reference implementations would improve design quality and give ar-director confidence that new agent patterns align with external best practices. This is valuable for long-term agent portfolio maturity.",
+      "impact": "New agents leverage proven patterns from 200+ production agents. Design quality benefits from external reference implementations. ar-director has confidence in design choices (can validate against awesome-copilot examples).",
+      "for_upskiller": "Add section to ar-director instructions: 'Leverage Awesome-Copilot Patterns as Design Reference.' Include: (1) Pointer to .github/context/2026-03-30-awesome-copilot-exploration.json as resource, (2) Examples of which patterns to reference for different agent types: orchestrators → Gem series, complex instructions → Beast Mode, governance → agent-governance-reviewer, (3) Guidance: 'When designing new agents, search context files for similar agents in awesome-copilot and use as reference templates.' (4) Encourage ar-director to ask agentic-workflow-researcher for latest patterns if needed: 'If designing agent outside previously-seen domains, delegate quick pattern research to agentic-workflow-researcher for latest external references.'"
+    }
+  ],
+  "strengths": [
+    {
+      "title": "Clear 7-Step Recruitment Process",
+      "evidence": "ar-director.agent.md#L14-L60 defines well-structured recruitment workflow with explicit steps from understanding role through agent deployment and reporting. Process flows logically from design through deployment."
+    },
+    {
+      "title": "References Research Documentation Systematically",
+      "evidence": "ar-director.agent.md#L42-L57 explicitly mentions consulting agentic-workflows research and provides list of relevant documents (vscode-agent-architecture.md, agent-definition-and-fundamentals.md, agent-specialization-patterns.md, tool-composition-patterns.md, etc.). Shows awareness of patterns available."
+    },
+    {
+      "title": "Enables Research Validation with agentic-workflow-researcher",
+      "evidence": "ar-director.agent.md#L22-L25 includes 'Optional best-practice review' step that delegates to agentic-workflow-researcher. Shows understanding that complex agent designs benefit from external validation."
+    },
+    {
+      "title": "Maintains Workspace Documentation Updates",
+      "evidence": "ar-director.agent.md#L37-L40 (Steps 5-6) ensures new agents are added to Ben's registry and workspace instructions. Shows responsibility for portfolio discoverability."
+    },
+    {
+      "title": "Appropriate Tool Set for Recruitment Role",
+      "evidence": "ar-director frontmatter tools include file operations (create/edit), search (codebase, web, GitHub), and agent invocation. Tool set is focused and justified for recruitment domain."
+    },
+    {
+      "title": "Proper Governance (Sub-Agent Only)",
+      "evidence": "ar-director frontmatter: user-invocable: false. ar-director is appropriately restricted to sub-agent role invoked only by Ben, preventing misuse."
+    },
+    {
+      "title": "Delegation Rule Clarity",
+      "evidence": "ar-director.agent.md#L62-L64 explicitly defines delegation rule: 'You may invoke agentic-workflow-researcher only to improve recruitment quality... keep delegation targeted and time-bounded.' Shows clear understanding of appropriate delegation patterns."
+    }
+  ],
+  "recommendations_by_priority": {
+    "high": [
+      {
+        "id": "gap-001",
+        "title": "Missing Systematic Capability Gap Assessment Framework"
+      },
+      {
+        "id": "gap-002",
+        "title": "No Explicit Agent Specification Quality Checklist Tied to agent-creation-checklist.md"
+      },
+      {
+        "id": "gap-003",
+        "title": "Unclear Criteria for Mandatory vs Optional Research Validation"
+      },
+      {
+        "id": "gap-004",
+        "title": "Incomplete Application of Instruction Engineering Best Practices to New Agents"
+      },
+      {
+        "id": "gap-006",
+        "title": "Missing Explicit Agent Specialization Framework Application"
+      }
+    ],
+    "medium": [
+      {
+        "id": "gap-005",
+        "title": "Missing Systematic Tool Composition Framework for New Agents"
+      },
+      {
+        "id": "gap-007",
+        "title": "Missing Explicit Portfolio Integration Verification"
+      },
+      {
+        "id": "gap-008",
+        "title": "Missing Structured Capability Gap Analysis Documentation"
+      },
+      {
+        "id": "gap-009",
+        "title": "Missing Explicit Testing & Deployment Verification Before Agent Creation"
+      }
+    ],
+    "low": [
+      {
+        "id": "gap-010",
+        "title": "Limited Leverage of Awesome-Copilot Patterns (200+ Agents Reference)"
+      }
+    ]
+  },
+  "summary": {
+    "overall_assessment": "ar-director has established a solid 7-step recruitment process and understands the importance of research-backed design. However, the agent lacks systematic application of comprehensive research patterns available in the workspace. The 5-phase agent-creation-checklist.md, 6-element specialization framework, and instruction-engineering best practices are documented in workspace research, but ar-director doesn't have explicit checklists enforcing consistent application. This creates risk of new agents being created with specification gaps (overly broad scope, unclear constraints, unmeasurable success criteria, incomplete instructions). The most critical improvement is adding explicit verification frameworks that ar-director applies to every new agent design—currently these frameworks exist in documentation but aren't embedded in ar-director's workflow. Strengths include clear process flow, awareness of research resources, and appropriate governance. With the recommended improvements, ar-director would be a fully mature recruitment specialist applying research-backed patterns systematically.",
+    "strengths": [
+      "Well-structured 7-step recruitment process with clear progression from role understanding through deployment",
+      "Explicitly aware of research documentation and references relevant agentic-workflows materials",
+      "Enables research validation through delegation to agentic-workflow-researcher (shows good coordination understanding)",
+      "Maintains workspace documentation and portfolio visibility (updates Ben and copilot-instructions.md)",
+      "Appropriate tool set focused on recruitment domain (file operations, search, agent invocation)",
+      "Properly governed as sub-agent only (user-invocable: false), preventing misuse",
+      "Clear delegation rules for agentic-workflow-researcher collaboration with time-bounded, targeted requests"
+    ],
+    "improvement_areas": [
+      "Lacks systematic framework for analyzing and validating capability gaps (currently subjective)",
+      "Doesn't enforce comprehensive agent-creation-checklist.md verification (5-phase framework not mapped to workflow)",
+      "Makes research validation 'optional' without explicit decision criteria (risk of skipping for complex agents)",
+      "Incomplete application of instruction-engineering-best-practices (example template missing critical sections)",
+      "No systematic tool composition framework (doesn't reference tool-composition-patterns.md strategies)",
+      "Doesn't explicitly apply 6-element specialization framework as verification checklist",
+      "Missing portfolio integration verification (doesn't check for duplicate agents or naming consistency)",
+      "No persistent documentation of recruitment rationale (why agents were created, what gaps they fill)",
+      "Skips testing and deployment verification steps from agent-creation-checklist.md",
+      "Limited reference to external patterns from 200+ awesome-copilot agents"
+    ],
+    "critical_gaps": "5 high-priority gaps identified, all related to lack of explicit frameworks and checklists. These prevent systematic application of research-backed patterns already documented in workspace.",
+    "recommendations_by_priority": {
+      "high": "5 high-priority gaps: (1) Capability gap assessment framework, (2) Specification quality checklist, (3) Research validation decision criteria, (4) Instruction engineering application, (5) Specialization framework enforcement. These directly impact agent specification quality and prevention of common failures.",
+      "medium": "4 medium-priority gaps: (1) Tool composition framework, (2) Portfolio integration checks, (3) Gap analysis documentation, (4) Testing/deployment verification. These improve agent quality and portfolio coherence but don't block individual agent creation.",
+      "low": "1 low-priority gap: Awesome-copilot pattern leverage. This is pattern enrichment rather than functional requirement, valuable for long-term quality improvement."
+    }
+  },
+  "next_steps": {
+    "for_ben": "Review ar-director evaluation results. Recommended action: (1) Acknowledge ar-director's solid foundational process, (2) Identify that 5 high-priority gaps exist around explicit frameworks/checklists, (3) Delegate comprehensive upskilling to @ar-upskiller with this evaluation JSON and focus on implementing high-priority gaps first. Timeline: High-priority improvements can be implemented in 2-3 hours (adding explicit checklists and decision frameworks to ar-director instructions). Sequencing: Fix gaps 001, 002, 003, 004, 006 (specification quality cluster) before gaps 005, 007, 008, 009 (quality/documentation cluster).",
+    "for_upskiller": "Recommended approach: (1) High-priority cluster (2-3 hours): Add explicit verification frameworks for capability gap analysis (gap-001), specification quality (gap-002), research validation decision criteria (gap-003), instruction engineering (gap-004), and specialization framework (gap-006). Create checklists that ar-director applies to every new agent. (2) Medium-priority cluster (1-2 hours): Add tool composition framework (gap-005), portfolio integration verification (gap-007), pre-deployment testing (gap-009). (3) Documentation (30 min): Add capability gap documentation step (gap-008) and awesome-copilot pattern reference (gap-010). Implementation approach: Directly reference research documents in ar-director instructions with line ranges (e.g., 'See agent-specialization-patterns.md#L40-L80'). Provide concrete examples alongside each new framework. Make ar-director's instructions serve as a 'checklist companion' to research documents—every new agent undergoes systematic verification using these frameworks.",
+    "timeline": "High-priority gaps: 2-3 hours. Medium-priority gaps: 1-2 hours. Low-priority gaps: 30 min. Total estimated improvement time: 4-5 hours. Recommended sequence: 1) Implement high-priority frameworks first (most impactful), 2) Add medium-priority verification steps, 3) Add documentation and reference enhancements."
+  },
+  "evaluation_metadata": {
+    "framework_used": "8-step evaluation framework (read target agent, understand type, scan research, query external patterns if needed, compare against patterns, identify gaps, synthesize report, verify)",
+    "research_delegations": [
+      "Considered delegating to agentic-workflow-researcher for 'agent recruitment frameworks' but determined comprehensive patterns already exist in workspace (agent-creation-checklist.md, agent-specialization-patterns.md, instruction-engineering-best-practices.md, orchestrator-worker-case-study.md). Awesome-copilot exploration already completed and documented in context JSON."
+    ],
+    "confidence_level": "high - Evaluation is based on: (1) Complete ar-director agent definition review, (2) Comprehensive research pattern documentation in workspace, (3) Established specialist agent examples (@doc, @git-ops, @research), (4) Ben's orchestration model showing how ar-director outputs are used, (5) External patterns documented in awesome-copilot-exploration.json context file. No significant pattern gaps identified in workspace documentation.",
+    "evaluation_complete": true,
+    "notes": "ar-director is a relatively new agent (recently recruited) with solid foundational design but incomplete pattern application. The workspace has invested heavily in research documentation (agent-creation-checklist.md is 400+ lines, with 5-phase framework; agent-specialization-patterns.md is 300+ lines with 6-element framework). The improvement opportunity is making ar-director's recruitment process explicitly reference and enforce these patterns through verification checklists. No major capability gaps identified—mostly pattern application gaps. All recommendations are concrete, actionable, and tied directly to existing workspace research or demonstrated patterns in specialist agents. High confidence that recommended improvements can be implemented quickly and will significantly improve ar-director's effectiveness."
+  }
+}
