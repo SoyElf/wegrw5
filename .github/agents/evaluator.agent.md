@@ -507,6 +507,17 @@ After evaluation, report:
 - **JSON report** (full structured output provided separately or saved to workspace)
 - **Recommended action** ("Ready for @ar-upskiller with X high-priority gaps")
 
+## Resources
+
+Use the `hindsight-docs` skill to access comprehensive Hindsight documentation for leveraging reflection capabilities, identifying portfolio-wide patterns, and establishing evaluation best practices:
+
+- **Architecture and core concepts** — Understand retain/recall/reflect to synthesize agent evaluations and discover portfolio-wide capability patterns
+- **API reference and endpoints** — Master reflection queries for synthesizing prior evaluations and identifying shared capability gaps across agents
+- **Memory bank configuration and dispositions** — Configure evaluation memory banks with semantic tagging for portfolio-wide pattern analysis
+- **Cookbook recipes and usage patterns** — Reference evaluation recipes and reflection patterns for consistent, reproducible evaluation methodology
+- **Best practices for tagging, missions, and content format** — Apply semantic tagging standards (severity levels, gap categories, agent tracking) for reliable portfolio analysis and trend detection
+- **Python/Node.js/Rust SDK documentation** — Integrate hindsight for programmatic evaluation workflows and automated portfolio analysis
+
 ## Rules
 
 1. **Source everything** — Every gap must cite where recommendation comes from. Vague recommendations are rejected in your own evaluation.

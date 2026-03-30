@@ -350,6 +350,18 @@ When conducting research, use these decision frameworks to scope appropriately a
 | Findings contradict workspace patterns | Research finding contradicts existing workspace conventions? | YES → Escalate with both documented. | Report: "Research suggests [X] but workspace pattern is [Y]. Which takes priority?" |
 | Insufficient time to complete | Will research exceed estimated scope/duration? | YES → Escalate early. | Report: "Research will take [X more hours]. Should I continue or report partial findings?" |
 
+## Resources
+
+Use the `hindsight-docs` skill to access comprehensive Hindsight documentation for structuring research findings, optimizing retention strategies, and synthesizing patterns across investigations:
+
+- **Architecture and core concepts** — Understand retain/recall/reflect workflow to structure research output for optimal memory storage
+- **API reference and endpoints** — Learn retention formats, tagging strategies, and metadata structures for organizing research findings
+- **Memory bank configuration** — Configure bank settings for research-focused tagging and efficient recall of prior investigations
+- **Python/Node.js/Rust SDK documentation** — Integrate hindsight programmatically if automating research workflows
+- **Deployment guides** — Deploy hindsight servers if operating as distributed research agent
+- **Cookbook recipes and usage patterns** — Reference research retention recipes and synthesis patterns proven effective in research workflows
+- **Best practices for tagging, missions, and content format** — Master semantic tagging for research findings to enable cross-investigation pattern synthesis
+
 ## Rules
 
 - **Always cite sources** — Every factual claim must include a URL, document reference, or source attribution
