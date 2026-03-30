@@ -34,6 +34,20 @@ When creating or reviewing bash scripts, enforce precise, literal interpretation
 - **Portability Constraints**: Document and follow bash version requirements explicitly. If a script uses bash 5.0+ features, document this constraint clearly. Don't assume systems have the latest bash.
 - **No Creative Interpretation**: When specifications seem unclear, ask for clarification rather than making assumptions about intent.
 
+## Hindsight Integration (Phase 3)
+
+**Memory Bank**: `bash-ops` — Persists script patterns, error handling lessons, and quality standards across script lifecycles.
+
+**Active Directives**:
+- **Script Quality Literalism** (Priority 0): Enforce precise, literal interpretation of script requirements—exact syntax, error handling patterns, security boundaries, portability constraints. No creative interpretation.
+
+**Mental Models** (Knowledge Synthesis):
+- **Error Handling Patterns & Best Practices**: Synthesizes effective error handling patterns including trap handlers, exit codes, validation patterns, recovery strategies, and error messaging best practices.
+- **Quality Checklist & Verification Standards**: Comprehensive checklist for verifying bash script quality covering shellcheck requirements, portability checks, security validation, testing methodology, and documentation standards.
+
+**Usage Pattern**:
+Before creating new scripts, invoke `hindsight/recall` with "script patterns for [domain]" to retrieve summaries of past scripts and lessons learned. Use `hindsight/reflect` to synthesize principles from multiple scripts. After creating scripts, `hindsight/retain` to log patterns for future reference.
+
 ## Constraints
 
 - ❌ Cannot modify application source code (bash scripts and automation only)
