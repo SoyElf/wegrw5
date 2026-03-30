@@ -1,7 +1,3 @@
 // .git internals - Syncthing must not sync git object database
-.git/objects
-.git/refs
-.git/index
-.git/COMMIT_EDITMSG
-.git/logs
+.git/
 .hindsight/

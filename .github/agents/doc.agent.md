@@ -77,7 +77,7 @@ recall(query, tags=['research:*'], filters=[timeline])
 ```
 
 **Examples**:
-- `recall("async pattern discoveries", tags=['research:patterns', 'async'])` 
+- `recall("async pattern discoveries", tags=['research:patterns', 'async'])`
   → Returns summaries of async pattern research from @research and @explore-codebase
 - `recall("agent orchestration findings", tags=['research:agents', 'orchestration'])`
   → Returns findings from orchestration research
@@ -269,7 +269,7 @@ Principle 2: [theme]
 **Step 4: Update Documentation**
 ```
 Before: Generic discussion of topic X
-After: 
+After:
 - Overview of topic with [Principle 1] and [Principle 2] as framework
 - Examples from discoveries and codebase (with sources/citations)
 - Guidance based on synthesized patterns
@@ -321,7 +321,7 @@ query hindsight/recall("async error recovery", tags=['research:async', 'codebase
 
 Step 2: Synthesize Patterns
 query hindsight/reflect(
-  "What unified error recovery approach connects async research and our actual codebase?", 
+  "What unified error recovery approach connects async research and our actual codebase?",
   tags=['research:async', 'codebase:async']
 )
 → Returns: "Exponential backoff with circuit breaker pattern is used consistently"
@@ -335,7 +335,7 @@ Draft new section:
 ---
 ### Async Error Recovery: Circuit Breaker Pattern
 
-Research into async operations (March 2026) identified exponential backoff with circuit breaker 
+Research into async operations (March 2026) identified exponential backoff with circuit breaker
 as a consistent error recovery approach:
 
 \`\`\`javascript
@@ -343,7 +343,7 @@ as a consistent error recovery approach:
 const withCircuitBreaker = (fn, options = {}) => {
   let failures = 0;
   let state = 'CLOSED'; // Can transition to 'OPEN' after failure threshold
-  
+
   return async (...args) => {
     if (state === 'OPEN') throw new Error('Circuit breaker open');
     try {
@@ -359,7 +359,7 @@ const withCircuitBreaker = (fn, options = {}) => {
 };
 \`\`\`
 
-This pattern reflects research findings from [async-recovery research, March 2026] 
+This pattern reflects research findings from [async-recovery research, March 2026]
 and implementation patterns in [codebase file references].
 ---
 
@@ -579,7 +579,7 @@ Example:
 
 ```
 For each domain, execute:
-reflect("What unifying principles connect [discovered patterns]?", 
+reflect("What unifying principles connect [discovered patterns]?",
         tags=[domain_tags])
 → Returns: 2-3 high-level themes connecting the discoveries
 ```
@@ -652,7 +652,7 @@ After all updates complete:
 For each updated document:
 retain({
   content: "Updated [doc path] with synthesized patterns",
-  context: "Living doc synthesis: recalled [N] discoveries, 
+  context: "Living doc synthesis: recalled [N] discoveries,
             synthesized [M] patterns, updated [K] sections",
   metadata: {
     doc_updated: "[file path]",
@@ -664,7 +664,7 @@ retain({
 })
 ```
 
-**Why log updates**: 
+**Why log updates**:
 - Creates audit trail showing documentation evolving from research
 - Tracks which patterns are documented (prevents duplication)
 - Enables continuous improvement of documentation process
