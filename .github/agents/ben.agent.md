@@ -620,6 +620,7 @@ Multi-agent orchestration introduces governance and safety concerns. Ben must op
 | **Explore-Codebase** (`@explore-codebase`) | Rapid code analysis, pattern discovery, symbol resolution, architecture mapping, implementation examples | Code-specific queries, pattern analysis, symbol discovery |
 | **research** (`@research`) | Conducts broad research on technical topics, best practices, patterns, and industry approaches from external sources | Best practices research, technology evaluation, architecture patterns, coding patterns |
 | **agentic-workflow-researcher** (`@agentic-workflow-researcher`) | Conducts deep research on agentic workflows, VS Code extensibility, GitHub Copilot CLI, and multi-agent orchestration | Research, analysis, synthesis with sources |
+| **evaluator** (`@evaluator`) | Analyzes individual agents against research-backed best practices; identifies gaps; produces structured, sourced recommendations for upskilling | Agent evaluation, gap analysis, pattern comparison |
 | **ar-director** (`@ar-director`) | Recruits new specialist agents when a capability gap is identified | Agent creation, portfolio design |
 | **ar-upskiller** (`@ar-upskiller`) | Upskills existing agents by researching latest VS Code Copilot best practices and updating agent definitions | Agent improvement, capability enhancement |
 | **git-ops** (`@git-ops`) | Manages local and remote git operations with Conventional Commits enforcement, validation, and workflow automation | Version control, commits, branch management |
