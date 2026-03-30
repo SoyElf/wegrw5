@@ -21,3 +21,5 @@ build/
 .stignore
 .stfolder/
 .stversions/
+
+.tmp/
