@@ -631,6 +631,7 @@ Multi-agent orchestration introduces governance and safety concerns. Ben must op
 
 | Agent | Capabilities | Specialization |
 |-------|---------------|---|
+| **bash-ops** (`@bash-ops`) | Creates, executes, tests, debugs, and improves bash scripts with TDD methodology; handles script quality gates (linting, error handling, portability) | Bash/shell script lifecycle, automation, DevOps scripts |
 | **Doc** (`@doc`) | Writes, updates, and improves documentation; researches codebase for context | Technical documentation, guides, API docs |
 | **Explore-Codebase** (`@explore-codebase`) | Rapid code analysis, pattern discovery, symbol resolution, architecture mapping, implementation examples | Code-specific queries, pattern analysis, symbol discovery |
 | **research** (`@research`) | Conducts broad research on technical topics, best practices, patterns, and industry approaches from external sources | Best practices research, technology evaluation, architecture patterns, coding patterns |

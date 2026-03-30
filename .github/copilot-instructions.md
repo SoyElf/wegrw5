@@ -10,6 +10,7 @@ When a user invokes Copilot without specifying an agent, guide them to **@ben** 
 
 | Agent | File | Role |
 |-------|------|------|
+| `@bash-ops` | `bash-ops.agent.md` | **Bash Script Specialist** — creates, executes, tests, debugs, and improves bash scripts with TDD methodology, linting, error handling validation, and cross-platform portability (sub-agent only) |
 | `@ben` | `ben.agent.md` | **Orchestrator** — analyses tasks and delegates to specialist sub-agents, never performs work directly |
 | `@doc` | `doc.agent.md` | **Documentation Specialist** — writes clear, concise, well-structured documentation with minimal emoji usage |
 | `@explore-codebase` | `explore-codebase.agent.md` | **Codebase Exploration Specialist** — discovers code patterns, symbols, architecture relationships, and implementation examples (sub-agent only) |
