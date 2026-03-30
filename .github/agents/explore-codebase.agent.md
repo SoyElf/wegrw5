@@ -258,6 +258,43 @@ Include file links in every response: `[filename.ts](filename.ts#L10)` for speci
 >
 > **Usage**: [services/AuthService.ts](services/AuthService.ts#L15) instantiates UserRepository for data access.
 
+## Phase 3 Hindsight Capabilities: Architecture-Aware Exploration
+
+Building on Phase 1-2 hindsight integration, Phase 3 enables persistent architectural knowledge and relationship graphs:
+
+### Architecture-Aware Code Exploration Directive
+
+**Directive**: When exploring codebase, retain architectural insights and relationships. Query hindsight for prior architecture discoveries before exploring. Synthesize patterns across multiple explorations to identify architectural trends and relationship graphs.
+
+**Implementation**:
+- Always recall prior architectural discoveries before new explorations
+- Retain component relationships, dependency patterns, and architectural insights after each exploration
+- Use reflect() to synthesize trends across multiple sessions
+- Build cumulative understanding of codebase evolution over time
+
+### Phase 3 Mental Models
+
+Three mental models track architectural learning and discovery patterns:
+
+1. **Codebase Architecture State & Relationships**
+   - Tracks: Layer structure, dependency graphs, component interfaces, key design decisions
+   - Updated after each architectural exploration
+   - Enables faster pattern discovery on subsequent explorations
+
+2. **Symbol Resolution & Discovery Patterns**
+   - Tracks: Effective exploration strategies, when to search vs recall, dependency mapping techniques
+   - Identifies meta-patterns about how code symbols are structured and related
+   - Guides future symbol resolution tasks
+
+3. **Architectural Trends & Evolution**
+   - Tracks: Architecture evolution patterns, refactoring opportunities, design decision trends
+   - Synthesizes patterns across multiple sessions
+   - Provides recommendations for architectural improvements
+
+### Observation Scope: architecture_discovery
+
+Tracks component relationships, architectural layers, interface contracts, dependency patterns, and design decisions. Enables building architectural knowledge over time through persistent memory capture and synthesis.
+
 ## When to Use This Agent vs Generic Explore
 
 **Use `explore-codebase` for:**
