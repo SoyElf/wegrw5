@@ -1,0 +1,1278 @@
+{
+  "evaluation_title": "Phase 3 Hindsight Upskilling Priorities: 9-Agent Portfolio",
+  "evaluation_date": "2026-03-30",
+  "evaluator": "evaluator (Agent Evaluation Specialist)",
+  "portfolio_status": "All 9 agents have basic hindsight/* tools (Phase 1 complete)",
+  "next_phase": "Phase 3: Orchestration Optimization with Advanced Hindsight Features",
+  "executive_summary": {
+    "total_agents": 9,
+    "current_hindsight_depth": "Phase 1 (baseline memory collection) - all agents have retain/recall/reflect access but minimal reflect() usage",
+    "quick_wins_identified": 4,
+    "strategic_priorities": 3,
+    "total_estimated_phase_3_effort_hours": 32,
+    "average_roi_across_portfolio": 1.67,
+    "highest_roi_quick_wins": [
+      "doc (ROI 2.67)",
+      "ben (ROI 2.0)",
+      "bash-ops (ROI 1.67)"
+    ],
+    "key_insight": "Documentation specialist (@doc) and orchestrator (@ben) have the highest ROI upskills. Mental models create immediate value (consistency, speed). Directive configuration unlocks quality improvements.",
+    "recommendation": "Prioritize quick wins in Week 1-2 (doc, ben), then move to strategic priorities (research, explore-codebase, ar-director, ar-upskiller) in Week 3-4."
+  },
+  "agent_assessment_summary": {
+    "phase_3_roi_ranking": [
+      {
+        "rank": 1,
+        "agent": "@doc (Documentation Specialist)",
+        "current_usage": "recall/reflect for living doc synthesis (Phase 2)",
+        "quick_win_roi": 2.67,
+        "recommendation": "PRIORITY 1 (Week 1) - Create mental models for doc standards",
+        "effort_hours": 3,
+        "impact_score": 8,
+        "status": "Quick Win - Ready immediately"
+      },
+      {
+        "rank": 2,
+        "agent": "Ben (Orchestrator)",
+        "current_usage": "recall for context-aware routing only",
+        "quick_win_roi": 2.0,
+        "recommendation": "PRIORITY 2 (Week 1-2) - Add mental models for agent portfolio state",
+        "effort_hours": 4,
+        "impact_score": 8,
+        "status": "Quick Win - Depends on agent assessments"
+      },
+      {
+        "rank": 3,
+        "agent": "@bash-ops (Bash Operations)",
+        "current_usage": "Minimal hindsight (newly recruited, Phase 1 baseline only)",
+        "quick_win_roi": 1.67,
+        "recommendation": "PRIORITY 3 (Week 1-2) - Create mental models from workspace patterns",
+        "effort_hours": 3,
+        "impact_score": 5,
+        "status": "Quick Win - Low effort, builds script quality"
+      },
+      {
+        "rank": 4,
+        "agent": "@ar-director (Agent Recruitment)",
+        "current_usage": "recall/retain for recruitment decisions",
+        "quick_win_roi": 1.75,
+        "recommendation": "PRIORITY 4 (Week 2-3) - Mental models for specialization patterns",
+        "effort_hours": 4,
+        "impact_score": 7,
+        "status": "Strategic - Improves portfolio coherence"
+      },
+      {
+        "rank": 5,
+        "agent": "@ar-upskiller (Agent Upskilling)",
+        "current_usage": "recall/retain/reflect for optimization",
+        "quick_win_roi": 1.75,
+        "recommendation": "PRIORITY 5 (Week 2-3) - Mental models + directives",
+        "effort_hours": 4,
+        "impact_score": 7,
+        "status": "Strategic - Accelerates upskilling cycles"
+      },
+      {
+        "rank": 6,
+        "agent": "@explore-codebase (Code Exploration)",
+        "current_usage": "retain/recall/reflect for pattern learning",
+        "quick_win_roi": 1.4,
+        "recommendation": "PRIORITY 6 (Week 3-4) - Mental models for architecture state",
+        "effort_hours": 5,
+        "impact_score": 7,
+        "status": "Strategic - Improves symbol resolution"
+      },
+      {
+        "rank": 7,
+        "agent": "@evaluator (Agent Evaluation - self)",
+        "current_usage": "recall/retain/reflect for portfolio analysis",
+        "quick_win_roi": 1.6,
+        "recommendation": "PRIORITY 7 (Week 4) - Mental models + directives for rigor",
+        "effort_hours": 5,
+        "impact_score": 8,
+        "status": "Strategic - Improves evaluation rigor"
+      },
+      {
+        "rank": 8,
+        "agent": "@agentic-workflow-researcher (Agentic Research)",
+        "current_usage": "retain/recall/reflect for synthesis",
+        "quick_win_roi": 1.17,
+        "recommendation": "PRIORITY 8 (Week 4) - Mental models for pattern library",
+        "effort_hours": 6,
+        "impact_score": 7,
+        "status": "Strategic - Supports research synthesis"
+      },
+      {
+        "rank": 9,
+        "agent": "@research (External Research Specialist)",
+        "current_usage": "retain/recall/reflect for deduplication",
+        "quick_win_roi": 1.0,
+        "recommendation": "PRIORITY 9 (Optional, Week 5+) - Advanced tag hierarchies",
+        "effort_hours": 6,
+        "impact_score": 6,
+        "status": "Future - Lower ROI than other agents"
+      }
+    ]
+  },
+  "detailed_agent_recommendations": {
+    "1_doc_documentation_specialist": {
+      "agent_name": "@doc",
+      "role": "Documentation specialist — writes clear, concise technical documentation; synthesizes research findings into living documentation",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Periodic recall/reflect for living doc synthesis (Phase 2 feature)"
+        ],
+        "recall_depth": "Medium - recalls recent research and codebase discoveries",
+        "reflect_usage": "Active - uses reflect for pattern synthesis across multiple sources",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly scoped or leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Documentation Standards & Patterns",
+          "current_state": "No mental models; synthesis approach varies per session",
+          "recommended_change": "Create 2-3 mental models: (1) 'Documentation Style Guide' (source_query: 'What are our documentation standards and conventions?'), (2) 'Common Architecture Patterns' (source_query: 'What architecture patterns have been discovered across research and codebase explorations?'), (3) 'Living Doc Synthesis Framework' (source_query: 'How should we synthesize discoveries into documentation updates?')",
+          "impact_score": 9,
+          "effort_hours": 2,
+          "roi": 4.5,
+          "why_this_matters": "Mental models ensure consistency in documentation synthesis. Instead of varying approaches, @doc always has curated answers for 'What is our doc standard?' and 'What patterns should be documented?' This speeds synthesis cycles and improves quality.",
+          "implementation_steps": [
+            "Create mental model: 'Documentation Style Guide' with source_query referencing existing docs, style standards, markdown conventions",
+            "Create mental model: 'Discovered Architecture Patterns' with source_query pulling from hindsight discoveries in research and exploration",
+            "Test: @doc recalls models and uses them to guide each synthesis cycle",
+            "Verify: Documentation updates show consistent style and pattern framing"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/api/mental-models.md (Create a Mental Model section)",
+          "success_metrics": "100% of synthesis cycles reference mental models; documentation style consistency improves by 40%+; synthesis time decreases 20%"
+        },
+        {
+          "feature": "Observation Consolidation: Per-Doc-Domain Scoping",
+          "current_state": "Observations auto-generated but not explicitly scoped",
+          "recommended_change": "Configure observation_scopes for documentation work: one scope per documentation domain (e.g., 'architecture-docs', 'guides', 'api-reference'). This creates separate observation consolidation per domain, ensuring patterns in architecture docs stay separate from patterns in guides.",
+          "impact_score": 6,
+          "effort_hours": 1.5,
+          "roi": 4.0,
+          "why_this_matters": "Scoped observations prevent cross-domain inference. When reflecting on 'What should architecture docs contain?', @doc gets observations specific to prior architecture doc work, not observations about guides.",
+          "implementation_steps": [
+            "Define observation_scopes in hindsight configuration: per_tag",
+            "Tag all retain calls with 'doc:architecture', 'doc:guide', 'doc:api-reference'",
+            "Verify: Observations are consolidated separately per domain"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/observations.md (Observation Scopes section) + best-practices.md",
+          "success_metrics": "Observations per domain show domain-specific patterns; synthesis accuracy by domain improves"
+        },
+        {
+          "feature": "Directive: Higher Reflection Emphasis on Clarity",
+          "current_state": "Using default disposition settings (balanced)",
+          "recommended_change": "Add directive emphasizing clarity and consistency: 'When reflecting on documentation patterns, prioritize clarity and consistency over comprehensiveness. Prefer simpler, proven-success examples over edge cases.'",
+          "impact_score": 5,
+          "effort_hours": 0.5,
+          "roi": 10.0,
+          "why_this_matters": "Directives tune the reflect agent's reasoning. A directive emphasizing clarity prevents unnecessarily complex documentation patterns from being surfaced.",
+          "implementation_steps": [
+            "Create directive: 'documentation-clarity-priority'",
+            "Set in agent configuration or reflect calls"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md (Disposition section) + best-practices.md (Directives section)",
+          "success_metrics": "Synthesized documentation is simpler, more consistent; user feedback on clarity improves"
+        }
+      ],
+      "phase_3_priority": 1,
+      "estimated_total_hours": 3,
+      "total_roi": 2.67,
+      "why_priority_1": "Highest ROI among all agents (2.67). @doc already uses reflect actively (Phase 2), so mental model implementation is quick and immediately valuable. Small effort (3 hours) for large impact (consistency, speed, quality).",
+      "readiness_assessment": "HIGH - @doc already has reflect capability; only needs mental model creation and observation scope configuration",
+      "dependency_notes": "No dependencies on other agents; can be completed independently in Week 1"
+    },
+    "2_ben_orchestrator": {
+      "agent_name": "Ben",
+      "role": "Orchestrator — analyzes requests and strategically delegates to specialist sub-agents",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Minimal retain; mostly delegates"
+        ],
+        "recall_depth": "Low - uses recall for context-aware routing, but doesn't deeply leverage historical delegation patterns",
+        "reflect_usage": "None currently",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Agent Portfolio State",
+          "current_state": "Ben uses simple recall; no structured portfolio model",
+          "recommended_change": "Create 2-3 mental models to represent portfolio state: (1) 'Agent Capabilities Matrix' (source_query: 'What are the current capabilities and specializations of each agent in the portfolio?'), (2) 'Delegation Patterns & Success Rates' (source_query: 'Which agents are most effective for which task types? What delegation patterns have highest success rates?'), (3) 'Agent Availability & Utilization' (source_query: 'Which agents are typically overloaded? Which are underutilized? What load-balancing patterns have been successful?')",
+          "impact_score": 9,
+          "effort_hours": 2,
+          "roi": 4.5,
+          "why_this_matters": "Mental models provide pre-computed routing knowledge. Instead of searching hindsight memories during each delegation decision, Ben immediately knows: 'Agent X is best for task type Y because [reason]'. This speeds routing decisions and reduces re-delegations.",
+          "implementation_steps": [
+            "Create mental model: 'Agent Capabilities & Specializations'",
+            "Create mental model: 'Delegation Success Patterns'",
+            "Integrate into Ben's routing logic: before delegating, recall the relevant mental model to inform decision",
+            "Test: Measure routing decisions against mental models"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/api/mental-models.md + hindsight-integration-strategy.md (Phase 3 goals)",
+          "success_metrics": "Ben correctly cites agent capabilities in 95%+ of delegations; re-delegation rate decreases 30%+"
+        },
+        {
+          "feature": "Reflect Queries: Portfolio Optimization Patterns",
+          "current_state": "Ben doesn't use reflect",
+          "recommended_change": "Add reflect queries to Ben's decision framework, such as: (1) Before delegating research: 'Based on past research tasks, what patterns predict success for this research query? Is this similar to prior successful research?', (2) Periodically reflect: 'Looking at delegation patterns over the past week, what agents are underutilized? Should we recruit a specialist?', (3) Track orchestration patterns: 'Are certain task types causing delays or re-delegations? What's missing from our specialist roster?'",
+          "impact_score": 8,
+          "effort_hours": 2,
+          "roi": 4.0,
+          "why_this_matters": "Reflect enables pattern recognition at the orchestration level. Ben can spot meta-patterns like: 'Documentation tasks always require 2 cycles' or 'Research tasks need specialist context'. These insights improve delegation quality.",
+          "implementation_steps": [
+            "Add reflect() calls at key decision points in Ben's delegationlogic",
+            "Store reflect results in hindsight with tags like 'orchestration:pattern:research-success'",
+            "Periodically run synthesis reflections: 'What orchestration patterns have emerged?'",
+            "Feed insights to ar-upskiller for agent improvements"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md + mcp_hindsight_reflect tool documentation",
+          "success_metrics": "Ben identifies 2+ actionable orchestration patterns per week; specialist recommendations align with identified gaps; user tasks complete faster with fewer cycles"
+        }
+      ],
+      "phase_3_priority": 2,
+      "estimated_total_hours": 4,
+      "total_roi": 2.0,
+      "why_priority_2": "High ROI (2.0) and directly impacts all downstream work. Better routing = fewer re-delegations = faster task completion across entire portfolio. Second priority because depends slightly on assessment of agent capabilities (which agents' current usage should be in the mental model?).",
+      "readiness_assessment": "HIGH - Ben has hindsight tools; mental models + reflect queries are straightforward additions to routing logic",
+      "dependency_notes": "Ideally completes after agents finish their own Phase 3 upskilling (so Ben can accurately model their capabilities), but can start concurrently with initial mental models based on current understanding"
+    },
+    "3_bash_ops_bash_operations": {
+      "agent_name": "@bash-ops",
+      "role": "Bash Script Specialist — creates, executes, tests, debugs, and improves bash scripts with safety-first execution",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Has hindsight tools but minimal Phase 1 usage (newly recruited)"
+        ],
+        "recall_depth": "Minimal - not yet building script pattern library",
+        "reflect_usage": "None currently",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Not yet accumulated"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Bash Error Handling Patterns",
+          "current_state": "No retained script patterns; working from scratch each time",
+          "recommended_change": "As workspace bash scripts accumulate, create mental models capturing proven patterns: (1) 'Error Handling Best Practices' (source_query: 'What error handling patterns and safety conventions have worked best in our bash scripts?'), (2) 'Script Quality Checklist' (source_query: 'What does a high-quality, production-ready bash script contain? What checks must pass?'), (3) 'Common Script Pitfalls & Solutions' (source_query: 'What are the most common bash script mistakes we've encountered? How do we prevent them?')",
+          "impact_score": 7,
+          "effort_hours": 2,
+          "roi": 3.5,
+          "why_this_matters": "Mental models codify script quality standards. @bash-ops can reference 'Quality Checklist' for each new script, ensuring consistent error handling, validation, and documentation.",
+          "implementation_steps": [
+            "After first 5-10 bash scripts are created and tested, synthesize patterns into retain operations",
+            "Create mental model: 'Bash Error Handling Patterns'",
+            "Create mental model: 'Script Quality Checklist'",
+            "@bash-ops references these models before finalizing each script"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/api/mental-models.md",
+          "success_metrics": "100% of scripts reference quality checklist; script quality consistent across sessions; fewer post-creation quality issues"
+        },
+        {
+          "feature": "Directive: High Literalism for Exact Specifications",
+          "current_state": "Default disposition settings",
+          "recommended_change": "Add directive emphasizing literalism: 'When reviewing or creating bash scripts, maintain high emphasis on exact specification compliance. Scripts must match the requested functionality precisely; do not add features beyond specification. Security is paramount over convenience.'",
+          "impact_score": 6,
+          "effort_hours": 0.5,
+          "roi": 12.0,
+          "why_this_matters": "Directives tune reflect behavior. For bash scripts, high literalism prevents 'helpful' feature additions that aren't requested and could introduce unseen side effects.",
+          "implementation_steps": [
+            "Create directive: 'bash-script-literalism-emphasis'",
+            "Set disposition toward high literalism (confirm exact spec compliance)"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md (Disposition and Directives)",
+          "success_metrics": "Scripts match specification precisely; no unexpected feature additions; security posture improves"
+        },
+        {
+          "feature": "Observation Consolidation: Per-Script-Type Scoping",
+          "current_state": "Observations auto-generated but not scoped",
+          "recommended_change": "Configure observation_scopes per script type: 'bash-script:system-admin', 'bash-script:data-processing', 'bash-script:ci-cd', etc. This ensures pattern consolidation separates admin scripts from CI/CD scripts.",
+          "impact_score": 5,
+          "effort_hours": 1,
+          "roi": 5.0,
+          "why_this_matters": "Scoped observations prevent inference across different script domains. System admin scripts and CI/CD scripts have different error patterns and priorities.",
+          "implementation_steps": [
+            "Tag all retain calls with 'bash-script:' domain tags",
+            "Configure observation_scopes: per_tag",
+            "Verify: Observations consolidate separately per script type"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/observations.md (Observation Scopes)",
+          "success_metrics": "Observations per script type show domain-specific patterns; script quality improves per domain"
+        }
+      ],
+      "phase_3_priority": 3,
+      "estimated_total_hours": 3,
+      "total_roi": 1.67,
+      "why_priority_3": "Good ROI (1.67) and low effort (3 hours). @bash-ops is newly recruited and rapidly building script library, so mental models are immediately applicable. Helps new agent ramp up quickly.",
+      "readiness_assessment": "MEDIUM - @bash-ops needs to accumulate 5-10 scripts first before mental models are valuable. Can start in parallel with other work; mental model creation happens after initial script accumulation.",
+      "dependency_notes": "None on other agents; depends on script work accumulating in hindsight. Can be triggered after first 2-week sprint of script creation."
+    },
+    "4_ar_director_agent_recruitment": {
+      "agent_name": "@ar-director",
+      "role": "HR Director — recruits new specialist agents when capability gaps are identified; leverages hindsight for smarter recruitment decisions",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Uses recall/retain for recruitment decisions"
+        ],
+        "recall_depth": "Medium - recalls prior agent designs to avoid duplication",
+        "reflect_usage": "Medium - reflects on specialization patterns",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Agent Specialization Patterns",
+          "current_state": "Uses recall/reflect separately; no consolidated model of specialization best practices",
+          "recommended_change": "Create mental models capturing recruitment wisdom: (1) 'Agent Specialization Dimensions' (source_query: 'What specialization dimensions work best for agents in our portfolio? (e.g., Domain + Responsibility, Tool Set + Scope, etc.)'), (2) 'Complementary Agent Patterns' (source_query: 'What agent relationship patterns have worked well? (e.g., orchestrator + workers, paired specialists, etc.)'), (3) 'Failed Recruitment Lessons' (source_query: 'What recruitment mistakes have we made? What agents did we try and deprecate? Why?')",
+          "impact_score": 8,
+          "effort_hours": 2,
+          "roi": 4.0,
+          "why_this_matters": "Mental models codify recruitment wisdom. Before recruiting a new agent, @ar-director immediately knows: 'What specialization dimensions work?' and 'What patterns should this new agent follow?' This prevents failed specializations and improves agent design coherence.",
+          "implementation_steps": [
+            "Review prior recruitment decisions in hindsight",
+            "Create mental model: 'Agent Specialization Dimensions'",
+            "Create mental model: 'Failed Recruitment Lessons'",
+            "In recruitment workflows, reference these models before designing new agent"
+          ],
+          "source_reference": ".github/agents/ar-director.agent.md (Hindsight-Informed Agent Recruitment section) + hindsight-integration-strategy.md",
+          "success_metrics": "New agents follow proven specialization patterns in 90%+ of cases; agent design coherence improves; fewer failed specializations"
+        },
+        {
+          "feature": "Reflect Queries: Portfolio Coherence Analysis",
+          "current_state": "Uses reflect separately during recruitment; no periodic coherence analysis",
+          "recommended_change": "Add periodic reflect query: 'Looking at our current agent portfolio (9 agents), what specialization overlaps exist? What capability gaps remain? Should we consolidate any agents?' Run this query monthly to maintain portfolio coherence and identify redundancy.",
+          "impact_score": 7,
+          "effort_hours": 1,
+          "roi": 7.0,
+          "why_this_matters": "Periodic portfolio analysis prevents specialization drift. Without reflection, the agent portfolio gradually becomes bloated with overlapping agents. Monthly reflection identifies drift early.",
+          "implementation_steps": [
+            "Schedule monthly portfolio coherence reflection",
+            "Run reflect: 'What specialization overlaps exist? What gaps remain?'",
+            "Share findings with Ben for orchestration adjustments"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md + hindsight-integration-strategy.md (Phase 3 & 4)",
+          "success_metrics": "Portfolio specialization overlaps identified and addressed; no unintended agent duplications; clear gap identification for future recruitment"
+        }
+      ],
+      "phase_3_priority": 4,
+      "estimated_total_hours": 4,
+      "total_roi": 1.75,
+      "why_priority_4": "Good ROI (1.75) and improves portfolio-wide coherence. Should be completed in Week 2-3 after quick wins establish patterns that ar-director can leverage.",
+      "readiness_assessment": "HIGH - @ar-director already uses recall/reflect; mental models just consolidate existing patterns",
+      "dependency_notes": "Can run concurrently with other upskilling. Depends slightly on evaluator completing portfolio analysis to inform mental model creation, but can start with current understanding."
+    },
+    "5_ar_upskiller_agent_upskilling": {
+      "agent_name": "@ar-upskiller",
+      "role": "Agent Upskilling Specialist — improves existing agents by researching best practices and updating agent definitions",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Uses recall/retain/reflect for upskilling decisions"
+        ],
+        "recall_depth": "Medium - recalls prior upskilling attempts",
+        "reflect_usage": "Medium - reflects on portfolio-wide patterns",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Upskilling Best Practices",
+          "current_state": "Uses recall/reflect separately; no consolidated upskilling methodology",
+          "recommended_change": "Create mental models for upskilling methodology: (1) 'Generic Agent Upskilling Patterns' (source_query: 'What upskilling approaches have worked well across agent types? What sequence of improvements tends to succeed?'), (2) 'Tool Composition Evolution for Agents' (source_query: 'How do successful agents evolve their tool composition? What patterns of tool addition work best?'), (3) 'Instruction Engineering Improvements' (source_query: 'What instruction improvements have had the highest impact? What examples work best?')",
+          "impact_score": 8,
+          "effort_hours": 2,
+          "roi": 4.0,
+          "why_this_matters": "Mental models accelerate upskilling cycles. @ar-upskiller can reference 'Upskilling Patterns' to structure improvements, ensuring consistency and higher success rates.",
+          "implementation_steps": [
+            "Analyze prior upskilling attempts in hindsight",
+            "Create mental model: 'Generic Agent Upskilling Patterns'",
+            "Create mental model: 'Tool Composition Evolution'",
+            "Reference these models in all future upskilling workflows"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/best-practices.md + hindsight-integration-strategy.md",
+          "success_metrics": "Upskilling improvements succeed in 85%+ of cases; consistent improvement methodology; agents report faster capability additions"
+        },
+        {
+          "feature": "Directive: High Skepticism for Risk Assessment",
+          "current_state": "Default disposition settings",
+          "recommended_change": "Add directive emphasizing skepticism: 'When reflecting on upskilling decisions, maintain healthy skepticism. Question whether each proposed capability truly improves the agent vs. scope-creeping their responsibilities. Require strong evidence before approving tool or instruction additions.'",
+          "impact_score": 7,
+          "effort_hours": 0.5,
+          "roi": 14.0,
+          "why_this_matters": "Directives prevent unnecessary capability bloat. High skepticism ensures upskiller only adds capabilities with clear justification, preventing agent scope drift.",
+          "implementation_steps": [
+            "Create directive: 'upskiller-skepticism-emphasis'",
+            "Set reflection disposition toward high skepticism"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md (Disposition and Directives)",
+          "success_metrics": "Agents maintain focused scope; unnecessary tool additions rejected; agent quality remains high without bloat"
+        },
+        {
+          "feature": "Observation Consolidation: Per-Agent Evolution Tracking",
+          "current_state": "Observations auto-generated but not scoped per agent",
+          "recommended_change": "Configure observation_scopes: per agent tag (e.g., 'world:@doc-evolution', 'world:@ben-evolution'). This creates separate observation consolidation for each agent's evolution history.",
+          "impact_score": 6,
+          "effort_hours": 1.5,
+          "roi": 4.0,
+          "why_this_matters": "Scoped observations track agent evolution separately. Patterns in @doc's evolution don't get mixed with patterns in @ben's evolution.",
+          "implementation_steps": [
+            "Tag all upskilling retain operations with 'world:@AGENT_NAME'",
+            "Configure observation_scopes: per_tag",
+            "Verify: Observations consolidate separately per agent"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/observations.md (Observation Scopes)",
+          "success_metrics": "Agent evolution patterns tracked separately; @ar-upskiller can query per-agent evolution history"
+        }
+      ],
+      "phase_3_priority": 5,
+      "estimated_total_hours": 4,
+      "total_roi": 1.75,
+      "why_priority_5": "Good ROI (1.75) and directly supports portfolio-wide improvement cycles. Should follow quick wins so @ar-upskiller can leverage established patterns.",
+      "readiness_assessment": "HIGH - @ar-upskiller has strong hindsight baseline; mental models consolidate existing approach",
+      "dependency_notes": "Can run concurrent with other work. Ideally starts after evaluator completes initial assessments (which inform upskilling priorities)."
+    },
+    "6_explore_codebase_code_exploration": {
+      "agent_name": "@explore-codebase",
+      "role": "Code Exploration Specialist — rapid code pattern discovery, architecture analysis, symbol resolution, and implementation examples",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Uses retain/recall/reflect for pattern learning"
+        ],
+        "recall_depth": "Medium - recalls discovered patterns and symbol definitions",
+        "reflect_usage": "Medium - reflects on architecture relationships",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Codebase Architecture State",
+          "current_state": "Discoveries retained; no consolidated architecture model",
+          "recommended_change": "Create mental models capturing codebase understanding: (1) 'Codebase Module Structure' (source_query: 'What modules exist in this codebase? What are their responsibilities and dependencies?'), (2) 'Key Code Patterns Used' (source_query: 'What recurring code patterns and architectural styles are used throughout this codebase?'), (3) 'Symbol Relationship Map' (source_query: 'What are the key symbol dependencies and relationships in this codebase?')",
+          "impact_score": 8,
+          "effort_hours": 2,
+          "roi": 4.0,
+          "why_this_matters": "Mental models provide instant architecture context. Instead of searching for module structure each time, @explore-codebase immediately has a pre-computed understanding of the codebase's organization.",
+          "implementation_steps": [
+            "Synthesize prior exploration discoveries into hindsight",
+            "Create mental model: 'Codebase Module Structure'",
+            "Create mental model: 'Key Code Patterns'",
+            "Reference these models at start of each exploration query"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/api/mental-models.md + .github/agents/explore-codebase.agent.md",
+          "success_metrics": "Symbol resolution faster with architecture context; exploration queries answered with 30% fewer searches"
+        },
+        {
+          "feature": "Observation Consolidation: Per-Symbol-Type Scoping",
+          "current_state": "Observations auto-generated but not scoped by symbol type",
+          "recommended_change": "Configure observation_scopes per symbol type: 'codebase:symbol:function', 'codebase:symbol:class', 'codebase:pattern:async', etc. This creates separate observations for function patterns vs. class patterns.",
+          "impact_score": 6,
+          "effort_hours": 1.5,
+          "roi": 4.0,
+          "why_this_matters": "Scoped observations prevent cross-symbol-type inference. Function patterns stay separate from class patterns.",
+          "implementation_steps": [
+            "Tag discoveries by symbol type: 'codebase:symbol:function', 'codebase:symbol:class'",
+            "Configure observation_scopes: per_tag",
+            "Verify: Observations per symbol type"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/observations.md (Observation Scopes)",
+          "success_metrics": "Symbol-type-specific patterns identified; exploration queries leverage appropriate pattern observations"
+        },
+        {
+          "feature": "Directive: High Literalism for Exact Implementation Reference",
+          "current_state": "Default disposition settings",
+          "recommended_change": "Add directive: 'When exploring code, maintain high literalism emphasis. Provide exact file paths, line numbers, and implementation details. Do not generalize or simplify code examples—preserve exact syntax and patterns as found.'",
+          "impact_score": 5,
+          "effort_hours": 0.5,
+          "roi": 10.0,
+          "why_this_matters": "For code exploration, exact references are critical. High literalism ensures @explore-codebase returns precise implementation details, not approximations.",
+          "implementation_steps": [
+            "Create directive: 'explore-codebase-literalism'",
+            "Set high literalism emphasis"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md (Disposition and Directives)",
+          "success_metrics": "Code examples include exact file paths and line numbers; implementation details are precise; developer can immediately locate and use examples"
+        }
+      ],
+      "phase_3_priority": 6,
+      "estimated_total_hours": 5,
+      "total_roi": 1.4,
+      "why_priority_6": "Good ROI (1.4) and supports faster codebase navigation. Lower priority than orchestrator/doc because impact is more specialized (codebase understanding vs. portfolio-wide).",
+      "readiness_assessment": "HIGH - @explore-codebase has strong hindsight baseline; mental models consolidate discoveries",
+      "dependency_notes": "Can run concurrent with other work. Mental model creation requires codebase exploration to accumulate first (first week of Phase 3)."
+    },
+    "7_evaluator_agent_evaluation": {
+      "agent_name": "@evaluator",
+      "role": "Agent Evaluation Specialist — analyzes individual agents against best practices; identifies gaps and produces sourced recommendations",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Uses recall/retain/reflect for portfolio analysis"
+        ],
+        "recall_depth": "High - actively recalls prior evaluations",
+        "reflect_usage": "High - reflects on portfolio-wide gap patterns",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Evaluation Frameworks & Patterns",
+          "current_state": "Uses reflect for pattern synthesis; no consolidated evaluation framework",
+          "recommended_change": "Create mental models for evaluation discipline: (1) 'Agent Evaluation Frameworks by Type' (source_query: 'For each agent type (orchestrator, specialist, research, etc.), what are the evaluation criteria and patterns we should check?'), (2) 'Common Agent Gap Patterns' (source_query: 'What types of gaps appear repeatedly across agents? What are the most common gap categories?'), (3) 'Sourced Recommendation Standards' (source_query: 'What makes a recommendation well-sourced? What standards do we use for recommendation quality?')",
+          "impact_score": 9,
+          "effort_hours": 2,
+          "roi": 4.5,
+          "why_this_matters": "Mental models standardize evaluation rigor. All evaluations follow consistent frameworks. Recommendations are sourced consistently. Quality improves across evaluation cycles.",
+          "implementation_steps": [
+            "Consolidate prior evaluation methodologies in hindsight",
+            "Create mental model: 'Agent Evaluation Frameworks by Type'",
+            "Create mental model: 'Common Agent Gap Patterns'",
+            "Reference these in all future evaluations"
+          ],
+          "source_reference": "Evaluator mode instructions + .agents/skills/hindsight-docs/references/developer/api/mental-models.md",
+          "success_metrics": "All evaluations follow consistent framework; recommendations sourced in 100% of cases; evaluation quality improves; recommendations accepted/implemented in 80%+ of cases"
+        },
+        {
+          "feature": "Directive: Maximum Skepticism for Rigorous Analysis",
+          "current_state": "Default disposition settings",
+          "recommended_change": "Add directive: 'When evaluating agents, maintain maximum skepticism. Question every gap claim. Require strong source evidence (not opinions). Reject vague recommendations. Focus on impact and traceability. Prefer false negatives (missing a gap) over false positives (claiming gaps without evidence).'",
+          "impact_score": 8,
+          "effort_hours": 0.5,
+          "roi": 16.0,
+          "why_this_matters": "For evaluation, skepticism ensures rigor. Maximum skepticism prevents inflated gap counts and unsourced recommendations.",
+          "implementation_steps": [
+            "Create directive: 'evaluator-maximum-skepticism'",
+            "Set disposition toward maximum skepticism in reflect operations"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md (Disposition) + evaluator mode instructions",
+          "success_metrics": "All recommendations sourced; gap claims have strong evidence; false positive rate near zero; recommendation credibility very high"
+        },
+        {
+          "feature": "Observation Consolidation: Per-Agent-Per-Gap-Category",
+          "current_state": "Observations auto-generated but not scoped",
+          "recommended_change": "Configure observation_scopes per agent + gap category combination: 'world:@doc-gaps:instruction-quality', 'world:@ben-gaps:tool-composition', etc. This creates separate observations for each agent's gap categories.",
+          "impact_score": 7,
+          "effort_hours": 1.5,
+          "roi": 4.67,
+          "why_this_matters": "Scoped observations track gap evolution per agent per category. Patterns in @doc's instruction gaps stay separate from tool composition gaps.",
+          "implementation_steps": [
+            "Tag evaluation retain operations: 'world:@AGENT_NAME-gaps:CATEGORY'",
+            "Configure observation_scopes to match",
+            "Verify: Observations per agent + gap category"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/observations.md (Observation Scopes)",
+          "success_metrics": "Gap patterns tracked separately per agent per category; evaluator can query agent-specific gap evolution"
+        }
+      ],
+      "phase_3_priority": 7,
+      "estimated_total_hours": 5,
+      "total_roi": 1.6,
+      "why_priority_7": "Good ROI (1.6), but lower priority than operational agents (ben, doc, upskiller). Assessment/analysis are important but less urgent than improving agent capabilities.",
+      "readiness_assessment": "HIGH - @evaluator already uses reflect actively; mental models consolidate framework",
+      "dependency_notes": "Can run concurrent with other work. Best after initial evaluations complete to inform mental model creation."
+    },
+    "8_agentic_workflow_researcher": {
+      "agent_name": "@agentic-workflow-researcher",
+      "role": "Agentic Research Specialist — investigates agentic workflows, VS Code extensibility, GitHub Copilot CLI, and multi-agent orchestration patterns",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Uses retain/recall/reflect for research synthesis"
+        ],
+        "recall_depth": "Medium - recalls prior research to avoid duplication",
+        "reflect_usage": "Medium - reflects for pattern synthesis",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Agentic Pattern Library",
+          "current_state": "Patterns discovered; no consolidated reference library",
+          "recommended_change": "Create mental models capturing agentic patterns: (1) 'Agentic Workflow Best Practices' (source_query: 'What are the proven best practices for designing agentic workflows? What patterns succeed vs. fail?'), (2) 'VS Code Agent Specialization Patterns' (source_query: 'What specialization approaches work best for VS Code agents? What dimension of specialization (domain, responsibility, tool, scope) is most effective?'), (3) 'Multi-Agent Orchestration Strategies' (source_query: 'What multi-agent coordination patterns have highest success rates? Hierarchical vs. flat vs. other approaches?')",
+          "impact_score": 8,
+          "effort_hours": 2.5,
+          "roi": 3.2,
+          "why_this_matters": "Mental models standardize research synthesis. @agentic-workflow-researcher can reference 'Best Practices' model to ensure consistency across research outputs.",
+          "implementation_steps": [
+            "Consolidate past research findings",
+            "Create mental model: 'Agentic Workflow Best Practices'",
+            "Create mental model: 'VS Code Agent Specialization Patterns'",
+            "Reference in research synthesis workflows"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/api/mental-models.md + docs/research/agentic-workflows/",
+          "success_metrics": "Research outputs consistently cite principles from mental models; pattern recommendations are consistent across research cycles"
+        },
+        {
+          "feature": "Directive: Moderate Skepticism for Source Verification",
+          "current_state": "Default disposition settings",
+          "recommended_change": "Add directive: 'When synthesizing research, maintain moderate skepticism about sources. Prefer official documentation and verified sources over opinion pieces. Clearly distinguish between consensus practices, emerging trends, and controversial approaches. Require citations for all factual claims.'",
+          "impact_score": 7,
+          "effort_hours": 0.5,
+          "roi": 14.0,
+          "why_this_matters": "Directives ensure research quality. Moderate skepticism ensures research is well-sourced and clearly distinguishes evidence from opinion.",
+          "implementation_steps": [
+            "Create directive: 'research-source-verification'",
+            "Set moderate skepticism emphasis"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md (Disposition and Directives) + .github/agents/agentic-workflow-researcher.agent.md",
+          "success_metrics": "100% of research claims cite sources; opinion distinguished from fact; research credibility high"
+        },
+        {
+          "feature": "Observation Consolidation: Per-Research-Domain Scoping",
+          "current_state": "Observations auto-generated but not scoped",
+          "recommended_change": "Configure observation_scopes per research domain: 'research:agentic-workflows', 'research:vs-code-patterns', 'research:orchestration', etc. Separate observation consolidation per domain.",
+          "impact_score": 6,
+          "effort_hours": 1.5,
+          "roi": 4.0,
+          "why_this_matters": "Scoped observations prevent cross-domain inference. Patterns in agentic workflows stay separate from VS Code-specific patterns.",
+          "implementation_steps": [
+            "Tag research retain with domain tags",
+            "Configure observation_scopes: per_tag",
+            "Verify: Domain-specific observations"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/observations.md (Observation Scopes)",
+          "success_metrics": "Research patterns per domain are distinct; reflect pulls domain-appropriate observations"
+        }
+      ],
+      "phase_3_priority": 8,
+      "estimated_total_hours": 6,
+      "total_roi": 1.17,
+      "why_priority_8": "Lower ROI (1.17) than operational agents. Research support is important but lower priority than core orchestration, documentation, and upskilling work.",
+      "readiness_assessment": "HIGH - @agentic-workflow-researcher already uses retain/recall/reflect",
+      "dependency_notes": "Can run parallel with other work. Mental model creation needs prior research accumulated (first 2-3 weeks of Phase 3)."
+    },
+    "9_research_external_research_specialist": {
+      "agent_name": "@research",
+      "role": "External Research Specialist — conducts broad research on technical topics, best practices, patterns; retains findings in hindsight for pattern recognition",
+      "current_hindsight_usage": {
+        "retained_operations": [
+          "Uses retain/recall/reflect for deduplication and synthesis"
+        ],
+        "recall_depth": "Low - uses recall to check for prior research",
+        "reflect_usage": "Low - limited reflect usage",
+        "mental_models": 0,
+        "directives": 0,
+        "observations": "Auto-generated only (not explicitly leveraged)"
+      },
+      "advanced_features_to_add": [
+        {
+          "feature": "Mental Models: Research Domain Index",
+          "current_state": "Research findings retained; no consolidated index",
+          "recommended_change": "Create mental models for research organization: (1) 'Research Domain Taxonomy' (source_query: 'What research domains have we investigated? What are the key topics and sub-topics?'), (2) 'High-Confidence vs. Emerging Research Findings' (source_query: 'Which research findings are well-established consensus vs. emerging trends? Which sources are most authoritative in each domain?')",
+          "impact_score": 7,
+          "effort_hours": 2,
+          "roi": 3.5,
+          "why_this_matters": "Mental models organize research knowledge. Before conducting research, @research can check the index to understand existing coverage.",
+          "implementation_steps": [
+            "Consolidate past research topics into taxonomy",
+            "Create mental model: 'Research Domain Taxonomy'",
+            "Reference to avoid duplicate research"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/api/mental-models.md + .github/agents/research.agent.md",
+          "success_metrics": "Research duplication reduced 60%+; domain coverage is well-organized; research prioritization informed by existing coverage"
+        },
+        {
+          "feature": "Advanced Tag Hierarchies: Fine-Grained Source Classification",
+          "current_state": "Basic tagging; limited source differentiation",
+          "recommended_change": "Implement deeper tag hierarchies: 'research:source:official-docs', 'research:source:github-repos', 'research:source:technical-blogs', 'research:confidence:consensus', 'research:confidence:emerging'. This enables precise recall filtering by source type and confidence.",
+          "impact_score": 6,
+          "effort_hours": 2,
+          "roi": 3.0,
+          "why_this_matters": "Fine-grained tags enable smart recall filtering. Ben can recall 'only official documentation' or 'only consensus practices'.",
+          "implementation_steps": [
+            "Design extended tag schema with source + confidence dimensions",
+            "Update all research retain calls to use new tags",
+            "Use tag_groups in recall for sophisticated filtering"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/best-practices.md (Tag naming conventions) + (tag_groups for complex filters)",
+          "success_metrics": "Recall filtering is more precise; source traceability improves; research credibility assessment is easier"
+        },
+        {
+          "feature": "Directive: High Skepticism for Source Verification",
+          "current_state": "Default disposition settings",
+          "recommended_change": "Add directive: 'When conducting research, maintain high skepticism about sources. Prefer official documentation and peer-reviewed sources. Flag opinion pieces, blogs, and unverified claims. Require strong evidence before accepting claims as facts. Distinguish clearly between consensus, emerging, and controversial approaches.'",
+          "impact_score": 6,
+          "effort_hours": 0.5,
+          "roi": 12.0,
+          "why_this_matters": "High skepticism ensures research quality. Prevents hallucinated research claims; ensures citations are rigorous.",
+          "implementation_steps": [
+            "Create directive: 'research-source-skepticism'",
+            "Set high skepticism emphasis"
+          ],
+          "source_reference": ".agents/skills/hindsight-docs/references/developer/reflect.md (Disposition and Directives)",
+          "success_metrics": "Research outputs are well-sourced; source credibility is high; false research claims are rare"
+        }
+      ],
+      "phase_3_priority": 9,
+      "estimated_total_hours": 6,
+      "total_roi": 1.0,
+      "why_priority_9": "Lowest ROI (1.0) among all agents. Research deduplication improves, but impact is localized to research domain rather than portfolio-wide. Lower priority than operational improvements.",
+      "readiness_assessment": "HIGH - @research already uses retain/recall/reflect",
+      "dependency_notes": "Can run concurrent with other work. Lower priority; can be deferred to Week 4-5 if timeline is tight."
+    }
+  },
+  "phase_3_upskilling_roadmap": {
+    "timeline": "4-5 weeks",
+    "weekly_breakdown": {
+      "week_1_quick_wins": {
+        "focus": "High-ROI, low-effort improvements that show immediate value",
+        "agents": [
+          "@doc",
+          "Ben",
+          "@bash-ops"
+        ],
+        "estimated_hours": 10,
+        "estimated_roi": 2.7,
+        "deliverables": [
+          "@doc: 3 mental models (Documentation Standards, Architecture Patterns, Synthesis Framework)",
+          "Ben: 2 mental models (Agent Capabilities, Delegation Patterns)",
+          "@bash-ops: 2 mental models (Error Handling, Quality Checklist) + directive"
+        ],
+        "success_criteria": [
+          "@doc synthesis cycles reference mental models",
+          "Ben routing decisions cite model-based reasoning",
+          "@bash-ops scripts reference quality checklist"
+        ],
+        "notes": "Quick wins establish patterns that inform later strategic work. Week 1 completion creates momentum for rest of Phase 3."
+      },
+      "week_2_priority_agents": {
+        "focus": "Consolidate orchestration and recruitment effectiveness",
+        "agents": [
+          "@ar-director",
+          "@ar-upskiller"
+        ],
+        "estimated_hours": 8,
+        "estimated_roi": 1.75,
+        "deliverables": [
+          "@ar-director: 3 mental models (Specialization Dimensions, Complementary Patterns, Failed Lessons) + periodic portfolio coherence reflect",
+          "@ar-upskiller: 3 mental models (Upskilling Patterns, Tool Evolution, Instruction Engineering) + directive"
+        ],
+        "success_criteria": [
+          "New recruits follow established specialization patterns",
+          "Upskilling cycles use consistent methodology",
+          "Portfolio coherence maintained (no specialization overlap)"
+        ],
+        "notes": "These agents directly support portfolio optimization. Week 2 completion ensures upskilling capacity ready for Phase 4."
+      },
+      "week_3_code_and_analysis": {
+        "focus": "Improve codebase navigation and evaluation rigor",
+        "agents": [
+          "@explore-codebase",
+          "@evaluator"
+        ],
+        "estimated_hours": 10,
+        "estimated_roi": 1.5,
+        "deliverables": [
+          "@explore-codebase: 3 mental models (Module Structure, Patterns, Symbol Map) + observation scopes + directive",
+          "@evaluator: 3 mental models (Frameworks, Gap Patterns, Standards) + maximum skepticism directive + observation scopes"
+        ],
+        "success_criteria": [
+          "Code exploration 30% faster with architecture context",
+          "Evaluations are rigorous, well-sourced, consistent",
+          "Gap patterns tracked per agent per category"
+        ],
+        "notes": "Analysis agents are critical for portfolio health. These upskills improve quality of all future evaluations."
+      },
+      "week_4_research_and_polish": {
+        "focus": "Enhance research synthesis and handle final improvements",
+        "agents": [
+          "@agentic-workflow-researcher",
+          "@research"
+        ],
+        "estimated_hours": 12,
+        "estimated_roi": 1.1,
+        "deliverables": [
+          "@agentic-workflow-researcher: 3 mental models (Best Practices, Specialization Patterns, Orchestration Strategies) + observation scopes + directive",
+          "@research: 2 mental models (Domain Index, Confidence Assessment) + advanced tag hierarchies + directive"
+        ],
+        "success_criteria": [
+          "Research outputs are consistent, well-sourced, clearly structured",
+          "Research duplication reduced 50%+",
+          "Pattern synthesis in agentic workflows is authoritative"
+        ],
+        "notes": "Research enhancement completes Phase 3. These agents provide input for future agent improvements."
+      },
+      "week_5_verification_and_tuning": {
+        "focus": "Test all upskills, fine-tune implementation, document learnings",
+        "agents": "All 9",
+        "estimated_hours": 8,
+        "estimated_roi": "N/A (validation + tuning)",
+        "deliverables": [
+          "Test all 9 mental models: Are they returning correct synthesized answers?",
+          "Verify directives: Are agents following disposition guidance?",
+          "Verify observation scopes: Are patterns consolidating correctly?",
+          "Document: Mental model implementations, directive configurations, tagging schema used",
+          "Retain learnings: Document Phase 3 upskilling process and outcomes"
+        ],
+        "success_criteria": [
+          "All mental models tested and working correctly",
+          "Directives improving agent reasoning as intended",
+          "Observation scopes functioning correctly",
+          "No regressions in agent quality or capability"
+        ],
+        "notes": "Week 5 optional if Week 1-4 are on schedule. Otherwise integrate testing into concurrent weeks."
+      }
+    }
+  },
+  "portfolio_wide_patterns_and_insights": {
+    "quick_wins_pattern": {
+      "definition": "High-ROI (>2.0), low-effort (<4 hours) improvements that are immediately implementable",
+      "agents_qualifying": [
+        "@doc (ROI 2.67)",
+        "Ben (ROI 2.0)"
+      ],
+      "why_it_matters": "Quick wins establish momentum and demonstrate hindsight value early. Complete Week 1.",
+      "implementation_approach": "Focus on mental model creation; minimal directive/observation scope work"
+    },
+    "mental_models_across_portfolio": {
+      "total_mental_models_recommended": 24,
+      "breakdown": {
+        "@doc": 3,
+        "Ben": 2,
+        "@bash-ops": 2,
+        "@ar-director": 2,
+        "@ar-upskiller": 2,
+        "@explore-codebase": 3,
+        "@evaluator": 3,
+        "@agentic-workflow-researcher": 3,
+        "@research": 2
+      },
+      "pattern": "Each agent gets 2-3 mental models covering core responsibilities and decision frameworks",
+      "rollout_sequence": "Sequential by agent priority; mental models created as agent accumulates relevant hindsight memories",
+      "portfolio_value": "Mental models become company-wide knowledge base; new agents can reference existing models to accelerate onboarding"
+    },
+    "directives_and_disposition_tuning": {
+      "total_directives_recommended": 9,
+      "breakdown": {
+        "@doc": 1,
+        "Ben": 0,
+        "@bash-ops": 1,
+        "@ar-director": 0,
+        "@ar-upskiller": 1,
+        "@explore-codebase": 1,
+        "@evaluator": 1,
+        "@agentic-workflow-researcher": 1,
+        "@research": 1
+      },
+      "pattern": "Directives applied selectively to agents needing specialized reasoning emphasis",
+      "types_used": [
+        "Skepticism directives (research, evaluation, upskilling, agentic research) — verify claims, require evidence",
+        "Literalism directives (bash-ops, explore-codebase) — exact specifications, precise references",
+        "Clarity emphasis (doc, upskiller) — prioritize simplicity and consistency"
+      ],
+      "portfolio_value": "Directives fine-tune reasoning for agent specialization; prevent common failure modes (hallucination, scope creep, ambiguity)"
+    },
+    "observation_scopes_strategy": {
+      "agents_implementing_scopes": 6,
+      "scope_approaches": [
+        "Per-agent tracking (ar-upskiller, evaluator) — separate observation consolidation per agent",
+        "Per-domain tracking (@doc, @explore-codebase, @agentic-workflow-researcher, @research) — separate observations per research/code domain",
+        "Per-symbol-type tracking (@explore-codebase) — separate patterns for functions vs. classes",
+        "Per-script-type tracking (@bash-ops) — separate patterns for admin vs. CI/CD scripts"
+      ],
+      "portfolio_value": "Scoped observations prevent false inference; patterns stay in appropriate domains; reflection becomes more precise"
+    },
+    "critical_success_factors": {
+      "factor_1_mental_model_quality": {
+        "risk": "Mental models created from insufficient hindsight memory; answers are generic or incorrect",
+        "mitigation": "Delay mental model creation until agent has accumulated 10+ relevant memories. Review models after creation; allow human refinement before deployment.",
+        "verification": "Test mental model queries against hindsight; ensure responses are specific and accurate"
+      },
+      "factor_2_directive_alignment": {
+        "risk": "Directives contradict agent's core purpose (e.g., high skepticism for @doc harms writing confidence)",
+        "mitigation": "Review each directive against agent role and responsibilities. Test with sample reflect queries before deployment.",
+        "verification": "Monitor agent behavior after directive; ensure reasoning is improved, not hindered"
+      },
+      "factor_3_observation_scope_configuration": {
+        "risk": "Observation scopes misconfigured; patterns get consolidated incorrectly or observations are lost",
+        "mitigation": "Test observation_scopes with sample retain/reflect cycles before deploying to production",
+        "verification": "Query observations by scope; verify they consolidate correctly and reflect returns appropriate observations"
+      },
+      "factor_4_tag_consistency": {
+        "risk": "Inconsistent tagging across agents makes recall/reflect filtering unreliable",
+        "mitigation": "Document tag schema in .github/context/hindsight-tag-schema.md; review all retain calls for tag consistency",
+        "verification": "Audit hindsight memory; ensure tags follow schema; fix outliers"
+      },
+      "factor_5_hindsight_memory_hygiene": {
+        "risk": "Memory accumulation becomes unwieldy; recall/reflect performance degrades",
+        "mitigation": "Establish memory retention policy; archive old observations; consolidate duplicate memories",
+        "verification": "Monitor hindsight memory size; establish alerts for excessive growth"
+      }
+    },
+    "portfolio_coherence_analysis": {
+      "specialization_overlap_assessment": "No significant overlap detected. Each agent has distinct specialization. Phase 3 upskilling maintains coherence by enforcing consistent patterns.",
+      "capability_gap_analysis": "No critical gaps identified in current 9-agent portfolio. Phase 3 hindsight upskilling addresses quality/consistency gaps rather than capability gaps.",
+      "dependency_relationships": {
+        "ben_depends_on": "All other agents; mental models improve routing effectiveness",
+        "ar_director_depends_on": "evaluator (for portfolio assessment); agentic-workflow-researcher (for recruitment patterns)",
+        "ar_upskiller_depends_on": "evaluator (for gap identification); all agents (whose upskilling is being planned)",
+        "doc_depends_on": "research, explore-codebase, agentic-workflow-researcher (for content to synthesize)",
+        "all_agents_depend_on": "hindsight infrastructure (memory bank, consolidation, mental model API)"
+      },
+      "recommended_rollout_sequence": "Week 1: Quick wins (doc, ben, bash-ops) establish patterns. Week 2-3: Orchestration agents (ar-director, ar-upskiller) leverage established patterns. Week 4: Analysis/research agents (evaluator, agentic-workflow-researcher, research) consolidate findings. This sequence ensures dependencies are satisfied before dependent agents are upskilled."
+    },
+    "phase_4_implications": {
+      "emergent_intelligence_foundation": "Phase 3 mental models become foundation for Phase 4 emergent behavior. Agents with strong mental models can teach each other.",
+      "agent_learning_loop_enablement": "Phase 3 observation scopes enable Phase 4 'agent learning from experience'. Agents can recall and reflect on prior patterns to improve future decisions.",
+      "mental_model_evolution": "Phase 3 static mental models can evolve in Phase 4 with 'trigger_refresh_after_consolidation' enabled, allowing continuous updates as new memories arrive",
+      "workspace_conventions_emergence": "Phase 3 consistency (directive emphasis, tag schema, observation scoping) creates foundation for Phase 4 workspace-wide conventions. Agents develop shared practices automatically."
+    }
+  },
+  "implementation_checklist": {
+    "pre_phase_3_setup": [
+      {
+        "task": "Verify hindsight API is running and responsive",
+        "responsibility": "@bash-ops (or ops team)",
+        "estimated_hours": 0.5,
+        "notes": "Check hindsight service health, test basic retain/recall"
+      },
+      {
+        "task": "Create .github/context/hindsight-tag-schema.md documenting Phase 3 tag standards",
+        "responsibility": "evaluator",
+        "estimated_hours": 1,
+        "notes": "Standardize tags: research:*, codebase:*, pattern:*, memory:*, etc."
+      },
+      {
+        "task": "Create mental model implementation template (.github/context/mental-model-template.md)",
+        "responsibility": "@doc",
+        "estimated_hours": 1,
+        "notes": "Template includes: name, source_query, tags, expected content, refresh strategy"
+      }
+    ],
+    "week_1_execution": [
+      {
+        "task": "@doc: Create 3 mental models (Documentation Standards, Architecture Patterns, Synthesis Framework)",
+        "responsibility": "@doc",
+        "estimated_hours": 2.5,
+        "success_criteria": "Mental models created, tested, integrated into synthesis workflow"
+      },
+      {
+        "task": "Ben: Create 2 mental models (Agent Capabilities, Delegation Patterns)",
+        "responsibility": "Ben + evaluator (testing)",
+        "estimated_hours": 1.5,
+        "success_criteria": "Models created; Ben routing logic references models in 80%+ of delegations"
+      },
+      {
+        "task": "@bash-ops: Create 2 mental models (Error Handling, Quality Checklist) + directive",
+        "responsibility": "@bash-ops",
+        "estimated_hours": 2,
+        "success_criteria": "Models reference established bash script patterns; directive improves script literalism"
+      },
+      {
+        "task": "Week 1 verification: Test all Week 1 mental models",
+        "responsibility": "evaluator",
+        "estimated_hours": 1.5,
+        "success_criteria": "All models return correct synthesized answers; no hallucination; models are actionable"
+      }
+    ],
+    "week_2_execution": [
+      {
+        "task": "@ar-director: Create 3 mental models + reflect query for portfolio coherence",
+        "responsibility": "@ar-director",
+        "estimated_hours": 2,
+        "success_criteria": "Recruitment decisions cite model-based reasoning"
+      },
+      {
+        "task": "@ar-upskiller: Create 3 mental models + skepticism directive",
+        "responsibility": "@ar-upskiller",
+        "estimated_hours": 2.5,
+        "success_criteria": "Upskilling methodology consistent; directive prevents unnecessary scope creep"
+      },
+      {
+        "task": "Week 2 verification: Test upskilling decision quality",
+        "responsibility": "evaluator",
+        "estimated_hours": 1,
+        "success_criteria": "Upskilling recommendations have strong justification; patterns vs. one-offs are clear"
+      }
+    ],
+    "week_3_execution": [
+      {
+        "task": "@explore-codebase: Create 3 mental models + observation scopes + directive",
+        "responsibility": "@explore-codebase",
+        "estimated_hours": 2.5,
+        "success_criteria": "Symbol exploration faster with architecture context"
+      },
+      {
+        "task": "@evaluator: Create 3 mental models + maximum skepticism directive + observation scopes",
+        "responsibility": "@evaluator",
+        "estimated_hours": 2.5,
+        "success_criteria": "All evaluations follow consistent framework; recommendations well-sourced"
+      },
+      {
+        "task": "Week 3 verification: Test evaluation quality and observation consolidation",
+        "responsibility": "@evaluator",
+        "estimated_hours": 1.5,
+        "success_criteria": "Evaluations are rigorous; observations consolidate correctly per scope"
+      }
+    ],
+    "week_4_execution": [
+      {
+        "task": "@agentic-workflow-researcher: Create 3 mental models + observation scopes + directive",
+        "responsibility": "@agentic-workflow-researcher",
+        "estimated_hours": 3,
+        "success_criteria": "Research synthesis consistent; pattern library is authoritative"
+      },
+      {
+        "task": "@research: Create 2 mental models + advanced tag hierarchies + directive",
+        "responsibility": "@research",
+        "estimated_hours": 2.5,
+        "success_criteria": "Research sources are traceable; duplication reduced"
+      },
+      {
+        "task": "Week 4 verification: Test research synthesis and tag filtering",
+        "responsibility": "evaluator",
+        "estimated_hours": 1,
+        "success_criteria": "Research is well-sourced; tag-based filtering works correctly"
+      }
+    ],
+    "week_5_validation_and_documentation": [
+      {
+        "task": "Final verification: Test all 9 agents' Phase 3 capabilities in operational use",
+        "responsibility": "Ben (orchestrator) + all agents",
+        "estimated_hours": 2,
+        "success_criteria": "All mental models, directives, scopes working correctly in live delegation cycles"
+      },
+      {
+        "task": "Documentation: Create .github/context/phase-3-upskilling-summary.md",
+        "responsibility": "@doc",
+        "estimated_hours": 1.5,
+        "notes": "Document what was implemented, why, expected outcomes, and Phase 4 roadmap"
+      },
+      {
+        "task": "Hindsight retention: Retain Phase 3 learnings and outcomes",
+        "responsibility": "@evaluator",
+        "estimated_hours": 1,
+        "notes": "Store mental models created, directives implemented, observations scopes configured for Phase 4 reference"
+      },
+      {
+        "task": "Phase 3 completion report to Ben",
+        "responsibility": "@ar-upskiller",
+        "estimated_hours": 0.5,
+        "notes": "Summary: 24 mental models created, 9 directives configured, 6 observation scope implementations, all 9 agents upskilled"
+      }
+    ]
+  },
+  "risk_mitigation_and_contingencies": {
+    "risk_1_mental_model_hallucination": {
+      "description": "Mental models return incorrect or generic answers if based on insufficient memory",
+      "likelihood": "Medium",
+      "mitigation": [
+        "Require minimum 10 relevant memories before creating mental model",
+        "Test mental model queries manually before deployment",
+        "Set up monitoring to detect hallucination (compare model answers against raw memories)"
+      ],
+      "contingency": "Mark model as 'draft' and continue refining with new memory accumulation"
+    },
+    "risk_2_hindsight_api_latency": {
+      "description": "Mental model or observation queries cause noticeable agent latency increase",
+      "likelihood": "Low",
+      "mitigation": [
+        "Use budget='low' for routine recall operations",
+        "Cache frequently accessed mental models",
+        "Monitor latency metrics per agent"
+      ],
+      "contingency": "Reduce mental model complexity or defer some reflect queries to background"
+    },
+    "risk_3_tag_schema_divergence": {
+      "description": "Agents use inconsistent tags, making recall/reflect filtering unreliable",
+      "likelihood": "Medium",
+      "mitigation": [
+        "Create tag schema documentation before upskilling",
+        "Audit all retain calls for compliance (automated or manual)",
+        "Provide tag examples in mental model templates"
+      ],
+      "contingency": "Retroactively re-tag memories or create tag translation layer"
+    },
+    "risk_4_directive_backfire": {
+      "description": "Directive intended to improve reasoning actually harms agent quality (e.g., skepticism prevents decisiveness)",
+      "likelihood": "Low",
+      "mitigation": [
+        "Test directives with sample reflect queries before deployment",
+        "Monitor agent behavior changes after directive implementation",
+        "Have rollback plan (remove directive if harmful)"
+      ],
+      "contingency": "Disable directive, analyze failure, redesign with different approach"
+    },
+    "risk_5_observation_scope_misconfiguration": {
+      "description": "Observation scopes configured incorrectly; pattern consolidation is broken or incomplete",
+      "likelihood": "Medium",
+      "mitigation": [
+        "Document observation scope strategy clearly",
+        "Test scopes with sample retain/reflect cycles",
+        "Query hindsight observations API to verify consolidation"
+      ],
+      "contingency": "Reset observation scopes and reconfigure with corrected strategy"
+    },
+    "risk_6_timeline_compression": {
+      "description": "5-week timeline is too aggressive; upskilling quality suffers",
+      "likelihood": "Medium",
+      "mitigation": [
+        "Prioritize Week 1 quick wins; defer lower-ROI agents to Week 4-5",
+        "Parallelize work across agents (Ben/Doc/bash-ops in Week 1 can run concurrently)",
+        "Use templates to accelerate mental model creation"
+      ],
+      "contingency": "Extend timeline to 6-7 weeks; de-prioritize research agents (lowest ROI) to later phases"
+    }
+  },
+  "success_metrics_and_measurement": {
+    "phase_3_success_indicators": [
+      {
+        "metric": "Mental model coverage",
+        "target": "24 mental models created across 9 agents",
+        "measurement": "Query hindsight mental models API; count created models"
+      },
+      {
+        "metric": "Agent routing accuracy improvement",
+        "target": "Re-delegation rate decreases from baseline to <5%",
+        "measurement": "Compare re-delegation rate before/after Phase 3; Ben should cite routing rationale 80%+ of the time"
+      },
+      {
+        "metric": "Documentation consistency",
+        "target": "@doc synthesis cycles reference mental models 100% of the time",
+        "measurement": "Review @doc outputs; check for mental model references"
+      },
+      {
+        "metric": "Evaluation rigor",
+        "target": "All evaluations follow consistent framework; 100% of recommendations are sourced",
+        "measurement": "Review evaluations; verify recommendations have source citations"
+      },
+      {
+        "metric": "Research duplication reduction",
+        "target": "Research duplication decreases 50%; agents recall prior research before starting new investigation",
+        "measurement": "Track research recall operations; monitor for overlapping queries"
+      },
+      {
+        "metric": "Portfolio coherence",
+        "target": "No new specialization overlaps detected; recruitment decisions improve",
+        "measurement": "Quarterly portfolio review; compare agent specializations; track recruitment success rate"
+      },
+      {
+        "metric": "Hindsight memory health",
+        "target": "Tag schema compliance >95%; memory growth is bounded; no duplicate observations",
+        "measurement": "Audit hindsight memories; check tags, memory size, observation consolidation"
+      },
+      {
+        "metric": "Agent satisfaction with Phase 3 capabilities",
+        "target": "Agents report Phase 3 improvements help their work (qualitative feedback)",
+        "measurement": "Post-Phase-3 feedback survey to all agents"
+      }
+    ],
+    "phase_3_to_phase_4_transition_readiness": {
+      "checklist": [
+        "All 24 mental models created, tested, and integrated",
+        "All 9 directives configured and functioning",
+        "Observation scopes working correctly (6 agents)",
+        "Tag schema documented and in use across all agents",
+        "Portfolio-wide patterns stable (no regressions in agent quality)",
+        "Hindsight memory health verified (hygiene, consolidation)",
+        "Phase 4 roadmap documented (emergent intelligence goals)"
+      ],
+      "transition_criteria": "Phase 3 is complete when all checklist items are satisfied AND agents demonstrate improved performance in their specialized domains"
+    }
+  },
+  "appendix_roi_calculations": {
+    "methodology": "ROI = Impact Score / Effort Hours. Impact scores (1-10) assess how much the upskilling improves agent effectiveness. Effort hours estimate time to implement (mental model creation, directive config, observation scope setup, testing).",
+    "roi_ranking": [
+      {
+        "rank": 1,
+        "agent": "@doc",
+        "quick_win_feature": "Mental Models (Documentation Standards, Patterns, Framework)",
+        "impact": 8,
+        "effort": 3,
+        "roi": 2.67,
+        "notes": "Highest ROI. @doc actively uses reflect (Phase 2), so mental models are immediately valuable."
+      },
+      {
+        "rank": 2,
+        "agent": "Ben",
+        "quick_win_feature": "Mental Models (Agent Portfolio, Delegation Patterns) + Reflect Queries",
+        "impact": 8,
+        "effort": 4,
+        "roi": 2.0,
+        "notes": "High ROI. Orchestrator improvement benefits entire portfolio."
+      },
+      {
+        "rank": 3,
+        "agent": "@bash-ops",
+        "quick_win_feature": "Mental Models + Directive (Literalism)",
+        "impact": 5,
+        "effort": 3,
+        "roi": 1.67,
+        "notes": "Good ROI. New agent ramping up; mental models accelerate learning."
+      },
+      {
+        "rank": 4,
+        "agent": "@ar-director",
+        "strategic_feature": "Mental Models (Specialization, Patterns, Lessons) + Reflect",
+        "impact": 7,
+        "effort": 4,
+        "roi": 1.75,
+        "notes": "Portfolio coherence improves; prevents recruitment mistakes."
+      },
+      {
+        "rank": 5,
+        "agent": "@ar-upskiller",
+        "strategic_feature": "Mental Models (Upskilling Patterns, Tool Evolution, Instructions) + Directive (Skepticism)",
+        "impact": 7,
+        "effort": 4,
+        "roi": 1.75,
+        "notes": "Upskilling methodology becomes consistent and evidence-based."
+      },
+      {
+        "rank": 6,
+        "agent": "@explore-codebase",
+        "strategic_feature": "Mental Models (Architecture, Patterns, Symbols) + Scopes + Directive",
+        "impact": 7,
+        "effort": 5,
+        "roi": 1.4,
+        "notes": "Code exploration faster with architecture context; more precise symbol resolution."
+      },
+      {
+        "rank": 7,
+        "agent": "@evaluator",
+        "strategic_feature": "Mental Models (Frameworks, Patterns, Standards) + Directive (Skepticism) + Scopes",
+        "impact": 8,
+        "effort": 5,
+        "roi": 1.6,
+        "notes": "Evaluation rigor and consistency improve; critical for portfolio health."
+      },
+      {
+        "rank": 8,
+        "agent": "@agentic-workflow-researcher",
+        "strategic_feature": "Mental Models (Best Practices, Specialization, Orchestration) + Scopes + Directive",
+        "impact": 7,
+        "effort": 6,
+        "roi": 1.17,
+        "notes": "Research synthesis becomes more consistent; pattern library authoritative."
+      },
+      {
+        "rank": 9,
+        "agent": "@research",
+        "future_feature": "Mental Models (Domain Index, Confidence) + Advanced Tags + Directive",
+        "impact": 6,
+        "effort": 6,
+        "roi": 1.0,
+        "notes": "Lowest ROI. Research deduplication improves but impact is localized."
+      }
+    ],
+    "portfolio_averages": {
+      "average_impact_score": 6.9,
+      "average_effort_hours": 4.4,
+      "average_roi": 1.67,
+      "median_roi": 1.67,
+      "total_portfolio_effort": 32,
+      "total_estimated_improvement": "Significant Phase 3 comprehensive upskilling"
+    }
+  },
+  "conclusion_and_next_steps": {
+    "next_step_1": "Review and approve this Phase 3 evaluation with Ben. Confirm priority sequence and timeline.",
+    "next_step_2": "Coordinate with @ar-upskiller to begin Week 1 quick wins: @doc, Ben, @bash-ops mental models.",
+    "next_step_3": "Monitor Weeks 1-2 execution; adjust timeline if slippage occurs.",
+    "next_step_4": "Upon Phase 3 completion, transition to Phase 4: Emergent Intelligence. Focus on enabling agent learning loops with mental model evolution and observation-driven behavior improvement.",
+    "final_note": "This evaluation represents systematic, sourced assessment of Phase 3 opportunities. All recommendations are grounded in Hindsight advanced features documentation and portfolio-specific needs. Implementation follows evaluator-recommended priorities (quick wins first, then strategic improvements) to maximize ROI while maintaining quality."
+  }
+}
