@@ -1,7 +1,7 @@
 # Agent Skills Best Practices & Design Patterns
 
-**Comprehensive Research Report**  
-*Date: March 31, 2026*  
+**Comprehensive Research Report**
+*Date: March 31, 2026*
 *Research Scope: Agent skill definition, structure, discovery, usage patterns, and workspace organization*
 
 ---
@@ -54,9 +54,9 @@ Reasons to package knowledge as a skill:
 
 #### Example 1: Hindsight Documentation Skill (Workspace)
 
-**What**: Complete Hindsight documentation packaged as an agent skill  
-**Location**: `/.agents/skills/hindsight-docs/SKILL.md`  
-**Structure**: YAML frontmatter + organized reference documentation directory with references, SDKs, integrations, cookbook  
+**What**: Complete Hindsight documentation packaged as an agent skill
+**Location**: `/.agents/skills/hindsight-docs/SKILL.md`
+**Structure**: YAML frontmatter + organized reference documentation directory with references, SDKs, integrations, cookbook
 **Key Insight**: Shows that a skill can wrap extensive reference documentation and provide clear navigation paths for agents to find what they need
 
 This skill works because:
@@ -66,9 +66,9 @@ This skill works because:
 
 #### Example 2: Hindsight Documentation Skill (Workspace)
 
-**What**: Complete Hindsight memory system documentation packaged as reusable skill  
-**Location**: `/.github/agents/skills/hindsight-docs/SKILL.md`  
-**Pattern**: Organizes extensive reference documentation with clear navigation paths for agents  
+**What**: Complete Hindsight memory system documentation packaged as reusable skill
+**Location**: `/.github/agents/skills/hindsight-docs/SKILL.md`
+**Pattern**: Organizes extensive reference documentation with clear navigation paths for agents
 **Key Insight**: Skills can provide comprehensive reference material with multiple entry points, making complex domains accessible
 
 #### Example 3: Claude Agent Capabilities (Anthropic Pattern)
@@ -77,7 +77,7 @@ When Claude agents need to know "What can Claude do?", this is packaged as a dis
 
 ### Skills vs Guides vs References
 
-| Aspect | Skill | Guide | Reference | 
+| Aspect | Skill | Guide | Reference |
 |--------|-------|-------|-----------|
 | **Purpose** | Navigation + entry points | Learning path | Lookup material |
 | **Audience** | Both agents and humans | Primarily humans | Both agents and humans |
@@ -96,14 +96,14 @@ When Claude agents need to know "What can Claude do?", this is packaged as a dis
 #### Required Fields
 
 **`name`** (string)
-- Human-readable skill name  
-- Should be searchable and descriptive  
-- Examples: "Hindsight Documentation," "CLI Modes Reference," "Python Testing Patterns"  
+- Human-readable skill name
+- Should be searchable and descriptive
+- Examples: "Hindsight Documentation," "CLI Modes Reference," "Python Testing Patterns"
 - **Best Practice**: Use clear, domain-specific names. Avoid generic names like "Utilities" or "Helpers"
 
 **`description`** (string)
-- 1-2 sentence summary of what the skill provides  
-- When agents should use it  
+- 1-2 sentence summary of what the skill provides
+- When agents should use it
 - Examples:
   - "Complete Hindsight documentation for AI agents. Use this to learn about architecture, APIs, and best practices."
   - "Reference guide for GitHub Copilot CLI modes and when to use each mode."
@@ -112,35 +112,35 @@ When Claude agents need to know "What can Claude do?", this is packaged as a dis
 #### Recommended Metadata Fields
 
 **`keywords`** (array)
-- Search terms agents might use when looking for this skill  
-- Include synonyms and related concepts  
-- Example: For Hindsight skill: `["hindsight", "memory", "retention", "recall", "reflect", "agents", "documentation"]`  
+- Search terms agents might use when looking for this skill
+- Include synonyms and related concepts
+- Example: For Hindsight skill: `["hindsight", "memory", "retention", "recall", "reflect", "agents", "documentation"]`
 - **Best Practice**: Think like an agent asking questions. "I need to remember things" → include "memory" + "retention"
 
 **`audience`** (array)
-- Which agents/roles should use this skill  
-- Helps orchestrators route work  
-- Example: `["@agentic-workflow-researcher", "@skill-builder", "any agent needing memory patterns"]`  
+- Which agents/roles should use this skill
+- Helps orchestrators route work
+- Example: `["@agentic-workflow-researcher", "@skill-builder", "any agent needing memory patterns"]`
 - **Best Practice**: Be explicit. Prevents misuse and wasted discovery.
 
 **`prerequisites`** (array)
-- Required knowledge or skills agents need before using this skill  
-- Example: `["Understanding of agent architecture", "Familiarity with REST APIs"]`  
+- Required knowledge or skills agents need before using this skill
+- Example: `["Understanding of agent architecture", "Familiarity with REST APIs"]`
 - **Best Practice**: Clear prerequisites prevent agents from getting lost in advanced material.
 
 **`difficulty`** (string)
-- Complexity level: `beginner | intermediate | advanced`  
-- Helps agents self-select appropriate resources  
+- Complexity level: `beginner | intermediate | advanced`
+- Helps agents self-select appropriate resources
 - **Best Practice**: Mix levels in skill structure so agents can start simple.
 
 **`version`** (string)
-- Semantic version (e.g., `1.0.0`, `1.2.3`) for tracking skill evolution  
-- Enables version-aware references  
+- Semantic version (e.g., `1.0.0`, `1.2.3`) for tracking skill evolution
+- Enables version-aware references
 - **Best Practice**: Bump version when substantially updating. Track in changelog.
 
 **`tags`** (array)
-- Categorical tags for navigation and filtering  
-- Examples: `["pattern:agentic-workflows", "category:memory", "domain:AI"]`  
+- Categorical tags for navigation and filtering
+- Examples: `["pattern:agentic-workflows", "category:memory", "domain:AI"]`
 - **Best Practice**: Use consistent tagging scheme across all skills.
 
 ### Markdown Content Structure
@@ -195,7 +195,7 @@ See: Cookbook → Recipes organized by use case
 
 **Content**:
 - Concept 1: Definition + quick context
-- Concept 2: Definition + quick context  
+- Concept 2: Definition + quick context
 - Links to detailed sections for deep dives
 
 **Avoid**: Comprehensive explanation (that's for guides). Just enough context to be useful.
@@ -383,23 +383,23 @@ If you need long-term learning across sessions → Use hindsight (persistent)
 ### Metadata Enables Programmatic Discovery
 
 **Keywords field**: Enables semantic matching
-> Agent: "I need to know about memory operations"  
+> Agent: "I need to know about memory operations"
 > System: Semantic search finds skill with keywords `["memory", "retention", "recall"]`
 
 **Audience field**: Helps orchestrators route
-> Ben: "@research agent needs historical context. Should I provide skill?"  
+> Ben: "@research agent needs historical context. Should I provide skill?"
 > Check: Does "audience" field include "@agentic-workflow-researcher"? → YES, route it.
 
 **Prerequisites field**: Prevents misuse
-> Agent checks: "Does this skill have prerequisite I'm missing?"  
+> Agent checks: "Does this skill have prerequisite I'm missing?"
 > Agent: "Memory patterns skill requires understanding agent architecture. Let me get that first."
 
 **Tags field**: Enables category filtering
-> Ben: "Show me all pattern: tags"  
+> Ben: "Show me all pattern: tags"
 > System filters by tag and returns all pattern documentation
 
 **Difficulty field**: Helps agents select learning path
-> Agent: "I'm new to this. Show me beginner content first"  
+> Agent: "I'm new to this. Show me beginner content first"
 > System shows beginner sections before advanced content
 
 ---
@@ -768,7 +768,7 @@ replacement: new-cli-modes-skill-v3
 
 **Why**: Consistency makes skills predictable. Agents and users recognize patterns.
 
-**Action**: 
+**Action**:
 - Create `.github/agents/skills/SKILL-TEMPLATE.md` with required sections
 - Require all new skills to follow template
 - @skill-builder enforces in reviews
@@ -838,7 +838,7 @@ replacement: new-cli-modes-skill-v3
 
 **Decision tree**:
 - Agent-first + discoverable + entry points? → **Skill**
-- Human learning path + sequential? → **Guide**  
+- Human learning path + sequential? → **Guide**
 - Lookup detail + parameter tables? → **Reference**
 - Synthesized findings + sources? → **Research**
 
@@ -1047,7 +1047,7 @@ hindsight-docs/
 
 ---
 
-**Research Completed**: March 31, 2026  
-**Researcher**: @agentic-workflow-researcher (GitHub Copilot)  
-**Format**: Comprehensive markdown report + structured JSON research document  
+**Research Completed**: March 31, 2026
+**Researcher**: @agentic-workflow-researcher (GitHub Copilot)
+**Format**: Comprehensive markdown report + structured JSON research document
 **Report Status**: Ready for workspace implementation

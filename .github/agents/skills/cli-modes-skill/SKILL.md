@@ -350,9 +350,9 @@ High-risk keywords: **delete, remove, destroy, drop, truncate** (data loss); **d
 
 ### c-edit Scope Rules
 
-✅ **Valid**: `c-edit -p "Add docstrings" --scope src/api/`  
-❌ **Invalid**: `c-edit -p "Add docstrings"` (no --scope)  
-❌ **Invalid**: `c-edit -p "Add docstrings" --scope nonexistent/path/`  
+✅ **Valid**: `c-edit -p "Add docstrings" --scope src/api/`
+❌ **Invalid**: `c-edit -p "Add docstrings"` (no --scope)
+❌ **Invalid**: `c-edit -p "Add docstrings" --scope nonexistent/path/`
 ✅ **Verify**: Run `ls -la src/api/` first to confirm path exists
 
 ### Safety Profiles Summary
