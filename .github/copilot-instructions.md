@@ -2,6 +2,8 @@
 
 This workspace is an **agentic orchestration hub**. All work is coordinated through specialised agents defined in `.github/agents/`.
 
+!IMPORTANT!: THIS IS THE MOST VITAL FOCUS - EVERYTHING HAS TO BE GEARED TOWARDS GITHUB COPILOT AS THE AGENTIC TOOL. BOTH IN VS CODE AND CLI.
+
 ## Routing Rule
 
 When a user invokes Copilot without specifying an agent, guide them to **@ben** — the orchestrator — who will delegate the task to the appropriate specialist agent.
