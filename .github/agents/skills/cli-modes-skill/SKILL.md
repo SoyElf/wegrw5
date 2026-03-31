@@ -61,23 +61,23 @@ Since agents don't read linearly, choose your starting point:
 
 ### Quick Start: Decision Tree (5 min)
 
-Jump to the [Mode Selection Decision Tree](#mode-selection-decision-tree) below to identify the right mode for your immediate task. If you need context, return to [Core Concepts](#core-concepts) afterward.
+Jump to the [Mode Selection Decision Tree](<#mode-selection-decision-tree>) below to identify the right mode for your immediate task. If you need context, return to [Core Concepts](<#core-concepts>) afterward.
 
 ### Discovery Path: What Each Mode Does (10 min)
 
-Read [Mode Overview](#mode-overview) to understand each mode's capabilities and limits, then use the [Mental Models](#mental-models) section to understand *why* the progression exists.
+Read [Mode Overview](<#mode-overview>) to understand each mode's capabilities and limits, then use the [Mental Models](<#mental-models>) section to understand *why* the progression exists.
 
 ### Deep Dive: Complete Guide (20 min)
 
-Start with [Mental Models](#mental-models) for conceptual foundation, then move through sections sequentially to build complete understanding of modes, safety, and delegation patterns.
+Start with [Mental Models](<#mental-models>) for conceptual foundation, then move through sections sequentially to build complete understanding of modes, safety, and delegation patterns.
 
 ### Problem-Solving Path: "How Do I...?" (varies)
 
-- **"How do I explain code or diagnose an error?"** → c-ask mode in [Mode Overview](#mode-overview)
-- **"How do I design a complex refactoring?"** → c-plan mode in [Mode Overview](#mode-overview)
-- **"How do I safely edit files?"** → c-edit mode in [Mode Overview](#mode-overview)
-- **"How do I run a multi-step workflow?"** → c-agent mode in [Mode Overview](#mode-overview)
-- **"I'm delegating work to a specialist—which mode?"** → [Delegation Patterns](#delegation-patterns)
+- **"How do I explain code or diagnose an error?"** → c-ask mode in [Mode Overview](<#mode-overview>)
+- **"How do I design a complex refactoring?"** → c-plan mode in [Mode Overview](<#mode-overview>)
+- **"How do I safely edit files?"** → c-edit mode in [Mode Overview](<#mode-overview>)
+- **"How do I run a multi-step workflow?"** → c-agent mode in [Mode Overview](<#mode-overview>)
+- **"I'm delegating work to a specialist—which mode?"** → [Delegation Patterns](<#delegation-patterns>)
 
 ---
 
@@ -397,9 +397,9 @@ Before delegating any c-edit task:
 
 ## See Also
 
-**Comprehensive Guide**: For detailed workflows, deep dives per mode, troubleshooting scenarios, and extended examples, see [CLI Mode Patterns & Orchestration Heuristics: Comprehensive Skill Guide](../../../../docs/guides/cli-modes-comprehensive-guide.md) (~25-30 min read).
+**Comprehensive Guide**: For detailed workflows, deep dives per mode, troubleshooting scenarios, and extended examples, see [CLI Mode Patterns & Orchestration Heuristics: Comprehensive Skill Guide](<../../../../docs/guides/cli-modes-comprehensive-guide.md>) (~25-30 min read).
 
-**Research Backing**: For technical analysis of mode patterns and design rationale, see [Research: CLI Mode Patterns & Orchestration Heuristics](../../../../docs/research/cli-mode-patterns-research.md).
+**Research Backing**: For technical analysis of mode patterns and design rationale, see [CLI Mode Patterns & Orchestrator Heuristics Research](<../../../../docs/research/cli-mode-patterns-research.md>).
 
 **Related Skills**:
 - Agent orchestration and delegation patterns
