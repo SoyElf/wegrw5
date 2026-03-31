@@ -7,6 +7,12 @@
 
 ---
 
+**Quick Links**:
+- 📖 **[Practical Guide: CLI Modes](<../guides/cli-modes-comprehensive-guide.md>)** — Implementation guide with real-world examples and workflows
+- 🎯 **[Quick Reference Skill](<../../.github/agents/skills/cli-modes-skill/SKILL.md>)** — Agent-discoverable quick reference for CLI modes
+
+---
+
 ## Executive Summary
 
 The workspace's CLI mode system (c-ask, c-plan, c-edit, c-agent) implements a **progressive escalation architecture** for task execution, pairing operational complexity with appropriate model capability and safety controls. Ben uses mode-aware delegation patterns to signal task complexity to specialist agents, enabling autonomous decision-making about execution approach.
@@ -882,10 +888,8 @@ Cost and reasoning power increase together with complexity.
   - Logging and utilities (lines 117-597)
 
 **Related Documentation**
-- `DELIVERY.md` — Architecture and delivery summary
-- `INTEGRATION-TEST-EXECUTIVE-SUMMARY.md` — Verification of all modes
-- `EXAMPLES.md` — Real-world usage examples
-- `QUICK-REFERENCE.md` — Quick command reference
+- [CLI Modes Comprehensive Guide](<../guides/cli-modes-comprehensive-guide.md>) — Implementation guidance and practical examples
+- [CLI Modes Quick Reference Skill](<../../.github/agents/skills/cli-modes-skill/SKILL.md>) — Agent-discoverable quick reference card
 
 ---
 

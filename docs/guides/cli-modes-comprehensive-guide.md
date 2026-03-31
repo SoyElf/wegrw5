@@ -8,18 +8,24 @@
 
 ---
 
+**Quick Links**:
+- 🔗 **[Quick Reference: CLI Modes Skill](<../../.github/agents/skills/cli-modes-skill/SKILL.md>)** — One-page skill reference for quick lookup
+- 📊 **[Research Backing: Patterns & Heuristics](<../research/cli-mode-patterns-research.md>)** — Deep research synthesis and technical analysis
+
+---
+
 ## Table of Contents
 
-1. [Overview & Mental Models](#overview--mental-models)
-2. [Quick Decision Guide](#quick-decision-guide)
-3. [Mode Deep Dives](#mode-deep-dives)
-4. [Delegation Patterns](#delegation-patterns)
-5. [Safety & Confirmation Workflows](#safety--confirmation-workflows)
-6. [Model Selection Heuristics](#model-selection-heuristics)
-7. [Real-World Workflow Sequences](#real-world-workflow-sequences)
-8. [Troubleshooting & Recovery](#troubleshooting--recovery)
-9. [Best Practices & Patterns](#best-practices--patterns)
-10. [Reference & Checklists](#reference--checklists)
+1. [Overview & Mental Models](<#overview--mental-models>)
+2. [Quick Decision Guide](<#quick-decision-guide>)
+3. [Mode Deep Dives](<#mode-deep-dives>)
+4. [Delegation Patterns](<#delegation-patterns>)
+5. [Safety & Confirmation Workflows](<#safety--confirmation-workflows>)
+6. [Model Selection Heuristics](<#model-selection-heuristics>)
+7. [Real-World Workflow Sequences](<#real-world-workflow-sequences>)
+8. [Troubleshooting & Recovery](<#troubleshooting--recovery>)
+9. [Best Practices & Patterns](<#best-practices--patterns>)
+10. [Reference & Checklists](<#reference--checklists>)
 
 ---
 

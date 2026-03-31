@@ -1,12 +1,28 @@
-# Copilot CLI Model Discovery - Complete Index
+# Workspace Documentation Index
 
-**Discovery Date**: 2026-03-30
-**Copilot Version**: 1.0.12
-**Status**: ✓ COMPLETE
+**Last Updated**: 2026-03-31
+**Scope**: Agentic workflows, orchestration patterns, and Copilot CLI tools
 
 ---
 
-## Quick Facts
+## 📚 Documentation Structure
+
+This workspace maintains three primary documentation categories:
+
+### **[Guides & References](docs/guides/)** — Practical Implementation
+- **[CLI Modes Comprehensive Guide](<./docs/guides/cli-modes-comprehensive-guide.md>)** — Deep dive into orchestration patterns and workflows
+- **[CLI Modes Quick Reference](<./docs/guides/cli-modes-quick-reference.md>)** — Quick lookup for CLI models and modes
+- **[Copilot Models Quick Reference](<./docs/guides/copilot-models-quick-reference.md>)** — All 20 available Copilot CLI models at a glance
+- **[Copilot Wrapper Model Guide](<./docs/guides/copilot-wrapper-model-guide.md>)** — Implementation guide with code samples
+
+### **[Research Findings](docs/research/)** — Technical Deep Dives
+- **[CLI Mode Patterns Research](<./docs/research/cli-mode-patterns-research.md>)** — Comprehensive synthesis of orchestration patterns
+- **[Model Discovery Report](<./docs/research/model-discovery-report.md>)** — Complete discovery of 20 available Copilot CLI models
+- **[Model Discovery Test Results](<./docs/research/model-discovery-test-results.md>)** — Detailed test procedures and validation results
+
+---
+
+## 🎯 Quick Facts (CLI Models)
 
 | Item | Value |
 |------|-------|
@@ -18,7 +34,7 @@
 
 ---
 
-## Most Useful Model Names
+## 🚀 Most Useful Model Names
 
 ### For General Use
 ```bash
@@ -41,15 +57,14 @@
 
 ---
 
-## Documentation Index
+## 📖 Related Documentation
 
 | Document | Purpose | Size | Audience |
 |----------|---------|------|----------|
-| **[DISCOVERY-SUMMARY.txt](<../assets/DISCOVERY-SUMMARY.txt>)** | Executive overview (this page) | 3KB | Everyone |
-| **[COPILOT-WRAPPER-MODEL-GUIDE.md](<./COPILOT-WRAPPER-MODEL-GUIDE.md>)** | Implementation guide with code samples | 5KB | Developers |
-| **[COPILOT-MODELS-QUICK-REFERENCE.md](<./COPILOT-MODELS-QUICK-REFERENCE.md>)** | One-page model lookup | 4KB | Quick reference |
-| **[MODEL-DISCOVERY-TEST-RESULTS.md](<./MODEL-DISCOVERY-TEST-RESULTS.md>)** | Detailed test procedures & results | 8KB | Technical review |
-| **[MODEL-DISCOVERY-REPORT.md](<./MODEL-DISCOVERY-REPORT.md>)** | Comprehensive discovery report | 12KB | Full documentation |
+| **[docs/guides/README.md](<./docs/guides/README.md>)** | Guides index | — | All |
+| **[docs/research/README.md](<./docs/research/README.md>)** | Research index | — | Technical reviewers |
+| **[.github/agents/](../.github/agents/)** | Agent definitions | — | Developers |
+| **[.github/agents/skills/](../.github/agents/skills/)** | Reusable skills | — | Developers |
 
 ---
 
