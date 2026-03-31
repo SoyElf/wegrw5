@@ -9,7 +9,6 @@
 
 **Quick Links**:
 - 📖 **[Practical Guide: CLI Modes](<../guides/cli-modes-comprehensive-guide.md>)** — Implementation guide with real-world examples and workflows
-- 🎯 **[Quick Reference Skill](<../../.github/agents/skills/cli-modes-skill/SKILL.md>)** — Agent-discoverable quick reference for CLI modes
 
 ---
 
@@ -889,7 +888,6 @@ Cost and reasoning power increase together with complexity.
 
 **Related Documentation**
 - [CLI Modes Comprehensive Guide](<../guides/cli-modes-comprehensive-guide.md>) — Implementation guidance and practical examples
-- [CLI Modes Quick Reference Skill](<../../.github/agents/skills/cli-modes-skill/SKILL.md>) — Agent-discoverable quick reference card
 
 ---
 

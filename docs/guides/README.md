@@ -11,5 +11,4 @@ Quick-start guides and comprehensive references for CLI modes, Copilot models, a
 
 ## Related
 
-- [CLI Modes & Orchestration: Quick Reference](<../../.github/agents/skills/cli-modes-skill/SKILL.md>) — Agent-discoverable reference card
 - [CLI Mode Patterns & Orchestrator Heuristics Research](<../research/cli-mode-patterns-research.md>) — Detailed research synthesis

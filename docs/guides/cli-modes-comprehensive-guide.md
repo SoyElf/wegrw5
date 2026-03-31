@@ -9,8 +9,7 @@
 ---
 
 **Quick Links**:
-- 🔗 **[Quick Reference: CLI Modes Skill](<../../.github/agents/skills/cli-modes-skill/SKILL.md>)** — One-page skill reference for quick lookup
-- 📊 **[Research Backing: Patterns & Heuristics](<../research/cli-mode-patterns-research.md>)** — Deep research synthesis and technical analysis
+-  **[Research Backing: Patterns & Heuristics](<../research/cli-mode-patterns-research.md>)** — Deep research synthesis and technical analysis
 
 ---
 

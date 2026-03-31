@@ -11,4 +11,3 @@ Research synthesis and technical findings on agentic workflows, CLI tools, and o
 ## Related
 
 - [CLI Mode Patterns & Orchestration Heuristics: Comprehensive Skill Guide](<../guides/cli-modes-comprehensive-guide.md>) — Practical implementation guidance
-- [CLI Modes & Orchestration: Quick Reference](<../../.github/agents/skills/cli-modes-skill/SKILL.md>) — Quick reference card

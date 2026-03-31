@@ -1,0 +1,565 @@
+{
+  "research_topic": "Agent Skills Best Practices, Structure, and Design Patterns",
+  "findings": {
+    "definition_and_purpose": {
+      "what_is_a_skill": "An agent skill is a reusable, packaged unit of domain-specific knowledge, capability, or procedural expertise designed to enhance an AI agent's effectiveness. Unlike generic documentation, a skill is agent-first: it's structured, discoverable, and intended for agents to locate, invoke, and leverage during execution. A skill encapsulates specialized knowledge (how to perform a technical task), procedural patterns (step-by-step workflows), or reference material (APIs, tools, best practices) in a machine-readable and human-readable format.",
+      "purpose": [
+        "Enable agents to discover and reuse specialized knowledge without duplicating information",
+        "Provide agents with procedural guidance for complex, domain-specific tasks",
+        "Serve as a reference layer that agents can query (recall) during problem-solving",
+        "Package knowledge artifacts that agents need but wouldn't know to look for",
+        "Create composable capability blocks that multiple agents can leverage"
+      ],
+      "skills_vs_documentation": {
+        "skill": "Agent-first, discoverable, structured: includes metadata (keywords, audience, prerequisites), clear entry points, explicit when-to-use guidance. Designed for agents to find and reference during execution.",
+        "guide": "Human-first, descriptive, narrative: comprehensive walkthrough of a topic. Read end-to-end. Not optimized for programmatic discovery.",
+        "reference": "Human-first, organized by structure: API docs, parameter tables, type definitions. Humans search for specific information. Not a guided walkthrough.",
+        "research": "Synthetic findings with sources: deep analysis of patterns, best practices, and recommendations. Historical context and credibility assessment."
+      },
+      "real_world_examples": {
+        "example_2_hindsight_docs": {
+          "description": "Complete Hindsight documentation packaged as an agent skill",
+          "location": "workspace: /.agents/skills/hindsight-docs/SKILL.md",
+          "structure": "Frontmatter (name, description) + organized documentation directory with references, SDKs, integrations, cookbook. Designed for agents to navigate and extract relevant sections.",
+          "key_insight": "Shows that a skill can wrap extensive reference documentation and provide clear navigation paths for agents to find what they need."
+        },
+        "example_2_cli_modes_redesign": {
+          "description": "CLI Modes Skill (being redesigned with proper structure)",
+          "status": "UNDER REDESIGN (deleted 2026-03-31 confused version, rebuilding with proper design)",
+          "future_location": "workspace: /.github/agents/skills/cli-modes-skill/SKILL.md",
+          "plan": "Rebuild with: clear frontmatter, focused entry point, navigation to comprehensive guides",
+          "key_insight": "Initial version was too large and guide-like, conflating skill and guide. New version will be entry point + navigation."
+        },
+        "example_3_claude_features": {
+          "description": "Anthropic's Claude documentation as model capabilities skill",
+          "pattern": "When Claude agents need to know what Claude can do (tools, limits, features), this is packaged as a discoverable skill with model capabilities, limitations, and versioning.",
+          "key_insight": "Skills are effective for packaging capabilities documentation that agents need during reasoning."
+        }
+      }
+    },
+    "skill_structure_anatomy": {
+      "yaml_frontmatter": {
+        "required_fields": {
+          "name": {
+            "type": "string",
+            "description": "Human-readable skill name. Should be searchable and descriptive.",
+            "examples": [
+              "Hindsight Documentation",
+              "CLI Modes Reference",
+              "Python Testing Patterns"
+            ],
+            "best_practice": "Use clear, domain-specific names. Avoid generic names like 'Utilities' or 'Helpers'."
+          },
+          "description": {
+            "type": "string",
+            "description": "1-2 sentence summary of what the skill provides and when agents should use it.",
+            "examples": [
+              "Complete Hindsight documentation for AI agents. Use this to learn about architecture, APIs, and best practices.",
+              "Reference guide for GitHub Copilot CLI modes and when to use each mode."
+            ],
+            "best_practice": "Be specific about the skill's domain and use case. Agents will use this to decide if the skill is relevant to their current task."
+          }
+        },
+        "recommended_metadata_fields": {
+          "keywords": {
+            "type": "array",
+            "description": "Search terms agents might use when looking for this skill",
+            "examples": [
+              "hindsight, memory, retention, recall, reflect, documentation, agents"
+            ],
+            "best_practice": "Include synonyms, alternative names, and related concepts. Think about how agents would ask for this knowledge."
+          },
+          "audience": {
+            "type": "array",
+            "description": "Which agents/roles should use this skill",
+            "examples": [
+              "@agentic-workflow-researcher",
+              "@skill-builder",
+              "any agent needing memory patterns"
+            ],
+            "best_practice": "Be explicit about who benefits from this skill. Helps orchestrators route work appropriately."
+          },
+          "prerequisites": {
+            "type": "array",
+            "description": "Required knowledge or skills agents need before using this skill",
+            "examples": [
+              "Understanding of agent architecture",
+              "Familiarity with REST APIs"
+            ],
+            "best_practice": "Clear prerequisites prevent agents from misusing the skill or getting lost in advanced material."
+          },
+          "difficulty": {
+            "type": "string",
+            "description": "Complexity level: beginner, intermediate, advanced",
+            "best_practice": "Helps agents self-select appropriate resources. Mix levels in skill structure so agents can start simple."
+          },
+          "version": {
+            "type": "string",
+            "description": "Semantic version (1.0.0) for tracking skill evolution",
+            "best_practice": "Enables version-aware references and deprecation tracking."
+          },
+          "tags": {
+            "type": "array",
+            "description": "Categorical tags for navigation and filtering",
+            "examples": [
+              "pattern:agentic-workflows",
+              "category:memory",
+              "domain:AI"
+            ],
+            "best_practice": "Use consistent tagging scheme. Enables cross-skill discovery."
+          }
+        }
+      },
+      "markdown_content_structure": [
+        {
+          "section": "Overview/Purpose",
+          "description": "Clear statement of WHEN and WHY agents should use this skill",
+          "content": "- What problem does this skill solve?\n- When should agents reference this skill?\n- What will agents learn/accomplish?"
+        },
+        {
+          "section": "Entry Points (Critical!)",
+          "description": "How agents can navigate the skill. Multiple pathways for different use cases",
+          "content": "- Start here: [link to best practices]\n- Find X by [navigation method]\n- Quick reference: [summary table]\n- Full API: [comprehensive reference]"
+        },
+        {
+          "section": "Core Concepts",
+          "description": "Key ideas agents need to understand (brief, not comprehensive)",
+          "content": "- Concept 1: Definition + quick context\n- Concept 2: Definition + quick context\n- Links to detailed sections for deep dives"
+        },
+        {
+          "section": "How to Use This Skill",
+          "description": "Procedural guidance: step-by-step for common tasks",
+          "content": "- Task 1: Step-by-step workflow\n- Task 2: Step-by-step workflow\n- Common variations"
+        },
+        {
+          "section": "Reference / Details",
+          "description": "Comprehensive reference material organized logically",
+          "content": "- API endpoints / parameters\n- Configuration options\n- Code examples\n- Best practices"
+        },
+        {
+          "section": "Common Patterns",
+          "description": "How to combine this skill with others for common workflows",
+          "content": "- Pattern 1: How to use this skill with [other skill]\n- Pattern 2: Multi-step workflow combining skills"
+        }
+      ]
+    },
+    "minimal_vs_comprehensive": {
+      "minimal_viable_skill": {
+        "definition": "Minimum a skill needs to provide actionable value to agents",
+        "required_components": [
+          "Clear frontmatter (name, description, keywords)",
+          "One primary use case + entry point",
+          "Core concepts explained (500-800 words)",
+          "One worked example or procedure",
+          "Links to deeper material if complexity requires it"
+        ],
+        "word_count_target": "500-1000 words",
+        "structure": "Frontmatter + 2-3 tight sections. Assume agent knows context; don't over-explain.",
+        "when_appropriate": "Narrow domain with clear singular use case, common reference material, temporary/evolving knowledge"
+      },
+      "overweight_skill_antipattern": {
+        "signs": [
+          "Single .md file >5000 words (should split or link to guides)",
+          "Trying to cover everything (becomes unwieldy for agents searching)",
+          "Heavy narrative prose (agents scan, don't read essays)",
+          "Unclear when to use this skill (too broad)",
+          "No clear entry points or navigation (agents get lost)",
+          "Assumes agents read top-to-bottom (modern agents navigate laterally)"
+        ],
+        "solution": "Split into focused skills. Core skill (1000-2000 words) + linked guides (reading) + linked references (looking up details)"
+      },
+      "comprehensive_skill": {
+        "definition": "Well-structured skill with both breadth and depth",
+        "structure": [
+          "Frontmatter with rich metadata (keywords, audience, prerequisites, difficulty)",
+          "Overview + entry point guidance (helps agents navigate)",
+          "Core concepts explained clearly",
+          "Multiple entry points for different use cases",
+          "Linked subdirectories with detailed reference material",
+          "Cookbook/patterns showing skill in composition",
+          "Version history and known limitations"
+        ],
+        "word_count": "2000-5000 words + supporting materials",
+        "when_appropriate": "Complex domain, multiple use cases, deep reference material needed, foundational to multiple agents",
+        "example": "hindsight-docs skill with references/, SDKs/, integrations/, cookbook/ subdirectories"
+      },
+      "size_guidelines": {
+        "under_500_words": "Too brief. Not enough value. Grow it or leave it as summary in a guide.",
+        "500_1500_words": "Minimal viable skill. Good for narrow, well-defined domains. Entry point + core concept + one example.",
+        "1500_3000_words": "Sweet spot for most skills. Covers domain with breadth and depth. Multiple entry points, examples, patterns.",
+        "3000_5000_words": "Complex domain with multiple use cases. Consider whether this should be multiple skills.",
+        "over_5000_words": "Either split into multiple skills or link to guides. Skill is too heavy for agent navigation."
+      },
+      "split_decision_framework": {
+        "question_1": "Are there distinct use cases with different prerequisites?",
+        "if_yes": "Split into focused skills. Example: 'Hindsight for Beginners' vs 'Hindsight API Reference'",
+        "question_2": "Would agents ask different questions about this topic?",
+        "if_yes": "Split by question. Example: 'CLI Modes Overview' vs 'CLI Mode Comparison Table'",
+        "question_3": "Is there supporting material (deep dives, tutorial, etc)?",
+        "if_yes": "Link to guides/references. Keep skill as entry point and navigation layer.",
+        "heuristic": "If you imagine an agent asking 'How do I do X with this skill?' and can't answer clearly in <500 words, split it."
+      }
+    },
+    "discovery_and_usage_patterns": {
+      "how_agents_find_skills": [
+        "Explicit invocation: @skill-name (if agent knows skill exists)",
+        "Orchestrator routing: Ben analyzes task and provides hint: 'Use hindsight-docs to understand memory patterns'",
+        "Semantic search: Agent uses semantic_search or grep to find relevant skills by topic",
+        "Directory enumeration: Agent lists .github/agents/skills/ and reads frontmatter to discover available skills",
+        "Metadata matching: Agent searches by keyword from skill metadata"
+      ],
+      "how_agents_invoke_skills": [
+        "Read entire skill + navigate by section: Agent needs comprehensive understanding",
+        "Extract specific section: Agent asks 'What does this section say about X?' and references just that part",
+        "Use entry point: Agent follows 'Start Here' guidance to navigate to relevant subsection",
+        "Compose with other skills: Agent uses skill A + skill B together to solve complex problem",
+        "Reference during reasoning: Agent includes skill excerpt in reasoning context to improve decision-making"
+      ],
+      "cross_linking_patterns": {
+        "skill_to_skill": "Skills link to each other when they're composable: 'See [Agent Architecture Skill] for context on how agents work'",
+        "skill_to_guide": "Skill links to guides for deeper learning: 'For detailed tutorial, see docs/guides/hindsight-comprehensive-guide.md'",
+        "skill_to_research": "Skill links to research for best practices/patterns: 'See docs/research/agentic-workflows/ for pattern analysis'",
+        "metadata_enables_discovery": "Keywords and tags in frontmatter enable agents to find related skills without explicit links"
+      },
+      "metadata_for_programmatic_discovery": {
+        "keywords_field": "Enables semantic matching: agent searching for 'memory operations' finds hindsight skill",
+        "audience_field": "Helps orchestrators route: '@research agent needs historical context? Check audience field.'",
+        "prerequisites_field": "Prevents misuse: agent checks if it has context needed before diving into advanced skill",
+        "tags_field": "Enables category filtering: 'Show me all pattern: tags' or 'category: memory'",
+        "difficulty_field": "Helps agents select learning path: start with beginner section before advanced"
+      }
+    },
+    "documentation_hierarchy": {
+      "hierarchy_model": {
+        "skill": {
+          "purpose": "Agent-optimized packaged knowledge with clear entry points and navigation",
+          "audience": "AI agents and users who know they want this specific domain",
+          "structure": "YAML frontmatter + organized sections with nav guidance + linked references",
+          "length": "500-5000 words (entry point + core content, not exhaustive)",
+          "discovery": "Keywords, tags, metadata. Agents search for skills explicitly.",
+          "reading_pattern": "Non-linear: agents jump to relevant sections based on task"
+        },
+        "guide": {
+          "purpose": "Comprehensive walkthrough/tutorial of a topic. Human-readable learning path",
+          "audience": "Humans learning a new domain. Also agents doing research/context-building",
+          "structure": "Chapter/section structure that flows logically from intro → advanced",
+          "length": "2000-10000+ words. Complete treatment of topic.",
+          "discovery": "Linked from skills, referenced in docs/guides/ directory",
+          "reading_pattern": "Linear/sequential: readers follow learning path chapter by chapter"
+        },
+        "reference": {
+          "purpose": "Lookup material: API docs, parameters, type definitions, lookup tables",
+          "audience": "Developers/agents looking up specific details while building something",
+          "structure": "Organized alphabetically or by category. Each entry is self-contained.",
+          "length": "Variable: entries are concise (parameter definition = 1-2 sentences)",
+          "discovery": "Indexed, searchable, often auto-generated from code",
+          "reading_pattern": "Targeted search: find specific parameter/entity"
+        },
+        "research": {
+          "purpose": "Synthesized findings with sources. Patterns, best practices, recommendations",
+          "audience": "Decision-makers, architects, agents evaluating approaches",
+          "structure": "Executive summary + findings + sources + recommendations",
+          "length": "2000-5000 words",
+          "discovery": "Referenced in architecture docs, linked from relevant skills/guides",
+          "reading_pattern": "Summary-first: read exec summary + recommendations, deep-dive into findings if needed"
+        }
+      },
+      "mature_system_patterns": [
+        "Anthropic Claude docs: API reference (reference) + guides (tutorial walkthrough) + cookbook (patterns)",
+        "VS Code docs: Getting started (guides) + API reference (reference) + Extension examples (patterns)",
+        "Kubernetes docs: Concepts (guides) + API reference (reference) + Tasks (how-to guides)",
+        "Hindsight docs skill: Architecture (guide) + API reference (reference) + SDK integrations (patterns) + Cookbook (recipes)"
+      ],
+      "separation_of_concerns": {
+        "skill": "Navigation layer + entry points. 'Here's how to learn this domain'",
+        "guide": "Learning path. 'Start here and follow this path to understand'",
+        "reference": "Lookup layer. 'Here's the specific detail you're looking for'",
+        "research": "Analysis layer. 'Here's what we learned from investigating this'"
+      },
+      "directory_structure_recommendation": {
+        "proposed_structure": "`.github/agents/skills/` contains skill packages, each with: SKILL.md (entry point) + README.md (extended guide if complex) + subdirectories as needed",
+        "rationale": "Skills are the discovery layer. Guides/references live in docs/. This keeps skills focused on entry points and navigation.",
+        "example": "`.github/agents/skills/hindsight-docs/` with: SKILL.md (agent entry point) + structured subdirectories (references/, sdks/, cookbook/)"
+      }
+    },
+    "skill_packaging_and_reusability": {
+      "anatomy_of_reusable_skill": [
+        "Clear domain boundary: 'This skill is about X, not Y'",
+        "Atomic knowledge unit: Skill stands alone; doesn't require hours of prerequisite reading",
+        "Discoverable: Keywords, tags, and metadata enable finding it. Frontmatter tells agents when to use it",
+        "Entry points: Multiple ways in depending on agent's starting question",
+        "Composable: Can be combined with other skills to solve larger problems",
+        "Versioned: Semantic versioning enables tracking changes and deprecations"
+      ],
+      "skill_composition_patterns": {
+        "pattern_1_sequential": "Agent uses skill A to learn X, then skill B to apply X. Example: Learn agent architecture (skill) → use that to understand custom agents (skill)",
+        "pattern_2_parallel": "Agent uses skill A + skill B simultaneously for different aspects of problem. Example: CLI modes (skill) + agent architecture (skill) for designing agent that uses CLI",
+        "pattern_3_layered": "Skill A is entry point, skills B and C decompose specifics. Example: Agent architecture overview (A) → leads to vs-code-specific-patterns (B) + multi-agent-orchestration (C)",
+        "pattern_4_reference": "Agent reads main skill, then checks reference skill for specific details. Example: Hindsight architecture (skill) + API reference (linked from skill)"
+      },
+      "reusability_anti_patterns": [
+        "Coupling to specific agent: 'This skill is only for @doc agent' → Not reusable. Create domain skill, not agent-specific skill",
+        "Assumed context: 'You already know how agents work' → Not reusable for new agents. State prerequisites in metadata",
+        "Hidden structure: No table of contents, no clear sections → Agents can't navigate efficiently",
+        "Mixed concerns: Skill about CLI modes + skill about agent design → Split into focused skills",
+        "No keywords/tags: How would an agent find this? → Agents can't discover it"
+      ]
+    },
+    "best_practices_dos": [
+      {
+        "practice": "Start with clear metadata (name, description, keywords)",
+        "why": "Agents need to know what your skill is about before reading. Metadata determines discoverability.",
+        "example": "name: 'CLI Modes Reference', keywords: ['cli modes', 'copilot cli', 'github copilot cli modes']"
+      },
+      {
+        "practice": "Include clear entry points and navigation guidance",
+        "why": "Agents don't read documents end-to-end. They jump to relevant sections. Help them navigate.",
+        "example": "'Looking to pick a CLI mode? See Mode Selection Table. Want API parameters? See Reference. Just learning? Start with Concepts.'"
+      },
+      {
+        "practice": "Write for agent discovery: use keywords agents would search for",
+        "why": "Agents will use semantic search or grep. Think like an agent asking a question.",
+        "example": "If agents ask 'How do I run Copilot in different modes?' → include 'modes', 'run', 'configurations' in keywords"
+      },
+      {
+        "practice": "Provide worked examples for procedures",
+        "why": "Agents learn by example. Procedural content needs concrete instances showing what 'correct' looks like.",
+        "example": "Don't just explain 'configure memory banks'. Show: 'bank = create_bank(id='my-agent', mission='...'). Then use bank in retain() calls.'"
+      },
+      {
+        "practice": "Link to guides and references, don't duplicate content",
+        "why": "Skill is entry point and navigation, not complete encyclopaedia. Link to comprehensive guides.",
+        "example": "'For detailed CLI modes tutorial, see docs/guides/cli-modes-comprehensive-guide.md'"
+      },
+      {
+        "practice": "State prerequisites and target audience explicitly",
+        "why": "Prevents agents from getting lost in material they're not ready for. Helps orchestrators route appropriately.",
+        "example": "Prerequisites: Understanding of agent architecture. Target audience: Agents designing orchestration workflows."
+      },
+      {
+        "practice": "Use consistent section headers and structure across skills",
+        "why": "Agents recognize patterns. Consistent structure makes skills predictable and easier to navigate.",
+        "example": "All skills follow: Overview + When to Use + How to Use + Common Patterns + Reference"
+      },
+      {
+        "practice": "Include version and deprecation info",
+        "why": "Skills evolve. Agents and users need to know if this skill is current or deprecated.",
+        "example": "version: 1.2.0, status: active, deprecated_in: null. Or: status: deprecated_in 2.0, see new-skill for replacement"
+      }
+    ],
+    "anti_patterns_donts": [
+      {
+        "antipattern": "Writing skill as if it's a guide (narrative, complete encyclopaedia)",
+        "problem": "Makes skill too heavy for agent navigation. Agents get lost. Skill becomes 'read all or nothing'",
+        "instead": "Write skill as entry point layer. Narrative content goes in docs/guides/"
+      },
+      {
+        "antipattern": "Unclear when to use skill ('this is about stuff')",
+        "problem": "Agents can't determine if this is relevant to their task. Wasted discovery cost.",
+        "instead": "State clearly: 'Use this when you need to [specific problem]. Don't use this for [what it's NOT about]'"
+      },
+      {
+        "antipattern": "Mixing multiple concerns in one skill (agent design + tool patterns + orchestration)",
+        "problem": "Makes skill unmaintainable and confusing. What's the domain boundary?",
+        "instead": "One skill per focused domain. Cross-link related skills."
+      },
+      {
+        "antipattern": "No keywords or metadata ('if agents want it, they'll find it somehow')",
+        "problem": "Skills are undiscoverable. Agents can't find them. Work gets duplicated.",
+        "instead": "Rich metadata is mandatory. Keywords, audience, prerequisites, tags enable discovery."
+      },
+      {
+        "antipattern": "Assuming agent context ('You already know how X works')",
+        "problem": "Skill isn't self-contained. Agents can't use it without external training.",
+        "instead": "State prerequisites explicitly. Assume minimal context."
+      },
+      {
+        "antipattern": "No clear structure or table of contents",
+        "problem": "Agents can't navigate. Have to read everything to find what they need.",
+        "instead": "Structure with sections, internal links, and nav guidance. Make scanning easy."
+      },
+      {
+        "antipattern": "Skill-specific to one agent (@doc-skill, @research-skill)",
+        "problem": "Not reusable. Other agents can't leverage. Defeats the purpose of packaging.",
+        "instead": "Create domain skills (@doc uses them, but so can other agents)"
+      },
+      {
+        "antipattern": "Outdated or abandoned skills with no version/deprecation info",
+        "problem": "Agents use stale information. Creates confusion and errors.",
+        "instead": "Version all skills. Mark deprecated skills clearly. Link to replacements."
+      }
+    ],
+    "workspace_organization_recommendations": {
+      "directory_structure": {
+        "proposed": "`.github/agents/skills/[domain]/ → SKILL.md (entry point) + supporting materials`",
+        "rationale": "Skills are organized by domain (cli-modes, hindsight-docs, agent-architecture). Each skill has a SKILL.md entry point + optional supporting files.",
+        "example_tree": "`.github/agents/skills/\n├── hindsight-docs/\n│   ├── SKILL.md\n│   ├── references/\n│   ├── sdks/\n│   └── cookbook/\n├── agent-architecture/\n│   ├── SKILL.md\n│   └── ...\n└── README.md (index of all skills)`"
+      },
+      "naming_conventions": {
+        "skill_directory": "lowercase-with-hyphens. Examples: hindsight-docs, agent-patterns, bash-automation",
+        "rationale": "Matches common package naming conventions. Easy to reference in documentation.",
+        "skill_file": "Always SKILL.md (uppercase) inside skill directory. Makes pattern clear.",
+        "reference_files": "[topic]-reference.md or [topic].md for supporting docs"
+      },
+      "navigation_discoverability": {
+        "skills_index": "Create `.github/agents/skills/README.md` that lists all skills with: name, description, keywords, audience, link",
+        "rationale": "Simple navigation for agents discovering available skills. One place to see all options.",
+        "metadata_in_index": "Extract metadata from skill frontmatter automatically (if possible) or maintain manually",
+        "example_index": "| Skill | Description | Keywords | For |\n|-------|---|---|---|\n| CLI Modes | Reference guide for Copilot CLI modes | cli, modes, github copilot | Any agent using Copilot CLI |"
+      },
+      "documentation_hierarchy_mapping": {
+        "skills_layer": "`.github/agents/skills/` → Agent-first, discoverable, entry points",
+        "guides_layer": "`docs/guides/` → Human-readable walkthroughs and learning paths",
+        "reference_layer": "`docs/research/` + linked reference files → Detailed lookup material and patterns",
+        "research_layer": "`.github/context/` → Research findings with sources (not consumed by agents directly, but informs skill design)"
+      },
+      "cross_linking": {
+        "skill_to_guides": "SKILL.md says: 'For comprehensive tutorial, see docs/guides/[guide-name].md'",
+        "guide_to_skills": "Guides say: 'Reference this with @skill-name during agent workflows'",
+        "skills_to_each_other": "Related skills link to each other in 'See Also' section",
+        "all_layers": "Each layer links down to supporting material, up to discovery layer"
+      },
+      "maintenance_responsibility": {
+        "skill_owner": "@skill-builder agent maintains skill quality, structure, metadata",
+        "guide_owner": "@doc agent writes and maintains guides",
+        "reference_owner": "Whoever maintains that subsystem keeps reference current (e.g., CLI maintainer updates modes reference)",
+        "research_owner": "@agentic-workflow-researcher creates and updates research findings"
+      },
+      "version_control_patterns": {
+        "skills_in_git": "SKILL.md and supporting files are version-controlled",
+        "semantic_versioning": "Each skill has version field. Bump when updating.",
+        "changelog": "Maintain simple CHANGELOG or version annotation in SKILL.md",
+        "deprecation_strategy": "Don't delete dead skills. Mark deprecated. Link to replacement."
+      }
+    },
+    "design_recommendations_for_this_workspace": [
+      {
+        "recommendation": "Adopt consistent SKILL.md structure across all skills",
+        "rationale": "Consistency makes skills predictable. Agents and users recognize patterns.",
+        "action": "Define standard SKILL.md template with required sections: Frontmatter, Overview, When to Use, How to Use, Patterns, Reference"
+      },
+      {
+        "recommendation": "Require rich frontmatter metadata (keywords, audience, prerequisites, difficulty, tags)",
+        "rationale": "Metadata enables programmatic discovery and routing. Without it, skills are hidden.",
+        "action": "Create template with frontmatter requirements. @skill-builder enforces in reviews."
+      },
+      {
+        "recommendation": "Create `.github/agents/skills/README.md` index",
+        "rationale": "One place for agents and users to discover available skills. Improves discoverability.",
+        "action": "Generate index from skill metadata. Update it whenever new skill created."
+      },
+      {
+        "recommendation": "Establish skill/guide/reference/research boundary",
+        "rationale": "Clear separation of concerns prevents duplication and confusion.",
+        "action": "Document hierarchy in workspace docs. Use in skill design reviews."
+      },
+      {
+        "recommendation": "Target 1500-2500 words for most new skills",
+        "rationale": "Sweet spot: comprehensive enough to be useful, lightweight enough for agent navigation.",
+        "action": "Use word count as quality gate. If >3000 words, consider splitting."
+      },
+      {
+        "recommendation": "Always include 'When to Use' and 'Common Patterns' sections",
+        "rationale": "Helps agents determine relevance and understand composability.",
+        "action": "Add to SKILL.md template."
+      },
+      {
+        "recommendation": "Link heavy reference material as supporting files, not inline",
+        "rationale": "Keeps skill entry point lean. Agents can drill down for details as needed.",
+        "action": "Move >1000-word reference sections to separate [topic]-reference.md or subdirectory"
+      },
+      {
+        "recommendation": "Establish keyword engineering guidelines",
+        "rationale": "Keywords determine discoverability. Need clear process for identifying them.",
+        "action": "Document: 'Think about how agents would ask for this. Put those terms in keywords.'"
+      },
+      {
+        "recommendation": "Create skill template/checklist for @skill-builder",
+        "rationale": "Ensures new skills follow standards and best practices.",
+        "action": "Create .github/agents/skills/SKILL-TEMPLATE.md with required sections, fields, word count target"
+      },
+      {
+        "recommendation": "Implement semantic caching for skill metadata",
+        "rationale": "Multiple agents might search for same skills. Cache metadata for performance.",
+        "action": "Consider storing skill metadata in .github/context/ for easy programmatic access"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "title": "Workspace: Hindsight Documentation Skill",
+      "url": "file:///.agents/skills/hindsight-docs/SKILL.md",
+      "type": "workspace-example",
+      "accessed_date": "2026-03-31",
+      "credibility": "High - Production example in workspace of well-structured comprehensive skill"
+    },
+    {
+      "title": "Workspace: Skill-Builder Agent Instructions",
+      "url": "file:///.github/agents/skill-builder.agent.md",
+      "type": "workspace-documentation",
+      "accessed_date": "2026-03-31",
+      "credibility": "High - Defines skill design expectations for this workspace"
+    },
+    {
+      "title": "Workspace: VS Code Agent File Specification",
+      "url": "file:///docs/research/agentic-workflows/vscode-agent-file-specification.md",
+      "type": "workspace-research",
+      "accessed_date": "2026-03-31",
+      "credibility": "High - Documents agent format and metadata patterns"
+    },
+    {
+      "title": "Workspace: Agent Definition and Fundamentals",
+      "url": "file:///docs/research/agentic-workflows/agent-definition-and-fundamentals.md",
+      "type": "workspace-research",
+      "accessed_date": "2026-03-31",
+      "credibility": "High - Establishes agent design patterns"
+    },
+    {
+      "title": "Anthropic Claude API Documentation",
+      "url": "https://docs.anthropic.com",
+      "type": "official-documentation",
+      "accessed_date": "2026-03-31",
+      "credibility": "Very High - Official documentation from Claude creators"
+    },
+    {
+      "title": "GitHub Copilot Features",
+      "url": "https://github.com/features/copilot",
+      "type": "official-documentation",
+      "accessed_date": "2026-03-31",
+      "credibility": "Very High - Official GitHub documentation"
+    },
+    {
+      "title": "VS Code Copilot Documentation",
+      "url": "https://code.visualstudio.com/docs/copilot",
+      "type": "official-documentation",
+      "accessed_date": "2026-03-31",
+      "credibility": "Very High - Official VS Code documentation"
+    }
+  ],
+  "timestamp": "2026-03-31T12:00:00Z",
+  "requestor_agent": "ben",
+  "tags": [
+    "research:agent-skills",
+    "research:agentic-systems",
+    "pattern:skill-design",
+    "pattern:documentation-hierarchy",
+    "best-practices:skill-structure",
+    "workspace:organization",
+    "world:agent-knowledge-packaging"
+  ],
+  "summary": "Agent skills are reusable, packaged units of domain-specific knowledge designed for agent discovery and leverage. Unlike guides (human-readable walkthroughs) or references (parameter lookup), skills are agent-first with discoverable metadata, clear entry points, and navigable structure. Effective skills have rich frontmatter (name, description, keywords, audience, prerequisites), multiple entry points for different use cases, and clear boundaries to domain expertise. Target 1500-2500 words for most skills—substantial enough to be useful, lightweight enough for agent navigation. Skills should always include 'When to Use' and 'Common Patterns' sections to help agents determine relevance and composability. Documentation hierarchy distinguishes: skills (entry points), guides (learning paths), references (lookup), and research (synthesized findings). This workspace should establish consistent SKILL.md structure, require rich metadata, create a skills index, and distinguish skill/guide/reference boundaries to prevent duplication and enable discoverability.",
+  "applicable_to_agents": [
+    "@skill-builder",
+    "@doc",
+    "@ben",
+    "@agentic-workflow-researcher"
+  ],
+  "follow_up_questions": [
+    "How should metadata be extracted/validated? Create schema validator or manual checks?",
+    "Should skill metadata be cached in .github/context/ for programmatic agent access?",
+    "How frequently should skills be reviewed/refreshed? Annual? Event-driven?",
+    "What's the skill discovery API? How do agents programmatically find relevant skills?",
+    "Should deprecated skills be archived in separate directory or marked inline?"
+  ],
+  "version": "1.0"
+}
