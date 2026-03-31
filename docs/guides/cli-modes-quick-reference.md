@@ -143,8 +143,8 @@ cp-ask "task" --model gemini-3.1-pro
 
 ## For More Info
 
-- **Setup:** See `INSTALLATION.md`
-- **Examples:** See `EXAMPLES.md` (30+ real-world patterns)
+- **Setup:** See `docs/guides/INSTALLATION.md`
+- **Examples:** See `docs/EXAMPLES.md` (30+ real-world patterns)
 - **Inline help:** Run `c-modes` after installation
 
 ---

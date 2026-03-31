@@ -31,7 +31,7 @@ The core wrapper providing 4 mode functions and utilities:
 
 ---
 
-### 2. **copilot-modes-installer.sh** (Installation Script, 6.3 KB)
+### 2. **scripts/setup/copilot-modes-installer.sh** (Installation Script, 6.3 KB)
 Automated installation with safety and clarity:
 
 **What it does:**
@@ -48,7 +48,7 @@ Automated installation with safety and clarity:
 
 ---
 
-### 3. **INSTALLATION.md** (Setup Guide, 8.1 KB)
+### 3. **docs/guides/INSTALLATION.md** (Setup Guide, 8.1 KB)
 Complete installation and configuration guide:
 
 **Sections:**
@@ -63,7 +63,7 @@ Complete installation and configuration guide:
 
 ---
 
-### 4. **EXAMPLES.md** (Usage Patterns, 16 KB)
+### 4. **docs/EXAMPLES.md** (Usage Patterns, 16 KB)
 Real-world examples for every use case:
 
 **Coverage:**
@@ -96,7 +96,7 @@ Fast lookup reference:
 
 ---
 
-### Bonus: **SETUP-CHECKLIST.md** (Verification Checklist, 3 KB)
+### Bonus: **docs/checklists/SETUP-CHECKLIST.md** (Verification Checklist, 3 KB)
 Step-by-step checklist for confident setup:
 
 **Covers:**
@@ -252,9 +252,9 @@ c-log
 | File | Purpose | Audience |
 |------|---------|----------|
 | **QUICK-REFERENCE.md** | Command cheat sheet | Everyone (quick lookup) |
-| **INSTALLATION.md** | Detailed setup guide | First-time users |
-| **EXAMPLES.md** | Real-world usage patterns | Users learning modes |
-| **SETUP-CHECKLIST.md** | Verification checklist | Users doing setup |
+| **docs/guides/INSTALLATION.md** | Detailed setup guide | First-time users |
+| **docs/EXAMPLES.md** | Real-world usage patterns | Users learning modes |
+| **docs/checklists/SETUP-CHECKLIST.md** | Verification checklist | Users doing setup |
 | Inline comments | Code documentation | Script maintainers |
 
 ---
@@ -296,12 +296,15 @@ After installation:
 ```
 ~/wegrw5/
 ├── copilot-modes-wrapper.sh        (main wrapper, 16 KB)
-├── copilot-modes-installer.sh      (installer, 6.3 KB)
-├── INSTALLATION.md                 (setup guide)
-├── EXAMPLES.md                     (usage examples)
-├── QUICK-REFERENCE.md              (cheat sheet)
-├── SETUP-CHECKLIST.md              (verification)
-└── DELIVERY.md                     (this file)
+├── scripts/setup/
+│   └── copilot-modes-installer.sh  (installer, 6.3 KB)
+├── docs/guides/
+│   └── INSTALLATION.md             (setup guide)
+├── docs/
+│   ├── EXAMPLES.md                 (usage examples)
+│   └── DELIVERY.md                 (this file)
+└── docs/checklists/
+    └── SETUP-CHECKLIST.md          (verification)
 
 ~/.config/copilot-modes/
 ├── copilot-modes.zsh               (installed wrapper)
@@ -328,11 +331,11 @@ Logs can be fed to hindsight for:
 
 ## 🚦 Next Steps for Users
 
-1. **Install**: `bash copilot-modes-installer.sh`
+1. **Install**: `bash scripts/setup/copilot-modes-installer.sh`
 2. **Activate**: Add to `~/.zshrc` or `~/.bashrc` and reload
 3. **Verify**: Run `c-modes` to show help
 4. **Try it**: `cp-ask "hello"` for quick test
-5. **Learn**: Read `EXAMPLES.md` for real usage patterns
+5. **Learn**: Read `docs/EXAMPLES.md` for real usage patterns
 6. **Integrate**: Use with your workflow (git, tests, development)
 
 ---
@@ -340,9 +343,9 @@ Logs can be fed to hindsight for:
 ## 📞 Support Resources
 
 - **Quick lookup**: `c-modes` (in-shell help) or `QUICK-REFERENCE.md`
-- **Setup issues**: `INSTALLATION.md` (troubleshooting section)
-- **Usage questions**: `EXAMPLES.md` (30+ real-world examples)
-- **Setup verification**: `SETUP-CHECKLIST.md`
+- **Setup issues**: `docs/guides/INSTALLATION.md` (troubleshooting section)
+- **Usage questions**: `docs/EXAMPLES.md` (30+ real-world examples)
+- **Setup verification**: `docs/checklists/SETUP-CHECKLIST.md`
 - **Logging/history**: `c-log` command
 
 ---

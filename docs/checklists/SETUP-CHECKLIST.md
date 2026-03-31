@@ -23,7 +23,7 @@
 - [ ] Navigate to workspace directory containing the installer
 - [ ] Run installer script:
   ```bash
-  bash copilot-modes-installer.sh
+  bash scripts/setup/copilot-modes-installer.sh
   ```
 - [ ] Verify output shows:
   - ✔ copilot CLI found
@@ -103,9 +103,9 @@
 
 ## Next Steps
 
-- [ ] Read `EXAMPLES.md` for real-world usage patterns
-- [ ] Read `INSTALLATION.md` for detailed setup and troubleshooting
-- [ ] Read `QUICK-REFERENCE.md` for command cheat sheet
+- [ ] Read `docs/EXAMPLES.md` for real-world usage patterns
+- [ ] Read `docs/guides/INSTALLATION.md` for detailed setup and troubleshooting
+- [ ] Read `docs/guides/cli-modes-quick-reference.md` for command cheat sheet
 - [ ] Set up shell alias (optional):
   ```bash
   alias cask='cp-ask'
@@ -161,5 +161,5 @@ c-log                # View invocations
 
 For more examples and detailed usage, see the documentation files:
 - `QUICK-REFERENCE.md` — Command cheat sheet
-- `EXAMPLES.md` — Real-world usage patterns
-- `INSTALLATION.md` — Detailed setup guide
+- `docs/EXAMPLES.md` — Real-world usage patterns
+- `docs/guides/INSTALLATION.md` — Detailed setup guide

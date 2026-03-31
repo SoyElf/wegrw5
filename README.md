@@ -2,6 +2,21 @@
 
 An intelligent workspace powered by GitHub Copilot custom agents. This hub coordinates specialized AI agents to handle documentation, research, development, and DevOps tasks through intelligent delegation and orchestration.
 
+## Workspace Structure
+
+This workspace is organized for clarity, automation, and agent navigation:
+
+- **docs/** — Complete documentation (guides, research, testing reports, checklists)
+- **scripts/** — Executable scripts and utilities (setup and CLI)
+- **.github/agents/** — 11 specialist agent definitions plus custom skills
+- **.github/context/** — Active working context and research files
+- **.agents/skills/** — External skills from `npx skills` (e.g., Hindsight)
+- **.tmp/** — Temporary shared files directory (not committed)
+
+See [.github/WORKSPACE_STRUCTURE.md](<.github/WORKSPACE_STRUCTURE.md>) for complete hierarchy and file purposes.
+
+See [.github/agents/skills/README-SKILLS-ORGANIZATION.md](<.github/agents/skills/README-SKILLS-ORGANIZATION.md>) for details on skill organization.
+
 ## Technology Stack
 
 This workspace operates exclusively within the **GitHub Copilot ecosystem**. All agent infrastructure, tools, and models are scoped to Copilot capabilities:
