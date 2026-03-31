@@ -20,6 +20,7 @@ When a user invokes Copilot without specifying an agent, guide them to **@ben** 
 | `@ar-director` | `ar-director.agent.md` | **HR Director** — recruits new specialist agents when a capability gap is identified (sub-agent only) |
 | `@ar-upskiller` | `ar-upskiller.agent.md` | **Agent Upskilling Specialist** — researches latest VS Code Copilot best practices and updates existing agent definitions with improved capabilities (sub-agent only) |
 | `@git-ops` | `git-ops.agent.md` | **Git Operations Specialist** — manages local and remote git operations with Conventional Commits enforcement and workflow automation (sub-agent only) |
+| `@skill-builder` | `skill-builder.agent.md` | **Skills Packaging & Reusability Specialist** — identifies reusable patterns from code and workflows, packages them as discoverable skills in SKILL.md format, and maintains the workspace skills library (sub-agent only) |
 
 > Additional specialist agents will be added to `.github/agents/` over time. Update this table when a new agent is created.
 
