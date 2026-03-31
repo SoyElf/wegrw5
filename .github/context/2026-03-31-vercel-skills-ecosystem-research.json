@@ -1,0 +1,850 @@
+{
+  "research_topic": "Comprehensive Vercel Labs Skills Ecosystem: Available Skills, Integration Patterns, and Multi-Agent Orchestration Implications",
+  "findings": {
+    "ecosystem_overview": {
+      "description": "The npx skills ecosystem is a distributed, open-source skill marketplace for AI coding agents. Skills are modular instruction sets packaged as SKILL.md files with YAML frontmatter, enabling agents to extend capabilities across coding, design, deployment, and domain-specific tasks.",
+      "discovery_mechanism": "RFC 8615 well-known URIs + filesystem + node_modules + GitHub repositories. Skills discoverable via: (1) npx skills list/find commands, (2) local filesystem (.agents/skills/, .command-code/skills/, etc.), (3) npm registry (node_modules), (4) remote well-known endpoints (/.well-known/skills/)",
+      "skill_format": "SKILL.md files with YAML frontmatter (name, description, license) + markdown instructions + optional supporting files (scripts/, references/)",
+      "key_repositories": [
+        "vercel-labs/skills — Main CLI and infrastructure",
+        "vercel-labs/agent-skills — Official Vercel curated skills (8 skills)",
+        "anthropics/skills — Official Anthropic skills (17 skills including document creation/editing)",
+        "ComposioHQ/awesome-claude-skills — Community-curated collection",
+        "Multiple community collections (antigravity-awesome-skills, claude-skills-collection, etc.)",
+        "Vendor-specific: Hugging Face, fal.ai, n8n, Sentry, Trail of Bits, Expo, Neon, Google Stitch"
+      ],
+      "supported_tools_and_agents": [
+        "Claude Desktop, claude.ai",
+        "GitHub Copilot (VS Code integration, CLI modes c-ask, c-plan, c-edit, c-agent)",
+        "30+ coding agents: Cursor, Windsurf, Copilot Chat, Roo Code, Qwen Code, Pi, Mistral Vibe, OpenHands, etc.",
+        "MCP (Model Context Protocol) servers for tool/service integration"
+      ]
+    },
+    "vercel_labs_agent_skills_inventory": {
+      "count": 8,
+      "repository": "vercel-labs/agent-skills",
+      "skills": [
+        {
+          "name": "react-best-practices",
+          "description": "React and Next.js performance optimization. 40+ rules across 8 categories: eliminating waterfalls, bundle size optimization, server-side perf, client-side data fetching, re-render optimization, rendering perf, JS micro-optimizations.",
+          "tags": [
+            "react",
+            "nextjs",
+            "performance",
+            "code-quality"
+          ],
+          "use_when": [
+            "Writing new React components or Next.js pages",
+            "Data fetching (client/server)",
+            "Performance review",
+            "Bundle size optimization"
+          ],
+          "source": "Vercel Engineering",
+          "license": "MIT"
+        },
+        {
+          "name": "web-design-guidelines",
+          "description": "Comprehensive web design best practices. Covers accessibility (aria, semantic HTML, keyboard handlers), focus states, forms (autocomplete, validation), animations, typography, images, performance (virtualization, layout thrashing), navigation/state, dark mode/theming, touch/interaction, i18n.",
+          "tags": [
+            "design",
+            "accessibility",
+            "ux",
+            "performance",
+            "web"
+          ],
+          "use_when": [
+            "Building accessible web interfaces",
+            "Optimizing web app UX",
+            "Ensuring keyboard navigation",
+            "Implementing i18n"
+          ],
+          "domain": "Web Design & Accessibility"
+        },
+        {
+          "name": "react-native-guidelines",
+          "description": "React Native and Expo best practices. Navigation, state management, Reanimated, gesture handling, expo-image caching/lazy loading, Zustand patterns, React Compiler, monorepo structure, iOS/Android platform patterns.",
+          "tags": [
+            "react-native",
+            "expo",
+            "mobile",
+            "ios",
+            "android"
+          ],
+          "use_when": [
+            "Building React Native apps",
+            "Expo integration",
+            "Mobile performance optimization",
+            "Cross-platform patterns"
+          ],
+          "domain": "Mobile Development"
+        },
+        {
+          "name": "composition-patterns",
+          "description": "React component composition patterns for scale. Addresses boolean prop proliferation through compound components, state lifting, internal composition, prop drilling avoidance.",
+          "tags": [
+            "react",
+            "architecture",
+            "components",
+            "patterns"
+          ],
+          "use_when": [
+            "Refactoring components with many boolean props",
+            "Building component libraries",
+            "Designing flexible component APIs",
+            "Component architecture review"
+          ],
+          "domain": "Architecture & Patterns"
+        },
+        {
+          "name": "deploy-to-vercel",
+          "description": "Deploy applications to Vercel instantly. Claimable deployments transferable to user's own Vercel account. Directly from conversations in claude.ai or Claude Desktop.",
+          "tags": [
+            "deployment",
+            "vercel",
+            "devops"
+          ],
+          "use_when": [
+            "User wants to deploy app",
+            "Creating preview URLs",
+            "Claimable deployment needed"
+          ],
+          "domain": "DevOps & Deployment",
+          "capabilities": [
+            "Application deployment",
+            "Website deployment",
+            "Preview URL generation",
+            "Ownership transfer mechanism"
+          ]
+        },
+        {
+          "name": "react-native-skills",
+          "description": "React Native performance optimization and best practices. Navigation, state management, Reanimated, gesture handling, images, state management, architecture, platform-specific patterns.",
+          "tags": [
+            "react-native",
+            "performance",
+            "mobile"
+          ],
+          "use_when": [
+            "Optimizing React Native performance",
+            "Mobile app architecture",
+            "Cross-platform development"
+          ],
+          "domain": "Mobile Development"
+        },
+        {
+          "name": "vercel-cli-with-tokens",
+          "description": "Vercel CLI integration with authentication tokens for deployment automation.",
+          "tags": [
+            "vercel",
+            "cli",
+            "deployment"
+          ],
+          "use_when": [
+            "Automating Vercel deployments",
+            "CLI-based deployment pipelines",
+            "Token-based authentication"
+          ],
+          "domain": "DevOps & Automation"
+        }
+      ]
+    },
+    "anthropic_official_skills_inventory": {
+      "count": 17,
+      "repository": "anthropics/skills",
+      "note": "Anthropic maintains production-quality skills including document creation/editing skills that power Claude's built-in capabilities",
+      "skills": [
+        {
+          "name": "mcp-builder",
+          "description": "Guide for creating high-quality MCP (Model Context Protocol) servers. Enables LLMs to interact with external services. Covers deep research, implementation (Python/FastMCP, Node.js/MCP SDK), testing, and evaluation phases.",
+          "tags": [
+            "mcp",
+            "tools",
+            "integration",
+            "architecture"
+          ],
+          "relevance_to_agents": "CRITICAL — Directly applicable to building MCP servers for agent tool integration. Provides best practices for FastMCP (Python) and MCP SDK (TypeScript).",
+          "use_when": [
+            "Building MCP servers to integrate APIs/services",
+            "Extending agent tool capabilities",
+            "Service integration planning"
+          ],
+          "domain": "Integration & Tools",
+          "license": "Source-available (available but not open source)"
+        },
+        {
+          "name": "skill-creator",
+          "description": "Guide for creating high-quality agent skills. Covers skill design, SKILL.md format, testing, documentation.",
+          "tags": [
+            "skills",
+            "documentation",
+            "agent-development"
+          ],
+          "relevance_to_agents": "CRITICAL — Guides creation of new skills for our agent ecosystem. Essential for @skill-builder agent.",
+          "domain": "Skill Development"
+        },
+        {
+          "name": "doc-coauthoring",
+          "description": "Collaborative document writing assistance. Real-time collaboration, feedback integration, document structure optimization.",
+          "tags": [
+            "documentation",
+            "writing",
+            "collaboration"
+          ],
+          "use_when": [
+            "Writing collaborative documents",
+            "Documentation projects",
+            "Content coauthoring"
+          ],
+          "domain": "Documentation"
+        },
+        {
+          "name": "docx",
+          "description": "Word document (.docx) creation and editing. Production-quality skill powering Claude's document capabilities.",
+          "tags": [
+            "documents",
+            "office",
+            "integration"
+          ],
+          "domain": "Document Handling",
+          "license": "Source-available"
+        },
+        {
+          "name": "pdf",
+          "description": "PDF document creation, editing, reading. Production-quality skill.",
+          "tags": [
+            "documents",
+            "pdf",
+            "integration"
+          ],
+          "domain": "Document Handling",
+          "license": "Source-available"
+        },
+        {
+          "name": "pptx",
+          "description": "PowerPoint presentation creation and editing. Production-quality skill.",
+          "tags": [
+            "presentations",
+            "office",
+            "design"
+          ],
+          "domain": "Document Handling",
+          "license": "Source-available"
+        },
+        {
+          "name": "xlsx",
+          "description": "Excel/spreadsheet creation, editing, data analysis. Production-quality skill.",
+          "tags": [
+            "spreadsheets",
+            "data",
+            "office"
+          ],
+          "domain": "Data & Documents",
+          "license": "Source-available"
+        },
+        {
+          "name": "web-artifacts-builder",
+          "description": "Build interactive web artifacts and components. HTML/CSS/JavaScript generation.",
+          "tags": [
+            "web",
+            "artifacts",
+            "frontend"
+          ],
+          "domain": "Web Development"
+        },
+        {
+          "name": "webapp-testing",
+          "description": "Web application testing and quality assurance. Testing strategies, automation, edge cases.",
+          "tags": [
+            "testing",
+            "qa",
+            "quality"
+          ],
+          "domain": "Testing & Quality"
+        },
+        {
+          "name": "frontend-design",
+          "description": "Frontend design patterns and best practices. UI components, styling, responsive design.",
+          "tags": [
+            "design",
+            "frontend",
+            "ux"
+          ],
+          "domain": "Design"
+        },
+        {
+          "name": "brand-guidelines",
+          "description": "Brand identity and design guidelines. Logo, color palette, typography, tone of voice.",
+          "tags": [
+            "brand",
+            "design",
+            "guidelines"
+          ],
+          "domain": "Design & Branding"
+        },
+        {
+          "name": "theme-factory",
+          "description": "Design system and theme generation. Create consistent color schemes, component systems.",
+          "tags": [
+            "design",
+            "theming",
+            "design-systems"
+          ],
+          "domain": "Design Systems"
+        },
+        {
+          "name": "algorithmic-art",
+          "description": "Generative art and algorithmic creativity. Canvas-based art generation, creative coding.",
+          "tags": [
+            "art",
+            "generative",
+            "creative"
+          ],
+          "domain": "Creative"
+        },
+        {
+          "name": "canvas-design",
+          "description": "Canvas graphics and drawing operations. Low-level graphics programming.",
+          "tags": [
+            "graphics",
+            "canvas",
+            "design"
+          ],
+          "domain": "Graphics"
+        },
+        {
+          "name": "slack-gif-creator",
+          "description": "Create GIF animations for Slack and other platforms. Animation generation.",
+          "tags": [
+            "slack",
+            "animation",
+            "integration"
+          ],
+          "domain": "Integration & Media"
+        },
+        {
+          "name": "claude-api",
+          "description": "Claude API integration and best practices. How to interact with Claude programmatically, models, API patterns.",
+          "tags": [
+            "api",
+            "integration",
+            "claude"
+          ],
+          "relevance_to_agents": "RELEVANT — Useful for understanding how to call Claude APIs from skills/agents.",
+          "domain": "Integration & API"
+        },
+        {
+          "name": "internal-comms",
+          "description": "Internal communication guidelines and templates. Team communication patterns, documentation.",
+          "tags": [
+            "communication",
+            "documentation",
+            "team"
+          ],
+          "domain": "Communication"
+        }
+      ]
+    },
+    "community_skill_collections": {
+      "major_collections": [
+        {
+          "name": "ComposioHQ/awesome-claude-skills",
+          "description": "Community-curated collection of Claude skills",
+          "popularity": "Well-known, actively maintained",
+          "focus": "Multiple domains including development, integration, automation"
+        },
+        {
+          "name": "antigravity-awesome-skills",
+          "description": "Large curated registry of 1,300+ indexed skills",
+          "focus": "Comprehensive coverage: GitHub, Swift, SwiftUI, WordPress, Snowflake",
+          "note": "Registry includes official skills from Sentry, Trail of Bits, Expo, Hugging Face, Vercel, Google Stitch, Neon, n8n, fal.ai"
+        },
+        {
+          "name": "dirnbauer/webconsulting-skills",
+          "description": "61 curated agent skills for AI-augmented software development",
+          "focus": "Web development, React, deployment"
+        },
+        {
+          "name": "InternScience/Awesome-Scientific-Skills",
+          "description": "Curated skills for scientific research",
+          "focus": "Bioinformatics, cheminformatics, data analysis"
+        }
+      ],
+      "vendor_specific_skills": [
+        {
+          "vendor": "Hugging Face",
+          "skills": [
+            "hugging-face-cli",
+            "hugging-face-jobs"
+          ],
+          "focus": "ML/AI model management, job automation"
+        },
+        {
+          "vendor": "fal.ai",
+          "skills": [
+            "fal-audio",
+            "fal-generate",
+            "fal-image-edit",
+            "fal-platform",
+            "fal-upscale",
+            "fal-workflow"
+          ],
+          "focus": "AI image generation, upscaling, audio processing"
+        },
+        {
+          "vendor": "Sentry",
+          "skills": [
+            "commit",
+            "create-pr",
+            "find-bugs",
+            "iterate-pr"
+          ],
+          "focus": "Error tracking, PR automation, bug finding"
+        },
+        {
+          "vendor": "Trail of Bits",
+          "skills": [
+            "culture-index",
+            "fix-review",
+            "sharp-edges"
+          ],
+          "focus": "Code quality, security review, best practices"
+        },
+        {
+          "vendor": "Expo",
+          "skills": [
+            "expo-deployment",
+            "upgrading-expo"
+          ],
+          "focus": "React Native/Expo deployment and upgrades"
+        },
+        {
+          "vendor": "n8n",
+          "skills": [
+            "n8n-code-python",
+            "n8n-mcp-tools-expert",
+            "n8n-node-configuration"
+          ],
+          "focus": "Workflow automation, MCP tools, node configuration"
+        }
+      ]
+    },
+    "skill_categories_and_domains": {
+      "development_and_architecture": {
+        "skills": [
+          "react-best-practices",
+          "composition-patterns",
+          "react-native-guidelines",
+          "frontend-design",
+          "web-design-guidelines",
+          "claude-api",
+          "mcp-builder",
+          "skill-creator"
+        ],
+        "count": 8,
+        "notes": "Strong coverage of React, Next.js, React Native, component patterns, performance"
+      },
+      "deployment_and_devops": {
+        "skills": [
+          "deploy-to-vercel",
+          "vercel-cli-with-tokens",
+          "expo-deployment"
+        ],
+        "count": 3,
+        "notes": "Focused on Vercel and Expo. Gap: Docker, Kubernetes, CI/CD pipelines, other cloud platforms"
+      },
+      "document_handling_and_creation": {
+        "skills": [
+          "docx",
+          "pdf",
+          "pptx",
+          "xlsx",
+          "doc-coauthoring"
+        ],
+        "count": 5,
+        "notes": "Comprehensive office document support (production-quality). Enables document automation scenarios"
+      },
+      "design_and_ux": {
+        "skills": [
+          "web-design-guidelines",
+          "frontend-design",
+          "brand-guidelines",
+          "theme-factory",
+          "canvas-design",
+          "algorithmic-art"
+        ],
+        "count": 6,
+        "notes": "Covers design systems, branding, UI patterns, creative coding"
+      },
+      "testing_and_quality": {
+        "skills": [
+          "webapp-testing"
+        ],
+        "count": 1,
+        "notes": "Gap: Unit testing, integration testing, test automation frameworks"
+      },
+      "integration_and_tools": {
+        "skills": [
+          "mcp-builder",
+          "claude-api"
+        ],
+        "count": 2,
+        "notes": "Gap: Database integrations, API wrappers, service integrations beyond MCP"
+      },
+      "ai_and_ml": {
+        "skills": [
+          "fal-audio",
+          "fal-generate",
+          "fal-image-edit",
+          "fal-upscale",
+          "hf-cli",
+          "hf-jobs"
+        ],
+        "count": 6,
+        "notes": "Image generation, audio processing, ML model management"
+      },
+      "communication_and_documentation": {
+        "skills": [
+          "doc-coauthoring",
+          "internal-comms"
+        ],
+        "count": 2,
+        "notes": "Gap: Technical documentation, API docs, changelog generation"
+      },
+      "workflow_automation": {
+        "skills": [
+          "slack-gif-creator",
+          "n8n-code-python",
+          "n8n-mcp-tools-expert"
+        ],
+        "count": 3,
+        "notes": "Gap: GitHub Actions, scheduling, orchestration beyond n8n"
+      }
+    },
+    "gap_analysis": {
+      "well_covered_domains": [
+        "React/Next.js development (40+ best practice rules)",
+        "Document creation/editing (production-quality skills for all Office formats)",
+        "Design systems and UI patterns",
+        "AI/ML capabilities (image generation, audio, models)",
+        "Component architecture and composition"
+      ],
+      "underserved_domains": [
+        "DevOps automation (Docker, Kubernetes, cloud platforms beyond Vercel)",
+        "Database integration and ORM patterns",
+        "API design and REST/GraphQL best practices",
+        "Security hardening and OAuth/authentication patterns",
+        "Monitoring, logging, and observability",
+        "Unit testing frameworks (Jest, Vitest, Mocha)",
+        "Backend frameworks (Express, FastAPI, Django, Rails)",
+        "Git workflows and advanced branching strategies",
+        "Performance profiling and optimization tools",
+        "Accessibility compliance (WCAG) automation"
+      ],
+      "missing_for_multi_agent_orchestration": [
+        "Agent coordination and orchestration patterns",
+        "Hindsight memory integration",
+        "Multi-agent debugging and introspection",
+        "Agent skill composition and chaining",
+        "Cross-agent communication protocols",
+        "Agent testing and evaluation frameworks",
+        "Agent performance monitoring",
+        "Inter-agent state management"
+      ]
+    },
+    "relevance_to_multiagent_orchestration": {
+      "directly_applicable_skills": {
+        "mcp-builder": {
+          "relevance": "CRITICAL",
+          "reason": "Enables building MCP servers that expose tools/services to agents. Core pattern for integrating external capabilities into Ben orchestrator ecosystem.",
+          "use_case": "Build MCP servers for agent integration (hindsight servers, git operations, bash script execution, etc.)"
+        },
+        "skill-creator": {
+          "relevance": "CRITICAL",
+          "reason": "Guides creation of new skills for agent ecosystem. @skill-builder agent depends on this knowledge.",
+          "use_case": "Building custom skills for our specialist agents, packaging orchestration patterns as skills"
+        },
+        "claude-api": {
+          "relevance": "HIGH",
+          "reason": "Helps skills understand how to call Claude APIs, relevant for inter-agent communication and agent-to-LLM patterns.",
+          "use_case": "Building skills that orchestrate Claude calls, understanding API patterns for agent invocation"
+        }
+      },
+      "supportive_skills": {
+        "doc-coauthoring": {
+          "relevance": "MEDIUM",
+          "reason": "@doc agent could leverage for improved documentation collaboration",
+          "use_case": "Collaborative documentation for multi-agent workflows"
+        },
+        "deploy-to-vercel": {
+          "relevance": "MEDIUM",
+          "reason": "@ben orchestrator could use to deploy agent infrastructure, workspaces",
+          "use_case": "Automating deployment scenarios in multi-agent workflows"
+        }
+      },
+      "inspiration_from_architecture": [
+        "MCP server patterns in mcp-builder can inform how agents expose capabilities to other agents",
+        "Skill-creator's evaluation framework can guide testing multi-agent orchestration workflows",
+        "Document handling skills (docx, pdf, xlsx) show how to build complex integration skills"
+      ]
+    },
+    "integration_patterns_for_ben_agents": {
+      "pattern_1_direct_skill_import": {
+        "description": "Import existing Vercel/Anthropic skills directly using npx skills add",
+        "applicable_skills": [
+          "react-best-practices",
+          "deploy-to-vercel",
+          "mcp-builder",
+          "skill-creator"
+        ],
+        "command": "npx skills add vercel-labs/agent-skills anthropics/skills",
+        "benefit": "Immediate capability enhancement with production-tested skills",
+        "consideration": "Skills install to agent-specific directories, may need customization for Ben orchestrator"
+      },
+      "pattern_2_skill_wrapping": {
+        "description": "Wrap external skills as Ben-compatible sub-agent instructions",
+        "example": "Take react-best-practices @SKILL.md, wrap as instruction for @ar-upskiller to reference during agent training",
+        "benefit": "Leverage external skill knowledge within Ben's delegation model"
+      },
+      "pattern_3_mcp_server_building": {
+        "description": "Use mcp-builder skill to create MCP servers that expose agent capabilities",
+        "use_case": "Build MCP servers for: hindsight memory access, git operations, bash script execution, code analysis",
+        "benefit": "Standardized tool interface for multi-agent system"
+      },
+      "pattern_4_skill_composition": {
+        "description": "Combine multiple skills in orchestrated workflows",
+        "example": "Ben could compose: mcp-builder (create tool interface) + skill-creator (create skill wrapper) + doc-coauthoring (document workflow)",
+        "benefit": "Build complex multi-agent capabilities from composable skill primitives"
+      },
+      "pattern_5_skill_discovery_for_agents": {
+        "description": "Build @find-skills equivalent that helps agents discover relevant external skills",
+        "note": "find-skills skill exists in vercel-labs/skills repository - could be imported",
+        "benefit": "Agents can autonomously discover and request integration of new skills"
+      }
+    },
+    "actionable_recommendations": {
+      "immediate_actions": [
+        {
+          "action": "Import mcp-builder skill from anthropics/skills",
+          "owner": "@bash-ops or @ar-upskiller",
+          "benefit": "Enables Ben ecosystem to build MCP servers for agent integration",
+          "estimated_effort": "Medium (requires understanding MCP architecture)"
+        },
+        {
+          "action": "Import skill-creator skill from anthropics/skills",
+          "owner": "@skill-builder",
+          "benefit": "Guides creation of new skills for specialist agents",
+          "estimated_effort": "Low (primarily reference documentation)"
+        },
+        {
+          "action": "Create .github/context/skills-registry.json",
+          "owner": "@housekeeper",
+          "benefit": "Centralizes knowledge of available skills for agent discovery",
+          "estimated_effort": "Low (data organization)"
+        },
+        {
+          "action": "Import find-skills skill from vercel-labs/skills",
+          "owner": "@research (already used for discovery)",
+          "benefit": "Enables agents to autonomously discover skills from ecosystem",
+          "estimated_effort": "Low (wrapper around existing skill)"
+        }
+      ],
+      "medium_term_actions": [
+        {
+          "action": "Build MCP server for hindsight memory access",
+          "reference_skill": "mcp-builder",
+          "owner": "@bash-ops with guidance from mcp-builder",
+          "benefit": "Exposes hindsight as standardized tool for all agents",
+          "estimated_effort": "High (MCP server architecture)"
+        },
+        {
+          "action": "Create agent skill composition patterns",
+          "reference_skill": "skill-creator",
+          "owner": "@skill-builder",
+          "benefit": "Document how to compose multiple skills into complex orchestration patterns",
+          "estimated_effort": "Medium"
+        },
+        {
+          "action": "Build @hindsight-researcher skill",
+          "reference_skills": [
+            "mcp-builder",
+            "skill-creator"
+          ],
+          "owner": "agentic-workflow-researcher (this agent)",
+          "benefit": "Expose research capabilities as reusable skill",
+          "estimated_effort": "High"
+        }
+      ],
+      "long_term_strategy": [
+        "Build curated collection of Ben orchestrator-specific skills (analogous to vercel-labs/agent-skills)",
+        "Develop custom skills for multi-agent orchestration domains: agent debugging, inter-agent communication, workflow composition",
+        "Create skill evaluation framework for testing multi-agent orchestration scenarios",
+        "Contribute improvements/specializations back to public skill repositories (open source collaboration)"
+      ]
+    },
+    "skill_selection_for_agent_enhancement": {
+      "recommendations_by_agent": {
+        "@research": {
+          "candidate_skills": [
+            "find-skills",
+            "claude-api"
+          ],
+          "benefit": "Enhanced skill discovery, API integration knowledge",
+          "priority": "MEDIUM"
+        },
+        "@doc": {
+          "candidate_skills": [
+            "doc-coauthoring",
+            "docx",
+            "pdf"
+          ],
+          "benefit": "Collaborative documentation, multi-format output",
+          "priority": "MEDIUM"
+        },
+        "@bash-ops": {
+          "candidate_skills": [
+            "mcp-builder",
+            "deploy-to-vercel"
+          ],
+          "benefit": "MCP server creation, deployment automation",
+          "priority": "HIGH"
+        },
+        "@skill-builder": {
+          "candidate_skills": [
+            "skill-creator",
+            "mcp-builder"
+          ],
+          "benefit": "Skill creation best practices, tool integration patterns",
+          "priority": "HIGH"
+        },
+        "@ar-upskiller": {
+          "candidate_skills": [
+            "react-best-practices",
+            "composition-patterns",
+            "web-design-guidelines"
+          ],
+          "benefit": "Expand specialist agent training materials",
+          "priority": "MEDIUM"
+        },
+        "@evaluator": {
+          "candidate_skills": [
+            "webapp-testing",
+            "skill-creator"
+          ],
+          "benefit": "Evaluation patterns, quality assessment frameworks",
+          "priority": "MEDIUM"
+        }
+      }
+    },
+    "technical_details_installation_and_usage": {
+      "installation_command": "npx skills add <owner/repo> or npx skills add <skill-name>",
+      "discovery_command": "npx skills list | npx skills find <keyword>",
+      "install_scope_options": [
+        "-g/--global — User-level installation",
+        "-a, --agent <agents> — Specific agents (use * for all)",
+        "-s, --skill <skills> — Specific skills (use * for all)",
+        "--copy — Copy files instead of symlinking",
+        "--all — Install all skills to all agents"
+      ],
+      "skill_location_after_install": {
+        "global": "~/.config/<agent-type>/skills/ (platform-dependent)",
+        "project": "./<agent-type>/skills/ or .well-known/skills/",
+        "node_modules": "Can be discovered and synced from packages"
+      },
+      "version_control": "skills-lock.json tracks installed versions, enables reproducible installations"
+    },
+    "ecosystem_statistics": {
+      "official_skills_available": 25,
+      "vercel_official_skills": 8,
+      "anthropic_official_skills": 17,
+      "community_curated_collections": "5+ major collections",
+      "estimated_total_skills_in_ecosystem": "1300+ (from antigravity-awesome-skills registry)",
+      "supported_agent_platforms": 30,
+      "major_vendors_with_skills": 10
+    }
+  },
+  "sources": [
+    {
+      "title": "vercel-labs/skills GitHub Repository",
+      "url": "https://github.com/vercel-labs/skills",
+      "type": "official-repository",
+      "accessed_date": "2026-03-31",
+      "content": "Main CLI and infrastructure for npx skills ecosystem"
+    },
+    {
+      "title": "vercel-labs/agent-skills GitHub Repository",
+      "url": "https://github.com/vercel-labs/agent-skills",
+      "type": "official-repository",
+      "accessed_date": "2026-03-31",
+      "content": "Vercel's official curated skills collection (8 skills)"
+    },
+    {
+      "title": "anthropics/skills GitHub Repository",
+      "url": "https://github.com/anthropics/skills",
+      "type": "official-repository",
+      "accessed_date": "2026-03-31",
+      "content": "Anthropic's official skills collection (17 skills including production document handling)"
+    },
+    {
+      "title": "find-skills SKILL.md",
+      "url": "https://raw.githubusercontent.com/vercel-labs/skills/main/skills/find-skills/SKILL.md",
+      "type": "documentation",
+      "accessed_date": "2026-03-31",
+      "content": "Skill discovery guidance and ecosystem overview"
+    },
+    {
+      "title": "mcp-builder SKILL.md",
+      "url": "https://raw.githubusercontent.com/anthropics/skills/main/skills/mcp-builder/SKILL.md",
+      "type": "documentation",
+      "accessed_date": "2026-03-31",
+      "content": "MCP server development best practices and patterns"
+    },
+    {
+      "title": "ComposioHQ/awesome-claude-skills",
+      "url": "https://github.com/ComposioHQ/awesome-claude-skills",
+      "type": "community-repository",
+      "accessed_date": "2026-03-31",
+      "content": "Community-curated Claude skills collection"
+    },
+    {
+      "title": "antigravity-awesome-skills",
+      "url": "https://github.com/sickn33/antigravity-awesome-skills",
+      "type": "community-repository",
+      "accessed_date": "2026-03-31",
+      "content": "Large curated registry of 1,300+ indexed skills"
+    }
+  ],
+  "timestamp": "2026-03-31T14:30:00Z",
+  "requestor_agent": "ben (via agentic-workflow-researcher)",
+  "researcher_agent": "agentic-workflow-researcher",
+  "tags": [
+    "research:vercel-skills-ecosystem",
+    "research:agent-skills",
+    "research:multi-agent-orchestration",
+    "pattern:skill-integration",
+    "pattern:mcp-servers",
+    "world:agent-capabilities",
+    "world:tool-composition",
+    "source:official-repos",
+    "source:anthropic",
+    "source:vercel"
+  ],
+  "summary": "Vercel Labs skills ecosystem encompasses 25+ official skills (8 from Vercel, 17 from Anthropic) plus 1,300+ community skills across development, deployment, design, AI/ML, and documentation domains. Key strengths: React/Next.js expertise, production-quality document handling, design systems, AI capabilities. Critical gaps for multi-agent orchestration: agent coordination patterns, hindsight integration, multi-agent debugging. Highest-value imports: mcp-builder (enables MCP server creation for tool integration), skill-creator (guides skill development), find-skills (enables autonomous skill discovery). Immediate actionplan: (1) Import mcp-builder and skill-creator skills, (2) Build centralized skills registry, (3) Create MCP servers for hindsight and agent infrastructure, (4) Develop multi-agent-specific skill collection.",
+  "applicable_to_agents": [
+    "@ben",
+    "@skill-builder",
+    "@bash-ops",
+    "@ar-upskiller",
+    "@research",
+    "@doc",
+    "@evaluator",
+    "@agentic-workflow-researcher"
+  ],
+  "follow_up_questions": [
+    "Should we build an MCP server for hindsight memory access as an immediate next step?",
+    "How can we evaluate whether imported skills (mcp-builder, skill-creator) require customization for Ben's orchestration patterns?",
+    "What multi-agent orchestration patterns should we build as custom skills (not available in ecosystem)?",
+    "How do we decide between importing external skills vs. building Ben-specific equivalents?",
+    "Should we contribute back improvements or multi-agent-specific skills to public repositories?"
+  ],
+  "version": "1.0"
+}
