@@ -137,7 +137,7 @@ See **.github/agents/skills/README-SKILLS-ORGANIZATION.md** for detailed skill o
 
 1. **Root is minimal** — Only essential entry points and configuration files
 2. **Docs are hierarchical** — guides/, research/, testing/, checklists/ organize by purpose
-3. **Scripts are categorized** — setup/, cli/ organize by function  
+3. **Scripts are categorized** — setup/, cli/ organize by function
 4. **Context is current** — Active work in .github/context/; old work archived for reference
 5. **Skills are dual-sourced** — External (npx-managed) and custom (team-managed) coexist
 6. **Atomic, organized, clearly structured** — Everything has a deliberate purpose and location

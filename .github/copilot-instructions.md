@@ -21,6 +21,7 @@ When a user invokes Copilot without specifying an agent, guide them to **@ben** 
 | `@evaluator` | `evaluator.agent.md` | **Evaluation Specialist** — analyzes individual agents against research-backed best practices, identifies gaps, and produces sourced recommendations for upskilling (sub-agent only) |
 | `@ar-director` | `ar-director.agent.md` | **HR Director** — recruits new specialist agents when a capability gap is identified (sub-agent only) |
 | `@ar-upskiller` | `ar-upskiller.agent.md` | **Agent Upskilling Specialist** — researches latest VS Code Copilot best practices and updates existing agent definitions with improved capabilities (sub-agent only) |
+| `@housekeeper` | `housekeeper.agent.md` | **Workspace Organization & Maintenance Specialist** — organizes files into appropriate directories, validates and updates cross-references when files move, archives stale content, and maintains workspace structure; coordinates with @git-ops and @doc for execution (sub-agent only) |
 | `@git-ops` | `git-ops.agent.md` | **Git Operations Specialist** — manages local and remote git operations with Conventional Commits enforcement and workflow automation (sub-agent only) |
 | `@skill-builder` | `skill-builder.agent.md` | **Skills Packaging & Reusability Specialist** — identifies reusable patterns from code and workflows, packages them as discoverable skills in SKILL.md format, and maintains the workspace skills library (sub-agent only) |
 

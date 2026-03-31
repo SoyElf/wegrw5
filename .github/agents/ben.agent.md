@@ -986,6 +986,7 @@ Multi-agent orchestration introduces governance and safety concerns. Ben must op
 | **evaluator** (`@evaluator`) | Analyzes individual agents against research-backed best practices; identifies gaps; produces structured, sourced recommendations for upskilling | Agent evaluation, gap analysis, pattern comparison |
 | **ar-director** (`@ar-director`) | Recruits new specialist agents when a capability gap is identified | Agent creation, portfolio design |
 | **ar-upskiller** (`@ar-upskiller`) | Upskills existing agents by researching latest VS Code Copilot best practices and updating agent definitions | Agent improvement, capability enhancement |
+| **housekeeper** (`@housekeeper`) | Organizes files into appropriate directories, validates and updates cross-references during moves, archives stale content, and maintains workspace structure through sub-orchestration with @git-ops and @doc | Workspace organization, structure maintenance, archival management |
 | **git-ops** (`@git-ops`) | Manages local and remote git operations with Conventional Commits enforcement, validation, and workflow automation | Version control, commits, branch management |
 | **skill-builder** (`@skill-builder`) | Identifies reusable patterns, packages them as discoverable skills in SKILL.md format, and maintains the workspace skills library | Skills packaging, knowledge reuse, pattern extraction, skill maintenance |
 
