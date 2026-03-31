@@ -1,0 +1,360 @@
+{
+  "evaluated_agent": "git-ops",
+  "evaluation_date": "2026-03-31",
+  "evaluator": "evaluator",
+  "agent_profile": {
+    "name": "git-ops",
+    "description": "Git Operations Specialist — manages local and remote git operations with Conventional Commits enforcement and workflow automation",
+    "responsibilities": [
+      "Safe Commit Operations (structure check, message validation, content verification)",
+      "Remote Synchronization (push, pull, fetch, upstream sync; validate before destructive ops)",
+      "Conventional Commits Enforcement (validate against spec before commit/push)",
+      "Commit Message Validation (verify structure, type, subject, body, footer)",
+      "Workflow Automation (squashing, rebasing, cleanup with safety checks)",
+      "Destructive Operation Control (force-push, rebase, history rewrites with explicit approval)",
+      "Complex Operations (cherry-pick, revert, merge strategies with full validation)",
+      "Data Loss Prevention (catch accidental commits, prevent wrong files/messages)",
+      "Tool Integration (commitlint, husky, semantic-release)",
+      "Issue Linking (support issue references, coordinate with semantic-release)"
+    ],
+    "constraints": [
+      "Cannot modify application code (git operations only)",
+      "Cannot skip validation before committing or pushing",
+      "Cannot execute force operations without explicit user approval",
+      "Cannot rewrite history without confirming no one else depends on current state",
+      "Cannot assume current branch is correct; always verify before operations",
+      "Cannot attempt to 'recover' from mistakes beyond git's capabilities",
+      "Cannot bypass Conventional Commits validation",
+      "Cannot push to main/master without explicit approval"
+    ],
+    "tools": [
+      "agent (invoke other agents)",
+      "search/changes",
+      "search/codebase",
+      "search/fileSearch",
+      "search/listDirectory",
+      "search/searchResults",
+      "search/textSearch",
+      "edit/editFiles",
+      "execute (run git commands)",
+      "grep/* (text search)"
+    ],
+    "agents_can_invoke": [
+      "agent (orchestrator)"
+    ],
+    "user_invocable": false,
+    "model": "Claude Haiku 4.5 (copilot)"
+  },
+  "agent_classification": {
+    "type": "devops-specialist",
+    "primary_patterns": [
+      "safety-first-execution",
+      "validation-gate-pattern",
+      "directed-task-execution",
+      "sequential-operation-steps"
+    ],
+    "related_agents": [
+      "bash-ops (similar operational role)",
+      "housekeeper (primary caller)",
+      "ben (orchestrator)"
+    ]
+  },
+  "research_context_used": [
+    "docs/research/agentic-workflows/tool-composition-patterns.md#L1-L150",
+    "docs/research/agentic-workflows/agent-specialization-patterns.md#L1-L250",
+    "docs/research/agentic-workflows/instruction-engineering-best-practices.md#L1-L250",
+    "docs/research/agentic-workflows/effective-delegation-strategies.md#L1-L300",
+    "docs/research/agentic-workflows/multi-agent-orchestration-principles.md#L1-L200",
+    ".github/agents/bash-ops.agent.md (comparison agent for autonomy analysis)",
+    ".github/agents/housekeeper.agent.md (primary caller context)"
+  ],
+  "comparison_analysis": {
+    "git_ops_vs_bash_ops": {
+      "execution_model": {
+        "git_ops": "Directed task execution - receives explicit commands and executes with validation",
+        "bash_ops": "Autonomous planning - creates scripts from specifications, applies TDD methodology, evaluates quality, learns from hindsight",
+        "gap": "bash-ops has significantly higher autonomy; git-ops is more of a validator-executor"
+      },
+      "planning_capability": {
+        "git_ops": "Asks clarifying questions if unclear, follows risk-level decision framework, plans nothing autonomously",
+        "bash_ops": "Plans test cases, error handling, edge cases; uses TDD to validate before deployment",
+        "gap": "bash-ops drives design; git-ops executes predetermined design"
+      },
+      "prerequisite_handling": {
+        "git_ops": "Validates prerequisites exist; does NOT create them",
+        "bash_ops": "Would create required files/directories as part of implementation",
+        "gap": "git-ops assumes environment; bash-ops prepares environment"
+      },
+      "learning_integration": {
+        "git_ops": "No hindsight memory tools; learns nothing for future operations",
+        "bash_ops": "Uses hindsight/recall, hindsight/reflect, hindsight/retain for pattern learning",
+        "gap": "git-ops missing learning mechanism; bash-ops explicitly learns from past patterns"
+      },
+      "tool_composition": {
+        "git_ops": "Search + execute + edit; relatively limited tool chain",
+        "bash_ops": "Read, create, edit, search, execute, grep, hindsight; richer tool mix",
+        "gap": "git-ops missing read (assumes knows content) and hindsight tools"
+      }
+    }
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "category": "patterns",
+      "title": "No Autonomous Planning of Prerequisite Operations",
+      "current_state": "@git-ops receives explicit commands (e.g., 'move file X to Y/Z/') and executes them. If Y/Z/ does not exist, operation fails. Agent does not autonomously create missing directories before move operations.",
+      "gap_description": "Industry best practices for file operation agents (git, bash, DevOps) show that operational specialists should autonomously handle prerequisites. For example, when @housekeeper delegates 'move docs/ to docs/archive/', @git-ops should recognize that if archive/ doesn't exist, it must create it first. Currently, this requires explicit separate delegation: first 'create archive/', then 'move files'. This creates coordination overhead and splits atomic operations into multiple steps. @bash-ops, by contrast, would autonomously prepare the environment (create dirs, set permissions) as part of its implementation. Reference: docs/research/agentic-workflows/tool-composition-patterns.md#L81-L91 (Create-Then-Verify Pattern) shows complete operations should validate and prepare environment before execution.",
+      "recommended_change": "Add 'Autonomous Prerequisite Planning' ability to @git-ops: Before executing any file operation (move, rename), scan target directory path and create missing directories if needed. Example: 'move X to Y/Z/' → Check if Y/ and Y/Z/ exist → create if missing → then move. This reduces coordination overhead and makes @git-ops a more complete operational specialist. Implementation: Add step to git-ops instructions: 'Step 1.5: Verify target directory exists; create if missing with appropriate permissions.'",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L81-L91 (Create-Then-Verify Pattern); industrystandard file operations (git mv, bash mkdir, terraform apply); comparison to @bash-ops autonomy model",
+      "source_excerpt": "Always verify changes after modifications. Check for syntax errors, type issues, and unexpected side effects. Sufficient context in replacements ensures precision.",
+      "priority": "high",
+      "priority_justification": "This is called by @housekeeper frequently for workspace reorganization. Every directory move currently requires dual calls (create dir, then move files). This reduces @housekeeper's efficiency, splits logical operations into separate commits (violates atomic commit principle), and is the primary friction point in the housekeeper-git-ops coordination. Fixing this would enable @housekeeper to delegate single logical operations that @git-ops executes completely.",
+      "for_upskiller": "In git-ops.agent.md, add to 'Step 1: Understand & Clarify' section: 'Step 1.5: Verify target paths exist. For any move/rename operation, check if target directory exists. If not, create it first with git mkdir or equivalent before executing move. This ensures operations are atomic from caller's perspective.' Also update Tool Composition Pattern for file operations to include directory verification step. Test with @housekeeper workflow: move 10 files to new directory should result in single coordinated operation, not two separate delegations."
+    },
+    {
+      "id": "gap-002",
+      "category": "patterns",
+      "title": "No Atomic Operation Batching for Related File Operations",
+      "current_state": "@git-ops executes operations sequentially across multiple calls. Example: @housekeeper needs to (1) create archive/ dir, (2) move docs/file1 to archive/, (3) move docs/file2 to archive/, (4) update references. This results in 4 separate @git-ops invocations, each creating a separate commit message, each requiring separate coordination overhead.",
+      "gap_description": "Best practices for file operations show that related operations should be batched into atomic transactions. In traditional DevOps, this is handled via 'transaction blocks' (Terraform apply, git batch operations, etc.). @git-ops currently lacks ability to batch related operations. When @housekeeper delegates 'reorganize docs/', ideally @git-ops should: (1) receive full operation plan, (2) execute all moves together, (3) create single final commit. Currently each operation is separate, leading to fragmented git history and multiple coordination roundtrips. Reference: multi-agent-orchestration-principles.md#L103+ discusses dependency management; related operations have ZERO dependencies on each other and should be batched.",
+      "recommended_change": "Add 'Batch File Operations' ability: Allow @git-ops to receive operation plan like {'operations': [{'type': 'mkdir', 'path': 'x'}, {'type': 'mv', 'from': 'a', 'to': 'b'}, ...]} and execute all together in one git commit. Prerequisite: gap-001 (autonomous directory creation) must be resolved first. Implementation: Add new decision framework section 'Batch vs Sequential Operations': 'When delegated multiple related file moves/renames, determine if they are: (A) Dependent on each other (must be sequential) or (B) Independent (should be batched). If independent, request to batch them in single operation with single commit message. If sequential, execute sequentially with clear messages for each step.'",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L119-L135 (Batch Modification Pattern); multi-agent-orchestration-principles.md#L103+ (dependency management and parallel opportunities); .github/agents/housekeeper.agent.md#L81+ (archival pattern shows multiple moves that could be batched)",
+      "source_excerpt": "When making related changes across multiple files, use multi_replace to batch edits in single operation. This eliminates file coordination issues; all changes succeed or all fail together.",
+      "priority": "high",
+      "priority_justification": "This directly impacts @housekeeper efficiency and git history quality. Without batching, workspace reorganization creates 10-20 separate commits instead of 2-3 atomic ones. This violates the Conventional Commits principle (housekeeper.agent.md#L238: 'Group RELATED moves in one commit, not individual file moves per commit'). Also impacts @housekeeper's 'Link Validation & Updates' workflow—if moves are batched, link updates can be coordinated more cleanly. High priority because it's a coordination anti-pattern that's actively creating technical debt.",
+      "for_upskiller": "Add to git-ops 'Step 2: Assess Risk Level' section: 'When receiving multiple related file operations: First, determine dependencies. Independent operations should be batched into single commit. Example: 'Move 5 files to archive/' should be SINGLE git commit with all moves, not 5 separate commits. This requires planning: (1) Create target directories, (2) Move all files, (3) Single commit message summarizing all moves. Coordinate with caller (@housekeeper) on batch grouping.' Test with 'move 10 docs/ files to archive/' scenario—should produce 1-2 atomic commits, not 10."
+    },
+    {
+      "id": "gap-003",
+      "category": "patterns",
+      "title": "No Autonomous Planning of Complex Workflows; Requires Step-by-Step Direction",
+      "current_state": "@git-ops current operation model: Receive explicit task → Validate → Execute → Report. Example: 'Move file X to Y' (explicit). Agent does not plan: 'How should we organize Y? What other files need moving with X? What links need updating after move?'",
+      "gap_description": "Compare @git-ops (directed executor) to @bash-ops (autonomous planner). @bash-ops receives 'Create deployment script' and autonomously plans: test cases, error handling, edge cases, documentation, then implements all. @git-ops receives 'Move X to Y' and just executes it. When invoked by @housekeeper (which itself is a sub-orchestrator planning reorganization), @git-ops should have more autonomy to: (a) Suggest directory structure improvements, (b) Plan which moves grouped, (c) Identify related files that should move together. Instead, @housekeeper must plan everything and tell @git-ops each step. This violates the 'specialist expertise' principle—@git-ops should be expert at file operations, not just executor of explicit commands. Reference: agent-specialization-patterns.md#L88+ emphasizes specialists make domain-specific decisions within their scope; @git-ops should plan file operations, not just execute them.",
+      "recommended_change": "Enhance @git-ops autonomy: Extend instructions to include 'Planning Phase' before execution. When receiving file operation requests: (1) Analyze the overall goal ('organize workspace docs'), (2) Suggest optimal grouping/structure, (3) Identify related operations that should be batched, (4) Propose move plan to caller, (5) Execute only after approval. This moves @git-ops from 'executor' to 'planner-executor' model, matching @bash-ops maturity. Example: Housekeeper says 'organize my docs/'. Git-ops should: propose directory structure, identify which files go where, suggest atomic commits, then ask approval before executing.",
+      "source": "docs/research/agentic-workflows/agent-specialization-patterns.md#L88-L150 (specialists make domain decisions); instruction-engineering-best-practices.md#L148-L200 (decision frameworks and judgement calls); comparison to .github/agents/bash-ops.agent.md instructions which enable planning (lines 113+: TDD workflow, error handling planning, etc.)",
+      "source_excerpt": "Specialists outperform generalists. A documentation specialist consistently produces better documentation than a general-purpose agent. Specialization improves quality because focused instructions can concentrate on domain-specific quality criteria.",
+      "priority": "medium",
+      "priority_justification": "This is a maturity gap, not a blocking issue. @git-ops works fine executing explicit commands. But it prevents @git-ops from being a true 'Git Operations Specialist'—it's more of a 'Git Command Executor'. As the codebase grows, having @git-ops propose optimal file structures/moves would significantly improve workspace organization quality. Medium priority because it's an enhancement to autonomy, not a bug or safety issue. However, if @housekeeper is expanded to handle more complex reorganization tasks, this gap becomes high priority.",
+      "for_upskiller": "In git-ops.agent.md, revise 'Step 1: Understand & Clarify' to include planning: 'When receiving a complex file operation (reorganize X, consolidate Y), don't immediately execute. Instead: (1) Parse the goal, (2) Propose optimal structure based on git best practices, (3) List suggested operations and atomic commits, (4) Ask for approval with rationale. This planning phase turns you from executor into true specialist.' Add new section 'When to Plan vs Execute': 'Simple operations (commit, push, single move): Execute immediately. Complex operations (reorganize dirs, consolidate files): Plan first, propose, then execute.' Reference @bash-ops TDD methodology as inspiration for planning rigor."
+    },
+    {
+      "id": "gap-004",
+      "category": "tools",
+      "title": "Missing 'read/readFile' Tool for Content Context",
+      "current_state": "@git-ops tools list includes: search (changes, codebase, fileSearch, etc.), edit/editFiles, execute, grep, agent. Missing: read/readFile. When validating commits, @git-ops cannot directly read file contents to verify changes align with commit message intent.",
+      "gap_description": "@git-ops responsibilities include 'Content Verification' (commitlint validates structure, but @git-ops should verify content matches intent). Example: Commit message says 'refactor: simplify login flow' but files show unrelated changes. Without read/readFile, @git-ops cannot check. Current tool pattern: search/changes shows what changed, but @git-ops cannot inspect actual content to validate quality. @bash-ops has read/readFile for this reason—to understand context before acting. Tool composition best practices (tool-composition-patterns.md#L81-L91) recommend: 'Read file context before modifying. This ensures edits are surgically precise.' @git-ops should apply same principle: read file context before validating commit.",
+      "recommended_change": "Add read/readFile to @git-ops tools list. Use in validation workflow: 'Step 3: Verify Content Alignment' → 'Read affected files to understand if changes match commit message intent.' This enables deeper validation—not just structure (commitlint) but semantic validation (do changes actually match claimed intent?).",
+      "source": "docs/research/agentic-workflows/tool-composition-patterns.md#L81-L91 (Always read before modifying; understand context); .github/agents/bash-ops.agent.md frontmatter tools list includes read/readFile for exactly this reason; comparison to other operational agents",
+      "source_excerpt": "Always search before modifying. Don't assume file locations or structure. Read file context before making targeted replacements. This ensures edits are surgically precise.",
+      "priority": "medium",
+      "priority_justification": "This is a tool gap, not a workflow gap. @git-ops can currently validate Conventional Commits structure but not semantic intent. The gap means deeper validation quality is impossible. Medium priority because structural validation is working; semantic validation would add robustness but isn't blocking. However, if safety is paramount (as git-ops claims), semantic validation via content reading should be required.",
+      "for_upskiller": "Add read/readFile to git-ops.agent.md frontmatter tools: @git-ops now has tools: [..., read/readFile, ...]. Update 'Step 3: Verify Repository State' to include content verification: 'Use read/readFile to inspect changed files and verify changes align with commit message intent. This catches cases where commit message says X but code does Y.' Test with edge case: commit message 'docs: update README' but files show code changes—@git-ops should catch this."
+    },
+    {
+      "id": "gap-005",
+      "category": "tools",
+      "title": "Missing Hindsight Tools (recall/reflect/retain) for Learning and Pattern Recognition",
+      "current_state": "@git-ops has no hindsight integration. Each operation is executed independently with no learning mechanism. Complex git patterns (successful merge strategies, rebase approaches that worked, commit message mistakes made) are not captured for future reference.",
+      "gap_description": "@bash-ops extensively uses hindsight/recall, hindsight/reflect, hindsight/retain for learning. Before creating scripts, @bash-ops queries past script patterns. After creating new scripts, @bash-ops retains patterns for future use. @git-ops completely lacks this. When executing complex operations, @git-ops reaches no conclusions or learnings that could benefit future operations. This violates the 'continuous improvement' principle embedded in workspace design. Example: If @git-ops discovered that rebasing long feature branches often causes conflicts, it could retain this pattern and warn future callers. Currently this knowledge is lost. Reference: bash-ops.agent.md lines 73-85 show hindsight integration as core responsibility; evaluator-mode-instructions emphasize hindsight for evaluation and improvement.",
+      "recommended_change": "Integrate hindsight into @git-ops workflow: (1) Before complex operations, use hindsight/recall to check past similar operations and lessons learned, (2) After operations, use hindsight/retain to log patterns (successful merge strategies, common mistakes, etc.). Add new decision framework section: 'Learning from Past Operations': 'For complex operations (rebases, merges, history rewrites), query hindsight for lessons learned from similar operations. For new operation types, retain findings after execution for future reference.'",
+      "source": ".github/agents/bash-ops.agent.md#L73-L85 (hindsight integration example); evaluator-mode-instructions#L900+ (retain/recall/reflect for continuous improvement); agent-specialization-patterns.md (specialists should learn and improve over time)",
+      "source_excerpt": "After creating scripts, hindsight/retain to log patterns for future reference. Before creating new scripts, invoke hindsight/recall to retrieve summaries of past scripts and lessons learned. Use hindsight/reflect to synthesize principles from multiple past scripts.",
+      "priority": "medium",
+      "priority_justification": "This is a maturity/optimization gap, not a functional gap. @git-ops works without hindsight. But for a 'specialist' agent operating in a learning-focused workspace (with hindsight infrastructure), missing this capability is a significant maturity gap. Medium priority because it's not blocking but represents missed opportunity for continuous improvement. As workspace matures and more complex git operations occur, this gap becomes more valuable to fill.",
+      "for_upskiller": "Add to @git-ops tools list: hindsight/recall, hindsight/reflect, hindsight/retain. Add new section 'Hindsight Integration': 'For new operation types or complex scenarios, query hindsight for past lessons before proceeding. After completing complex operations, retain key learnings (successful strategies, common mistakes) for future reference.' Example usage: Before rebasing: 'Query hindsight for successful rebase strategies on long-lived branches.' After rebase: 'Retain: Rebasing 50+ commits often causes conflicts; recommend breaking into smaller batches.'  Coordinate with evaluator on consistent tagging for git-ops operation patterns."
+    },
+    {
+      "id": "gap-006",
+      "category": "patterns",
+      "title": "Coordination Response Pattern Lacks Verification Feedback for Upstream Orchestrators",
+      "current_state": "@git-ops reports results to caller (e.g., 'Pushed 3 commits to main'). But reporting lacks: (a) verification details (list exact commits), (b) quality assurance (confirm all commits validated), (c) impact summary (what changed, in what files). When @housekeeper delegates 5 file moves and receives 'Moves completed', housekeeper doesn't know if validation passed or if there are warnings.",
+      "gap_description": "Effective delegation requires verification at handoffs (multi-agent-orchestration-principles.md#L48: 'Verification at Boundaries'). @housekeeper delegates file moves and must be able to verify quality of execution. Current @git-ops reporting is minimal. Example: @git-ops reports 'Moved files to archive/' but housekeeper cannot see: (a) which files, (b) whether permission checks passed, (c) whether all expected files were moved. More complete reporting pattern would enable @housekeeper to catch issues. @bash-ops, by contrast, provides detailed execution reports (exit codes, test results, quality gate status). @git-ops should match this fidelity.",
+      "recommended_change": "Enhance reporting to include verification details. After any operation, report: (1) Operation summary ('Moved 5 files'), (2) Detailed list (filename, source → dest), (3) Validation results (commit messages validated ✓, permissions checked ✓), (4) Any warnings/issues encountered (if any). Provide this in structured format that @housekeeper can parse. Example: 'Moved docs/ files to archive/. Details: [file1 src/docs/file1 → archive/file1, file2 ...]. Validation: ✓ All 5 files moved, ✓ Permissions match, ✓ Git history preserved. Commit: chore(workspace): archive old docs (5 files).'",
+      "source": "multi-agent-orchestration-principles.md#L48 (Verification at Boundaries: 'Agent outputs are verified at handoff points'); effective-delegation-strategies.md#L215+ (success criteria examples showing detailed outputs); comparison to bash-ops reporting in TDD workflow (execute, test, report with full details)",
+      "source_excerpt": "Verify agent outputs at handoff points. Does documentation conform to style guide? Does code meet quality thresholds? Verification catches errors early before cascading to subsequent agents.",
+      "priority": "medium",
+      "priority_justification": "This is a coordination quality gap, not a functional gap. Operations complete successfully but feedback is minimal. For @housekeeper coordination to be robust, @git-ops must provide detailed verification results so @housekeeper can validate completion. Medium priority because current reports are enough for simple cases, but as complexity grows (more files, more moves), detailed feedback becomes essential. Also enables debugging if something goes wrong.",
+      "for_upskiller": "In git-ops.agent.md 'Step 5: Report Results' section, enhance to include detailed verification. Template: 'Report format: [Operation] [Count] [Details]. Example: Moved 5 files to archive/. ✓ docs/old-guide.md → archive/old-guide.md, ✓ docs/deprecated.md → archive/deprecated.md, [+ 3 more]. Validation: ✓ All 5 validated, ✓ Git history preserved, ✓ No link breakage. Commit: chore(workspace): archive outdated documentation.' Ensure structured format that @housekeeper can parse and validate against expectations."
+    },
+    {
+      "id": "gap-007",
+      "category": "instruction-quality",
+      "title": "Decision Framework Lacks Guidance for Sub-Orchestrational Coordination",
+      "current_state": "@git-ops decision framework handles: operation intent, risk level, approval workflow, escalation. Missing: specific guidance for when called by @housekeeper (sub-orchestrator). @housekeeper expects specific coordination patterns; @git-ops has no instructions tailored to this relationship.",
+      "gap_description": "@housekeeper is a sub-orchestrator that coordinates with @git-ops. Housekeeper expects @git-ops to: (1) receive reorganization plans, (2) suggest optimizations, (3) execute atomically, (4) provide detailed feedback. But @git-ops instructions are generic—no mention of @housekeeper or how to coordinate with sub-orchestrators. This creates implicit contract: @housekeeper understands how to work with @git-ops, but @git-ops doesn't explicitly acknowledge the @housekeeper relationship. Best practices show coordination is clearest when agents have explicit instructions for working with known partners. Reference: effective-delegation-strategies.md#L173+ shows tailored delegation patterns for different agent types; @git-ops should have similar section for coordinating with @housekeeper.",
+      "recommended_change": "Add to git-ops 'Workflow' section, new subsection: 'When Invoked by @housekeeper (Sub-Orchestrator)'. Content: 'Housekeeper coordinates workspace organization and delegates file operations to you. When housekeeper delegates: (1) Understand full reorganization context (not just single move), (2) Handle directory/path prerequisites (create missing dirs), (3) Batch related moves into atomic commits, (4) Provide detailed feedback showing what moved where and validation status. Housekeeper expects: Clear reporting on operations, confirmation of atomic commits, detailed verification.',  ",
+      "source": "effective-delegation-strategies.md#L173+ (Tailoring Delegation to Agent Type); .github/agents/housekeeper.agent.md#L58+ (housekeeper's expectations of git-ops); agent-specialization-patterns.md (specialization includes understanding partner relationships)",
+      "source_excerpt": "Tailoring delegation to agent type includes providing context specific to that agent's patterns and needs. Each agent type has different expectations and communication patterns.",
+      "priority": "low",
+      "priority_justification": "This is an instruction clarity issue, not a functional gap. @housekeeper works fine. But explicit guidance on @housekeeper coordination would improve clarity and reduce assumptions. Low priority because current implicit coordination works; explicit coordination is nice-to-have. However, if coordination breaks down or new sub-orchestrators emerge, this becomes higher priority.",
+      "for_upskiller": "Add subsection to git-ops.agent.md under 'Workflow': 'When Invoked by @housekeeper (Workspace Organization Sub-Orchestrator)'. Include: (1) recognize housekeeper context (full reorganization, not single command), (2) handle prerequisites (dir creation), (3) batch related moves, (4) provide detailed feedback. Reference housekeeper.agent.md to understand housekeeper expectations. This clarifies the working relationship."
+    }
+  ],
+  "summary": {
+    "overall_assessment": "@git-ops is a safety-focused, well-validated executor of git operations. It handles core responsibilities (commits, pushes, complex operations) with strong validation and explicit approval workflows. However, it lacks autonomy, planning capability, and coordination enrichment compared to specialist agents like @bash-ops. As a 'Git Operations Specialist', it is more 'executor' than 'specialist'—it executes explicit commands rather than planning git operations or learning from patterns. For simple, direct operations it works well. For complex coordination with @housekeeper and other orchestrators, it is missing key autonomous capabilities (prerequisite planning, batch operations, workflow planning) and integration features (hindsight, detailed feedback, specialized coordination guidance).",
+    "strengths": [
+      "Safety-first validation: Strong emphasis on preventing data loss and wrong commits",
+      "Clear constraints and responsibilities: Narrowly focused on git operations (not code modification)",
+      "Conventional Commits enforcement: Systematic validation of commit message structure and standards",
+      "Risk-aware decision framework: Distinguishes between low/medium/high risk operations with appropriate approval workflows",
+      "Explicit escalation paths: Clear guidance on when to ask orchestrator for help (conflicts, uncertainty, tool config issues)",
+      "Strong quality standards: Defined concrete criteria for commit quality, push safety, complex operation completeness",
+      "Tool composition patterns: Clear documented workflows for commit/push/rebase with verification steps",
+      "Data loss prevention focus: Prioritizes validation before destructive operations"
+    ],
+    "improvement_areas": [
+      "Lacks autonomous planning of prerequisites (must be told to create directories)",
+      "No atomic batching of related operations (each move is separate call/commit)",
+      "Limited planning autonomy compared to similar agents (@bash-ops)",
+      "Missing content verification tool (read/readFile) for semantic validation",
+      "No learning integration (hindsight tools missing)",
+      "Minimal coordination feedback for upstream orchestrators",
+      "Generic instructions without @housekeeper-specific coordination guidance"
+    ],
+    "critical_gaps": 0,
+    "high_priority_gaps": 2,
+    "medium_priority_gaps": 4,
+    "low_priority_gaps": 1,
+    "recommendations_by_priority": {
+      "high": "2 gaps: (gap-001) Autonomous prerequisite planning, (gap-002) Atomic operation batching. Both directly impact @housekeeper coordination efficiency and git history quality. Fixing these transforms @git-ops from 'command executor' to 'operational specialist' capable of planning.",
+      "medium": "4 gaps: (gap-003) Autonomous workflow planning, (gap-004) Missing read/readFile tool, (gap-005) No hindsight integration, (gap-006) Limited coordination feedback. These are maturity enhancements—agent works without them but would be significantly more capable with them.",
+      "low": "1 gap: (gap-007) Missing @housekeeper-specific coordination guidance. Clarity/documentation issue rather than functional problem."
+    }
+  },
+  "complexity_analysis": {
+    "agent_loc": 850,
+    "instruction_complexity": "medium",
+    "cyclomatic_complexity": 12,
+    "cyclomatic_complexity_explanation": "Decision points: risk-level assessment (3 branches), approval workflows (2 branches), error handling (3 branches), special cases (4 branches). Medium complexity suitable for operational agent.",
+    "duplication_percentage": 8,
+    "duplication_notes": "Tool composition patterns (commit safely, push safely, rebase safely) show repetitive structure but justified by domain. Some constraint duplication with other agents (e.g., 'cannot modify application code' appears in 6+ agents).",
+    "tool_efficiency": "good",
+    "tool_efficiency_notes": "Tools granted are appropriate for domain. No obvious unused tools. However, notably missing read/readFile which would improve content validation. Tool list could be optimized (search/changes might subsume some search/* tools).",
+    "tool_count": 9,
+    "comparison_to_similar_agents": "Comparable to bash-ops (10 tools) in scope. However, bash-ops has hindsight tools (3 additional) that git-ops lacks. Git-ops also lacks read/readFile while bash-ops has it. Overall: git-ops tool composition is slightly below bash-ops in completeness.",
+    "complexity_notes": "Instruction set is well-organized (role, responsibilities, constraints, quality standards, decision framework, workflows). Clarity is good. Main complexity comes from multiple tool composition patterns for different operation types (commit, push, rebase, cherry-pick, etc.). Complexity is justified—git operations genuinely require this rigor. No excessive complexity detected."
+  },
+  "boilerplate_analysis": {
+    "boilerplate_findings": [
+      {
+        "pattern": "Tool composition pattern repetition (commit safely, push safely, rebase safely)",
+        "pattern_type": "documentation",
+        "instances": 3,
+        "estimated_loc_duplicated": 45,
+        "files_affected": [
+          "git-ops.agent.md"
+        ],
+        "description": "Core pattern: search validation → fetch/verify → execute → report. Appears in three contexts (commit, push, rebase). Structure is similar but content varies by operation type.",
+        "consolidation_strategy": "Could extract to 'Generic Safe Operation Pattern' with parameterization (operation_type, validation_type, approval_required). But given domain-specific nature, duplication may be acceptable for clarity.",
+        "consolidation_effort_hours": 2
+      },
+      {
+        "pattern": "Constraint duplication across 6+ agents",
+        "pattern_type": "configuration",
+        "instances": 6,
+        "estimated_loc_duplicated": 12,
+        "files_affected": [
+          "git-ops.agent.md, bash-ops.agent.md, housekeeper.agent.md, doc.agent.md, ar-upskiller.agent.md, ar-director.agent.md"
+        ],
+        "description": "Constraint 'Cannot modify application code' appears verbatim in 6+ agents. Similarly, 'Cannot skip validation' pattern repeats.",
+        "consolidation_strategy": "Extract to shared CONSTRAINTS.md or create CONSTRAINT-TEMPLATE skill with common patterns",
+        "consolidation_effort_hours": 1
+      }
+    ],
+    "total_estimated_boilerplate_loc": 57,
+    "boilerplate_percentage": 7,
+    "boilerplate_notes": "Boilerplate is moderate (7% of agent). None is problematic duplication—patterns exist for clarity/emphasis. Tool composition patterns justify duplication (each operation type warrants clear walkthrough). Constraint duplication is portfolio-wide issue, not git-ops specific."
+  },
+  "simplification_recommendations": [
+    {
+      "id": "simplify-001",
+      "opportunity_title": "Extract shared constraint templates across 6+ agents",
+      "description": "Constraint text 'Cannot modify application code' and others appear identically across multiple agents. Consolidating to shared CONSTRAINTS.md or skill reduces duplication.",
+      "opportunity_type": "skill-extraction",
+      "affected_agents": [
+        "git-ops",
+        "bash-ops",
+        "housekeeper",
+        "doc",
+        "ar-upskiller",
+        "ar-director"
+      ],
+      "current_state": "Each agent independently lists constraints with identical wording",
+      "recommended_change": "Create .github/context/COMMON-CONSTRAINTS.md or CONSTRAINT-TEMPLATE skill with common patterns. Agents import or reference rather than duplicate.",
+      "effort_hours": 1,
+      "effort_breakdown": "0.5 hour extraction, 0.5 hour testing (verify all agents still work)",
+      "reduction_potential_loc": 12,
+      "reduction_potential_percentage": 1.4,
+      "reuse_benefit_count": 6,
+      "roi_score": "LOW (minimal LOC reduction, but improves consistency across portfolio)",
+      "priority": "low",
+      "portfolio_impact": "Reduces constraint duplication across 6 agents; enables consistency improvements; centralizes safety standards",
+      "for_skill_builder": "Create CONSTRAINT-TEMPLATE skill or .github/context/COMMON-CONSTRAINTS.md with: (1) Safety constraints ('Cannot modify application code', 'Cannot skip validation'), (2) Governance constraints ('Cannot delete without archival'), (3) Escalation constraints. Agents then import rather than duplicate. Low effort, high consistency value.",
+      "breaking_changes": false,
+      "migration_path": "Update agents to reference shared template; test all agent invocations after migration"
+    },
+    {
+      "id": "simplify-002",
+      "opportunity_title": "Parameterized tool composition pattern for safe operations",
+      "description": "Tool composition patterns for 'commit safely', 'push safely', 'rebase safely' share ~70% structure (validation → verify → execute → report). Could be parameterized to reduce duplication.",
+      "opportunity_type": "documentation-consolidation",
+      "affected_agents": [
+        "git-ops (internal)"
+      ],
+      "current_state": "Three nearly-identical tool composition patterns, each with operation-specific variations",
+      "recommended_change": "Create 'Generic Safe Operation Pattern' template showing: 1. Search/Validate [operation-specific], 2. Verify state, 3. Execute [operation-specific], 4. Report [operation-specific]. Then show how each operation (commit, push, rebase) instantiates this template.",
+      "effort_hours": 1.5,
+      "effort_breakdown": "1 hour template design, 0.5 hour validation and testing",
+      "reduction_potential_loc": 25,
+      "reduction_potential_percentage": 2.9,
+      "reuse_benefit_count": 1,
+      "roi_score": "MEDIUM (25 LOC reduction, improves clarity and maintenance for git-ops)",
+      "priority": "low",
+      "portfolio_impact": "Improves clarity within git-ops; reduces duplication; would serve as template for future operational agents",
+      "for_skill_builder": "If extracting generic safe operation pattern as skill, create 'SAFE-OPERATION-PATTERN' skill showing parameterized template. However, this may be git-ops specific—recommend extracting only if future operational agents (e.g., terraform-ops, k8s-ops) would benefit.",
+      "breaking_changes": false,
+      "migration_path": "Refactor git-ops instruction section to use parameterized pattern; verify instructions are clearer, not more confusing"
+    }
+  ],
+  "grade": {
+    "overall": "B",
+    "overall_rationale": "Safety-first, well-validated executor with strong focus on preventing data loss. Meets core responsibilities well. However, lacks autonomy and planning capability expected of 'Specialist' agents, and missing key integration features (hindsight, detailed feedback). Works well for direct commands but struggles with complex coordination. Grade B reflects: works reliably (not C) but significantly below specialist maturity (not A). For comparison: bash-ops would be B+ (adds learning/planning); orchestrator agents would be A (planning-focused).",
+    "grades": {
+      "autonomy": "C+",
+      "autonomy_rationale": "Asks clarifying questions (good) but lacks initiative in planning. Cannot create directories before moves, cannot suggest optimal operation groupings, cannot learn from past patterns. Executor autonomy, not specialist autonomy.",
+      "tool_composition": "B",
+      "tool_composition_rationale": "Tools are appropriate for domain (search, execute, edit, grep). Good match. But missing read/readFile for content verification and no hindsight tools. Would be A with these additions.",
+      "coordination_readiness": "B-",
+      "coordination_readiness_rationale": "Works with @housekeeper but minimal feedback and no prerequisite/batching autonomy creates coordination friction. Reporting is bare-minimum. Explicit @housekeeper guidance missing. With high/medium priority gaps fixed, would be B+.",
+      "safety": "A",
+      "safety_rationale": "Explicit approval for destructive ops, validation gates before commits/pushes, risk-level assessment, escalation paths. Safety is the strongest area.",
+      "specialization": "B-",
+      "specialization_rationale": "Focused on git ops (good specialization). But instructions are generic—no domain expertise guidance on optimal git workflows, merge strategies, history best practices. More 'executor' than 'specialist' in domain knowledge."
+    }
+  },
+  "next_steps": {
+    "for_ben": "Evaluation complete. @git-ops works reliably for explicit commands but lacks autonomy and coordination enrichment. Two high-priority gaps impact efficiency: (1) cannot autonomously create directories before moves, (2) cannot batch related operations. Recommend delegating to @ar-upskiller with focus on these two gaps first. Medium-priority gaps (planning autonomy, hindsight integration, detailed feedback) can be addressed incrementally. Summary: Working agent, but specialist capabilities are below @bash-ops maturity level. Coordinate with @housekeeper on whether current limitations are acceptable or if upgrades are needed for upcoming workspace reorganization tasks.",
+    "for_upskiller": "Start with gap-001 (Autonomous Prerequisite Planning) and gap-002 (Atomic Operation Batching). These two are blocking efficient collaboration with @housekeeper. Then tackle gap-003 (Planning Autonomy) and gap-005 (Hindsight Integration) for maturity increase. Gaps 4, 6, 7 are lower priority refinements. Recommended sequence: 1. Fix gaps 1-2 (3-4 hours), 2. Enhance with gaps 3,5 (4-5 hours), 3. Polish with gaps 4,6,7 (2-3 hours). Total estimated effort: 10 hours for full upskilling.",
+    "for_housekeeper": "Current git-ops works for your delegation but with limitations: requires separate calls for directory creation (not atomic), sequential execution of moves (not batched). Recommend: (1) Coordinate with @ar-upskiller on addressing gaps 1-2, (2) In interim, structure your delegation to group related moves, (3) Be explicit about directory structure you want (don't assume git-ops will infer it). After upskilling, your delegation can be more autonomous.",
+    "timeline": "High-priority gaps: 3-4 hours. Medium-priority gaps: 4-5 hours. Low-priority gaps: 1-2 hours. Recommend: Implement high-priority gaps immediately (blocks @housekeeper efficiency), medium-priority gaps in next iteration (maturity enhancements), low-priority gaps only if coordination issues arise."
+  },
+  "evaluation_metadata": {
+    "framework_used": "10-step agent evaluation framework + comparison to bash-ops agent for autonomy analysis",
+    "research_delegations": "None required—sufficient research context in workspace documentation",
+    "confidence_level": "high",
+    "confidence_justification": "All gaps sourced from workspace documentation (tool-composition-patterns, agent-specialization-patterns, instruction-engineering, multi-agent-orchestration, effective-delegation). Comparison to @bash-ops is direct. Understanding of @housekeeper coordination is explicit from housekeeper.agent.md. No external research needed.",
+    "evaluation_complete": true,
+    "hindsight_tags_recommended": [
+      "world:@git-ops",
+      "experience:evaluation-finding",
+      "pattern:agent-gap",
+      "severity:HIGH (gaps 1-2)",
+      "severity:MEDIUM (gaps 3-6)",
+      "severity:LOW (gap 7)",
+      "category:autonomy",
+      "category:coordination",
+      "category:tools"
+    ],
+    "notes": "Evaluation focused on file operations autonomy (user request focus area 1-2), tool composition (area 4), and coordination readiness (area 5). Planning autonomy (area 3) assessed but secondary to file operations focus. Comparison to bash-ops reveals @git-ops is a capable executor but lacks specialist-level autonomy and learning integration. No breaking safety issues found; all gaps are enhancements to capability/efficiency, not fixes to broken behavior."
+  }
+}

@@ -387,7 +387,7 @@ Recovery: Re-delegate with compiled code + explicit instruction to test examples
 
 **Parallelization Decision Process:**
 
-**STEP 1: Identify Task Independence** 
+**STEP 1: Identify Task Independence**
 For each task pair, answer these questions rigorously:
 ```
 Task A: [Name] — Specialist, Context
@@ -395,7 +395,7 @@ Task A: [Name] — Specialist, Context
   ✓ Does Task A need data/output from other tasks? [Task names, or "NONE"]
   ✓ Does Task A modify any shared files or state? [File names, or "NONE"]
 
-Task B: [Name] — Specialist, Context  
+Task B: [Name] — Specialist, Context
   ✓ What must complete before Task B starts? [Prior tasks, or "NONE"]
   ✓ Does Task B need data/output from other tasks? [Task names, or "NONE"]
   ✓ Does Task B modify any shared files or state? [File names, or "NONE"]
@@ -416,7 +416,7 @@ Answer these questions with YES/NO:
 [PARALLELIZATION VERDICT]:
   All questions above are NO? → ✅ PARALLELIZE (batch both in same function_calls)
   Any question is YES? → ⏸️ SEQUENCE (execute one after the other)
-  
+
 [JUSTIFY YOUR DECISION]:
   Write 1-2 sentences explaining WHY you chose parallel vs sequential.
   Example: "Tasks are independent (no data flow, different output files). → PARALLELIZE"
@@ -450,7 +450,7 @@ Task 1: @ar-upskiller - Upskill @housekeeper (6 gaps)
   Modifies shared files: NO (isolated agent definition)
 
 Task 2: @ar-upskiller - Upskill @git-ops (7 gaps)
-  Dependencies: NONE  
+  Dependencies: NONE
   Needs output from: NONE
   Modifies shared files: NO (isolated agent definition)
 
@@ -460,7 +460,7 @@ Task 2: @ar-upskiller - Upskill @git-ops (7 gaps)
   Both modify same files? NO
 
 [VERDICT]: ✅ PARALLELIZE
-[JUSTIFICATION]: Both tasks are completely independent. No shared state, no data dependencies. 
+[JUSTIFICATION]: Both tasks are completely independent. No shared state, no data dependencies.
   Run simultaneously to cut execution time by ~50% (15-20 min parallel vs 30-40 min sequential).
 
 [BATCHING STRATEGY]:
@@ -702,7 +702,7 @@ Task: Write API documentation for payment service
 
 **Quick reference—ask these questions** (answered in Step 3):
 1. **Task A dependencies**: What must complete before Task A starts?
-2. **Task B dependencies**: What must complete before Task B starts?  
+2. **Task B dependencies**: What must complete before Task B starts?
 3. **Data flow**: Does Task B need Task A's output? Does Task A need Task B's output?
 4. **Verdict**: No cross-dependencies? → **PARALLELIZE**. Any dependency? → **SEQUENCE**.
 
@@ -831,7 +831,7 @@ Marking tasks as PARALLEL signals to user: "These run at the same time. Total ti
 
 **Test Setup**:
 - Task 1: Upskill @agent-A with 5-7 capability gaps (evaluation report available)
-- Task 2: Upskill @agent-B with 5-7 capability gaps (evaluation report available)  
+- Task 2: Upskill @agent-B with 5-7 capability gaps (evaluation report available)
 - Independence: Both are self-contained agent improvements with ZERO data dependencies
 
 **Expected Behavior** (✅ SUCCESS):
@@ -881,7 +881,7 @@ Task 2: Independent agent improvement (5+ gaps)
 Expected time savings: ~50%
 
 [ ] Step 3 parallelization checklist completed? YES
-[ ] Checklist verdict: PARALLELIZE documented? YES  
+[ ] Checklist verdict: PARALLELIZE documented? YES
 [ ] Both tasks in same function_calls block? YES
 [ ] Ben tells user about parallel execution? YES
 [ ] Actual time: 15-20 min (parallel) vs 30-40 min (sequential)? YES
