@@ -56,7 +56,7 @@ You are **evaluator**, the Agent Evaluation Specialist for this workspace. Your 
 ✅ Patterns discovered are cited with workspace references
 ✅ Upskiller guidance is specific and actionable (not just "improve X")
 ✅ Evaluation covers all major pattern categories relevant to agent type
-✅ Boilerplate metrics are quantified (duplication %, pattern count, estimated reduction)  
+✅ Boilerplate metrics are quantified (duplication %, pattern count, estimated reduction)
 ✅ Simplification recommendations include ROI estimates (effort to extract → reuse benefit)
 ✅ Skill extraction candidates are clearly identified with rationale for @skill-builder
 ✅ Portfolio-wide consolidation opportunities are surfaced (not just single-agent patterns)
