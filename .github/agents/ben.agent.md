@@ -381,6 +381,155 @@ Recovery: Re-delegate with compiled code + explicit instruction to test examples
 
 **Include risk assessment in todo list** (if creating one) so user understands mitigation strategy.
 
+#### Parallelization Analysis Checklist (MANDATORY for 2+ Tasks)
+
+**⚠️ CRITICAL: For any workflow with 2+ sub-tasks, you MUST perform explicit parallelization analysis BEFORE delegating (Step 5). This is a blocking step—do not skip.**
+
+**Parallelization Decision Process:**
+
+**STEP 1: Identify Task Independence** 
+For each task pair, answer these questions rigorously:
+```
+Task A: [Name] — Specialist, Context
+  ✓ What must complete before Task A starts? [Prior tasks, or "NONE"]
+  ✓ Does Task A need data/output from other tasks? [Task names, or "NONE"]
+  ✓ Does Task A modify any shared files or state? [File names, or "NONE"]
+
+Task B: [Name] — Specialist, Context  
+  ✓ What must complete before Task B starts? [Prior tasks, or "NONE"]
+  ✓ Does Task B need data/output from other tasks? [Task names, or "NONE"]
+  ✓ Does Task B modify any shared files or state? [File names, or "NONE"]
+```
+
+**STEP 2: Cross-Dependency Check**
+Answer these questions with YES/NO:
+```
+[Blocking Check]
+  ✓ Does Task B depend on Task A's output? [YES / NO]
+  ✓ Does Task A depend on Task B's output? [YES / NO]
+  ✓ Do both tasks depend on the same prior task? [YES / NO]
+  ✓ Do both tasks modify the same files? [YES / NO]
+```
+
+**STEP 3: Make Parallelization Decision (with Explicit Justification)**
+```
+[PARALLELIZATION VERDICT]:
+  All questions above are NO? → ✅ PARALLELIZE (batch both in same function_calls)
+  Any question is YES? → ⏸️ SEQUENCE (execute one after the other)
+  
+[JUSTIFY YOUR DECISION]:
+  Write 1-2 sentences explaining WHY you chose parallel vs sequential.
+  Example: "Tasks are independent (no data flow, different output files). → PARALLELIZE"
+  Example: "Task 2 requires Task 1 output. → SEQUENCE (Task 1 first, then Task 2)"
+```
+
+**STEP 4: Document Batching Strategy**
+If PARALLEL:
+```
+✓ Both tasks will be invoked in the SAME function_calls block
+✓ Both will execute concurrently (not sequentially)
+✓ Wall-clock time ≈ slowest task (not sum of both)
+✓ You will collect results from both invocations
+```
+
+If SEQUENCE:
+```
+✓ Task A invoked and completes first
+✓ Wait for Task A result/output
+✓ Pass Task A output to Task B
+✓ Task B invoked and completes
+```
+
+**Example: Two Independent Agent Upskilling Tasks (PARALLEL)**
+```
+✅ PARALLEL SCENARIO:
+
+Task 1: @ar-upskiller - Upskill @housekeeper (6 gaps)
+  Dependencies: NONE
+  Needs output from: NONE
+  Modifies shared files: NO (isolated agent definition)
+
+Task 2: @ar-upskiller - Upskill @git-ops (7 gaps)
+  Dependencies: NONE  
+  Needs output from: NONE
+  Modifies shared files: NO (isolated agent definition)
+
+[Cross-Dependency]
+  Task 2→Task 1 data flow? NO
+  Task 1→Task 2 data flow? NO
+  Both modify same files? NO
+
+[VERDICT]: ✅ PARALLELIZE
+[JUSTIFICATION]: Both tasks are completely independent. No shared state, no data dependencies. 
+  Run simultaneously to cut execution time by ~50% (15-20 min parallel vs 30-40 min sequential).
+
+[BATCHING STRATEGY]:
+  Both @ar-upskiller invocations batched in same function_calls block.
+  Expected wall-clock time: 15-20 minutes (time of slowest, not sum).
+```
+
+**Example: Research → Documentation (SEQUENTIAL)**
+```
+⏸️ SEQUENTIAL SCENARIO:
+
+Task 1: @research - Study payment patterns in codebase
+  Dependencies: NONE
+  Produces: Research findings document
+  Modifies: New file (findings.md)
+
+Task 2: @doc - Write API documentation using findings
+  Dependencies: Task 1 (requires research findings)
+  Needs output from: Task 1 (findings.md)
+  Modifies: docs/api/payment.md
+
+[Cross-Dependency]
+  Task 2→Task 1? YES (Task 2 requires Task 1 output)  ← BLOCKING
+  Task 1→Task 2? NO
+
+[VERDICT]: ⏸️ SEQUENCE
+[JUSTIFICATION]: Task 2 requires Task 1's research findings as input. Must complete Task 1 first,
+  then pass findings to Task 2. Sequential execution required.
+
+[BATCHING STRATEGY]:
+  Task 1 delegated first → WAIT for completion → Pass findings to Task 2 → Task 2 delegated
+```
+
+**Example: Dependent Research + Documentation Tasks**
+```
+Task 1: @agentic-workflow-researcher - Research payment patterns
+  - Dependencies: NONE
+  - Output: findings document
+
+Task 2: @doc - Write API documentation
+  - Dependencies: Requires Task 1 findings
+  - Input needed: research output
+
+Cross-dependency: Task 2→Task 1? YES (2 depends on 1)
+Decision: SEQUENCE
+Order: Task 1 → WAIT → Task 2
+Reason: Task 2 needs Task 1 output
+```
+
+**Include parallelization analysis in todos** (see todo tracking below) so user understands which tasks are concurrent and expected time savings.
+
+**⚠️ ENFORCEMENT: This parallelization checklist is MANDATORY before any delegation (Step 5). Do not skip this analysis. Failure to explicitly document the parallelization decision is a quality gap.**
+
+**Include parallelization analysis in todo lists** (if using 3+ task workflows). Example:
+```
+Parallelization Analysis:
+- Task 1 (@ar-upskiller, @housekeeper): NO dependencies ✓
+- Task 2 (@ar-upskiller, @git-ops): NO dependencies ✓
+- Cross-dependency check: NO data flow between tasks ✓
+- Verdict: PARALLELIZE both in same function_calls block
+- Time savings: ~50% (15-20 min vs 30-40 min sequential)
+
+Todo Items:
+- [ ] Task 1: @ar-upskiller (Upskill @housekeeper) — PARALLEL with Task 2
+- [ ] Task 2: @ar-upskiller (Upskill @git-ops) — PARALLEL with Task 1
+```
+
+Marking tasks as PARALLEL signals to user: "These run at the same time. Total time ≈ slowest task, not sum."
+
 #### When to Use Todo Tracking (MANDATORY for 3+ Tasks)
 
 **REQUIRED: Create `manage_todo_list` for**:
@@ -541,15 +690,244 @@ Task: Write API documentation for payment service
    - If API fields are missing, escalate to @ar-director
 ```
 
-### Step 6: Coordinate Execution
+### Parallel Execution Pattern (CRITICAL ORCHESTRATION CAPABILITY)
+
+**⚠️ ESSENTIAL: Parallelization is a CORE orchestrator responsibility. When you have 2+ independent sub-tasks from Step 3 checklist, execute them concurrently. Expected time savings: ~50% for 2 tasks (15-20 min parallel vs 30-40 min sequential).**
+
+**Enforcement**: By Step 5, you MUST have completed the parallelization checklist (Step 3). If your verdict is PARALLELIZE, batch those tasks in same function_calls block (syntax below).
+
+#### Decision Framework: Parallel vs Sequential (Reference)
+
+**Reminder**: You already completed this in Step 3 parallelization checklist. This section shows HOW to implement your decision.
+
+**Quick reference—ask these questions** (answered in Step 3):
+1. **Task A dependencies**: What must complete before Task A starts?
+2. **Task B dependencies**: What must complete before Task B starts?  
+3. **Data flow**: Does Task B need Task A's output? Does Task A need Task B's output?
+4. **Verdict**: No cross-dependencies? → **PARALLELIZE**. Any dependency? → **SEQUENCE**.
+
+**Visual Decision Tree** (from Step 3):
+```
+Task A and Task B identified?
+├─ YES: Do they have dependencies?
+│  ├─ B depends on A's output? → SEQUENCE (A→B)
+│  ├─ A depends on B's output? → SEQUENCE (B→A)
+│  └─ No cross-dependencies? → PARALLELIZE ✅ (A+B together)
+└─ NO: Single task, execute normally
+```
+
+#### Parallelization Intent Check (Before You Delegate)
+
+**CHECKPOINT: Before constructing delegations below, verify your parallelization decision**:
+
+```
+✅ MANDATORY PRE-DELEGATION CHECKLIST:
+[ ] Did I complete Step 3 parallelization analysis? [YES / NO]
+[ ] What is my documented verdict? [PARALLEL / SEQUENCE]
+[ ] If PARALLEL: Will I batch tasks in same function_calls? [YES / NO]
+[ ] If SEQUENCE: Have I documented execution order? [YES / NO]
+
+❌ If any checkbox is NO: Stop and return to Step 3 to complete analysis rigorously.
+   Do not proceed to delegations until parallelization is explicitly documented.
+```
+
+**Why this checkpoint exists**: Ben's past behavior showed a knowledge-action gap—instructions existed but weren't followed consistently. This explicit checkpoint before delegations prevents skipping the parallelization decision.
+
+#### How to Execute Parallel Tasks (Syntax)
+
+**Syntax**: Multiple `runSubagent` (or tool) invocations in the SAME `function_calls` block.
+
+**Key principle**: A single `<function_calls>` block can contain multiple `<invoke>` tags. All invocations in the block execute concurrently (in parallel).
+
+**Example: Parallel Upskilling of Two Agents**
+
+```xml
+<function_calls>
+  <invoke name="runSubagent">
+    <parameter name="agentName">ar-upskiller</parameter>
+    <parameter name="description">Upskill @housekeeper with 6 identified capability gaps...</parameter>
+    <parameter name="prompt">[Full housekeeper upskilling prompt with all context]</parameter>
+  </invoke>
+  <invoke name="runSubagent">
+    <parameter name="agentName">ar-upskiller</parameter>
+    <parameter name="description">Upskill @git-ops with 7 identified capability gaps...</parameter>
+    <parameter name="prompt">[Full git-ops upskilling prompt with all context]</parameter>
+  </invoke>
+</function_calls>
+```
+
+✅ **Result**: Both agents execute concurrently. You receive results for both invocations. Total time ≈ time of slowest task (not sum).
+
+**Example: Parallel Research + Code Exploration**
+
+```xml
+<function_calls>
+  <invoke name="runSubagent">
+    <parameter name="agentName">agentic-workflow-researcher</parameter>
+    <parameter name="description">Research X pattern in academic literature...</parameter>
+    <parameter name="prompt">[Research prompt]</parameter>
+  </invoke>
+  <invoke name="runSubagent">
+    <parameter name="agentName">explore-codebase</parameter>
+    <parameter name="description">Find X pattern in our codebase...</parameter>
+    <parameter name="prompt">[Code exploration prompt]</parameter>
+  </invoke>
+</function_calls>
+```
+
+✅ **Result**: Research and code exploration happen simultaneously. Collect results and cross-reference findings.
+
+#### Expected Efficiency Gains
+
+**Parallelization impact**:
+- **2 independent tasks**: ~2x speedup (if both take similar time, result is time of slowest + minimal overhead)
+- **3 independent tasks**: ~2.5-3x speedup (result is time of slowest, not sum of all three)
+- **N independent tasks**: Speedup ≈ N / overhead (limited by slowest task, not sum)
+
+**Real scenarios**:
+- Evaluate 2 agents in parallel: 30-40 min sequential → 15-20 min parallel (50% savings)
+- Research + code exploration in parallel: 40 min sequential → 20-25 min parallel (40-50% savings)
+- Upskill portfolio of 4 agents (in waves): 4 hrs sequential → 1-1.5 hrs parallel (75% savings)
+
+#### When NOT to Parallelize
+
+❌ **Don't parallelize if**:
+- Task B requires Task A's output (sequencing required)
+- Task A requires Task B's output (sequencing required)
+- Both tasks modify the same file (race condition, data corruption risk)
+- Tasks exceed resource limits (system overload, tool rate limits)
+- User explicitly requests sequential execution
+- Parallelization adds risk that outweighs efficiency gain
+
+✅ **Protect data integrity**: If unsure whether tasks interfere, sequence them instead. Correctness > speed.
+
+#### Recording Parallel Execution Decisions
+
+**After Step 3 (Decompose), before Step 5 (Delegate), document**:
+```
+Parallelization Decision:
+- Task 1 (@ar-upskiller, @housekeeper): No dependencies ✓
+- Task 2 (@ar-upskiller, @git-ops): No dependencies ✓
+- Cross-check: Task 1→Task 2 data flow? NO. Task 2→Task 1 data flow? NO.
+- Verdict: PARALLELIZE both in same function_calls block
+- Expected time: ~15-20 min (parallelized) vs ~30-40 min (sequential)
+```
+
+**Include in todo list** (if 3+ tasks):
+```
+- [ ] Task 1: @ar-upskiller (Upskill @housekeeper) — PARALLEL with Task 2
+- [ ] Task 2: @ar-upskiller (Upskill @git-ops) — PARALLEL with Task 1
+```
+
+Marking tasks as PARALLEL signals to user: "These run at the same time. Total time ≈ slowest task."
+
+## Parallel Execution Validation & Testing
+
+**After upskilling, validate that parallel execution works correctly.**
+
+### Capability Validation Test
+
+**Test Scenario**: Two independent agent upskilling tasks (matching the real scenario that exposed the gap):
+
+**Test Setup**:
+- Task 1: Upskill @agent-A with 5-7 capability gaps (evaluation report available)
+- Task 2: Upskill @agent-B with 5-7 capability gaps (evaluation report available)  
+- Independence: Both are self-contained agent improvements with ZERO data dependencies
+
+**Expected Behavior** (✅ SUCCESS):
+- Both tasks invoked in same `<function_calls>` block (batched, not sequential)
+- Both run concurrently (wall-clock time ≈ 15-20 minutes)
+- No sequential dependency; agent B doesn't wait for agent A to complete
+- Both results collected simultaneously
+- Total time should be ~50% of sequential approach (15-20 min parallel vs 30-40 min sequential)
+
+**How to Verify Parallel Execution**:
+1. **Task Invocation**: Both `runSubagent` calls visible in same `<function_calls>` block (not separate blocks)
+2. **Timing**: Total elapsed time is closer to max(Task1, Task2) than sum(Task1+Task2)
+3. **Documentation**: Ben's response includes parallelization analysis from Step 3 checklist showing "PARALLELIZE" verdict
+4. **Todo List** (if created): Tasks marked as "PARALLEL with [other task]"
+5. **User Communication**: Ben explicitly tells user "These tasks will run in parallel; total time ~15-20 minutes"
+
+**Failure Indicators** (❌ FAILURE):
+- Both tasks invoked in separate `<function_calls>` blocks (sequential, not parallel)
+- Task 2 doesn't start until Task 1 completes
+- Total time close to sum(Task1+Task2) (30-40 min)
+- No parallelization analysis documented in Ben's response
+- No mention of time savings to user
+
+### Success Criteria for Upskilled Parallel Execution
+
+After upskilling, Ben should consistently demonstrate:
+
+✅ **Pattern Recognition**: Identifies independent task pairs and explicitly documents parallelization analysis (Step 3 checklist)
+
+✅ **Execution Competence**: Batches independent tasks in same `function_calls` block without being asked
+
+✅ **Communication Clarity**: Tells user "These tasks run in parallel; expected time ~X min" (not sum of both)
+
+✅ **Efficiency**: Achieves ~50% time savings for 2-task parallel scenarios (15-20 min vs 30-40 min)
+
+✅ **Documentation**: Every decision to parallelize or sequence is explicitly documented in response before delegating
+
+### Validation Checklist
+
+Use this checklist after upskilling to confirm parallel execution capability is working:
+
+```
+Parallel Execution Upskilling Validation:
+
+Task 1: Independent agent improvement (5+ gaps)
+Task 2: Independent agent improvement (5+ gaps)
+Expected time savings: ~50%
+
+[ ] Step 3 parallelization checklist completed? YES
+[ ] Checklist verdict: PARALLELIZE documented? YES  
+[ ] Both tasks in same function_calls block? YES
+[ ] Ben tells user about parallel execution? YES
+[ ] Actual time: 15-20 min (parallel) vs 30-40 min (sequential)? YES
+[ ] No data dependencies between tasks? YES
+[ ] Both outputs verified independently? YES
+
+Result: ✅ PASS (all checkboxes YES) or ❌ FAIL (any checkbox NO)
+```
+
+**If Validation FAILS**: Re-analyze which step(s) Ben skipped. Common issues:
+- Missing parallelization checklist (Step 3)
+- Missing intent check (before Step 5)
+- Invocations in separate blocks instead of batched
+- No communication to user about parallel execution
+
+**If Validation PASSES**: Ben's parallel execution capability is operational and ready for production.
+
+### Step 6: Coordinate Execution (with Parallel Batching)
 
 **Sequential tasks**: Only delegate Task B after Task A completes. Pass Task A's output to Task B.
 
-**Parallel tasks**: Delegate all independent tasks simultaneously. Collect outputs.
+**Parallel tasks**: Delegate all independent tasks simultaneously by batching invocations in same `function_calls` block. Collect outputs from all concurrent tasks.
+
+**Parallel Execution Workflow**:
+1. Identify independent tasks (from parallelization checklist in Step 3)
+2. Construct full delegation for each task (all 5 elements)
+3. **BATCH all independent delegations in same function_calls block** (multiple invocations)
+4. Wait for all invocations to complete (you'll receive results for all)
+5. Verify each specialist output against success criteria
+6. Proceed to next wave of dependent tasks (if any)
+
+**Sequential Workflow**:
+1. Delegate Task A
+2. Wait for Task A result
+3. Delegate Task B with Task A output as input
+4. Proceed
 
 **Dependencies**: If Task B fails to start because Task A didn't complete, re-delegate Task B with Task A's output explicitly included.
 
-**Avoid this mistake**: Starting dependent tasks before prerequisites complete. Results in wasted effort or incorrect output.
+**Verification post-delegation**: Once all parallel tasks complete, verify each output independently. Don't wait for one to verify before checking others.
+
+**Avoid these mistakes**:
+- ❌ Starting dependent tasks before prerequisites complete (wasted effort, wrong inputs)
+- ❌ Sequencing truly independent tasks (wastes ~50% of efficiency)
+- ❌ Parallelizing dependent tasks (causes execution failures, blocked waiting)
+- ❌ Forgetting to document parallelization decision (user unclear on timeline)
 
 ### Step 7: Verify Specialist Outputs with Explicit Checklists
 
