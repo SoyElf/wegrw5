@@ -2,6 +2,20 @@
 
 An intelligent workspace powered by GitHub Copilot custom agents. This hub coordinates specialized AI agents to handle documentation, research, development, and DevOps tasks through intelligent delegation and orchestration.
 
+## Technology Stack
+
+This workspace operates exclusively within the **GitHub Copilot ecosystem**. All agent infrastructure, tools, and models are scoped to Copilot capabilities:
+
+| Component | Technology | Details |
+|-----------|-----------|----------|
+| **IDE** | VS Code | Exclusive development environment (not Cursor or other tools) |
+| **Agent Runtime** | GitHub Copilot CLI | `copilot` binary for custom agent execution |
+| **LLM Models** | GitHub Copilot | Multi-model support (Claude Haiku 4.5, Claude Sonnet 4.6) |
+| **Memory System** | Hindsight MCP | Semantic tagging, observation scopes, mental models; Gemini 2.5 Flash LLM with planned upgrade to Gemini 3.1 Pro |
+| **Agent Definition** | VS Code Custom Agents | `.agent.md` format with YAML frontmatter and Markdown instructions |
+
+**Scoped Focus**: This workspace evaluates capabilities **within the Copilot ecosystem only**. We are not conducting multi-tool comparisons (Aider, Claude Code, OpenCode, etc.). The focus is on maximizing value within GitHub Copilot's capabilities and constraints.
+
 ## Project Overview
 
 This workspace is an **agentic orchestration hub** — a system where work is routed through a primary orchestrator agent (`@ben`) who analyzes user requests and delegates to specialized sub-agents with specific skills. The architecture enables:
@@ -10,6 +24,55 @@ This workspace is an **agentic orchestration hub** — a system where work is ro
 - **Autonomous execution** — Specialist agents work independently with full context to complete their tasks
 - **Parallel workflows** — Independent tasks execute simultaneously for faster completion
 - **Scalable capability** — New specialist agents can be recruited on-demand when capability gaps are identified
+
+## Strategic Overview
+
+The workspace operates on a **4-phase hindsight deployment strategy** designed to build institutional memory and distributed intelligence:
+
+### Core Strategy
+
+- **Multi-agent orchestration** — Ben (orchestrator) + 9 specialist agents working autonomously
+- **Institutional memory** — Hindsight-backed learning prevents duplication, enables smarter decisions, and synthesizes patterns across discoveries
+- **Living documentation** — Architecture docs, guides, and research findings automatically updated as new patterns emerge
+- **Skills composition** — Reusable domain knowledge packaged as agent skills for easier capability extension
+
+### Current Focus
+
+- CLI mode wrappers for bash scripting and task automation
+- Skills composition patterns for packaging specialized knowledge
+- Real-world testing and validation of agent orchestration
+
+This strategic approach ensures the workspace scales beyond individual agent capabilities through shared context, pattern discovery, and autonomous decision-making.
+
+## Deployment Phases
+
+The hindsight integration follows a systematic 4-phase rollout:
+
+### Phase 1: Memory Bank Initialization ✓ Complete
+
+- Semantic tagging system for organizing discoveries
+- Memory bank setup with disposition configuration
+- Basic retain/recall operations for storing and retrieving facts
+
+### Phase 2: Living Documentation ✓ Complete
+
+- Living documentation synthesis from research findings
+- Mental models capturing architectural patterns and best practices
+- Documentation update workflow driven by hindsight discoveries
+
+### Phase 3: Directives & Advanced Features ✓ Complete
+
+- Observation scopes for filtering discovered patterns
+- Directives for enforcing standards and guidelines
+- 9 agents upskilled with hindsight integration
+- 24 mental models representing workspace knowledge
+- Reflection capabilities for synthesizing complex patterns
+
+### Phase 4: Real-World Testing (In Progress)
+
+- Validation of agent orchestration in production workflows
+- Emergent intelligence patterns from multi-agent interaction
+- Continuous refinement based on real-world usage
 
 ## Agent System Architecture
 
@@ -183,13 +246,80 @@ The workspace uses these tools for git automation and validation:
 4. **For git operations** — Changes are automatically committed using Conventional Commits
 5. **For new capabilities** — @ben handles recruitment of new specialist agents
 
+## Directory Structure
+
+The workspace is organized to support agent orchestration, documentation, and research:
+
+```
+wegrw5/
+├── .github/
+│   ├── agents/                          Agent definitions (*.agent.md)
+│   │   ├── ben.agent.md                 Orchestrator (primary entry point)
+│   │   ├── doc.agent.md                 Documentation specialist
+│   │   ├── bash-ops.agent.md            Bash script specialist
+│   │   ├── explore-codebase.agent.md    Codebase exploration
+│   │   ├── research.agent.md            External research
+│   │   ├── agentic-workflow-researcher.agent.md  Agentic patterns research
+│   │   ├── evaluator.agent.md           Agent evaluation
+│   │   ├── ar-director.agent.md         Agent recruitment (HR)
+│   │   ├── ar-upskiller.agent.md        Agent upskilling
+│   │   └── git-ops.agent.md             Git operations
+│   ├── skills/                          Reusable agent skills (domain packages)
+│   ├── context/                         Shared context for inter-agent knowledge
+│   └── copilot-instructions.md          Routing rules and agent directory
+│
+├── docs/                                Architecture, guides, research findings
+│   ├── research/
+│   │   ├── agentic-workflows/           Agent orchestration patterns
+│   │   └── ...
+│   ├── guides/                          Specialized guides
+│   └── architecture/                    System architecture documentation
+│
+├── .tmp/                                Temporary working files
+│   ├── *.pdf                            Research PDFs
+│   ├── scripts/                         Temporary scripts
+│   └── ...
+│
+├── .memories/                           Session memory (temporary notes)
+├── /memories/                           User and repo shared memory (persistent)
+│
+└── README.md                            This file (institutional documentation)
+```
+
+**Key Directories**:
+
+- **`.github/agents/`** — Single source of truth for agent definitions. Each agent is a `.agent.md` file following VS Code custom agent format.
+- **`.github/skills/`** — Reusable skills packages. Skills encapsulate domain-specific knowledge and capabilities for easy agent extension.
+- **`.github/context/`** — Shared context for inter-agent communication and knowledge transfer.
+- **`docs/`** — Architecture documentation, research findings, and comprehensive guides. This is the knowledge repository for the workspace.
+- **`.tmp/`** — Temporary working files (research PDFs, scripts, etc.). Not version-controlled; used for transient work.
+- **`/memories/`** — Hindsight persistent memory. Contains user, session, and repository-scoped memory files.
+
 ## Workspace Configuration
 
 - **Workspace file** — [wegrw5.code-workspace](<../assets/wegrw5.code-workspace>)
 - **Copilot instructions** — [.github/copilot-instructions.md](<.github/copilot-instructions.md>)
 - **Agent definitions** — [.github/agents/](.github/agents/) directory
 - **Documentation** — This README and agent-specific docs in each `.agent.md` file
+- **Memory system** — Hindsight MCP configured via environment and agent instructions
+
+## Roadmap
+
+### In Progress
+
+- **CLI mode wrappers** — @bash-ops is prototyping bash script execution patterns and TDD methodology for shell script development
+- **Skills composition** — Defining reusable skill packages that encapsulate specialized knowledge for agent extension
+- **Real-world validation** — Testing agent orchestration and hindsight integration in production workflows
+
+### Future Roadmap
+
+- **Enhanced agent coordination** — More sophisticated inter-agent communication patterns
+- **Advanced skills library** — Expanding reusable skill packages across domains (API development, testing, DevOps, etc.)
+- **Hindsight mental model synthesis** — Automatic generation of new mental models from discovered patterns
+- **Performance optimization** — Parallel execution and caching strategies for multi-agent workflows
 
 ## Support
 
 Each agent file includes detailed instructions and workflow documentation. For specific agent capabilities, refer to the relevant `.agent.md` file in [.github/agents/](.github/agents/).
+
+For questions about architecture, strategy, or memory system integration, consult the relevant documentation in [docs/](docs/) or review the [Hindsight documentation](https://docs.hindsightai.io/).

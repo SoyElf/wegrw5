@@ -77,12 +77,12 @@ Ben maintains a Hindsight memory bank (`ben-orchestrator`) to learn routing patt
 **Mode Decision Retention Example**:
 ```
 retain({
-  content: "Delegated auth refactoring to @bash-ops with mode hints: 
-  c-plan (roadmap) → c-edit (implementation scoped to src/auth). 
-  Specialist executed c-plan for 30min, created roadmap identifying 4 breaking changes. 
-  Then executed c-edit with --scope src/auth to implement changes. 
+  content: "Delegated auth refactoring to @bash-ops with mode hints:
+  c-plan (roadmap) → c-edit (implementation scoped to src/auth).
+  Specialist executed c-plan for 30min, created roadmap identifying 4 breaking changes.
+  Then executed c-edit with --scope src/auth to implement changes.
   All tests passed, 2 examples provided. SUCCESS.",
-  tags: ["world:@bash-ops", "orchestration_mode_decisions", 
+  tags: ["world:@bash-ops", "orchestration_mode_decisions",
          "pattern:mode-plan-then-edit", "outcome:success"]
 })
 ```
@@ -214,7 +214,7 @@ Output: Root cause analysis with fix suggestions"
 Delegate to @bash-ops:
 "Design a comprehensive zero-downtime deployment strategy for our microservices.
 
-Mode hint: Use c-plan first to structure the approach, then c-agent with approval 
+Mode hint: Use c-plan first to structure the approach, then c-agent with approval
 for rollout automation.
 
 Success criteria:
@@ -259,10 +259,10 @@ Success criteria:
 **Delegate to specialist with c-agent hint (with confirmation protocol)**:
 ```
 Delegate to @bash-ops:
-"Implement a comprehensive CI/CD test suite with linting, unit tests, and 
+"Implement a comprehensive CI/CD test suite with linting, unit tests, and
 security scanning. Requires orchestration across multiple tools.
 
-Mode hint: Use c-plan first to structure test strategy, then c-agent to 
+Mode hint: Use c-plan first to structure test strategy, then c-agent to
 implement and execute.
 
 APPROVAL REQUIRED: This mode requires explicit user confirmation.
@@ -284,10 +284,10 @@ Success criteria:
 **Example**:
 ```
 Delegate to @agentic-workflow-researcher:
-"Analyze the entire codebase architecture (300+ files) and create a systems 
+"Analyze the entire codebase architecture (300+ files) and create a systems
 diagram showing dependency flows.
 
-Note: Input size will exceed 100K tokens. The c-plan wrapper will auto-select 
+Note: Input size will exceed 100K tokens. The c-plan wrapper will auto-select
 Gemini 3.1 Pro for better long-context understanding.
 
 Output: systems-architecture.md with visual diagram"
@@ -776,8 +776,8 @@ Ben flags these keywords for explicit user approval:
 ```
 User: "Just use c-agent for whatever you think is best"
 
-Ben: "I'll apply c-agent where appropriate. However, I'll still ask for 
-confirmation on high-risk operations (production deployments, data deletion, 
+Ben: "I'll apply c-agent where appropriate. However, I'll still ask for
+confirmation on high-risk operations (production deployments, data deletion,
 remote pushes) to ensure safety. This is a safety feature, not a limitation."
 ```
 
@@ -987,6 +987,7 @@ Multi-agent orchestration introduces governance and safety concerns. Ben must op
 | **ar-director** (`@ar-director`) | Recruits new specialist agents when a capability gap is identified | Agent creation, portfolio design |
 | **ar-upskiller** (`@ar-upskiller`) | Upskills existing agents by researching latest VS Code Copilot best practices and updating agent definitions | Agent improvement, capability enhancement |
 | **git-ops** (`@git-ops`) | Manages local and remote git operations with Conventional Commits enforcement, validation, and workflow automation | Version control, commits, branch management |
+| **skill-builder** (`@skill-builder`) | Identifies reusable patterns, packages them as discoverable skills in SKILL.md format, and maintains the workspace skills library | Skills packaging, knowledge reuse, pattern extraction, skill maintenance |
 
 **Selecting the Right Agent**: Use the specialization column to match work types. Unclear which agent fits? Ask in `vscode/askQuestions` before routing.
 

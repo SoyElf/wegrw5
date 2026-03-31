@@ -37,7 +37,7 @@
 - [ ] Add to appropriate shell profile:
   - For **Zsh**: `~/.zshrc`
   - For **Bash**: `~/.bashrc`
-  
+
   Paste this line at the end:
   ```bash
   source "$HOME/.config/copilot-modes/copilot-modes.zsh"
@@ -47,7 +47,7 @@
   ```bash
   # For zsh
   source ~/.zshrc
-  
+
   # For bash
   source ~/.bashrc
   ```
@@ -81,7 +81,7 @@
 
 - [ ] **Ask mode** (advisory only):
   ```bash
-  c-ask -p "What is REST API?" 
+  c-ask -p "What is REST API?"
   ```
 
 - [ ] **Plan mode** (planning):
